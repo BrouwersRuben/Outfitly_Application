@@ -4,16 +4,32 @@ import java.util.List;
 
 public class User extends Entity {
     //login details
-    protected String email;
-    protected String password;
+    private String email;
+    private String password;
 
-    protected String name;
-    protected List<ClothingItem> clothes;
+    private String name;
+    private List<ClothingItem> clothes;
 
     public User(String email, String password, String name, List<ClothingItem> clothes) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.clothes = clothes;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<ClothingItem> getClothes() {
+        return clothes;
     }
 }

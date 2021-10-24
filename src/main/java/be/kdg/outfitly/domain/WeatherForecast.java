@@ -7,13 +7,13 @@ public class WeatherForecast extends Entity {
     private LocalDate end;
     //TODO: check what is returned by the API
 
-    private double getLowestTemperature(){
+    public double getLowestTemperature(){
         //TODO
 
         return 0.0;
     }
 
-    private boolean isGoingToRain(){
+    public boolean isGoingToRain(){
         //TODO
 
         return false;

@@ -41,4 +41,28 @@ public class ClothingItem extends Entity {
         this.occasion = occasion;
         this.weather = weather;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public RainProofness getRainProofness() {
+        return rainProofness;
+    }
+
+    public Occasion getOccasion() {
+        return occasion;
+    }
+
+    public Weather getWeather() {
+        return weather;
+    }
+
+    public File getPhoto() {
+        return photo;
+    }
 }
