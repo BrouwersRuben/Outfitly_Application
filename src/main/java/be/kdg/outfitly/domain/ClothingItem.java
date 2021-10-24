@@ -3,21 +3,22 @@ package be.kdg.outfitly.domain;
 import java.io.File;
 
 public class ClothingItem extends Entity {
-    private enum Material{
-        COTTON, WOOL, SILK, SYNTHETIC, LEATHER
+    public enum Material{
+        COTTON, WOOL, SILK, SYNTHETIC, LEATHER, DENIM
     }
 
-    private enum Type{
+    public enum Type{
         JACKET_LIKE, SHIRT_LIKE, T_SHIRT_LIKE, TROUSERS_LIKE, SHOES
     }
-    private enum RainProofness{
+    public enum RainProofness{
         BAD, NORMAL, GOOD
     }
-    private enum Occasion{
+
+    public enum Occasion{
         CASUAL, UNIVERSAL, ELEGANT
     }
 
-    private enum Weather{
+    public enum Weather{
         COLD, MILD, WARM, UNIVERSAL
     }
 
@@ -29,9 +30,15 @@ public class ClothingItem extends Entity {
 //    ??
     private File photo;
 
+    public ClothingItem() {
+    }
 
-
-
-
-
+    //no photo yet
+    public ClothingItem(String name, Material material, RainProofness rainProofness, Occasion occasion, Weather weather) {
+        this.name = name;
+        this.material = material;
+        this.rainProofness = rainProofness;
+        this.occasion = occasion;
+        this.weather = weather;
+    }
 }
