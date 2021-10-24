@@ -3,12 +3,16 @@ package be.kdg.outfitly.domain;
 import java.util.List;
 
 public class User extends Entity {
-    //login details
-    private String email;
-    private String password;
 
-    private String name;
-    private List<ClothingItem> clothes;
+    // Variables
+
+    private final String email;
+    private final String password;
+
+    private final String name;
+    private final List<ClothingItem> clothes;
+
+    // Constructor
 
     public User(String email, String password, String name, List<ClothingItem> clothes) {
         this.email = email;
@@ -16,6 +20,8 @@ public class User extends Entity {
         this.name = name;
         this.clothes = clothes;
     }
+
+    // Getters
 
     public String getEmail() {
         return email;

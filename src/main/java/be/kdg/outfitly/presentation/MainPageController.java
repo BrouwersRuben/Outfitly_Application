@@ -1,6 +1,7 @@
 package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.service.ArduinoSensorService;
+import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,14 +16,18 @@ import java.time.LocalDateTime;
 public class MainPageController {
     private final Logger logger = LoggerFactory.getLogger(MainPageController.class);
     private final ArduinoSensorService arduinoSensorService;
+    private final UserService userService;
 
-    public MainPageController(ArduinoSensorService arduinoSensorService) {
+    public MainPageController(ArduinoSensorService arduinoSensorService, UserService userService) {
         this.arduinoSensorService = arduinoSensorService;
+        this.userService = userService;
     }
 
     @GetMapping
     public String ShowWeather(Model model){
+        //TODO: Show username of current logged in user
         model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.now()));
+        model.addAttribute("username", /*userService.getUsername()*/"$placeholder$");
         return "mainpage";
     }
 }
