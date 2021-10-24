@@ -12,16 +12,16 @@
         Outfitly
     </h1>
 
+<!--    TODO: split up this navbar-->
     <nav class="m-4 navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <ul class="navbar-nav ">
+            <ul class="navbar-nav d-flex">
                 <li class="nav-item justify-content-start">
                     <a class="nav-link" th:href="@{/...}">Pick outfit!</a>
                 </li>
                 <li class="nav-item justify-content-start">
                     <a class="nav-link" th:href="@{/...}">Weather forecast</a>
                 </li>
-
                 <li class="nav-item justify-content-end">
                     <a class="nav-link" th:href="@{/...}">Your profile</a>
                 </li>
@@ -35,31 +35,38 @@
 <!--    TODO: Make the time stuff dynamic-->
     <h2 class="m-4">Good morning, <span th:text="${username}"></span></h2>
 
-    <div class=" w-80 px-4">
-        <table class="able table-hover  my-4">
-            <thead class="table-dark">
+    <div class="col-sm-8 px-4">
+        <table class="table table-hover my-4">
+            <thead>
                 <tr>
-                    <td></td>
-                    <td>API</td>
-                    <td>Arduino</td>
+                    <th></th>
+                    <th>API</th>
+                    <th>Arduino</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Temperature</td>
-                    <td> <!--th:value="${}"-->PLACEHOLDER</td>
-                    <td th:value="${arduinoSensorData.sensorTemperature}"></td>
+                    <td> <!--th:value="${}"-->$placeholder$</td>
+                    <td><span th:text="${arduinoSensorData.sensorTemperature}">$placeholder$</span> °C</td>
                 </tr>
                 <tr>
                     <td>Humidity</td>
-                    <td> <!--th:value="${}"-->PLACEHOLDER</td>
-                    <td th:value="${arduinoSensorData.sensorHumidity}"></td>
+                    <td> <!--th:value="${}"-->$placeholder$</td>
+                    <td><span th:text="${arduinoSensorData.sensorHumidity}">$placeholder$</span> %</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-<!--    TODO: buttons suggested clothing and weekly forecast-->
+    <div class="d-flex justify-content-center">
+        <div class="m-2">
+            <a class="btn btn-outline-secondary" th:href="@{/...}">View suggested clothing</a>
+        </div>
+        <div class="m-2">
+            <a class="btn btn-outline-secondary" th:href="@{/...}">View weekly broadcast</a>
+        </div>
+    </div>
 
     <div th:insert="~{footer::copy}">&copy; 2021 The Static Templates</div>
 
