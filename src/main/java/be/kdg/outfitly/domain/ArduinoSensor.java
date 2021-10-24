@@ -2,7 +2,7 @@ package be.kdg.outfitly.domain;
 
 import java.time.LocalDateTime;
 
-public class ArduinoSensor {
+public class ArduinoSensor extends Entity{
 
     // Variables
 
