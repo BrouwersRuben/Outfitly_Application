@@ -4,9 +4,7 @@ import be.kdg.outfitly.domain.ArduinoSensor;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.repository.ArduinoSensorRepository;
-import be.kdg.outfitly.repository.EntityRepository;
-import be.kdg.outfitly.repository.ListRepository;
-import be.kdg.outfitly.repository.MainUserListRepository;
+import be.kdg.outfitly.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -15,23 +13,23 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class SeedData implements CommandLineRunner {
-    private Logger logger = LoggerFactory.getLogger(SeedData.class);
-    private ArduinoSensorRepository arduinoSensorRepository;
+    private final Logger logger = LoggerFactory.getLogger(SeedData.class);
+    private final ArduinoSensorRepository arduinoSensorRepository;
+    private final UserRepository userRepository;
 //    private EntityRepository entityRepository;
 //    private ListRepository listRepository;
 //    private MainUserListRepository mainUserListRepository;
 //    private ClothingItem clothingItem;
 
-    public SeedData(ArduinoSensorRepository arduinoSensorRepository/*, EntityRepository entityRepository, ListRepository listRepository, MainUserListRepository mainUserListRepository, ClothingItem clothingItem*/) {
+
+    public SeedData(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository) {
         this.arduinoSensorRepository = arduinoSensorRepository;
-//        this.entityRepository = entityRepository;
-//        this.listRepository = listRepository;
-//        this.mainUserListRepository = mainUserListRepository;
-//        this.clothingItem = clothingItem;
+        this.userRepository = userRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        logger.debug("Seeding the repositories");
         User user1 = new User("testUser1@gmail.com","test123","John",
                 List.of(new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD),
                         new ClothingItem("Hoodie", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD),
@@ -46,11 +44,11 @@ public class SeedData implements CommandLineRunner {
                         new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL)));
         ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
 
+        userRepository.create(user1);
+        userRepository.create(user2);
+
         arduinoSensorRepository.create(arduinoSensor);
 
-        //TODO: add mainUsers, but these are users....
         // Slave and master accounts may be a bit easier to understand
-//        mainUserListRepository.create(user1);
-//        mainUserListRepository.create(user2);
     }
 }

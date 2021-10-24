@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Component
 public class ArduinoSensorServiceImpl implements ArduinoSensorService{
@@ -27,8 +26,7 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
 //    }
 
     @Override
-    public ArduinoSensor showSensorDataByDate(LocalDateTime time){
-        logger.debug("Showing sensorData of date: " + time);
-        return arduinoSensorRepository.findByDate(time);
+    public ArduinoSensor findByDate(LocalDateTime time) {
+        return arduinoSensorRepository.read().stream().filter(data -> data.getTimeOfReading().equals(time)).findFirst().get();
     }
 }
