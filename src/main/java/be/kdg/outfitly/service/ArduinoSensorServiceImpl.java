@@ -27,6 +27,6 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
 
     @Override
     public ArduinoSensor findByDate(LocalDateTime time) {
-        return arduinoSensorRepository.read().stream().filter(data -> data.getTimeOfReading().equals(time)).findFirst().get();
+        return arduinoSensorRepository.read().stream().filter(sensorData -> sensorData.getTimeOfReading().equals(time)).findFirst().get();
     }
 }

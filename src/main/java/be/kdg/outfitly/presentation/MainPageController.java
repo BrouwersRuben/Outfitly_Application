@@ -26,7 +26,7 @@ public class MainPageController {
     @GetMapping
     public String ShowWeather(Model model){
         //TODO: Show username of current logged in user
-        model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.now()));
+        model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
         model.addAttribute("username", /*userService.getUsername()*/"$placeholder$");
         return "mainpage";
     }
