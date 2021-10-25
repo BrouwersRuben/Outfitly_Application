@@ -75,6 +75,7 @@ public class SeedData implements CommandLineRunner {
 
 
         // TODO: Where to put this ?
+        // TODO: Reload api on refresh
         URIBuilder builder = new URIBuilder(apiString);
         HttpGet get = new HttpGet(builder.build());
         CloseableHttpClient httpclient = HttpClients.createDefault();
