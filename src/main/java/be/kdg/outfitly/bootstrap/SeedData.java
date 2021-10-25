@@ -33,6 +33,7 @@ public class SeedData implements CommandLineRunner {
     private final UserRepository userRepository;
     private final WeatherForecastRepository weatherForecastRepository;
     private final String apiString = "https://api.openweathermap.org/data/2.5/weather?q=Antwerp,BE&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c";
+    private final String arduinoAPI = "http://192.168.222.187/data";
 //    private EntityRepository entityRepository;
 //    private ListRepository listRepository;
 //    private MainUserListRepository mainUserListRepository;
@@ -63,17 +64,48 @@ public class SeedData implements CommandLineRunner {
                         new ClothingItem("T-Shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.WARM),
                         new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL)));
 
-        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
+
 
         userRepository.create(user1);
         userRepository.create(user2);
 
+
+        // Arduino API
+        // TODO: Where to put this ?
+        URIBuilder arduinoBuilder = new URIBuilder(arduinoAPI);
+        HttpGet arduinoGet = new HttpGet(arduinoBuilder.build());
+        CloseableHttpClient arduinoHttpClient = HttpClients.createDefault();
+        JSONObject arduinoJsonWeatherForecast;
+
+        try (CloseableHttpResponse response = arduinoHttpClient.execute(arduinoGet)) {
+            arduinoJsonWeatherForecast = null;
+            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                logger.error("Bad response status code: {}.", response.getStatusLine().getStatusCode());
+                return;
+            }
+
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                String rawResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+                arduinoJsonWeatherForecast = new JSONObject(rawResult);
+            }
+
+            if (arduinoJsonWeatherForecast==null) {
+                logger.error("No arduino sensor data retrieved!");
+            } else {
+                logger.debug("Arduino sensor data successfully retrieved!");
+            }
+        }
+
+//        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
+        ArduinoSensor arduinoSensor = new ArduinoSensor(
+                Double.parseDouble(String.valueOf(arduinoJsonWeatherForecast.get("Temperature"))),
+                Double.parseDouble(String.valueOf(arduinoJsonWeatherForecast.get("Humidity"))),
+                LocalDateTime.parse(String.valueOf(arduinoJsonWeatherForecast.get("DateTime"))))                ;
+
         arduinoSensorRepository.create(arduinoSensor);
 
-
         // Weather API
-
-
         // TODO: Where to put this ?
         URIBuilder builder = new URIBuilder(apiString);
         HttpGet get = new HttpGet(builder.build());
