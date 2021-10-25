@@ -1,23 +1,84 @@
 package be.kdg.outfitly.domain;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
+// TODO: This is only for the CURRENT weather forecast, we still need a separate class for future forecast I guess.
 public class WeatherForecast extends Entity {
-    private LocalDate start;
-    private LocalDate end;
+
+    private LocalDateTime date;
+    private String city;
+    private String country;
+    private double temperature;
+    private double feelsLikeTemperature;
+    private double lowestTemperature;
+    private double highestTemperature;
+    private double windSpeed;
+    private int humidity;
+    private String weatherDescription;
+
+    public WeatherForecast(LocalDateTime date, String city, String country, double temperature, double feelsLikeTemperature, double lowestTemperature, double highestTemperature, double windSpeed, int humidity, String weatherDescription) {
+        this.date = date;
+        this.city = city;
+        this.country = country;
+        this.temperature = temperature;
+        this.feelsLikeTemperature = feelsLikeTemperature;
+        this.lowestTemperature = lowestTemperature;
+        this.highestTemperature = highestTemperature;
+        this.windSpeed = windSpeed;
+        this.humidity = humidity;
+        this.weatherDescription = weatherDescription;
+    }
+
     //TODO: check what is returned by the API
+    // Note: I can retrieve any info from the API, though retrieving some data might be tricky due to the fact that we're using a trial version.
+    // https://openweathermap.org/api
+    // Some data can be only retrieved with coordinates, feasible.
 
-    public double getLowestTemperature(){
-        //TODO
 
-        return 0.0;
+    public LocalDateTime getTimeOfReading() {
+        return date;
     }
 
-    public boolean isGoingToRain(){
-        //TODO
-
-        return false;
+    public String getCity() {
+        return city;
     }
 
+    public String getCountry() {
+        return country;
+    }
 
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public double getFeelsLikeTemperature() {
+        return feelsLikeTemperature;
+    }
+
+    public double getLowestTemperature() {
+        return lowestTemperature;
+    }
+
+    public double getHighestTemperature() {
+        return highestTemperature;
+    }
+
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public String getWeatherDescription() {
+        return weatherDescription;
+    }
+
+    // https://openweathermap.org/weather-conditions
+    public boolean isGoingToRain() {
+        //TODO
+        return getWeatherDescription().equals("rain") || getWeatherDescription().equals("drizzle");
+    }
 }

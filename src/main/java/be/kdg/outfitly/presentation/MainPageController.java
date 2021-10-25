@@ -1,7 +1,9 @@
 package be.kdg.outfitly.presentation;
 
+import be.kdg.outfitly.domain.WeatherForecast;
 import be.kdg.outfitly.service.ArduinoSensorService;
 import be.kdg.outfitly.service.UserService;
+import be.kdg.outfitly.service.WeatherForecastService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,9 +20,12 @@ public class MainPageController {
     private final ArduinoSensorService arduinoSensorService;
     private final UserService userService;
 
-    public MainPageController(ArduinoSensorService arduinoSensorService, UserService userService) {
+    private final WeatherForecastService weatherForecastService;
+
+    public MainPageController(ArduinoSensorService arduinoSensorService, UserService userService, WeatherForecastService weatherForecastService) {
         this.arduinoSensorService = arduinoSensorService;
         this.userService = userService;
+        this.weatherForecastService = weatherForecastService;
     }
 
     @GetMapping
@@ -28,6 +33,7 @@ public class MainPageController {
         //TODO: Show username of current logged in user
         model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
         model.addAttribute("username", /*userService.getUsername()*/"$placeholder$");
+        model.addAttribute("weatherForecastData", weatherForecastService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
         return "mainpage";
     }
 }
