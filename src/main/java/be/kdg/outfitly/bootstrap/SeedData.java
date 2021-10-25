@@ -47,6 +47,8 @@ public class SeedData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         logger.debug("Seeding the repositories");
+
+        //Test users with some clothing items
         User user1 = new User("testUser1@gmail.com","test123","John",
                 List.of(new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD),
                         new ClothingItem("Hoodie", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD),
