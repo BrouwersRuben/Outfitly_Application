@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Controller
 public class LoginController {
@@ -31,12 +32,14 @@ public class LoginController {
         logger.debug("Username entered: " + email);
         logger.debug("Password entered: " + password);
         List<User> users = userRepository.read();
-        //will take a long time with a lot of entries --> database sql
+        //will take a long time with a lot of entries --> database
         boolean result = users.stream().anyMatch(user -> Objects.equals(user.getEmail(), email) && Objects.equals(user.getPassword(), password));
-
         if(result){
             logger.debug("Filled in correct details");
-            return "redirect:/mainpage";
+            //get name to path into mainpage
+            String name = users.stream().filter(user -> user.getEmail().equals(email)).map(user -> user.getName()).reduce("",(curr, acc)->curr+acc);
+            logger.debug("User: " + name);
+            return "redirect:/mainpage?name=" + name;
         }else{
             logger.debug("Wrong details");
             model.addAttribute("errorMessage", "Please fill in your correct login details.");
