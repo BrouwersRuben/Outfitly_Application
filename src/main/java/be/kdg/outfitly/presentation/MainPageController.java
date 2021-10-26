@@ -1,5 +1,6 @@
 package be.kdg.outfitly.presentation;
 
+import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.domain.WeatherForecast;
 import be.kdg.outfitly.service.ArduinoSensorService;
 import be.kdg.outfitly.service.UserService;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/mainpage")
+@SessionAttributes("user")
 public class MainPageController {
     private final Logger logger = LoggerFactory.getLogger(MainPageController.class);
     private final ArduinoSensorService arduinoSensorService;
@@ -28,10 +30,10 @@ public class MainPageController {
     }
 
     @GetMapping
-    public String ShowWeather(@RequestParam("name") String name, Model model){
+    public String ShowWeather(Model model, @ModelAttribute("user") User user){
         //TODO: Show username of current logged in user
         model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
-        model.addAttribute("username", name);
+        model.addAttribute("username", user.getName());
         model.addAttribute("weatherForecastData", weatherForecastService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
         return "mainpage";
     }

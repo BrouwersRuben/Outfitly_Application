@@ -7,9 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/login")
+@SessionAttributes("user")
 public class LoginController {
     private final Logger logger = LoggerFactory.getLogger(LoginController.class);
     UserRepository userRepository;
@@ -31,22 +30,36 @@ public class LoginController {
     }
 
     @PostMapping
-    public String processLogin(UserDTO userDTO, Model model){
+    public String processLogin(UserDTO userDTO, Model model, @ModelAttribute("user") User user){
         logger.debug("Username entered: " + userDTO.getEmail());
         logger.debug("Password entered: " + userDTO.getPassword());
         List<User> users = userRepository.read();
         //will take a long time with a lot of entries --> database
-        boolean result = users.stream().anyMatch(user -> Objects.equals(user.getEmail(), userDTO.getEmail()) && Objects.equals(user.getPassword(), userDTO.getPassword()));
+        boolean result = users.stream().anyMatch(userN -> Objects.equals(userN.getEmail(), userDTO.getEmail()) && Objects.equals(userN.getPassword(), userDTO.getPassword()));
         if(result){
             logger.debug("Filled in correct details");
             //get name to path into mainpage
-            String name = users.stream().filter(user -> user.getEmail().equals(userDTO.getEmail())).map(User::getName).reduce("",(curr, acc)->curr+acc);
+            User currentUser = users.stream().filter(userN -> userN.getEmail().equals(userDTO.getEmail())).collect(Collectors.toList()).get(0);
+//            user.setId(5);
+            user.setClothes(currentUser.getClothes());
+            user.setEmail(currentUser.getEmail());
+            user.setName(currentUser.getName());
+            user.setPassword(currentUser.getPassword());
+            user.setId(currentUser.getId());
+
+            String name = users.stream().filter(userN -> userN.getEmail().equals(userDTO.getEmail())).map(User::getName).reduce("",(curr, acc)->curr+acc);
             logger.debug("User: " + name);
-            return "redirect:/mainpage?name=" + name;
+            return "redirect:/mainpage";
         }else{
             logger.debug("Wrong details");
             model.addAttribute("errorMessage", "Please fill in your correct login details.");
             return "login";
         }
     }
+
+    @ModelAttribute("user")
+    public User user(){
+        return new User();
+    }
+
 }
