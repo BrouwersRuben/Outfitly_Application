@@ -4,11 +4,11 @@ import java.io.File;
 
 public class ClothingItem extends Entity {
     public enum Material{
-        COTTON, WOOL, SILK, SYNTHETIC, LEATHER, DENIM
+        COTTON, WOOL, SILK, SYNTHETIC, LEATHER, DENIM, OTHER
     }
 
     public enum Type{
-        JACKET_LIKE, SHIRT_LIKE, T_SHIRT_LIKE, TROUSERS_LIKE, SHOES
+        JACKET_LIKE, SWEATSHIRT_LIKE, SHIRT_LIKE, T_SHIRT_LIKE, TROUSERS_LIKE, SHOES
     }
     public enum RainProofness{
         BAD, NORMAL, GOOD
@@ -43,6 +43,15 @@ public class ClothingItem extends Entity {
         this.weather = weather;
     }
 
+    public ClothingItem(String name, Material material, RainProofness rainProofness, Occasion occasion, Weather weather, Type type) {
+        this.name = name;
+        this.type = type;
+        this.material = material;
+        this.rainProofness = rainProofness;
+        this.occasion = occasion;
+        this.weather = weather;
+    }
+
     public String getName() {
         return name;
     }
@@ -69,5 +78,18 @@ public class ClothingItem extends Entity {
 
     public Type getType() {
         return type;
+    }
+
+    @Override
+    public String toString() {
+        return "ClothingItem{" +
+                "name='" + name + '\'' +
+                ", type=" + type +
+                ", material=" + material +
+                ", rainProofness=" + rainProofness +
+                ", occasion=" + occasion +
+                ", weather=" + weather +
+                ", photo=" + photo +
+                '}';
     }
 }
