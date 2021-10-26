@@ -25,7 +25,7 @@ public class OutfitSelector {
 
     private double rightTemperature(double arduinoTemp, double apiTemp){
         final double acceptableRange = 3; //the api can be 3° over or under the captured temperature of the arduino to still be counted as correct.
-        if(apiTemp - 3 < arduinoTemp && arduinoTemp < apiTemp + 3){
+        if(apiTemp - acceptableRange < arduinoTemp && arduinoTemp < apiTemp + acceptableRange){
             return apiTemp;
         }else{
             return arduinoTemp;
