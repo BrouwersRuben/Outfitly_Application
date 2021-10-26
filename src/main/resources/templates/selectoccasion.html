@@ -12,7 +12,11 @@
         Outfitly
     </h1>
 
-    <div class="m-5 d-flex justify-content-center">
+    <h2 class="text-muted text-center">
+        Your everyday AI stylist.
+    </h2>
+
+    <div class="mt-3 d-flex justify-content-center">
         <div class="form-check m-4">
             <input class="form-check-input" type="radio" name="occasion" id="casual" value="casual">
             <label class="form-check-label" for="casual">
@@ -27,10 +31,14 @@
         </div>
         <div class="form-check m-4">
             <input class="form-check-input" type="radio" name="occasion" id="elegant" value="elegant">
-            <label class="form-check-label" for="elegant">
+            <label class="form-check-label " for="elegant">
                 Elegant
             </label>
         </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <a href="" class="btn btn-outline-dark mb-4">Choose occasion</a>
     </div>
 
     <footer th:replace="~{footer::copy}"></footer>
