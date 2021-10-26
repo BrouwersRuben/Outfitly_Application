@@ -12,4 +12,8 @@ public class UserRepository extends ListRepository<User> {
     public UserRepository() {
         logger.debug("Creating user repository...");
     }
+
+    private void addUser(User user){
+
+    }
 }
