@@ -11,4 +11,9 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/")
 public class IndexController {
 
+    @GetMapping("/faq")
+    public String showFAQ(Model model) {
+        return "faq";
+    }
+
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQ</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid justify-content-end">
+        <ul class="navbar-nav ">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a aria-current="page" class="nav-link active">FAQ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}">Login/Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/...}">Price</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/...}">...</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<h2 class="display-2 text-center">
+    Outfitly
+</h2>
+
+<h3 class="text-muted text-center">
+    Your everyday AI stylist.
+</h3>
+
+<div class="m-4">
+    <h5 class="font-weight-bold">How does it work?</h5>
+    <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
+        culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
+        cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
+        mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
+        non elit non amet nisi sint reprehenderit pariatur aliqua.
+    </p>
+    <h5 class="font-weight-bold">Can I add my children's clothes to my account?</h5>
+    <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
+        culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
+        cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
+        mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
+        non elit non amet nisi sint reprehenderit pariatur aliqua.
+    </p>
+    <h5 class="font-weight-bold">I forgot my password, where do I retrieve it?</h5>
+    <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
+        culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
+        cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
+        mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
+        non elit non amet nisi sint reprehenderit pariatur aliqua.
+    </p>
+    <h5 class="font-weight-bold">What happens with my data?</h5>
+    <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
+        culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
+        cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
+        mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
+        non elit non amet nisi sint reprehenderit pariatur aliqua.
+    </p>
+</div>
+
+<div th:insert="~{footer::copy}">&copy; 2021 The Static Templates</div>
+
+</body>
+</html>
