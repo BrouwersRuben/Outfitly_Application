@@ -1,6 +1,7 @@
 package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.User;
+import be.kdg.outfitly.presentation.dto.UserDTO;
 import be.kdg.outfitly.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,17 +25,22 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/login")
-    public String processLogin(String email, String password, Model model){
-        logger.debug("Username entered: " + email);
-        logger.debug("Password entered: " + password);
+    @GetMapping
+    public String showLogin(Model model) {
+        return "login";
+    }
+
+    @PostMapping
+    public String processLogin(UserDTO userDTO, Model model){
+        logger.debug("Username entered: " + userDTO.getEmail());
+        logger.debug("Password entered: " + userDTO.getPassword());
         List<User> users = userRepository.read();
         //will take a long time with a lot of entries --> database
-        boolean result = users.stream().anyMatch(user -> Objects.equals(user.getEmail(), email) && Objects.equals(user.getPassword(), password));
+        boolean result = users.stream().anyMatch(user -> Objects.equals(user.getEmail(), userDTO.getEmail()) && Objects.equals(user.getPassword(), userDTO.getPassword()));
         if(result){
             logger.debug("Filled in correct details");
             //get name to path into mainpage
-            String name = users.stream().filter(user -> user.getEmail().equals(email)).map(user -> user.getName()).reduce("",(curr, acc)->curr+acc);
+            String name = users.stream().filter(user -> user.getEmail().equals(userDTO.getEmail())).map(User::getName).reduce("",(curr, acc)->curr+acc);
             logger.debug("User: " + name);
             return "redirect:/mainpage?name=" + name;
         }else{
