@@ -6,13 +6,13 @@ public class ArduinoSensor extends Entity{
 
     // Variables
 
-    private int sensorTemperature;
-    private int sensorHumidity;
+    private double sensorTemperature;
+    private double sensorHumidity;
     private LocalDateTime timeOfReading;
 
     // Constructor
 
-    public ArduinoSensor(int sensorTemperature, int sensorHumidity, LocalDateTime timeOfReading) {
+    public ArduinoSensor(double sensorTemperature, double sensorHumidity, LocalDateTime timeOfReading) {
         this.sensorTemperature = sensorTemperature;
         this.sensorHumidity = sensorHumidity;
         this.timeOfReading = timeOfReading;
@@ -20,11 +20,11 @@ public class ArduinoSensor extends Entity{
 
     // Getters
 
-    public int getSensorTemperature() {
+    public double getSensorTemperature() {
         return sensorTemperature;
     }
 
-    public int getSensorHumidity() {
+    public double getSensorHumidity() {
         return sensorHumidity;
     }
 
@@ -44,5 +44,14 @@ public class ArduinoSensor extends Entity{
 
     public void setTimeOfReading(LocalDateTime timeOfReading) {
         this.timeOfReading = timeOfReading;
+    }
+
+    @Override
+    public String toString() {
+        return "ArduinoSensor{" +
+                "sensorTemperature=" + sensorTemperature +
+                ", sensorHumidity=" + sensorHumidity +
+                ", timeOfReading=" + timeOfReading +
+                '}';
     }
 }
