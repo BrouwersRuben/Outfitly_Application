@@ -23,6 +23,7 @@ public class ClothingItem extends Entity {
     }
 
     private String name;
+    private Type type;
     private Material material;
     private RainProofness rainProofness;
     private Occasion occasion;
@@ -64,5 +65,9 @@ public class ClothingItem extends Entity {
 
     public File getPhoto() {
         return photo;
+    }
+
+    public Type getType() {
+        return type;
     }
 }
