@@ -16,4 +16,9 @@ public class IndexController {
         return "faq";
     }
 
+    @GetMapping("/...")
+    public String showDoesNotExist(Model model) {
+        return "doesnotexist";
+    }
+
 }
