@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your outfit</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+<h1 class="display-1 text-center m-4">
+    Outfitly
+</h1>
+
+<h2 class="text-muted text-center">
+    Your everyday AI stylist.
+</h2>
+
+<p>Your outfit:</p>
+
+<footer th:replace="~{footer::copy}"></footer>
+
+</body>
+</html>
