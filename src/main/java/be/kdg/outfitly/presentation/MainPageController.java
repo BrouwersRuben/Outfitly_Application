@@ -35,11 +35,4 @@ public class MainPageController {
         model.addAttribute("weatherForecastData", weatherForecastService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
         return "mainpage";
     }
-
-    @PostMapping("/mainpage")
-    public String getUsername(@RequestParam String username, Model model){
-        logger.debug("getUsername is called when logging in!");
-        model.addAttribute("username", username);
-        return "mainpage";
-    }
 }
