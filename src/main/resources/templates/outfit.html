@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Your outfit</title>
@@ -17,6 +17,14 @@
 </h2>
 
 <p>Your outfit:</p>
+<table class="table">
+    <tr th:each="entry : ${clothes}">
+        <th th:text="${entry.getKey()}"></th>
+        <td >
+            <div th:each="item : ${entry.getValue()}" th:text="${item.getName()}"></div>
+        </td>
+    </tr>
+</table>
 
 <footer th:replace="~{footer::copy}"></footer>
 
