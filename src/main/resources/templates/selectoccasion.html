@@ -7,31 +7,32 @@
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </head>
 <body>
-<h1 class="display-1 text-center m-4">
-    Outfitly
-</h1>
 
-<div class="container">
-    <form method="post">
-        <div class="form-group">
-            <label class="text-center">Occasion</label>
-            <label class="form-check-label" for="casual">Casual</label>
-            <input aria-describedby="occasionHelp" class="form-control form-check-input" id="casual" name="occasion" type="radio"
-                   value="casual">
+    <h1 class="display-1 text-center m-4">
+        Outfitly
+    </h1>
 
-            <label class="form-check-label"  for="universal">universal</label>
-            <input aria-describedby="occasionHelp" class="form-control ui-icon-radio-on form-check-input" id="universal" name="occasion" type="radio"
-                   value="universal">
-
-            <label class="form-check-label"  for="elegant">Elegant</label>
-            <input aria-describedby="occasionHelp" class="form-control ui-icon-radio-on form-check-input" id="elegant" name="occasion" type="radio"
-                   value="elegant">
-            <small class="form-text text-muted" id="occasionHelp">We'll never share your email with anyone else.</small>
+    <div class="m-5 d-flex justify-content-center">
+        <div class="form-check m-4">
+            <input class="form-check-input" type="radio" name="occasion" id="casual" value="casual">
+            <label class="form-check-label" for="casual">
+                Casual
+            </label>
         </div>
+        <div class="form-check m-4">
+            <input class="form-check-input" type="radio" name="occasion" id="universal" value="universal">
+            <label class="form-check-label" for="universal">
+                Universal
+            </label>
+        </div>
+        <div class="form-check m-4">
+            <input class="form-check-input" type="radio" name="occasion" id="elegant" value="elegant">
+            <label class="form-check-label" for="elegant">
+                Elegant
+            </label>
+        </div>
+    </div>
 
-        <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
-</div>
-<footer th:replace="~{footer::copy}"></footer>
+    <footer th:replace="~{footer::copy}"></footer>
 </body>
 </html>
