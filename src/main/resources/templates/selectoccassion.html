@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+<h1 class="display-1 text-center m-4">
+    Outfitly
+</h1>
+
+<div class="container">
+    <form method="post">
+        <div class="form-group">
+            <label class="text-center">Occasion</label>
+            <label for="casual">Casual</label>
+            <input aria-describedby="occasionHelp" class="form-control" id="casual" name="occasion" type="radio"
+                   value="casual">
+
+            <label for="universal">universal</label>
+            <input aria-describedby="occasionHelp" class="form-control" id="universal" name="occasion" type="radio"
+                   value="universal">
+
+            <label for="casual">Elegant</label>
+            <input aria-describedby="occasionHelp" class="form-control" id="elegant" name="occasion" type="radio"
+                   value="elegant">
+            <small class="form-text text-muted" id="occasionHelp">We'll never share your email with anyone else.</small>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+<footer th:replace="~{footer::copy}"></footer>
+</body>
+</html>
