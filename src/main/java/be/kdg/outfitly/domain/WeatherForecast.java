@@ -30,6 +30,16 @@ public class WeatherForecast extends Entity {
         this.weatherDescription = weatherDescription;
     }
 
+    public WeatherForecast() {
+    }
+
+    public static WeatherForecast randomForecast(){
+        WeatherForecast wf = new WeatherForecast();
+        wf.lowestTemperature = 5;
+        wf.weatherDescription = "rain";
+        return wf;
+    }
+
     //TODO: check what is returned by the API
     // Note: I can retrieve any info from the API, though retrieving some data might be tricky due to the fact that we're using a trial version.
     // https://openweathermap.org/api
