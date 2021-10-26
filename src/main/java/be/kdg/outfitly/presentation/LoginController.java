@@ -35,6 +35,7 @@ public class LoginController {
         logger.debug("Username entered: " + userDTO.getEmail());
         logger.debug("Password entered: " + userDTO.getPassword());
         List<User> users = userRepository.read();
+
         //will take a long time with a lot of entries --> database
         boolean result = users.stream().anyMatch(user -> Objects.equals(user.getEmail(), userDTO.getEmail()) && Objects.equals(user.getPassword(), userDTO.getPassword()));
         if(result){
