@@ -8,23 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
     private final Logger logger = LoggerFactory.getLogger(LoginController.class);
     UserRepository userRepository;
 
     public LoginController(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
-
-    @GetMapping("/login")
-    public String loadLoginForm(){
-        return "login";
     }
 
     @PostMapping("/login")
