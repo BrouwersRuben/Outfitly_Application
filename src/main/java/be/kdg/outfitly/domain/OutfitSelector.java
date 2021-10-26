@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class OutfitSelector {
     private WeatherForecast weatherForecast;
+    private ArduinoSensor arduinoSensor;
     private User user;
     private ClothingItem.Occasion occasion;
 
@@ -22,11 +23,20 @@ public class OutfitSelector {
 
     private Logger logger = LoggerFactory.getLogger(OutfitSelector.class);
 
+    private double rightTemperature(double arduinoTemp, double apiTemp){
+        final double acceptableRange = 3; //the api can be 3° over or under the captured temperature of the arduino to still be counted as correct.
+        if ((apiTemp - acceptableRange) > arduinoTemp || (apiTemp + acceptableRange) < arduinoTemp){
+            return arduinoTemp;
+        } else {
+            return apiTemp;
+        }
+    }
+
 
     public List<ClothingItem> getPossibleClothingItems() {
 
         List<ClothingItem> possibleItems = user.getClothes();
-        double lowestTemperature = weatherForecast.getLowestTemperature();
+        double lowestTemperature = rightTemperature(arduinoSensor.getSensorTemperature(), weatherForecast.getLowestTemperature());
         boolean isGoingToRain = weatherForecast.isGoingToRain();
 
 
