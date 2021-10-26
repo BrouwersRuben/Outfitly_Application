@@ -64,11 +64,8 @@ public class SeedData implements CommandLineRunner {
                         new ClothingItem("T-Shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.WARM),
                         new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL)));
 
-
-
         userRepository.create(user1);
         userRepository.create(user2);
-
 
         // Arduino API
         ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
@@ -98,7 +95,7 @@ public class SeedData implements CommandLineRunner {
         // Slave and master accounts may be a bit easier to understand
     }
 
-    public JSONObject retrieveAPIData(Logger logger, String APILink) throws Exception{
+    private JSONObject retrieveAPIData(Logger logger, String APILink) throws Exception{
         // TODO: Reload api on refresh
         URIBuilder builder = new URIBuilder(APILink);
         HttpGet get = new HttpGet(builder.build());
@@ -109,6 +106,7 @@ public class SeedData implements CommandLineRunner {
             jsonData = null;
             if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                 logger.error("Bad response status code: {}.", response.getStatusLine().getStatusCode());
+//                return;
             }
 
             HttpEntity entity = response.getEntity();
