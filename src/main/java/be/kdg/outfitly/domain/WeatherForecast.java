@@ -35,8 +35,8 @@ public class WeatherForecast extends Entity {
 
     public static WeatherForecast randomForecast(){
         WeatherForecast wf = new WeatherForecast();
-        wf.lowestTemperature = 5;
-        wf.weatherDescription = "rain";
+        wf.lowestTemperature = 16;
+        wf.weatherDescription = "";
         return wf;
     }
 
