@@ -8,8 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -29,11 +28,18 @@ public class MainPageController {
     }
 
     @GetMapping
-    public String ShowWeather(Model model){
+    public String ShowWeather(@RequestParam("name") String name, Model model){
         //TODO: Show username of current logged in user
         model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
-        model.addAttribute("username", /*userService.getUsername()*/"$placeholder$");
+        model.addAttribute("username", name);
         model.addAttribute("weatherForecastData", weatherForecastService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
+        return "mainpage";
+    }
+
+    @PostMapping("/mainpage")
+    public String getUsername(@RequestParam String username, Model model){
+        logger.debug("getUsername is called when logging in!");
+        model.addAttribute("username", username);
         return "mainpage";
     }
 }
