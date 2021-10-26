@@ -29,8 +29,6 @@ public class OutfitSelector {
         double lowestTemperature = weatherForecast.getLowestTemperature();
         boolean isGoingToRain = weatherForecast.isGoingToRain();
 
-        //TODO: this has to be passed from somewhere else
-        ClothingItem.Occasion occasion = ClothingItem.Occasion.UNIVERSAL;
 
         possibleItems = removeUnsuitableForTemperature(possibleItems, lowestTemperature);
         possibleItems = removeUnsuitableForRain(possibleItems, isGoingToRain);
