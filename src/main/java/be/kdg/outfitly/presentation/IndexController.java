@@ -11,8 +11,4 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/")
 public class IndexController {
 
-    @GetMapping("/login")
-    public String showLogin(Model model) {
-        return "login";
-    }
 }
