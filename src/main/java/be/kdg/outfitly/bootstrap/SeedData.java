@@ -71,83 +71,58 @@ public class SeedData implements CommandLineRunner {
 
 
         // Arduino API
-        // TODO: Where to put this ?
-        URIBuilder arduinoBuilder = new URIBuilder(arduinoAPI);
-        HttpGet arduinoGet = new HttpGet(arduinoBuilder.build());
-        CloseableHttpClient arduinoHttpClient = HttpClients.createDefault();
-        JSONObject arduinoJsonWeatherForecast;
-
-        try (CloseableHttpResponse response = arduinoHttpClient.execute(arduinoGet)) {
-            arduinoJsonWeatherForecast = null;
-            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
-                logger.error("Bad response status code: {}.", response.getStatusLine().getStatusCode());
-                return;
-            }
-
-            HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                String rawResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-                arduinoJsonWeatherForecast = new JSONObject(rawResult);
-            }
-
-            if (arduinoJsonWeatherForecast==null) {
-                logger.error("No arduino sensor data retrieved!");
-            } else {
-                logger.debug("Arduino sensor data successfully retrieved!");
-            }
-        }
-
-//        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
-        ArduinoSensor arduinoSensor = new ArduinoSensor(
-                Double.parseDouble(String.valueOf(arduinoJsonWeatherForecast.get("Temperature"))),
-                Double.parseDouble(String.valueOf(arduinoJsonWeatherForecast.get("Humidity"))),
-                LocalDateTime.parse(String.valueOf(arduinoJsonWeatherForecast.get("DateTime"))))                ;
+        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
+//        ArduinoSensor arduinoSensor = new ArduinoSensor(
+//                Double.parseDouble(String.valueOf(retrieveAPIData(logger, arduinoAPI).get("Temperature"))),
+//                Double.parseDouble(String.valueOf(retrieveAPIData(logger, arduinoAPI).get("Humidity"))),
+//                LocalDateTime.parse(String.valueOf(retrieveAPIData(logger, arduinoAPI).get("DateTime"))))                ;
 
         arduinoSensorRepository.create(arduinoSensor);
 
         // Weather API
-        // TODO: Where to put this ?
-        // TODO: Reload api on refresh
-        URIBuilder builder = new URIBuilder(apiString);
-        HttpGet get = new HttpGet(builder.build());
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        JSONObject jsonWeatherForecast;
-
-        try (CloseableHttpResponse response = httpclient.execute(get)) {
-            jsonWeatherForecast = null;
-            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
-                logger.error("Bad response status code: {}.", response.getStatusLine().getStatusCode());
-                return;
-            }
-
-            HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                String rawResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-                jsonWeatherForecast = new JSONObject(rawResult);
-            }
-
-            if (jsonWeatherForecast==null) {
-                logger.error("No weather forecast data retrieved!");
-            } else {
-                logger.debug("Forecast data successfully retrieved!");
-            }
-        }
-
         WeatherForecast forecast = new WeatherForecast(
                 LocalDateTime.of(2021, 10, 29, 12, 30, 30),
-                String.valueOf(jsonWeatherForecast.getJSONObject("sys").get("country")),
-                String.valueOf(jsonWeatherForecast.get("name")),
-                Double.parseDouble(String.valueOf(jsonWeatherForecast.getJSONObject("main").get("temp"))),
-                Double.parseDouble(String.valueOf(jsonWeatherForecast.getJSONObject("main").get("feels_like"))),
-                Double.parseDouble(String.valueOf(jsonWeatherForecast.getJSONObject("main").get("temp_min"))),
-                Double.parseDouble(String.valueOf(jsonWeatherForecast.getJSONObject("main").get("temp_max"))),
-                Double.parseDouble(String.valueOf(jsonWeatherForecast.getJSONObject("wind").get("speed"))),
-                Integer.parseInt(String.valueOf(jsonWeatherForecast.getJSONObject("main").get("humidity"))),
-                String.valueOf(jsonWeatherForecast.getJSONArray("weather").getJSONObject(0).get("main"))
+                String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("sys").get("country")),
+                String.valueOf(retrieveAPIData(logger, apiString).get("name")),
+                Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("temp"))),
+                Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("feels_like"))),
+                Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("temp_min"))),
+                Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("temp_max"))),
+                Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("wind").get("speed"))),
+                Integer.parseInt(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("humidity"))),
+                String.valueOf(retrieveAPIData(logger, apiString).getJSONArray("weather").getJSONObject(0).get("main"))
         );
 
         weatherForecastRepository.create(forecast);
 
         // Slave and master accounts may be a bit easier to understand
+    }
+
+    public JSONObject retrieveAPIData(Logger logger, String APILink) throws Exception{
+        // TODO: Reload api on refresh
+        URIBuilder builder = new URIBuilder(APILink);
+        HttpGet get = new HttpGet(builder.build());
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        JSONObject jsonData;
+
+        try (CloseableHttpResponse response = httpclient.execute(get)) {
+            jsonData = null;
+            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                logger.error("Bad response status code: {}.", response.getStatusLine().getStatusCode());
+            }
+
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                String rawResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+                jsonData = new JSONObject(rawResult);
+            }
+
+            if (jsonData==null) {
+                logger.error("No weather forecast data retrieved!");
+            } else {
+                logger.debug("Forecast data successfully retrieved!");
+            }
+        }
+        return jsonData;
     }
 }
