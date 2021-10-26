@@ -3,10 +3,7 @@ package be.kdg.outfitly.domain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class OutfitSelector {
@@ -35,14 +32,18 @@ public class OutfitSelector {
     public List<ClothingItem> getPossibleClothingItems() {
 
         List<ClothingItem> possibleItems = user.getClothes();
-        double lowestTemperature = rightTemperature(arduinoSensor.getSensorTemperature(), weatherForecast.getLowestTemperature());
+        //TODO:
+//        double lowestTemperature = rightTemperature(arduinoSensor.getSensorTemperature(), weatherForecast.getLowestTemperature());
+        double lowestTemperature = weatherForecast.getLowestTemperature();
         boolean isGoingToRain = weatherForecast.isGoingToRain();
+        logger.debug("Possible items: "+ Arrays.toString(possibleItems.toArray()));
 
 
         possibleItems = removeUnsuitableForTemperature(possibleItems, lowestTemperature);
         possibleItems = removeUnsuitableForRain(possibleItems, isGoingToRain);
         possibleItems = removeUnsuitableForOccasion(possibleItems, occasion);
 
+        logger.debug("Possible items: "+ Arrays.toString(possibleItems.toArray()));
         return possibleItems;
     }
 
