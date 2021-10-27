@@ -23,7 +23,7 @@
         <tbody>
             <tr th:each="entry : ${clothes}">
                 <td>
-                    <div th:text="${entry.getKey()}"></div>
+                    <div th:text="${entry.getKey().getName()}"></div>
                 </td>
                 <td >
                     <div th:each="item : ${entry.getValue()}" th:text="${item.getName()}"></div>
