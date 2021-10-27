@@ -25,6 +25,10 @@ public class User extends Entity {
         this.clothes = clothes;
     }
 
+    public void addClothing(ClothingItem clothingItem){
+        clothes.add(clothingItem);
+    }
+
     // Getters
 
     public String getEmail() {
