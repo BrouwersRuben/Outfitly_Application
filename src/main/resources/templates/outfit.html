@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="entry : ${clothes}">
+            <tr th:each="entry : ${clothes}" th:if="${entry.getValue().size()!=0}">
                 <td>
                     <div th:text="${entry.getKey()}"></div>
                 </td>
