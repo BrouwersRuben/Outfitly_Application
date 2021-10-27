@@ -21,14 +21,6 @@
     </tr>
     </thead>
     <tbody>
-    <!--            <tr th:each="entry : ${clothes}" th:if="${entry.getValue().size()!=0}">-->
-    <!--                <td>-->
-    <!--                    <div th:text="${entry.getKey()}"></div>-->
-    <!--                </td>-->
-    <!--                <td >-->
-    <!--                    <div th:each="item : ${entry.getValue()}" th:text="${item.getName()}"></div>-->
-    <!--                </td>-->
-    <!--            </tr>   -->
     <tr th:each="type : ${types}" th:if="${clothes.get(type).size()!=0}">
         <td>
             <div th:text="${type.getName()}"></div>
