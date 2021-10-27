@@ -37,17 +37,11 @@ public class AddClothingController {
     }
 
     @PostMapping
-    public String processClothing(@ModelAttribute("user") User user, String clothingName, String material, String rainproofness, String occasion, String weather, String type){
+    public String processClothing(@ModelAttribute("user") User user, String clothingName, ClothingItem.Material material, ClothingItem.RainProofness rainproofness, ClothingItem.Occasion occasion, ClothingItem.Weather weather, ClothingItem.Type type){
         logger.debug("User filled in clothing: " + clothingName);
 
-        //Can this be done better?
-        ClothingItem.Material materialEnum = ClothingItem.Material.valueOf(material);
-        ClothingItem.RainProofness rainproofnessEnum = ClothingItem.RainProofness.valueOf(rainproofness);
-        ClothingItem.Occasion occasionEnum = ClothingItem.Occasion.valueOf(occasion);
-        ClothingItem.Weather weatherEnum = ClothingItem.Weather.valueOf(weather);
-        ClothingItem.Type typeEnum = ClothingItem.Type.valueOf(type);
 
-        ClothingItem newClothingItem = new ClothingItem(clothingName, materialEnum, rainproofnessEnum, occasionEnum, weatherEnum, typeEnum);
+        ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type);
         List<ClothingItem> userClothing = new ArrayList<>(user.getClothes());
         userClothing.add(newClothingItem);
 
