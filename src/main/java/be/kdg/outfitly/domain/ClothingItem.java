@@ -3,6 +3,7 @@ package be.kdg.outfitly.domain;
 import java.io.File;
 
 public class ClothingItem extends Entity {
+
     public enum Material{
         COTTON, WOOL, SILK, SYNTHETIC, LEATHER, DENIM, OTHER
     }
