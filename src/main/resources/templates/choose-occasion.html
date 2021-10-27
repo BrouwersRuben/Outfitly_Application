@@ -7,35 +7,32 @@
     <link rel="stylesheet" th:href="@{/style.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </head>
-<body>
+<body class="m-4">
 
-<h1 class="display-1 text-center m-4">
-    Outfitly
-</h1>
+    <div th:insert="~{fragments/navbarLoggedIn::navbarLoggedIn}">navbarLoggedIn</div>
 
-<h2 class="text-muted text-center">
-    Your everyday AI stylist.
-</h2>
+    <div th:insert="~{fragments/header::header}">header</div>
 
-<form method="post">
+    <form method="post">
 
-    <div class="mt-3 d-flex justify-content-center">
+        <div class="mt-3 d-flex justify-content-center">
 
-        <div class="form-check m-4" th:each="occasion : ${occasions}">
-            <input class="form-check-input" name="occasion" th:id="${occasion.name()}" th:value="${occasion.name()}"
-                   type="radio">
-            <label class="form-check-label " th:for="${occasion.name()}" th:text="${occasion.name()}">
-                Occasion
-            </label>
+            <div class="form-check m-4" th:each="occasion : ${occasions}">
+                <input class="form-check-input" name="occasion" th:id="${occasion.name()}" th:value="${occasion.name()}"
+                       type="radio">
+                <label class="form-check-label " th:for="${occasion.name()}" th:text="${occasion.name()}">
+                    Occasion
+                </label>
+            </div>
+
         </div>
 
-    </div>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-outline-dark mb-4" type="submit">Choose occasion</button>
+        </div>
+    </form>
 
-    <div class="d-flex justify-content-center">
-        <button class="btn btn-outline-dark mb-4" type="submit">Choose occasion</button>
-    </div>
-</form>
+    <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
 
-<footer th:replace="~{footer::copy}"></footer>
 </body>
 </html>

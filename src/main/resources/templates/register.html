@@ -6,51 +6,39 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid justify-content-end">
-            <ul class="navbar-nav ">
-                <li class="nav-item">
-                    <a aria-current="page" th:href="@{/index}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/...}">FAQ</a>
-                </li>
-                <li class="nav-item">
-                    <a aria-current="page" class="nav-link active"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/...}">Price</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/...}">...</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <h1 class="display-1 text-center m-4">
-        Outfitly
-    </h1>
+<body class="m-4">
+
+    <div th:insert="~{fragments/header::header}">header</div>
+
     <div class="container">
-        <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}">
+        <div class="d-flex justify-content-end">
+            <a th:href="@{/login}" class="btn btn-primary m-4">Go back</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div th:if="${errorMessage}" class="alert alert-danger m-4" role="alert" th:text="${errorMessage}">
             Please fill in your correct login details.
         </div>
-        <form method="post">
-            <div class="form-group">
+        <form method="post" class="m-4">
+            <div class="form-group m-4">
                 <label for="inputName">Name</label>
                 <input type="text" class="form-control" id="inputName" placeholder="John Doe" name="name">
             </div>
-            <div class="form-group">
+            <div class="form-group m-4">
                 <label for="inputEmail">Email address</label>
                 <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
-            <div class="form-group">
+            <div class="form-group m-4">
                 <label for="inputPassword">Password</label>
                 <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary m-4">Submit</button>
         </form>
     </div>
+
+    <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+
 </body>
 </html>

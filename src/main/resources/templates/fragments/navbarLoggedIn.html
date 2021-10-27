@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="navbarLoggedIn" class="d-flex justify-content-end">
+
+    <!--TODO: Split up this navbar-->
+    <nav class="m-4 navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/outfit/choose-occasion}">Pick outfit!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/...}">Weather forecast</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/...}">Your profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/...}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</div>
+
+</body>
+
+</html>
