@@ -56,5 +56,11 @@ public class LoginController {
         }
     }
 
+    @ModelAttribute("user")
+    public User user() {
+        User user = new User();
+        user.setId(-1);
+        return user;
+    }
 
 }
