@@ -6,12 +6,17 @@
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <title>Outfitly</title>
 </head>
-<body>
+<body class="m-4">
 
-<h1>You have logged out.</h1>
-<a th:href="@{/}">Go back to home page</a>
+    <div th:insert="~{fragments/header::header}">header</div>
 
+    <h3 class="display-3 text-center mt-5">You have logged out.</h3>
 
-<footer th:replace="~{footer::copy}"></footer>
+    <div class="d-flex justify-content-center m-5">
+        <a th:href="@{/}" class="btn btn-outline-dark">Go back to home page</a>
+    </div>
+
+    <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+
 </body>
 </html>
