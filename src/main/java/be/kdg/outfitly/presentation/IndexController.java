@@ -17,6 +17,9 @@ public class IndexController {
 
     @GetMapping("/faq")
     public String showFAQ(Model model, @ModelAttribute("user") User user) {
+        model.addAttribute("loggedIn", user.getId() != -1);
+        model.addAttribute("user", user);
+
         return "faq";
     }
 
@@ -25,4 +28,10 @@ public class IndexController {
         return "doesnotexist";
     }
 
+    @ModelAttribute("user")
+    public User user() {
+        User user = new User();
+        user.setId(-1);
+        return user;
+    }
 }

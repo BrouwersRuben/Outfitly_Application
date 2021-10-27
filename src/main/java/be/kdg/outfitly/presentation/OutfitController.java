@@ -20,7 +20,7 @@ public class OutfitController {
 
     @GetMapping("/choose-occasion")
     public String occasionSelector(Model model, @ModelAttribute("user") User user) {
-        model.addAttribute("loggedin", user.getId() != -1);
+        model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
         model.addAttribute("occasions", ClothingItem.Occasion.values());
         logger.debug(user.getId() + "");
