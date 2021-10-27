@@ -31,8 +31,11 @@ public class MainPageController {
 
     @GetMapping
     public String ShowWeather(Model model, @ModelAttribute("user") User user){
-        //TODO: Show username of current logged in user
+        model.addAttribute("loggedin", user.getId() != -1);
+        model.addAttribute("user", user);
         model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
+
+        //TODO: just use user.getName() in thymeleaf instead of this
         model.addAttribute("username", user.getName());
         model.addAttribute("weatherForecastData", weatherForecastService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
         return "mainpage";
