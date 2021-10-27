@@ -1,6 +1,5 @@
 package be.kdg.outfitly.service;
 
-import be.kdg.outfitly.domain.ArduinoSensor;
 import be.kdg.outfitly.domain.WeatherForecast;
 import be.kdg.outfitly.repository.WeatherForecastRepository;
 import org.slf4j.Logger;

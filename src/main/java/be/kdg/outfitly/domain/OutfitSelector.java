@@ -7,10 +7,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class OutfitSelector {
-    private WeatherForecast weatherForecast;
+    private final WeatherForecast weatherForecast;
     private ArduinoSensor arduinoSensor;
-    private User user;
-    private ClothingItem.Occasion occasion;
+    private final User user;
+    private final ClothingItem.Occasion occasion;
 
     public OutfitSelector(WeatherForecast weatherForecast, User user, ClothingItem.Occasion occasion) {
         this.weatherForecast = weatherForecast;
@@ -18,7 +18,7 @@ public class OutfitSelector {
         this.occasion = occasion;
     }
 
-    private Logger logger = LoggerFactory.getLogger(OutfitSelector.class);
+    private final Logger logger = LoggerFactory.getLogger(OutfitSelector.class);
 
     private double rightTemperature(double arduinoTemp, double apiTemp){
         final double acceptableRange = 3; //the api can be 3° over or under the captured temperature of the arduino to still be counted as correct.

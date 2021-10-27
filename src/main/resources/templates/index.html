@@ -8,43 +8,42 @@
 </head>
 <body class="m-4">
 
-<!--    <div th:insert="~{fragments/navbar::navbar}">navbar</div>-->
 <nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
-
 
     <div th:insert="~{fragments/header::header}">header</div>
 
-<!--    todo: center container-->
-    <div class="container m-4">
-        <div class="row">
-            <div class="col-sm">
-                <img class="my-4" th:src="@{images/drawingWardrobe.png}" width="100%" alt="cartoon wardrobe image">
-            </div>
-            <div class="col-sm">
-                <h5 class="m-4 text-black">
-                    Don't waste time picking the right clothes. Outfitly will do it for
-                    you. You will save time and will always have the right outfit for
-                    the weather conditions.
-                </h5>
-                <p class="m-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut erat sit amet velit semper efficitur.
-                    Nullam est justo, pharetra vitae nisl in, vulputate hendrerit est. Fusce ullamcorper vehicula semper.
-                    Phasellus id mattis lorem. Ut quis tincidunt tortor. Duis vel dignissim metus. Curabitur in elit eu lorem
-                    tincidunt ornare et at ex. Integer risus leo, iaculis sit amet metus eu, varius semper purus.
-                </p>
-                <p class="m-4">
-                    Fusce nec tempor ex, tincidunt volutpat turpis. Sed vulputate orci eu sapien congue facilisis. Ut neque ipsum,
-                    ornare ac neque ut, molestie iaculis ligula. Suspendisse porta erat sit amet bibendum faucibus. Praesent tristique
-                    sem nec erat rutrum sollicitudin. Aliquam non ligula nisi. Suspendisse malesuada nulla sed magna finibus, ac
-                    convallis dolor pharetra. Nullam eu ex vitae diam viverra ornare tincidunt ac massa.
-                </p>
-                <p class="m-4">
-                    Donec semper volutpat faucibus. Phasellus faucibus rutrum rutrum. Interdum et malesuada fames ac ante ipsum
-                    primis in faucibus. Praesent dapibus rhoncus odio, vitae vulputate magna viverra eu. In ac nulla sit amet dolor
-                    gravida suscipit et in felis. Maecenas posuere, quam quis tempus elementum, sem arcu aliquet tortor, sit amet
-                    ultrices tellus ante sit amet massa. In imperdiet eros eget nulla vestibulum malesuada. Cras lobortis, quam
-                    vel vehicula semper, ante augue euismod odio, non aliquet orci felis ut tellus.
-                </p>
+    <div class="d-flex justify-content-center">
+        <div class="container m-4">
+            <div class="row">
+                <div class="col-sm">
+                    <img class="my-4" th:src="@{images/drawingWardrobe.png}" width="100%" alt="cartoon wardrobe image">
+                </div>
+                <div class="col-sm">
+                    <h5 class="m-4 text-black">
+                        Don't waste time picking the right clothes. Outfitly will do it for
+                        you. You will save time and will always have the right outfit for
+                        the weather conditions.
+                    </h5>
+                    <p class="m-4">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut erat sit amet velit semper efficitur.
+                        Nullam est justo, pharetra vitae nisl in, vulputate hendrerit est. Fusce ullamcorper vehicula semper.
+                        Phasellus id mattis lorem. Ut quis tincidunt tortor. Duis vel dignissim metus. Curabitur in elit eu lorem
+                        tincidunt ornare et at ex. Integer risus leo, iaculis sit amet metus eu, varius semper purus.
+                    </p>
+                    <p class="m-4">
+                        Fusce nec tempor ex, tincidunt volutpat turpis. Sed vulputate orci eu sapien congue facilisis. Ut neque ipsum,
+                        ornare ac neque ut, molestie iaculis ligula. Suspendisse porta erat sit amet bibendum faucibus. Praesent tristique
+                        sem nec erat rutrum sollicitudin. Aliquam non ligula nisi. Suspendisse malesuada nulla sed magna finibus, ac
+                        convallis dolor pharetra. Nullam eu ex vitae diam viverra ornare tincidunt ac massa.
+                    </p>
+                    <p class="m-4">
+                        Donec semper volutpat faucibus. Phasellus faucibus rutrum rutrum. Interdum et malesuada fames ac ante ipsum
+                        primis in faucibus. Praesent dapibus rhoncus odio, vitae vulputate magna viverra eu. In ac nulla sit amet dolor
+                        gravida suscipit et in felis. Maecenas posuere, quam quis tempus elementum, sem arcu aliquet tortor, sit amet
+                        ultrices tellus ante sit amet massa. In imperdiet eros eget nulla vestibulum malesuada. Cras lobortis, quam
+                        vel vehicula semper, ante augue euismod odio, non aliquet orci felis ut tellus.
+                    </p>
+                </div>
             </div>
         </div>
     </div>

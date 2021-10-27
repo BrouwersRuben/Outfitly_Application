@@ -10,14 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 @RequestMapping("/")
 @SessionAttributes("user")
 public class IndexController {
 
-    private Logger logger = LoggerFactory.getLogger(IndexController.class);
+    private final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
 
     @GetMapping("/faq")

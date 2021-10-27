@@ -17,7 +17,7 @@ import java.util.Map;
 @RequestMapping("/addclothing")
 @SessionAttributes("user")
 public class AddClothingController {
-    private Logger logger = LoggerFactory.getLogger(AddClothingController.class);
+    private final Logger logger = LoggerFactory.getLogger(AddClothingController.class);
     @GetMapping
     public String addClothing(Model model, @ModelAttribute("user") User user){
 

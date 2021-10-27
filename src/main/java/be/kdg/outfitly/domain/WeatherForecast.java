@@ -1,7 +1,6 @@
 package be.kdg.outfitly.domain;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 // TODO: This is only for the CURRENT weather forecast, we still need a separate class for future forecast I guess.
 public class WeatherForecast extends Entity {
