@@ -24,7 +24,7 @@
                 <h2 th:text="${enum.getKey()}"></h2>
                 <div th:each="value : ${enum.getValue}">
                     <input type="radio" th:id="${value}" th:name="${enum.getKey()}" th:value="${value}" required="required">
-                    <label th:for="${value}" th:text="${value}">value</label>
+                    <label th:for="${value}" th:text="${value.getName()}">value</label>
                 </div>
             </div>
         </div>
