@@ -13,13 +13,23 @@
 
     <div th:insert="~{fragments/header::header}">header</div>
 
-    <table class="table">
-        <tr th:each="entry : ${clothes}">
-            <th th:text="${entry.getKey()}"></th>
-            <td >
-                <div th:each="item : ${entry.getValue()}" th:text="${item.getName()}"></div>
-            </td>
-        </tr>
+    <table class="table table-responsive table-striped table-bordered my-4">
+        <thead class = "table-dark">
+            <tr>
+                <th scope="col" style="width: 50%">Clothing Type</th>
+                <th scope="col" style="width: 50%">Clothing Items</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="entry : ${clothes}">
+                <td>
+                    <div th:text="${entry.getKey()}"></div>
+                </td>
+                <td >
+                    <div th:each="item : ${entry.getValue()}" th:text="${item.getName()}"></div>
+                </td>
+            </tr>
+        </tbody>
     </table>
 
     <div class="d-flex justify-content-center m-5">
