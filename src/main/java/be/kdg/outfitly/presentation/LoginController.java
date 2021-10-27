@@ -25,11 +25,6 @@ public class LoginController {
 
     @GetMapping
     public String showLogin(Model model, @ModelAttribute("user") User user) {
-
-        model.addAttribute("loggedin", user.getId() != -1);
-        model.addAttribute("user", user);
-
-
         return "login";
     }
 

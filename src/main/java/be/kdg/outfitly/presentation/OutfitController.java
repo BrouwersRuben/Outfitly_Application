@@ -19,17 +19,19 @@ public class OutfitController {
     private final Logger logger = LoggerFactory.getLogger(OutfitController.class);
 
     @GetMapping("/choose-occasion")
-    public String occasionSelector(Model model, @ModelAttribute("user") User user){
+    public String occasionSelector(Model model, @ModelAttribute("user") User user) {
+        model.addAttribute("loggedin", user.getId() != -1);
+        model.addAttribute("user", user);
         model.addAttribute("occasions", ClothingItem.Occasion.values());
-        logger.debug(user.getId()+"");
-        logger.debug(user.getName()+"");
+        logger.debug(user.getId() + "");
+        logger.debug(user.getName() + "");
         return "choose-occasion";
     }
 
     @PostMapping("/choose-occasion")
     public String occasionForm(ClothingItem.Occasion occasion,
                                @ModelAttribute("user") User user,
-                               Model model){
+                               Model model) {
 
         outfitSelector = new OutfitSelector(WeatherForecast.randomForecast(), user, occasion);
 
