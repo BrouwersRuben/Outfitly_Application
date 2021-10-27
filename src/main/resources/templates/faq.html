@@ -8,46 +8,47 @@
 </head>
 <body class="m-4">
 
-    <div th:insert="~{fragments/navbar::navbar}">navbar</div>
+<!--    <div th:insert="~{fragments/navbar::navbar}">navbar</div>-->
+<nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
 
-    <div th:insert="~{fragments/header::header}">header</div>
+<div th:insert="~{fragments/header::header}">header</div>
 
-    <div class="m-4">
-        <h5 class="font-weight-bold">How does it work?</h5>
-        <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
-            culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
-            cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
-            mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
-            non elit non amet nisi sint reprehenderit pariatur aliqua.
-        </p>
-        <h5 class="font-weight-bold">Can I add my children's clothes to my account?</h5>
-        <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
-            culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
-            cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
-            mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
-            non elit non amet nisi sint reprehenderit pariatur aliqua.
-        </p>
-        <h5 class="font-weight-bold">I forgot my password, where do I retrieve it?</h5>
-        <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
-            culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
-            cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
-            mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
-            non elit non amet nisi sint reprehenderit pariatur aliqua.
-        </p>
-        <h5 class="font-weight-bold">What happens with my data?</h5>
-        <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
-            culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
-            cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
-            mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
-            non elit non amet nisi sint reprehenderit pariatur aliqua.
-        </p>
-    </div>
+<div class="m-4">
+    <h5 class="font-weight-bold">How does it work?</h5>
+    <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
+        culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
+        cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
+        mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
+        non elit non amet nisi sint reprehenderit pariatur aliqua.
+    </p>
+    <h5 class="font-weight-bold">Can I add my children's clothes to my account?</h5>
+    <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
+        culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
+        cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
+        mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
+        non elit non amet nisi sint reprehenderit pariatur aliqua.
+    </p>
+    <h5 class="font-weight-bold">I forgot my password, where do I retrieve it?</h5>
+    <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
+        culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
+        cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
+        mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
+        non elit non amet nisi sint reprehenderit pariatur aliqua.
+    </p>
+    <h5 class="font-weight-bold">What happens with my data?</h5>
+    <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
+        culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
+        cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
+        mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
+        non elit non amet nisi sint reprehenderit pariatur aliqua.
+    </p>
+</div>
 
-    <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+<div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
 
 </body>
 </html>

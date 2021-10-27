@@ -20,7 +20,11 @@ public class AddClothingController {
     private Logger logger = LoggerFactory.getLogger(AddClothingController.class);
     @GetMapping
     public String addClothing(Model model, @ModelAttribute("user") User user){
-        Map<String, List<Object>> enumsValues = new HashMap();
+
+        model.addAttribute("loggedIn", user.getId() != -1);
+        model.addAttribute("user", user);
+
+        Map<String, List<Object>> enumsValues = new HashMap<>();
         enumsValues.put("type", List.of(ClothingItem.Type.values()));
         enumsValues.put("occasion", List.of(ClothingItem.Occasion.values()));
         enumsValues.put("rainproofness", List.of(ClothingItem.RainProofness.values()));
