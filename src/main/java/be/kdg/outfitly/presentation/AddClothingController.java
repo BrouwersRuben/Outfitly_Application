@@ -35,6 +35,7 @@ public class AddClothingController {
     @PostMapping
     public String processClothing(@ModelAttribute("user") User user, String clothingName, String material, String rainproofness, String occasion, String weather, String type){
         logger.debug("User filled in clothing: " + clothingName);
+
         //Can this be done better?
         ClothingItem.Material materialEnum = ClothingItem.Material.valueOf(material);
         ClothingItem.RainProofness rainproofnessEnum = ClothingItem.RainProofness.valueOf(rainproofness);
