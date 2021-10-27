@@ -28,4 +28,10 @@ public class IndexController {
         return "doesnotexist";
     }
 
+    @ModelAttribute("user")
+    public User user() {
+        User user = new User();
+        user.setId(-1);
+        return user;
+    }
 }
