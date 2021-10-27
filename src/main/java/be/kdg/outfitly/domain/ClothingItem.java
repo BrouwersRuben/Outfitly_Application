@@ -9,7 +9,17 @@ public class ClothingItem extends Entity {
     }
 
     public enum Type{
-        JACKET_LIKE, SWEATSHIRT_LIKE, SHIRT_LIKE, T_SHIRT_LIKE, TROUSERS_LIKE, SHOES
+        JACKET_LIKE("Jackets"), SWEATSHIRT_LIKE("Sweatshirts"), SHIRT_LIKE("Shirts"), T_SHIRT_LIKE("T-Shirts"), TROUSERS_LIKE("Trousers"), SHOES("Shoes");
+
+        private final String name;
+
+        Type(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
     public enum RainProofness{
         BAD, NORMAL, GOOD
