@@ -9,20 +9,24 @@
 </head>
 <body class="m-4">
 
-<div th:insert="~{fragments/navbarLoggedIn::navbarLoggedIn}">navbarLoggedIn</div>
+    <div th:insert="~{fragments/navbarLoggedIn::navbarLoggedIn}">navbarLoggedIn</div>
 
-<div th:insert="~{fragments/header::header}">header</div>
+    <div th:insert="~{fragments/header::header}">header</div>
 
-<table class="table">
-    <tr th:each="entry : ${clothes}">
-        <th th:text="${entry.getKey()}"></th>
-        <td >
-            <div th:each="item : ${entry.getValue()}" th:text="${item.getName()}"></div>
-        </td>
-    </tr>
-</table>
+    <table class="table">
+        <tr th:each="entry : ${clothes}">
+            <th th:text="${entry.getKey()}"></th>
+            <td >
+                <div th:each="item : ${entry.getValue()}" th:text="${item.getName()}"></div>
+            </td>
+        </tr>
+    </table>
 
-<div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+    <div class="d-flex justify-content-center m-5">
+        <a th:href="@{/outfit/choose-occasion}" class="btn btn-outline-dark">Choose a different occasion</a>
+    </div>
+
+    <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
 
 </body>
 </html>
