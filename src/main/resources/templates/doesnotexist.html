@@ -6,7 +6,9 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </head>
-<body>
+<body class="m-4">
+    <div th:insert="~{fragments/header::header}">header</div>
+
     <h2 class="display-2 m-4 text-center">
         This page does not exist yet!
     </h2>

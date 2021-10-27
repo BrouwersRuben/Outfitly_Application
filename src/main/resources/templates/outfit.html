@@ -7,16 +7,12 @@
     <link rel="stylesheet" th:href="@{/style.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </head>
-<body>
-<h1 class="display-1 text-center m-4">
-    Outfitly
-</h1>
+<body class="m-4">
 
-<h2 class="text-muted text-center">
-    Your everyday AI stylist.
-</h2>
+<div th:insert="~{fragments/navbarLoggedIn::navbarLoggedIn}">navbarLoggedIn</div>
 
-<p>Your outfit:</p>
+<div th:insert="~{fragments/header::header}">header</div>
+
 <table class="table">
     <tr th:each="entry : ${clothes}">
         <th th:text="${entry.getKey()}"></th>
@@ -26,7 +22,7 @@
     </tr>
 </table>
 
-<footer th:replace="~{footer::copy}"></footer>
+<div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
 
 </body>
 </html>

@@ -8,31 +8,10 @@
 </head>
 <body class="m-4">
 
-    <h1 class="display-1 text-center m-4">
-        Outfitly
-    </h1>
+    <div th:insert="~{fragments/navbarLoggedIn::navbarLoggedIn}">navbarLoggedIn</div>
 
-<!--    TODO: split up this navbar-->
-    <nav class="m-4 navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <ul class="navbar-nav d-flex">
-                <li class="nav-item justify-content-start">
-                    <a class="nav-link" th:href="@{/outfit/choose-occasion}">Pick outfit!</a>
-                </li>
-                <li class="nav-item justify-content-start">
-                    <a class="nav-link" th:href="@{/...}">Weather forecast</a>
-                </li>
-                <li class="nav-item justify-content-end">
-                    <a class="nav-link" th:href="@{/...}">Your profile</a>
-                </li>
-                <li class="nav-item justify-content-end">
-                    <a class="nav-link" th:href="@{/...}">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div th:insert="~{fragments/header::header}">header</div>
 
-<!--    TODO: Make the time stuff dynamic-->
     <h2 class="m-4">Good morning, <span th:text="${username}"></span></h2>
 
     <div class="col-sm-8 px-4">
@@ -68,7 +47,7 @@
         </div>
     </div>
 
-    <div th:insert="~{footer::copy}">&copy; 2021 The Static Templates</div>
+    <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
 
 </body>
 </html>
