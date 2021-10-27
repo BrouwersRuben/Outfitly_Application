@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     @GetMapping("/faq")
-    public String showFAQ(Model model, @ModelAttribute("user") User user) {
+    public String showFAQ(Model model , @ModelAttribute("user") User user) {
         model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
 
