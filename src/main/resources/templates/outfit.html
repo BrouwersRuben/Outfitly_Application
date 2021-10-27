@@ -9,34 +9,43 @@
 </head>
 <body class="m-4">
 
-    <div th:insert="~{fragments/navbarLoggedIn::navbarLoggedIn}">navbarLoggedIn</div>
+<div th:insert="~{fragments/navbarLoggedIn::navbarLoggedIn}">navbarLoggedIn</div>
 
-    <div th:insert="~{fragments/header::header}">header</div>
+<div th:insert="~{fragments/header::header}">header</div>
 
-    <table class="table table-responsive table-striped table-bordered my-4">
-        <thead class = "table-dark">
-            <tr>
-                <th scope="col" style="width: 50%">Clothing Type</th>
-                <th scope="col" style="width: 50%">Clothing Items</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="entry : ${clothes}" th:if="${entry.getValue().size()!=0}">
-                <td>
-                    <div th:text="${entry.getKey()}"></div>
-                </td>
-                <td >
-                    <div th:each="item : ${entry.getValue()}" th:text="${item.getName()}"></div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<table class="table table-responsive table-striped table-bordered my-4">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col" style="width: 50%">Clothing Type</th>
+        <th scope="col" style="width: 50%">Clothing Items</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--            <tr th:each="entry : ${clothes}" th:if="${entry.getValue().size()!=0}">-->
+    <!--                <td>-->
+    <!--                    <div th:text="${entry.getKey()}"></div>-->
+    <!--                </td>-->
+    <!--                <td >-->
+    <!--                    <div th:each="item : ${entry.getValue()}" th:text="${item.getName()}"></div>-->
+    <!--                </td>-->
+    <!--            </tr>   -->
+    <tr th:each="type : ${types}" th:if="${clothes.get(type).size()!=0}">
+        <td>
+            <div th:text="${type.getName()}"></div>
+        </td>
+        <td>
+            <div th:each="item : ${clothes.get(type)}" th:text="${item.getName()}"></div>
+        </td>
+    </tr>
 
-    <div class="d-flex justify-content-center m-5">
-        <a th:href="@{/outfit/choose-occasion}" class="btn btn-outline-dark">Choose a different occasion</a>
-    </div>
+    </tbody>
+</table>
 
-    <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+<div class="d-flex justify-content-center m-5">
+    <a class="btn btn-outline-dark" th:href="@{/outfit/choose-occasion}">Choose a different occasion</a>
+</div>
+
+<div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
 
 </body>
 </html>

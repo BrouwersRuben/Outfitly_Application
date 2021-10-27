@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/outfit")
 @SessionAttributes("user")
@@ -35,7 +37,9 @@ public class OutfitController {
 
         outfitSelector = new OutfitSelector(WeatherForecast.randomForecast(), user, occasion);
 
-        model.addAttribute("clothes", outfitSelector.getSuitableClothesMap().entrySet());
+        model.addAttribute("clothes", outfitSelector.getSuitableClothesMap());
+        model.addAttribute("types", List.of(ClothingItem.Type.values()));
+
         return "outfit";
     }
 
