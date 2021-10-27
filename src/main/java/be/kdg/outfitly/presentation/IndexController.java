@@ -17,7 +17,7 @@ public class IndexController {
 
     @GetMapping("/faq")
     public String showFAQ(Model model, @ModelAttribute("user") User user) {
-        model.addAttribute("loggedin", user.getId() != -1);
+        model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
 
         return "faq";

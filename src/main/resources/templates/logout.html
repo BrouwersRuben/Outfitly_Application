@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <title>Outfitly</title>
+</head>
+<body>
+
+<h1>You have logged out.</h1>
+<a th:href="@{/}">Go back to home page</a>
+
+
+<footer th:replace="~{footer::copy}"></footer>
+</body>
+</html>

@@ -1,7 +1,6 @@
 package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.User;
-import be.kdg.outfitly.domain.WeatherForecast;
 import be.kdg.outfitly.service.ArduinoSensorService;
 import be.kdg.outfitly.service.UserService;
 import be.kdg.outfitly.service.WeatherForecastService;
@@ -31,7 +30,7 @@ public class MainPageController {
 
     @GetMapping
     public String ShowWeather(Model model, @ModelAttribute("user") User user){
-        model.addAttribute("loggedin", user.getId() != -1);
+        model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
         model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
 
