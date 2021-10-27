@@ -5,7 +5,17 @@ import java.io.File;
 public class ClothingItem extends Entity {
 
     public enum Material{
-        COTTON, WOOL, SILK, SYNTHETIC, LEATHER, DENIM, OTHER
+        COTTON("Cotton"), WOOL("Wool"), SILK("Silk"), SYNTHETIC("Synthetic"), LEATHER("Leather"), DENIM("Denim"), OTHER("Other");
+
+        private final String name;
+
+        Material(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 
     public enum Type{
@@ -21,16 +31,47 @@ public class ClothingItem extends Entity {
             return name;
         }
     }
+
     public enum RainProofness{
-        BAD, NORMAL, GOOD
+        BAD("Bad"), NORMAL("Normal"), GOOD("Good");
+
+        private final String name;
+
+        RainProofness(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 
     public enum Occasion{
-        CASUAL, UNIVERSAL, ELEGANT
+        CASUAL("Casual"), UNIVERSAL("Universal"), ELEGANT("Elegant");
+
+        private final String name;
+
+        Occasion(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 
     public enum Weather{
-        COLD, MILD, WARM, UNIVERSAL
+        COLD("Cold"), MILD("Mild"), WARM("Warm"), UNIVERSAL("Universal");
+
+        private final String name;
+
+        Weather(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 
     private String name;

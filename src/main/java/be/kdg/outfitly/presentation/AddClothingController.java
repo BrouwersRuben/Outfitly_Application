@@ -30,18 +30,22 @@ public class AddClothingController {
         enumsValues.put("rainproofness", List.of(ClothingItem.RainProofness.values()));
         enumsValues.put("material", List.of(ClothingItem.Material.values()));
         enumsValues.put("weather", List.of(ClothingItem.Weather.values()));
-        //same for all enums of clothing item
+
         model.addAttribute("enums", enumsValues.entrySet());
         logger.debug("Passing enums: " + enumsValues.entrySet());
         return "addclothing";
     }
 
+    //Automatically gets converted to enum
     @PostMapping
     public String processClothing(@ModelAttribute("user") User user, String clothingName, ClothingItem.Material material, ClothingItem.RainProofness rainproofness, ClothingItem.Occasion occasion, ClothingItem.Weather weather, ClothingItem.Type type){
         logger.debug("User filled in clothing: " + clothingName);
 
 
         ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type);
+        //quick fix, gives "java.lang.UnsupportedOperationException: null" error
+        //with ex. userClothing.getClothes().add(..)
+        //or addClothing method inside of User
         List<ClothingItem> userClothing = new ArrayList<>(user.getClothes());
         userClothing.add(newClothingItem);
 

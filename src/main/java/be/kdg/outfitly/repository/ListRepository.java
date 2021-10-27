@@ -33,7 +33,8 @@ public class ListRepository<T extends Entity> implements EntityRepository<T>{
 
     @Override
     public T findById(int id) {
-        return entities.stream().filter(e->e.getId()==id).findFirst().orElse(null);   }
+        return entities.stream().filter(e->e.getId()==id).findFirst().orElse(null);
+    }
 
     @Override
     public void delete(T entity) {
