@@ -8,7 +8,9 @@
 </head>
 <body class="m-4">
 
-    <div th:insert="~{fragments/navbar::navbar}">navbar</div>
+<!--    <div th:insert="~{fragments/navbar::navbar}">navbar</div>-->
+<nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
+
 
     <div th:insert="~{fragments/header::header}">header</div>
 
