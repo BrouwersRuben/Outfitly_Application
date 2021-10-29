@@ -33,6 +33,7 @@ public class SeedData implements CommandLineRunner {
     private final WeatherForecastRepository weatherForecastRepository;
     private final String apiString = "https://api.openweathermap.org/data/2.5/weather?q=Antwerp,BE&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c";
     private final String arduinoAPI = "http://192.168.222.187/data";
+    JSONObject jsonData;
 //    private EntityRepository entityRepository;
 //    private ListRepository listRepository;
 //    private MainUserListRepository mainUserListRepository;
@@ -47,6 +48,7 @@ public class SeedData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         logger.debug("Seeding the repositories");
+        jsonData = retrieveAPIData(logger, apiString);
 
         //Test users with some clothing items
         User user1 = new User("testUser1@gmail.com","test123","John",
@@ -64,10 +66,6 @@ public class SeedData implements CommandLineRunner {
                         new ClothingItem("White polo shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.UNIVERSAL, ClothingItem.Weather.WARM, ClothingItem.Type.T_SHIRT_LIKE),
                         new ClothingItem("Black pants", ClothingItem.Material.OTHER, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.UNIVERSAL, ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.TROUSERS_LIKE),
                         new ClothingItem("Black leather sneakers", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.UNIVERSAL, ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.SHOES)
-
-
-
-
         ));
 
         User user2 = new User("testUser2@gmail.com","test123","Bob",
@@ -92,15 +90,15 @@ public class SeedData implements CommandLineRunner {
         // Weather API
         WeatherForecast forecast = new WeatherForecast(
                 LocalDateTime.of(2021, 10, 29, 12, 30, 30),
-                String.valueOf(retrieveAPIData(logger, apiString).get("name")),
-                String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("sys").get("country")),
-                Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("temp"))),
-                Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("feels_like"))),
-                Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("temp_min"))),
-                Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("temp_max"))),
-                Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("wind").get("speed"))),
-                Integer.parseInt(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("humidity"))),
-                String.valueOf(retrieveAPIData(logger, apiString).getJSONArray("weather").getJSONObject(0).get("main"))
+                String.valueOf(jsonData.get("name")),
+                String.valueOf(jsonData.getJSONObject("sys").get("country")),
+                Double.parseDouble(String.valueOf(jsonData.getJSONObject("main").get("temp"))),
+                Double.parseDouble(String.valueOf(jsonData.getJSONObject("main").get("feels_like"))),
+                Double.parseDouble(String.valueOf(jsonData.getJSONObject("main").get("temp_min"))),
+                Double.parseDouble(String.valueOf(jsonData.getJSONObject("main").get("temp_max"))),
+                Double.parseDouble(String.valueOf(jsonData.getJSONObject("wind").get("speed"))),
+                Integer.parseInt(String.valueOf(jsonData.getJSONObject("main").get("humidity"))),
+                String.valueOf(jsonData.getJSONArray("weather").getJSONObject(0).get("main"))
         );
 
         weatherForecastRepository.create(forecast);
@@ -113,7 +111,6 @@ public class SeedData implements CommandLineRunner {
         URIBuilder builder = new URIBuilder(APILink);
         HttpGet get = new HttpGet(builder.build());
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        JSONObject jsonData;
 
         try (CloseableHttpResponse response = httpclient.execute(get)) {
             jsonData = null;
