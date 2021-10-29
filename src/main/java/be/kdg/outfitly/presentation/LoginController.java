@@ -3,6 +3,7 @@ package be.kdg.outfitly.presentation;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.UserDTO;
 import be.kdg.outfitly.repository.UserRepository;
+import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,10 @@ import java.util.stream.Collectors;
 @SessionAttributes("user")
 public class LoginController {
     private final Logger logger = LoggerFactory.getLogger(LoginController.class);
-    UserRepository userRepository;
+    UserService userService;
 
-    public LoginController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public LoginController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
@@ -32,7 +33,7 @@ public class LoginController {
     public String processLogin(UserDTO userDTO, Model model, @ModelAttribute("user") User user) {
         logger.debug("Username entered: " + userDTO.getEmail());
         logger.debug("Password entered: " + userDTO.getPassword());
-        List<User> users = userRepository.read();
+        List<User> users = userService.read();
         //will take a long time with a lot of entries --> database
         boolean result = users.stream().anyMatch(userN -> Objects.equals(userN.getEmail(), userDTO.getEmail()) && Objects.equals(userN.getPassword(), userDTO.getPassword()));
         if (result) {
