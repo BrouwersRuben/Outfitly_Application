@@ -2,6 +2,7 @@ package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
+import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,12 @@ import java.util.Map;
 @SessionAttributes("user")
 public class AddClothingController {
     private final Logger logger = LoggerFactory.getLogger(AddClothingController.class);
+    private UserService userService;
+
+    public AddClothingController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping
     public String addClothing(Model model, @ModelAttribute("user") User user){
 
@@ -48,6 +55,8 @@ public class AddClothingController {
         //or addClothing method inside of User
         List<ClothingItem> userClothing = new ArrayList<>(user.getClothes());
         userClothing.add(newClothingItem);
+        User userFromRepository = userService.findBytId(user.getId());
+        userFromRepository.setClothes(userClothing);
 
         logger.debug(user.getName() + " Added a new clothing item: " + newClothingItem);
 
