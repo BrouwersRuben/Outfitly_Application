@@ -24,8 +24,8 @@
                 <div class="form-check m-4" th:each="enum : ${enums}">
                     <h2 th:text="${enum.getKey()}"></h2>
                     <div th:each="value : ${enum.getValue()}">
-                        <input type="radio" th:id="${value}" th:name="${enum.getKey()}" th:value="${value}" required="required">
-                        <label th:for="${value}" th:text="${value.getName()}">value</label>
+                        <input type="radio" th:id="${enum.getKey() + value}" th:name="${enum.getKey()}" th:value="${value}" required="required">
+                        <label th:for="${enum.getKey() + value}" th:text="${value.getName()}">value</label>
                     </div>
                 </div>
             </div>
