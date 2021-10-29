@@ -32,7 +32,7 @@ public class SeedData implements CommandLineRunner {
     private final UserRepository userRepository;
     private final WeatherForecastRepository weatherForecastRepository;
     private final String apiString = "https://api.openweathermap.org/data/2.5/weather?q=Antwerp,BE&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c";
-    private final String arduinoAPI = "http://192.168.222.187/data";
+    private final String arduinoAPI = "http://192.168.184.187/data";
     JSONObject weatherAPIData;
     JSONObject arduinoAPIData;
 //    private EntityRepository entityRepository;
@@ -53,7 +53,7 @@ public class SeedData implements CommandLineRunner {
 //        arduinoAPIData = retrieveAPIData(logger, arduinoAPI);
 
         //Test users with some clothing items
-        User user1 = new User("testUser1@gmail.com","test123","John",
+        User user1 = new User("testUser1@gmail.com","test123","John Doe",
                 List.of(new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD, ClothingItem.Type.JACKET_LIKE),
                         new ClothingItem("Hoodie", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD, ClothingItem.Type.SWEATSHIRT_LIKE),
                         new ClothingItem("Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD,ClothingItem.Occasion.UNIVERSAL,ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.TROUSERS_LIKE),
