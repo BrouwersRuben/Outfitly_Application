@@ -33,7 +33,8 @@ public class SeedData implements CommandLineRunner {
     private final WeatherForecastRepository weatherForecastRepository;
     private final String apiString = "https://api.openweathermap.org/data/2.5/weather?q=Antwerp,BE&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c";
     private final String arduinoAPI = "http://192.168.222.187/data";
-    JSONObject jsonData;
+    JSONObject weatherAPIData;
+    JSONObject arduinoAPIData;
 //    private EntityRepository entityRepository;
 //    private ListRepository listRepository;
 //    private MainUserListRepository mainUserListRepository;
@@ -48,7 +49,8 @@ public class SeedData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         logger.debug("Seeding the repositories");
-        jsonData = retrieveAPIData(logger, apiString);
+        weatherAPIData = retrieveAPIData(logger, apiString);
+//        arduinoAPIData = retrieveAPIData(logger, arduinoAPI);
 
         //Test users with some clothing items
         User user1 = new User("testUser1@gmail.com","test123","John",
@@ -81,24 +83,24 @@ public class SeedData implements CommandLineRunner {
         // Arduino API
         ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
 //        ArduinoSensor arduinoSensor = new ArduinoSensor(
-//                Double.parseDouble(String.valueOf(retrieveAPIData(logger, arduinoAPI).get("Temperature"))),
-//                Double.parseDouble(String.valueOf(retrieveAPIData(logger, arduinoAPI).get("Humidity"))),
-//                LocalDateTime.parse(String.valueOf(retrieveAPIData(logger, arduinoAPI).get("DateTime"))))                ;
+//                Double.parseDouble(String.valueOf(arduinoAPIData.get("Temperature"))),
+//                Double.parseDouble(String.valueOf(arduinoAPIData.get("Humidity"))),
+//                LocalDateTime.parse(String.valueOf(arduinoAPIData.get("DateTime"))))                ;
 
         arduinoSensorRepository.create(arduinoSensor);
 
         // Weather API
         WeatherForecast forecast = new WeatherForecast(
                 LocalDateTime.of(2021, 10, 29, 12, 30, 30),
-                String.valueOf(jsonData.get("name")),
-                String.valueOf(jsonData.getJSONObject("sys").get("country")),
-                Double.parseDouble(String.valueOf(jsonData.getJSONObject("main").get("temp"))),
-                Double.parseDouble(String.valueOf(jsonData.getJSONObject("main").get("feels_like"))),
-                Double.parseDouble(String.valueOf(jsonData.getJSONObject("main").get("temp_min"))),
-                Double.parseDouble(String.valueOf(jsonData.getJSONObject("main").get("temp_max"))),
-                Double.parseDouble(String.valueOf(jsonData.getJSONObject("wind").get("speed"))),
-                Integer.parseInt(String.valueOf(jsonData.getJSONObject("main").get("humidity"))),
-                String.valueOf(jsonData.getJSONArray("weather").getJSONObject(0).get("main"))
+                String.valueOf(weatherAPIData.get("name")),
+                String.valueOf(weatherAPIData.getJSONObject("sys").get("country")),
+                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp"))),
+                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("feels_like"))),
+                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_min"))),
+                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_max"))),
+                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("wind").get("speed"))),
+                Integer.parseInt(String.valueOf(weatherAPIData.getJSONObject("main").get("humidity"))),
+                String.valueOf(weatherAPIData.getJSONArray("weather").getJSONObject(0).get("main"))
         );
 
         weatherForecastRepository.create(forecast);
@@ -111,9 +113,10 @@ public class SeedData implements CommandLineRunner {
         URIBuilder builder = new URIBuilder(APILink);
         HttpGet get = new HttpGet(builder.build());
         CloseableHttpClient httpclient = HttpClients.createDefault();
+        JSONObject json;
 
         try (CloseableHttpResponse response = httpclient.execute(get)) {
-            jsonData = null;
+            json = null;
             if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                 logger.error("Bad response status code: {}.", response.getStatusLine().getStatusCode());
 //                return;
@@ -122,15 +125,15 @@ public class SeedData implements CommandLineRunner {
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 String rawResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-                jsonData = new JSONObject(rawResult);
+                json = new JSONObject(rawResult);
             }
 
-            if (jsonData==null) {
+            if (json ==null) {
                 logger.error("No weather forecast data retrieved!");
             } else {
                 logger.debug("Forecast data successfully retrieved!");
             }
         }
-        return jsonData;
+        return json;
     }
 }
