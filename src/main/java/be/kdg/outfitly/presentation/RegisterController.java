@@ -1,8 +1,10 @@
 package be.kdg.outfitly.presentation;
 
+import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.UserDTO;
 import be.kdg.outfitly.repository.UserRepository;
+import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,10 +20,10 @@ import java.util.Objects;
 @RequestMapping("/register")
 public class RegisterController {
     private final Logger logger = LoggerFactory.getLogger(RegisterController.class);
-    UserRepository userRepository;
+    private UserService userService;
 
-    public RegisterController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public RegisterController(UserService userService) {
+        this.userService = userService;
     }
 
     @RequestMapping
@@ -34,7 +37,7 @@ public class RegisterController {
         String password = userDTO.getPassword();
         String email = userDTO.getEmail();
 
-        List<User> users = userRepository.read();
+        List<User> users = userService.read();
 
         boolean result = users.stream().anyMatch(user -> Objects.equals(user.getEmail(), userDTO.getEmail()));
         if(result){
@@ -44,7 +47,7 @@ public class RegisterController {
         }else{
             logger.debug("New email has been created");
             //No clothes yet
-            userRepository.create(new User(userDTO.getEmail(),userDTO.getPassword(), userDTO.getName(), null));
+            userService.create(userDTO.getEmail(),userDTO.getPassword(), userDTO.getName(), new ArrayList<>());
             return "redirect:/login";
         }
     }
