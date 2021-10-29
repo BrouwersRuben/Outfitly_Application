@@ -27,7 +27,7 @@ public class OutfitController {
         this.weatherForecastService = weatherForecastService;
     }
 
-    @GetMapping("/choose-occasion")
+    @GetMapping
     public String occasionSelector(Model model, @ModelAttribute("user") User user) {
         model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
@@ -37,7 +37,7 @@ public class OutfitController {
         return "choose-occasion";
     }
 
-    @PostMapping("/choose-occasion")
+    @PostMapping
     public String occasionForm(ClothingItem.Occasion occasion,
                                @ModelAttribute("user") User user,
                                Model model) {
