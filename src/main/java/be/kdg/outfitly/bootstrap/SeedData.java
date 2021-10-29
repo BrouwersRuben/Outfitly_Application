@@ -92,8 +92,8 @@ public class SeedData implements CommandLineRunner {
         // Weather API
         WeatherForecast forecast = new WeatherForecast(
                 LocalDateTime.of(2021, 10, 29, 12, 30, 30),
-                String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("sys").get("country")),
                 String.valueOf(retrieveAPIData(logger, apiString).get("name")),
+                String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("sys").get("country")),
                 Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("temp"))),
                 Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("feels_like"))),
                 Double.parseDouble(String.valueOf(retrieveAPIData(logger, apiString).getJSONObject("main").get("temp_min"))),

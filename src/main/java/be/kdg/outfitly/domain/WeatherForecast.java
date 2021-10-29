@@ -90,4 +90,20 @@ public class WeatherForecast extends Entity {
         //TODO
         return getWeatherDescription().equals("rain") || getWeatherDescription().equals("drizzle");
     }
+
+    @Override
+    public String toString() {
+        return "WeatherForecast{" +
+                "date=" + date +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", temperature=" + temperature +
+                ", feelsLikeTemperature=" + feelsLikeTemperature +
+                ", lowestTemperature=" + lowestTemperature +
+                ", highestTemperature=" + highestTemperature +
+                ", windSpeed=" + windSpeed +
+                ", humidity=" + humidity +
+                ", weatherDescription='" + weatherDescription + '\'' +
+                '}';
+    }
 }
