@@ -39,7 +39,6 @@ public class WeatherForecast extends Entity {
         return wf;
     }
 
-    //TODO: check what is returned by the API
     // Note: I can retrieve any info from the API, though retrieving some data might be tricky due to the fact that we're using a trial version.
     // https://openweathermap.org/api
     // Some data can be only retrieved with coordinates, feasible.
