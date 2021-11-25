@@ -32,13 +32,12 @@ public class RegisterController {
     }
 
     @PostMapping
+    //TODO: Bean Validation
     public String processRegister(UserDTO userDTO, Model model){
-        String name = userDTO.getName();
-        String password = userDTO.getPassword();
-        String email = userDTO.getEmail();
 
         List<User> users = userService.read();
 
+        //TODO: Bean validation change this? SQL?
         boolean result = users.stream().anyMatch(user -> Objects.equals(user.getEmail(), userDTO.getEmail()));
         if(result){
             logger.debug("User tried creating a new account with an existing email");
@@ -47,7 +46,7 @@ public class RegisterController {
         }else{
             logger.debug("New email has been created");
             //No clothes yet
-            userService.create(userDTO.getEmail(),userDTO.getPassword(), userDTO.getName(), new ArrayList<>());
+            userService.create(userDTO.getEmail(),userDTO.getPassword(), userDTO.getName(), userDTO.getLocation(), new ArrayList<>());
             return "redirect:/login";
         }
     }

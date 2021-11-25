@@ -6,11 +6,12 @@ public class User extends Entity {
 
     // Variables
 
-    private  String email;
-    private  String password;
+    private String email;
+    private String password;
 
-    private  String name;
-    private  List<ClothingItem> clothes;
+    private String name;
+    private String location;
+    private List<ClothingItem> clothes;
 
     // Constructor
 
@@ -18,11 +19,12 @@ public class User extends Entity {
     public User() {
     }
 
-    public User(String email, String password, String name, List<ClothingItem> clothes) {
+    public User(String email, String password, String name, String location, List<ClothingItem> clothes) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.clothes = clothes;
+        this.location = location;
     }
 
     public void addClothing(ClothingItem clothingItem){
@@ -47,6 +49,10 @@ public class User extends Entity {
         return clothes;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -61,5 +67,9 @@ public class User extends Entity {
 
     public void setClothes(List<ClothingItem> clothes) {
         this.clothes = clothes;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

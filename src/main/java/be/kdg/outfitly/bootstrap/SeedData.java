@@ -31,10 +31,10 @@ public class SeedData implements CommandLineRunner {
     private final ArduinoSensorRepository arduinoSensorRepository;
     private final UserRepository userRepository;
     private final WeatherForecastRepository weatherForecastRepository;
-    private final String apiString = "https://api.openweathermap.org/data/2.5/weather?q=Antwerp,BE&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c";
-    private final String arduinoAPI = "http://192.168.184.187/data";
-    JSONObject weatherAPIData;
-    JSONObject arduinoAPIData;
+    private JSONObject weatherAPIData;
+//    private final String arduinoAPI = "http://192.168.184.187/data";
+
+//    JSONObject arduinoAPIData;
 //    private EntityRepository entityRepository;
 //    private ListRepository listRepository;
 //    private MainUserListRepository mainUserListRepository;
@@ -49,11 +49,12 @@ public class SeedData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         logger.debug("Seeding the repositories");
-        weatherAPIData = retrieveAPIData(logger, apiString);
+        //TODO: Make this so that the location changes per user it loads.
+        weatherAPIData = retrieveAPIData(logger, "Antwerp,BE");
 //        arduinoAPIData = retrieveAPIData(logger, arduinoAPI);
 
         //Test users with some clothing items
-        User user1 = new User("testUser1@gmail.com","test123","John Doe",
+        User user1 = new User("testUser1@gmail.com","test123","John Doe", "Antwerp",
                 List.of(new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD, ClothingItem.Type.JACKET_LIKE),
                         new ClothingItem("Hoodie", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD, ClothingItem.Type.SWEATSHIRT_LIKE),
                         new ClothingItem("Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD,ClothingItem.Occasion.UNIVERSAL,ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.TROUSERS_LIKE),
@@ -70,7 +71,7 @@ public class SeedData implements CommandLineRunner {
                         new ClothingItem("Black leather sneakers", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.UNIVERSAL, ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.SHOES)
         ));
 
-        User user2 = new User("testUser2@gmail.com","test123","Bob",
+        User user2 = new User("testUser2@gmail.com","test123","Bob", "Barcelona",
                 List.of(new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD),
                         new ClothingItem("Hoodie", ClothingItem.Material.SYNTHETIC, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD),
                         new ClothingItem("Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD,ClothingItem.Occasion.UNIVERSAL,ClothingItem.Weather.UNIVERSAL),
@@ -108,7 +109,8 @@ public class SeedData implements CommandLineRunner {
         // Slave and master accounts may be a bit easier to understand
     }
 
-    private JSONObject retrieveAPIData(Logger logger, String APILink) throws Exception{
+    private JSONObject retrieveAPIData(Logger logger, String location) throws Exception{
+        String APILink = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c";
         // TODO: Reload api on refresh
         URIBuilder builder = new URIBuilder(APILink);
         HttpGet get = new HttpGet(builder.build());
