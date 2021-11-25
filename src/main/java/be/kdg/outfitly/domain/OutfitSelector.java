@@ -50,6 +50,7 @@ public class OutfitSelector {
 
     public List<ClothingItem> removeUnsuitableForRain(List<ClothingItem> clothes, boolean isGoingToRain) {
         if (isGoingToRain) {
+            logger.debug("It is going to rain, so it chose rainproof clothing");
             clothes = clothes
                     .stream()
                     .filter(item -> item.getRainProofness() != ClothingItem.RainProofness.BAD)
@@ -64,10 +65,13 @@ public class OutfitSelector {
 
 
         if (temperature < 5) {
+            logger.debug("The weather is cold, so it chose clothing for cold weather");
             givenWeather = ClothingItem.Weather.COLD;
         } else if (temperature < 15) {
+            logger.debug("The weather is mild, so it chose clothing for cold mild");
             givenWeather = ClothingItem.Weather.MILD;
         } else {
+            logger.debug("The weather is warm, so it chose clothing for warm weather");
             givenWeather = ClothingItem.Weather.WARM;
         }
 
