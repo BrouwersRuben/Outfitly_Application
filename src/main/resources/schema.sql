@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS customer_accounts(
                                                 account_id INTEGER CONSTRAINT customer_accounts_account_id_nn NOT NULL,
                                                 account_name VARCHAR(50) CONSTRAINT customer_account_account_name_NN NOT NULL,
                                                 is_master boolean CONSTRAINT customer_account_is_master_nn NOT NULL,
-                                                latitude DECIMAL CONSTRAINT customer_account_latitute_nn NOT NULL,
+                                                latitude DECIMAL CONSTRAINT customer_account_latitude_nn NOT NULL,
                                                 longitude DECIMAL CONSTRAINT customer_account_longitude_nn NOT NULL
 );
 
