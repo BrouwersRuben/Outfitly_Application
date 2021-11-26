@@ -107,4 +107,8 @@ public class UserDTO {
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
+
+    public void setApartmentNumber(String apartmentNumber) {
+        this.apartmentNumber = apartmentNumber;
+    }
 }

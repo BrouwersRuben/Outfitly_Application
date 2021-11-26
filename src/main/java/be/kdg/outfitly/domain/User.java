@@ -26,21 +26,6 @@ public class User extends Entity {
     public User() {
     }
 
-    //Constructor for without apartmentNumber
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String zipcode, List<ClothingItem> clothes) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.country = country;
-        this.city = city;
-        this.streetName = streetName;
-        this.streetNumber = streetNumber;
-        this.zipcode = zipcode;
-        this.clothes = clothes;
-    }
-
     //constructor for everything
     public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode, List<ClothingItem> clothes) {
         this.email = email;
@@ -53,6 +38,21 @@ public class User extends Entity {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.apartmentNumber = apartmentNumber;
+        this.zipcode = zipcode;
+        this.clothes = clothes;
+    }
+
+    //Constructor for without apartmentNumber
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String zipcode, List<ClothingItem> clothes) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.country = country;
+        this.city = city;
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
         this.zipcode = zipcode;
         this.clothes = clothes;
     }
@@ -79,24 +79,45 @@ public class User extends Entity {
         return lastName;
     }
 
-    //function to get first name and surname together
-    public String getName(){
-        return firstName + " " + lastName;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public List<ClothingItem> getClothes() {
-        return clothes;
+    public String getCountry() {
+        return country;
     }
 
     public String getCity() {
         return city;
     }
 
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public int getStreetNumber() {
+        return streetNumber;
+    }
+
     public String getApartmentNumber() {
         return apartmentNumber;
     }
 
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public List<ClothingItem> getClothes() {
+        return clothes;
+    }
+
+    //function to get first name and surname together
+    public String getName(){
+        return firstName + " " + lastName;
+    }
+
     //setters
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -139,5 +160,23 @@ public class User extends Entity {
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", streetName='" + streetName + '\'' +
+                ", streetNumber=" + streetNumber +
+                ", apartmentNumber='" + apartmentNumber + '\'' +
+                ", zipcode='" + zipcode + '\'' +
+                ", clothes=" + clothes +
+                '}';
     }
 }
