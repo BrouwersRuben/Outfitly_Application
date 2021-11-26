@@ -162,6 +162,10 @@ public class User extends Entity {
         this.zipcode = zipcode;
     }
 
+    public void setApartmentNumber(String apartmentNumber) {
+        this.apartmentNumber = apartmentNumber;
+    }
+
     @Override
     public String toString() {
         return "User{" +

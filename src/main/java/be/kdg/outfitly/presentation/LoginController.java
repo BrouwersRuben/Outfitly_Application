@@ -48,6 +48,13 @@ public class LoginController {
             user.setPassword(currentUser.getPassword());
             user.setId(currentUser.getId());
             user.setCity(currentUser.getCity());
+            user.setCountry(currentUser.getCountry());
+            user.setApartmentNumber(currentUser.getApartmentNumber());
+            user.setStreetName(currentUser.getStreetName());
+            user.setStreetNumber(currentUser.getStreetNumber());
+            user.setZipcode(currentUser.getZipcode());
+            user.setPhoneNumber(currentUser.getPhoneNumber());
+            
 
             //name = firstName + surname
             String name = users.stream().filter(userN -> userN.getEmail().equals(userDTO.getEmail())).map(User::getName).reduce("", (curr, acc) -> curr + acc);
