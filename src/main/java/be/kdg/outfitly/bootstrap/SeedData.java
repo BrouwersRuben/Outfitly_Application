@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -26,6 +27,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
+@Profile("JavaCollections")
 public class SeedData implements CommandLineRunner {
     private final Logger logger = LoggerFactory.getLogger(SeedData.class);
     private final ArduinoSensorRepository arduinoSensorRepository;

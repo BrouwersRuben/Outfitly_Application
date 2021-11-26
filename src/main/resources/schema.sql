@@ -1,10 +1,9 @@
-DROP TABLE IF EXISTS arduino_forecast;
-DROP TABLE IF EXISTS clothes;
-DROP TABLE IF EXISTS customer_accounts;
-DROP TABLE IF EXISTS customer;
-DROP SEQUENCE IF EXISTS customer_id_sequence;
+-- DROP TABLE IF EXISTS arduino_forecast;
+-- DROP TABLE IF EXISTS clothes;
+-- DROP TABLE IF EXISTS customer_accounts;
+-- DROP TABLE IF EXISTS customer;
 
-CREATE SEQUENCE customer_id_sequence START WITH 0 INCREMENT BY 1 AS INTEGER;
+-- CREATE SEQUENCE customer_id_sequence START WITH 0 INCREMENT BY 1;
 
 CREATE TABLE IF NOT EXISTS customer(
                                        customer_id INTEGER CONSTRAINT customer_customer_id_nn NOT NULL,
