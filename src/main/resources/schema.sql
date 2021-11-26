@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS customer
         CONSTRAINT customer_street_name_nn NOT NULL,
     street_number    SMALLINT
         CONSTRAINT customer_street_number_nn NOT NULL,
-    building_number  SMALLINT DEFAULT NULL,
     apartment_number SMALLINT DEFAULT NULL,
     zip_code         VARCHAR(10)
         CONSTRAINT customer_zip_code_nn NOT NULL
