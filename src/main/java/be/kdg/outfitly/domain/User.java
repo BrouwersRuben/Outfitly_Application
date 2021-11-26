@@ -9,7 +9,8 @@ public class User extends Entity {
     private String email;
     private String password;
 
-    private String name;
+    private String firstName;
+    private String surname;
     private String location;
     private List<ClothingItem> clothes;
 
@@ -19,10 +20,11 @@ public class User extends Entity {
     public User() {
     }
 
-    public User(String email, String password, String name, String location, List<ClothingItem> clothes) {
+    public User(String email, String password, String firstName, String surname, String location, List<ClothingItem> clothes) {
         this.email = email;
         this.password = password;
-        this.name = name;
+        this.firstName = firstName;
+        this.surname = surname;
         this.clothes = clothes;
         this.location = location;
     }
@@ -41,8 +43,17 @@ public class User extends Entity {
         return password;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    //function to get first name and surname together
+    public String getName(){
+        return firstName + " " + surname;
     }
 
     public List<ClothingItem> getClothes() {
@@ -61,8 +72,12 @@ public class User extends Entity {
         this.password = password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public void setClothes(List<ClothingItem> clothes) {

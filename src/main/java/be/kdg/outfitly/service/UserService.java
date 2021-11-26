@@ -9,7 +9,7 @@ public interface UserService {
 
     String getUsername(User user);
     User findBytId(int id);
-    User create(String email, String password, String name, String location, List<ClothingItem> clothes);
+    User create(String email, String password, String firstName, String surname, String location, List<ClothingItem> clothes);
     List<User> read();
 
 }

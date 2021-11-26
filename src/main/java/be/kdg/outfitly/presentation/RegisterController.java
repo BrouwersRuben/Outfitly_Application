@@ -46,7 +46,7 @@ public class RegisterController {
         }else{
             logger.debug("New email has been created");
             //No clothes yet
-            userService.create(userDTO.getEmail(),userDTO.getPassword(), userDTO.getName(), userDTO.getLocation(), new ArrayList<>());
+            userService.create(userDTO.getEmail(),userDTO.getPassword(),userDTO.getFirstName(), userDTO.getSurname(), userDTO.getLocation(), new ArrayList<>());
             return "redirect:/login";
         }
     }

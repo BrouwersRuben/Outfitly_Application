@@ -43,10 +43,14 @@ public class LoginController {
 //          user.setId(5);
             user.setClothes(currentUser.getClothes());
             user.setEmail(currentUser.getEmail());
-            user.setName(currentUser.getName());
+            user.setFirstName(currentUser.getFirstName());
+            user.setSurname(currentUser.getSurname());
+            //user.setName(currentUser.getName());
             user.setPassword(currentUser.getPassword());
             user.setId(currentUser.getId());
+            user.setLocation(currentUser.getLocation());
 
+            //name = firstName + surname
             String name = users.stream().filter(userN -> userN.getEmail().equals(userDTO.getEmail())).map(User::getName).reduce("", (curr, acc) -> curr + acc);
             logger.debug("User: " + name);
             return "redirect:/mainpage";

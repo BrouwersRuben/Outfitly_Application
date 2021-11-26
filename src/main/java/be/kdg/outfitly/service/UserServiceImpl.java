@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User create(String email, String password, String name, String location, List<ClothingItem> clothes) {
-        User user = new User(email, password, name, location, clothes);
+    public User create(String email, String password, String firstName, String surname, String location, List<ClothingItem> clothes) {
+        User user = new User(email, password, firstName, surname, location, clothes);
         return userRepository.create(user);
     }
 
