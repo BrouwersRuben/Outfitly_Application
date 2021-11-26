@@ -22,21 +22,50 @@
         </div>
         <form method="post" class="m-4">
             <div class="form-group m-4">
-                <label for="inputName">Name</label>
-                <input type="text" class="form-control" id="inputName" placeholder="John Doe" name="name" required="required">
+                <label for="inputFirstName">First Name</label>
+                <input type="text" class="form-control" id="inputFirstName" placeholder="John" name="firstName" required>
             </div>
             <div class="form-group m-4">
-                <label for="inputName">Location</label>
-                <input type="text" class="form-control" id="location" placeholder="Antwerp, BE" name="location" required="required">
-            </div>
-            <div class="form-group m-4">
-                <label for="inputEmail">Email address</label>
-                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email" required="required">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label for="inputLastName">Last name</label>
+                <input type="text" class="form-control" id="inputLastName" placeholder="John" name="lastName" required>
             </div>
             <div class="form-group m-4">
                 <label for="inputPassword">Password</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" required="required">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" required>
+            </div>
+            <div class="form-group m-4">
+                <label for="inputEmail">Email address</label>
+                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group m-4">
+                <label for="inputPhoneNumber">Phone Number</label>
+                <input type="text" class="form-control" id="inputPhoneNumber" placeholder="John" name="phoneNumber" required>
+            </div>
+            <h2>Address:</h2>
+            <div class="form-group m-4">
+                <label for="inputCountry">Country</label>
+                <input type="text" class="form-control" id="inputCountry" placeholder="Belgium" name="country" required>
+            </div>
+            <div class="form-group m-4">
+                <label for="inputCity">City</label>
+                <input type="text" class="form-control" id="inputCity" placeholder="Antwerp" name="city" required>
+            </div>
+            <div class="form-group m-4">
+                <label for="inputStreet">Street</label>
+                <input type="text" class="form-control" id="inputStreet" placeholder="Nationale Straat" name="streetName" required>
+            </div>
+            <div class="form-group m-4">
+                <label for="inputStreetNumber">Street Number</label>
+                <input type="number" class="form-control" id="inputStreetNumber" placeholder="5" name="streetNumber" required>
+            </div>
+            <div class="form-group m-4">
+                <label for="inputApartmentNumber">Apartment Number (optional)</label>
+                <input type="text" class="form-control" id="inputApartmentNumber" placeholder="5" name="apartmentNumber">
+            </div>
+            <div class="form-group m-4">
+                <label for="inputZipcode">Zipcode</label>
+                <input type="text" class="form-control" id="inputZipcode" placeholder="2000" name="zipcode" required>
             </div>
             <button type="submit" class="btn btn-primary m-4">Create account</button>
         </form>

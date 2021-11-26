@@ -10,23 +10,51 @@ public class User extends Entity {
     private String password;
 
     private String firstName;
-    private String surname;
-    private String location;
+    private String lastName;
+    //String --> 047/..
+    private String phoneNumber;
+    private String country;
+    private String city;
+    private String streetName;
+    private int streetNumber;
+    private String apartmentNumber;
+    private String zipcode;
     private List<ClothingItem> clothes;
 
     // Constructor
 
-
     public User() {
     }
 
-    public User(String email, String password, String firstName, String surname, String location, List<ClothingItem> clothes) {
+    //Constructor for without apartmentNumber
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String zipcode, List<ClothingItem> clothes) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
-        this.surname = surname;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.country = country;
+        this.city = city;
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
+        this.zipcode = zipcode;
         this.clothes = clothes;
-        this.location = location;
+    }
+
+    //constructor for everything
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode, List<ClothingItem> clothes) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.country = country;
+        this.city = city;
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
+        this.apartmentNumber = apartmentNumber;
+        this.zipcode = zipcode;
+        this.clothes = clothes;
     }
 
     public void addClothing(ClothingItem clothingItem){
@@ -47,23 +75,28 @@ public class User extends Entity {
         return firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
     //function to get first name and surname together
     public String getName(){
-        return firstName + " " + surname;
+        return firstName + " " + lastName;
     }
 
     public List<ClothingItem> getClothes() {
         return clothes;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCity() {
+        return city;
     }
 
+    public String getApartmentNumber() {
+        return apartmentNumber;
+    }
+
+    //setters
     public void setEmail(String email) {
         this.email = email;
     }
@@ -76,15 +109,35 @@ public class User extends Entity {
         this.firstName = firstName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setClothes(List<ClothingItem> clothes) {
         this.clothes = clothes;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public void setStreetNumber(int streetNumber) {
+        this.streetNumber = streetNumber;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 }

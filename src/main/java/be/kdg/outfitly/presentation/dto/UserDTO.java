@@ -1,11 +1,20 @@
 package be.kdg.outfitly.presentation.dto;
 
 public class UserDTO {
-    private String firstName;
-    private String surname;
     private String email;
     private String password;
-    private String location;
+
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    //String --> 047/..
+    private String phoneNumber;
+    private String country;
+    private String city;
+    private String streetName;
+    private int streetNumber;
+    private String apartmentNumber;
+    private String zipcode;
 
     public String getEmail() {
         return email;
@@ -27,23 +36,75 @@ public class UserDTO {
         return firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public String getLocation() {
-        return location;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public int getStreetNumber() {
+        return streetNumber;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public String getApartmentNumber() {
+        return apartmentNumber;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public void setStreetNumber(int streetNumber) {
+        this.streetNumber = streetNumber;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 }

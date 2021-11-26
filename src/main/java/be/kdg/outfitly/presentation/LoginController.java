@@ -2,7 +2,6 @@ package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.UserDTO;
-import be.kdg.outfitly.repository.UserRepository;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,11 +43,11 @@ public class LoginController {
             user.setClothes(currentUser.getClothes());
             user.setEmail(currentUser.getEmail());
             user.setFirstName(currentUser.getFirstName());
-            user.setSurname(currentUser.getSurname());
+            user.setLastName(currentUser.getLastName());
             //user.setName(currentUser.getName());
             user.setPassword(currentUser.getPassword());
             user.setId(currentUser.getId());
-            user.setLocation(currentUser.getLocation());
+            user.setCity(currentUser.getCity());
 
             //name = firstName + surname
             String name = users.stream().filter(userN -> userN.getEmail().equals(userDTO.getEmail())).map(User::getName).reduce("", (curr, acc) -> curr + acc);

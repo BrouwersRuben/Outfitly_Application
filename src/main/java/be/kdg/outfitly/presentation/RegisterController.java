@@ -34,7 +34,8 @@ public class RegisterController {
     @PostMapping
     //TODO: Bean Validation
     public String processRegister(UserDTO userDTO, Model model){
-
+        logger.debug("Registration is being run");
+        logger.debug("Apartment number: " + userDTO.getApartmentNumber());
         List<User> users = userService.read();
 
         //TODO: Bean validation change this? SQL?
@@ -44,9 +45,9 @@ public class RegisterController {
             model.addAttribute("errorMessage", "That email already exists");
             return "register";
         }else{
-            logger.debug("New email has been created");
             //No clothes yet
-            userService.create(userDTO.getEmail(),userDTO.getPassword(),userDTO.getFirstName(), userDTO.getSurname(), userDTO.getLocation(), new ArrayList<>());
+            userService.create(userDTO.getEmail(),userDTO.getPassword(),userDTO.getFirstName(), userDTO.getLastName(), userDTO.getPhoneNumber(), userDTO.getCountry(), userDTO.getCity(), userDTO.getStreetName(), userDTO.getStreetNumber(), userDTO.getApartmentNumber(), userDTO.getZipcode(), new ArrayList<>());
+            logger.debug("New email has been created");
             return "redirect:/login";
         }
     }

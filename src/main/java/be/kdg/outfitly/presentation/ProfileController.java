@@ -27,15 +27,15 @@ public class ProfileController {
 
     @GetMapping("/changelocation")
     public String changeLocation(Model model, @ModelAttribute("user") User user){
-        logger.debug("User is trying to change their location. Their current location is: " + user.getLocation());
-        model.addAttribute("location",user.getLocation());
+        logger.debug("User is trying to change their location. Their current location is: " + user.getCity());
+        model.addAttribute("location",user.getCity());
         return "changelocation";
     }
 
     @PostMapping("/changelocation")
-    public String processChangedLocation(@ModelAttribute("user") User user, String location){
-        logger.debug("User changed their location from " + user.getLocation() + "to " + location);
-        user.setLocation(location);
+    public String processChangedLocation(@ModelAttribute("user") User user, String city){
+        logger.debug("User changed their location from " + user.getCity() + " to " + city);
+        user.setCity(city);
         return "redirect:/profile";
     }
 }
