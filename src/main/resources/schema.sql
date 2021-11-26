@@ -14,8 +14,6 @@ CREATE TABLE IF NOT EXISTS customer
         CONSTRAINT customer_account_password_nn NOT NULL,
     first_name       VARCHAR(50)
         CONSTRAINT customer_first_name_nn NOT NULL,
-    middle_name      VARCHAR(50)
-        CONSTRAINT customer_middle_name_nn NOT NULL,
     last_name        VARCHAR(50)
         CONSTRAINT customer_last_name_nn NOT NULL,
     phone_number     VARCHAR(50)
