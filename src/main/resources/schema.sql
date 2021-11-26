@@ -3,6 +3,8 @@ DROP TABLE IF EXISTS clothes;
 DROP TABLE IF EXISTS customer_accounts;
 DROP TABLE IF EXISTS customer;
 
+-- CREATE SEQUENCE customer_id_sequence START WITH 0 INCREMENT BY 1;
+
 CREATE TABLE IF NOT EXISTS customer(
                                        customer_id INTEGER CONSTRAINT customer_customer_id_nn NOT NULL,
                                        email VARCHAR(50) CONSTRAINT customer_email_nn NOT NULL,
@@ -31,7 +33,7 @@ CREATE TABLE IF NOT EXISTS customer_accounts(
 );
 
 ALTER TABLE customer_accounts ADD CONSTRAINT customer_accounts_account_id_pk PRIMARY KEY(account_id);
-ALTER TABLE customer_accounts ADD CONSTRAINT customer_accounts_account_id_uq UNIQUE (account_id);
+-- ALTER TABLE customer_accounts ADD CONSTRAINT customer_accounts_account_id_uq UNIQUE (account_id);
 ALTER TABLE customer_accounts ADD CONSTRAINT customer_accounts_customer_id_fk FOREIGN KEY(customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE;
 
 
