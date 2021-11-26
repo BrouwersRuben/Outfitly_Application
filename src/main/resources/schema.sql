@@ -47,10 +47,10 @@ CREATE TABLE IF NOT EXISTS customer_accounts
         CONSTRAINT customer_account_account_name_NN NOT NULL,
     is_master    BOOLEAN
         CONSTRAINT customer_account_is_master_nn NOT NULL,
-    latitude     DECIMAL
-        CONSTRAINT customer_account_latitude_nn NOT NULL,
-    longitude    DECIMAL
-        CONSTRAINT customer_account_longitude_nn NOT NULL
+    preferred_forecast_country VARCHAR(56)
+        CONSTRAINT customer_account_preferred_forecast_country_nn NOT NULL,
+    preferred_forecast_city    VARCHAR(85)
+        CONSTRAINT customer_account_preferred_forecast_city_nn NOT NULL
 );
 
 ALTER TABLE customer_accounts
