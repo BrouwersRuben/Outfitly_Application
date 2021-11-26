@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/style.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script defer th:src="@{/enablepopover.js}"></script>
 </head>
 <body class="m-4">
 
@@ -34,7 +35,8 @@
 </table>
 
 <div class="d-flex justify-content-center m-5">
-    <a class="btn btn-outline-dark" th:href="@{/outfit}">Choose a different occasion</a>
+    <a class="btn btn-outline-dark m-4" th:href="@{/outfit}">Choose a different occasion</a>
+    <a class="btn btn-outline-dark m-4" href="#" data-bs-toggle="popover" data-bs-placement="bottom" title="Why the AI picked these clothes" data-bs-content="#This is a test#">ℹ️ Information</a>
 </div>
 
 <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
