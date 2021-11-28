@@ -92,20 +92,8 @@ public class SeedData implements CommandLineRunner {
         clothingRepository.create(clothingItem13);
         clothingRepository.create(clothingItem14);
 
-        user1.addClothing(clothingItem1);
-        user1.addClothing(clothingItem2);
-        user1.addClothing(clothingItem3);
-        user1.addClothing(clothingItem4);
-        user1.addClothing(clothingItem5);
-        user1.addClothing(clothingItem6);
-        user1.addClothing(clothingItem7);
-        user1.addClothing(clothingItem8);
-        user1.addClothing(clothingItem9);
-        user1.addClothing(clothingItem10);
-        user1.addClothing(clothingItem11);
-        user1.addClothing(clothingItem12);
-        user1.addClothing(clothingItem13);
-        user1.addClothing(clothingItem14);
+        final List<ClothingItem> clothingItemsUser1 = List.of(clothingItem1, clothingItem2, clothingItem3, clothingItem4, clothingItem5, clothingItem6, clothingItem7, clothingItem8, clothingItem9, clothingItem10, clothingItem11, clothingItem12, clothingItem13, clothingItem14);
+        user1.setClothes(clothingItemsUser1);
 
 //        User user2 = new User("testUser2@gmail.com","test123","Bob","Shannon","0458564572", "Spain", "Barcelona", "La Rambla", 15, "08001");
 //                List.of(new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD),
