@@ -27,7 +27,7 @@ public class User extends Entity {
     }
 
     //constructor for everything
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode, List<ClothingItem> clothes) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -39,7 +39,6 @@ public class User extends Entity {
         this.streetNumber = streetNumber;
         this.apartmentNumber = apartmentNumber;
         this.zipcode = zipcode;
-        this.clothes = clothes;
     }
 
     //Constructor for without apartmentNumber
@@ -136,6 +135,10 @@ public class User extends Entity {
 
     public void setClothes(List<ClothingItem> clothes) {
         this.clothes = clothes;
+    }
+
+    public void setClothingItem(ClothingItem clothingItem) {
+        this.clothes.add(clothingItem);
     }
 
     public void setPhoneNumber(String phoneNumber) {
