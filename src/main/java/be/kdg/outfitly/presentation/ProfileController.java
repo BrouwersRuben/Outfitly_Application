@@ -2,6 +2,7 @@ package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
+import be.kdg.outfitly.presentation.dto.ClothingDTO;
 import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
@@ -114,9 +115,9 @@ public class ProfileController {
     }
 
     @PostMapping("/viewclothing")
-    public String processRemoveClothing(Model model, @ModelAttribute("user") User user){
-        model.addAttribute("user", user);
-        clothingService.delete(clothingId);
-        return "viewclothing";
+    public String processRemoveClothing(@ModelAttribute("clothingDTO") ClothingDTO clothingDTO){
+        logger.warn(clothingDTO.toString());
+        clothingService.delete(clothingDTO.getID());
+        return "redirect:/viewclothing";
     }
 }
