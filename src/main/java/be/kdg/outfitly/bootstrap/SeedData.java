@@ -5,6 +5,7 @@ import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.domain.WeatherForecast;
 import be.kdg.outfitly.repository.ArduinoSensorRepository;
+import be.kdg.outfitly.repository.ClothingRepository;
 import be.kdg.outfitly.repository.UserRepository;
 import be.kdg.outfitly.repository.WeatherForecastRepository;
 import org.apache.http.HttpEntity;
@@ -32,6 +33,7 @@ public class SeedData implements CommandLineRunner {
     private final Logger logger = LoggerFactory.getLogger(SeedData.class);
     private final ArduinoSensorRepository arduinoSensorRepository;
     private final UserRepository userRepository;
+    private final ClothingRepository clothingRepository;
     private final WeatherForecastRepository weatherForecastRepository;
     private JSONObject weatherAPIData;
 //    private final String arduinoAPI = "http://192.168.184.187/data";
@@ -42,9 +44,10 @@ public class SeedData implements CommandLineRunner {
 //    private MainUserListRepository mainUserListRepository;
 //    private ClothingItem clothingItem;
 
-    public SeedData(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, WeatherForecastRepository weatherForecastRepository) {
+    public SeedData(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository) {
         this.arduinoSensorRepository = arduinoSensorRepository;
         this.userRepository = userRepository;
+        this.clothingRepository = clothingRepository;
         this.weatherForecastRepository = weatherForecastRepository;
     }
 
@@ -56,7 +59,8 @@ public class SeedData implements CommandLineRunner {
 //        arduinoAPIData = retrieveAPIData(logger, arduinoAPI);
 
         //Test users with some clothing items
-        User user1 = new User("testUser1@gmail.com","test123","John", "Doe", "0475441658", "Belgium", "Antwerp", "Nationale Straat", 85, "2000");
+//        User user1 = new User("testUser1@gmail.com","test123","John", "Doe", "0475441658", "Belgium", "Antwerp", "Nationale Straat", 85, "2000");
+        User user1 = new User("testUser1@gmail.com", "test123", "John", "Doe", "0475441658", "Belgium", "Antwerp", "Nationale Straat", 5, "200B", "2000");
 
         ClothingItem clothingItem1 = new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD, ClothingItem.Type.JACKET_LIKE);
         ClothingItem clothingItem2 = new ClothingItem("Hoodie", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD, ClothingItem.Type.SWEATSHIRT_LIKE);
@@ -73,6 +77,21 @@ public class SeedData implements CommandLineRunner {
         ClothingItem clothingItem13 = new ClothingItem("Black pants", ClothingItem.Material.OTHER, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.UNIVERSAL, ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.TROUSERS_LIKE);
         ClothingItem clothingItem14 = new ClothingItem("Black leather sneakers", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.UNIVERSAL, ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.SHOES);
 
+        clothingRepository.create(clothingItem1);
+        clothingRepository.create(clothingItem2);
+        clothingRepository.create(clothingItem3);
+        clothingRepository.create(clothingItem4);
+        clothingRepository.create(clothingItem5);
+        clothingRepository.create(clothingItem6);
+        clothingRepository.create(clothingItem7);
+        clothingRepository.create(clothingItem8);
+        clothingRepository.create(clothingItem9);
+        clothingRepository.create(clothingItem10);
+        clothingRepository.create(clothingItem11);
+        clothingRepository.create(clothingItem12);
+        clothingRepository.create(clothingItem13);
+        clothingRepository.create(clothingItem14);
+
         user1.addClothing(clothingItem1);
         user1.addClothing(clothingItem2);
         user1.addClothing(clothingItem3);
@@ -88,15 +107,16 @@ public class SeedData implements CommandLineRunner {
         user1.addClothing(clothingItem13);
         user1.addClothing(clothingItem14);
 
-        User user2 = new User("testUser2@gmail.com","test123","Bob","Shannon","0458564572", "Spain", "Barcelona", "La Rambla", 15, "08001");
+//        User user2 = new User("testUser2@gmail.com","test123","Bob","Shannon","0458564572", "Spain", "Barcelona", "La Rambla", 15, "08001");
 //                List.of(new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD),
 //                        new ClothingItem("Hoodie", ClothingItem.Material.SYNTHETIC, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD),
 //                        new ClothingItem("Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD,ClothingItem.Occasion.UNIVERSAL,ClothingItem.Weather.UNIVERSAL),
 //                        new ClothingItem("T-Shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.WARM),
 //                        new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL)));
 
+
         userRepository.create(user1);
-        userRepository.create(user2);
+//        userRepository.create(user2);
 
         // Arduino API
         ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));

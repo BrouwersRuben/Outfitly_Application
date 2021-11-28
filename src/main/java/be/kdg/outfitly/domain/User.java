@@ -1,5 +1,6 @@
 package be.kdg.outfitly.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User extends Entity {
@@ -39,6 +40,7 @@ public class User extends Entity {
         this.streetNumber = streetNumber;
         this.apartmentNumber = apartmentNumber;
         this.zipcode = zipcode;
+        this.clothes = new ArrayList<>();
     }
 
     //Constructor for without apartmentNumber
@@ -53,7 +55,7 @@ public class User extends Entity {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.zipcode = zipcode;
-        this.clothes = clothes;
+        this.clothes = new ArrayList<>();
     }
 
     public void addClothing(ClothingItem clothingItem){

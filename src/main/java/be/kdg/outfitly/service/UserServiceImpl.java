@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService{
             user = new User(email, password, firstName, lastName, phoneNumber, country, city, streetName, streetNumber, zipcode, clothes);
         }else{
             logger.debug("User filled in an ap number");
-            user = new User(email, password, firstName, lastName, phoneNumber, country, city, streetName, streetNumber, apartmentNumber,zipcode, clothes);
+            user = new User(email, password, firstName, lastName, phoneNumber, country, city, streetName, streetNumber, apartmentNumber,zipcode);
         }
         return userRepository.create(user);
     }
