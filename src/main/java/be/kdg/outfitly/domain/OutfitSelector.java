@@ -33,7 +33,6 @@ public class OutfitSelector {
     public List<ClothingItem> getPossibleClothingItems() {
 
         List<ClothingItem> possibleItems = user.getClothes();
-        //TODO:
 //        double lowestTemperature = rightTemperature(arduinoSensor.getSensorTemperature(), weatherForecast.getLowestTemperature());
         double lowestTemperature = weatherForecast.getLowestTemperature();
         boolean isGoingToRain = weatherForecast.isGoingToRain();
@@ -52,7 +51,7 @@ public class OutfitSelector {
     public List<ClothingItem> removeUnsuitableForRain(List<ClothingItem> clothes, boolean isGoingToRain) {
         if (isGoingToRain) {
             loggerOutput.append("It is going to rain - filtering out clothes with bad rainproofness.\n");
-            logger.debug("It is going to rain - filtering out clothes with bad rainproofness.");
+//            logger.debug("It is going to rain - filtering out clothes with bad rainproofness.");
             clothes = clothes
                     .stream()
                     .filter(item -> item.getRainProofness() != ClothingItem.RainProofness.BAD)
@@ -65,22 +64,21 @@ public class OutfitSelector {
 
         ClothingItem.Weather givenWeather;
 
-
         if (temperature < 5) {
             loggerOutput.append("The temperature is classified as cold.\n");
-            logger.debug("The temperature is classified as cold");
+//            logger.debug("The temperature is classified as cold");
             givenWeather = ClothingItem.Weather.COLD;
         } else if (temperature < 15) {
             loggerOutput.append("The temperature is classified as mild.\n");
-            logger.debug("The temperature is classified as mild");
+//            logger.debug("The temperature is classified as mild");
             givenWeather = ClothingItem.Weather.MILD;
         } else {
             loggerOutput.append("The temperature is classified as warm.\n");
-            logger.debug("The temperature is classified as warm");
+//            logger.debug("The temperature is classified as warm");
             givenWeather = ClothingItem.Weather.WARM;
         }
 
-        logger.debug("Filtering out clothes that don't fit this temperature.");
+//        logger.debug("Filtering out clothes that don't fit this temperature.");
         return clothes
                 .stream()
                 .filter(item -> item.getWeather() == givenWeather || item.getWeather() == ClothingItem.Weather.UNIVERSAL)
@@ -121,7 +119,7 @@ public class OutfitSelector {
         return suitableClothes;
     }
 
-    public String getLoggerOutput() {
-        return loggerOutput.toString();
+    public StringBuilder getLoggerOutput() {
+        return loggerOutput;
     }
 }

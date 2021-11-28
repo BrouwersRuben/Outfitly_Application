@@ -46,9 +46,10 @@ public class OutfitController {
         WeatherForecast weatherForecast = weatherForecastService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30));
         logger.debug("Weather forecast from the API: " + weatherForecast);
         outfitSelector = new OutfitSelector(weatherForecast, user, occasion);
+        logger.debug(outfitSelector.getLoggerOutput().toString());
         model.addAttribute("clothes", outfitSelector.getSuitableClothesMap());
         model.addAttribute("types", List.of(ClothingItem.Type.values()));
-
+//        model.addAttribute("loggerOutput", outfitSelector.getLoggerOutput());
         return "outfit";
     }
 
