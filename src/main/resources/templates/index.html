@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <title>Outfitly</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link href="../static/style.css" media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </head>
-<body class="m-4">
+<body>
 
 <nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
 
     <div th:insert="~{fragments/header::header}">header</div>
+
+    <div class="container-fluid bg-blue text-white text-center py-4">
+        <h3 class="m-4">
+            <strong><em>Don't waste time picking the right clothes. Outfitly will do it for <br>
+            you. You will save time and will always have the right outfit for <br>
+            the weather conditions.</em> </strong> <br>
+        </h3>
+    </div>
 
     <div class="d-flex justify-content-center">
         <div class="container m-4">
@@ -19,16 +28,10 @@
                     <img class="my-4" th:src="@{images/drawingWardrobe.png}" width="100%" alt="cartoon wardrobe image">
                 </div>
                 <div class="col-sm">
-                    <h5 class="m-4 text-black">
-                        Don't waste time picking the right clothes. Outfitly will do it for
-                        you. You will save time and will always have the right outfit for
-                        the weather conditions.
-                    </h5>
                     <p class="m-4">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut erat sit amet velit semper efficitur.
-                        Nullam est justo, pharetra vitae nisl in, vulputate hendrerit est. Fusce ullamcorper vehicula semper.
-                        Phasellus id mattis lorem. Ut quis tincidunt tortor. Duis vel dignissim metus. Curabitur in elit eu lorem
-                        tincidunt ornare et at ex. Integer risus leo, iaculis sit amet metus eu, varius semper purus.
+                        Our mission is to help people make correct decisions when it comes to picking their clothing and
+                        even automating this process for them. The main goal is to save our customers’ time so they can
+                        focus on more important tasks.
                     </p>
                     <p class="m-4">
                         Fusce nec tempor ex, tincidunt volutpat turpis. Sed vulputate orci eu sapien congue facilisis. Ut neque ipsum,
@@ -48,7 +51,41 @@
         </div>
     </div>
 
-    <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+    <div class="d-flex justify-content-center">
+        <h1>What is this?</h1>
+    </div>
+
+PICTURE
+
+    <div class="d-flex justify-content-center">
+        <h1>Who are we?</h1>
+    </div>
+
+PICTURE
+
+    <div class="d-flex justify-content-center">
+        <h1>What is this?</h1>
+        <h2>How does it work</h2>
+        <h2>what does it cost</h2>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <h1>Overall Aim</h1>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <h1>Reviews
+        </h1>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <h1>Call to action, (newsletter?)
+        </h1>
+    </div>
+
+
+
+<div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
 
 </body>
 </html>
