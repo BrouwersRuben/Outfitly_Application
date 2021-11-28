@@ -1,6 +1,8 @@
 package be.kdg.outfitly.presentation;
 
+import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
+import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +18,11 @@ import java.util.Objects;
 public class ProfileController {
     Logger logger = LoggerFactory.getLogger(ProfileController.class);
     private UserService userService;
+    private ClothingService clothingService;
 
-    public ProfileController(UserService userService) {
+    public ProfileController(UserService userService, ClothingService clothingService) {
         this.userService = userService;
+        this.clothingService = clothingService;
     }
 
     @GetMapping
@@ -109,9 +113,10 @@ public class ProfileController {
         return "viewclothing";
     }
 
-    @GetMapping("/viewclothing/clothingDetail")
-    public String clothingDetail(Model model, @ModelAttribute("user") User user){
+    @PostMapping("/viewclothing")
+    public String processRemoveClothing(Model model, @ModelAttribute("user") User user){
         model.addAttribute("user", user);
-        return "/viewclothing/clothingDetail";
+        clothingService.delete(clothingId);
+        return "viewclothing";
     }
 }

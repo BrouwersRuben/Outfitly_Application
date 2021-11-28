@@ -9,4 +9,5 @@ public interface ClothingService {
     ClothingItem findById(int id);
     ClothingItem create(ClothingItem clothingItem);
     List<ClothingItem> read();
+    void delete(int id);
 }

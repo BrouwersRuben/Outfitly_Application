@@ -8,4 +8,5 @@ public interface ClothingRepository {
     List<ClothingItem> read();
     ClothingItem findById(int id);
     ClothingItem create(ClothingItem clothingItem);
+    void delete(ClothingItem clothingItem);
 }
