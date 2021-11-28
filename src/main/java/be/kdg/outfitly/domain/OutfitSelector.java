@@ -11,12 +11,13 @@ public class OutfitSelector {
     private ArduinoSensor arduinoSensor;
     private final User user;
     private final ClothingItem.Occasion occasion;
-    private StringBuilder loggerOutput;
+    private StringBuilder aiDecision;
 
     public OutfitSelector(WeatherForecast weatherForecast, User user, ClothingItem.Occasion occasion) {
         this.weatherForecast = weatherForecast;
         this.user = user;
         this.occasion = occasion;
+        this.aiDecision = new StringBuilder();
     }
 
     private final Logger logger = LoggerFactory.getLogger(OutfitSelector.class);
@@ -36,7 +37,7 @@ public class OutfitSelector {
 //        double lowestTemperature = rightTemperature(arduinoSensor.getSensorTemperature(), weatherForecast.getLowestTemperature());
         double lowestTemperature = weatherForecast.getLowestTemperature();
         boolean isGoingToRain = weatherForecast.isGoingToRain();
-//        logger.debug("Possible items before filtering: " + Arrays.toString(possibleItems.toArray()));
+        logger.debug("Possible items before filtering: " + Arrays.toString(possibleItems.toArray()));
 
 
         possibleItems = removeUnsuitableForTemperature(possibleItems, lowestTemperature);
@@ -50,7 +51,7 @@ public class OutfitSelector {
 
     public List<ClothingItem> removeUnsuitableForRain(List<ClothingItem> clothes, boolean isGoingToRain) {
         if (isGoingToRain) {
-            loggerOutput.append("It is going to rain - filtering out clothes with bad rainproofness.\n");
+            aiDecision.append("It is going to rain - filtering out clothes with bad rainproofness.\n");
 //            logger.debug("It is going to rain - filtering out clothes with bad rainproofness.");
             clothes = clothes
                     .stream()
@@ -65,15 +66,15 @@ public class OutfitSelector {
         ClothingItem.Weather givenWeather;
 
         if (temperature < 5) {
-            loggerOutput.append("The temperature is classified as cold.\n");
+            aiDecision.append("The temperature is classified as cold.\n");
 //            logger.debug("The temperature is classified as cold");
             givenWeather = ClothingItem.Weather.COLD;
         } else if (temperature < 15) {
-            loggerOutput.append("The temperature is classified as mild.\n");
+            aiDecision.append("The temperature is classified as mild.\n");
 //            logger.debug("The temperature is classified as mild");
             givenWeather = ClothingItem.Weather.MILD;
         } else {
-            loggerOutput.append("The temperature is classified as warm.\n");
+            aiDecision.append("The temperature is classified as warm.\n");
 //            logger.debug("The temperature is classified as warm");
             givenWeather = ClothingItem.Weather.WARM;
         }
@@ -119,7 +120,7 @@ public class OutfitSelector {
         return suitableClothes;
     }
 
-    public StringBuilder getLoggerOutput() {
-        return loggerOutput;
+    public StringBuilder getAiDecision() {
+        return aiDecision;
     }
 }
