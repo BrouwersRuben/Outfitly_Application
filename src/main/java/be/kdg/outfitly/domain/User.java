@@ -1,5 +1,6 @@
 package be.kdg.outfitly.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User extends Entity {
@@ -27,7 +28,7 @@ public class User extends Entity {
     }
 
     //constructor for everything
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode, List<ClothingItem> clothes) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -39,11 +40,11 @@ public class User extends Entity {
         this.streetNumber = streetNumber;
         this.apartmentNumber = apartmentNumber;
         this.zipcode = zipcode;
-        this.clothes = clothes;
+        this.clothes = new ArrayList<>();
     }
 
     //Constructor for without apartmentNumber
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String zipcode, List<ClothingItem> clothes) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -54,7 +55,7 @@ public class User extends Entity {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.zipcode = zipcode;
-        this.clothes = clothes;
+        this.clothes = new ArrayList<>();
     }
 
     public void addClothing(ClothingItem clothingItem){
@@ -136,6 +137,10 @@ public class User extends Entity {
 
     public void setClothes(List<ClothingItem> clothes) {
         this.clothes = clothes;
+    }
+
+    public void setClothingItem(ClothingItem clothingItem) {
+        this.clothes.add(clothingItem);
     }
 
     public void setPhoneNumber(String phoneNumber) {

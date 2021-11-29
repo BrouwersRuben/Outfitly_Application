@@ -39,7 +39,7 @@ public class LoginController {
             logger.debug("Filled in correct details");
             //get name to path into mainpage
             User currentUser = users.stream().filter(userN -> userN.getEmail().equals(userDTO.getEmail())).collect(Collectors.toList()).get(0);
-//          user.setId(5);
+            //user.setId(5);
             user.setClothes(currentUser.getClothes());
             user.setEmail(currentUser.getEmail());
             user.setFirstName(currentUser.getFirstName());

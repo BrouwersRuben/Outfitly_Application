@@ -36,10 +36,10 @@ public class UserServiceImpl implements UserService{
         User user;
         if(apartmentNumber == null){
             logger.debug("User didn't fill in a ap number");
-            user = new User(email, password, firstName, lastName, phoneNumber, country, city, streetName, streetNumber, zipcode, clothes);
+            user = new User(email, password, firstName, lastName, phoneNumber, country, city, streetName, streetNumber, zipcode);
         }else{
             logger.debug("User filled in an ap number");
-            user = new User(email, password, firstName, lastName, phoneNumber, country, city, streetName, streetNumber, apartmentNumber,zipcode, clothes);
+            user = new User(email, password, firstName, lastName, phoneNumber, country, city, streetName, streetNumber, apartmentNumber,zipcode);
         }
         return userRepository.create(user);
     }
@@ -49,5 +49,8 @@ public class UserServiceImpl implements UserService{
         return userRepository.read();
     }
 
-
+    @Override
+    public void update(User updatedUser){
+        userRepository.update(updatedUser);
+    }
 }

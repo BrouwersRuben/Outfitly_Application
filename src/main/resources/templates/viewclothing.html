@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Outfitly</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+    <div th:insert="~{fragments/navbarLoggedIn::navbarLoggedIn}">navbarLoggedIn</div>
+
+    <div th:insert="~{fragments/header::header}">header</div>
+
+    <div class="container w-25">
+        <div th:each="clothing : ${user.getClothes()}">
+            <div class="card">
+                <div class="card-body">
+                    <span th:text="${clothing.getName()}"></span>
+                    <form method="post" th:object="${clothingDTO}">
+                        <input type="submit" class="btn" id="ID" name="ID" th:value="${clothing.getId()}" th:href="@{/profile/viewclothing}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+</body>
+</html>

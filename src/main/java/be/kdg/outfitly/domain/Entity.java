@@ -2,7 +2,7 @@ package be.kdg.outfitly.domain;
 
 import java.util.Objects;
 
-public class Entity {
+public abstract class Entity {
     protected int id;
 
     public int getId() {
