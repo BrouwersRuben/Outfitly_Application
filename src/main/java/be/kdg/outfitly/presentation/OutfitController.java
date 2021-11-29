@@ -48,7 +48,8 @@ public class OutfitController {
         outfitSelector = new OutfitSelector(weatherForecast, user, occasion);
         model.addAttribute("clothes", outfitSelector.getSuitableClothesMap());
         model.addAttribute("types", List.of(ClothingItem.Type.values()));
-
+        model.addAttribute("aiDecision", outfitSelector.getAiDecision());
+//        logger.debug("Logger output: " + outfitSelector.getAiDecision().toString());
         return "outfit";
     }
 
