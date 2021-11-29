@@ -17,7 +17,8 @@
                 <div class="card-body">
                     <span th:text="${clothing.getName()}"></span>
                     <form method="post" th:object="${clothingDTO}">
-                        <input type="submit" class="btn" id="ID" name="ID" th:value="${clothing.getId()}" th:href="@{/profile/viewclothing}">
+                        <input type="text" id="ID" name="ID" th:value="${clothing.getId()}" hidden>
+                        <input type="submit" class="btn" th:href="@{/profile/viewclothing}" value="Delete clothing">
                     </form>
                 </div>
             </div>
