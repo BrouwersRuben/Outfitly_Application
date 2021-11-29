@@ -34,7 +34,7 @@ public class MainPageController {
         model.addAttribute("user", user);
         model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
         model.addAttribute("username", user.getName());
-        model.addAttribute("weatherForecastData", weatherForecastService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
+        model.addAttribute("weatherForecastData", weatherForecastService.findByCountryAndCity(user.getCountry(), user.getCity()));
         return "mainpage";
     }
 }

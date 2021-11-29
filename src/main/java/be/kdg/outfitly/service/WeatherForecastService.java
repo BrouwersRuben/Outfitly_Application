@@ -7,4 +7,5 @@ import java.time.LocalDateTime;
 public interface WeatherForecastService {
 
     WeatherForecast findByDate(LocalDateTime time);
+    WeatherForecast findByCountryAndCity(String country, String city);
 }

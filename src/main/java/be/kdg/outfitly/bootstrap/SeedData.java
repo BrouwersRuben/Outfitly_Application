@@ -8,14 +8,6 @@ import be.kdg.outfitly.repository.ArduinoSensorRepository;
 import be.kdg.outfitly.repository.ClothingRepository;
 import be.kdg.outfitly.repository.UserRepository;
 import be.kdg.outfitly.repository.WeatherForecastRepository;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +15,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -55,7 +46,6 @@ public class SeedData implements CommandLineRunner {
     public void run(String... args) throws Exception {
         logger.debug("Seeding the repositories");
         //TODO: Make this so that the location changes per user it loads.
-        weatherAPIData = retrieveAPIData(logger, "Antwerp,BE");
 //        arduinoAPIData = retrieveAPIData(logger, arduinoAPI);
 
         //Test users with some clothing items
@@ -125,51 +115,24 @@ public class SeedData implements CommandLineRunner {
         arduinoSensorRepository.create(arduinoSensor);
 
         // Weather API
-        WeatherForecast forecast = new WeatherForecast(
-                LocalDateTime.of(2021, 10, 29, 12, 30, 30),
-                String.valueOf(weatherAPIData.get("name")),
-                String.valueOf(weatherAPIData.getJSONObject("sys").get("country")),
-                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp"))),
-                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("feels_like"))),
-                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_min"))),
-                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_max"))),
-                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("wind").get("speed"))),
-                Integer.parseInt(String.valueOf(weatherAPIData.getJSONObject("main").get("humidity"))),
-                String.valueOf(weatherAPIData.getJSONArray("weather").getJSONObject(0).get("main"))
-        );
+//        WeatherForecast forecast = new WeatherForecast(
+//                LocalDateTime.of(2021, 10, 29, 12, 30, 30),
+//                String.valueOf(weatherAPIData.get("name")),
+//                String.valueOf(weatherAPIData.getJSONObject("sys").get("country")),
+//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp"))),
+//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("feels_like"))),
+//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_min"))),
+//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_max"))),
+//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("wind").get("speed"))),
+//                Integer.parseInt(String.valueOf(weatherAPIData.getJSONObject("main").get("humidity"))),
+//                String.valueOf(weatherAPIData.getJSONArray("weather").getJSONObject(0).get("main"))
+//        );
 
-        weatherForecastRepository.create(forecast);
+        WeatherForecast forecast = WeatherForecast.currentForecastForCountryCity("Belgium", "Antwerp");
+        if (forecast != null) weatherForecastRepository.create(forecast);
 
         // Slave and master accounts may be a bit easier to understand
     }
 
-    private JSONObject retrieveAPIData(Logger logger, String location) throws Exception{
-        String APILink = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c";
-        // TODO: Reload api on refresh
-        URIBuilder builder = new URIBuilder(APILink);
-        HttpGet get = new HttpGet(builder.build());
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        JSONObject json;
 
-        try (CloseableHttpResponse response = httpclient.execute(get)) {
-            json = null;
-            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
-                logger.error("Bad response status code: {}.", response.getStatusLine().getStatusCode());
-//                return;
-            }
-
-            HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                String rawResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-                json = new JSONObject(rawResult);
-            }
-
-            if (json ==null) {
-                logger.error("No weather forecast data retrieved!");
-            } else {
-                logger.debug("Forecast data successfully retrieved!");
-            }
-        }
-        return json;
-    }
 }

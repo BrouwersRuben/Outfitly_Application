@@ -43,12 +43,13 @@ public class OutfitController {
                                Model model) {
 
 //        outfitSelector = new OutfitSelector(WeatherForecast.randomForecast(), user, occasion);
-        WeatherForecast weatherForecast = weatherForecastService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30));
+        WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountry(), user.getCity());
         logger.debug("Weather forecast from the API: " + weatherForecast);
         outfitSelector = new OutfitSelector(weatherForecast, user, occasion);
         model.addAttribute("clothes", outfitSelector.getSuitableClothesMap());
         model.addAttribute("types", List.of(ClothingItem.Type.values()));
-
+        model.addAttribute("aiDecision", outfitSelector.getAiDecision());
+//        logger.debug("Logger output: " + outfitSelector.getAiDecision().toString());
         return "outfit";
     }
 
