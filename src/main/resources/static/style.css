@@ -1,3 +1,11 @@
 .bg-blue{
     background: #4A86E8;
 }
+
+.diagram{
+    max-width: 60%;
+}
+
+.font-weight-bold{
+    font-weight: bold;
+}
