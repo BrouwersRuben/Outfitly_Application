@@ -1,13 +1,10 @@
 package be.kdg.outfitly.domain;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@javax.persistence.Entity
 @Table(name = "costumers")
 public class User extends Entity {
 
@@ -50,7 +47,7 @@ public class User extends Entity {
     @Column(name = "zip_code", nullable = false, length = 10)
     private String zipcode;
 
-    //TODO: Relationship
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<ClothingItem> clothes;
 
     // Constructor

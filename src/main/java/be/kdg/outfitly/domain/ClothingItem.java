@@ -1,7 +1,10 @@
 package be.kdg.outfitly.domain;
 
+import javax.persistence.*;
 import java.io.File;
 
+@javax.persistence.Entity
+@Table(name = "clothes")
 public class ClothingItem extends Entity {
 
     public enum Material{
@@ -74,19 +77,44 @@ public class ClothingItem extends Entity {
         }
     }
 
-    private String name;
-    private Type type;
-    private Material material;
-    private RainProofness rainProofness;
-    private Occasion occasion;
-    private Weather weather;
-//    ??
-    private File photo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    public ClothingItem() {
+    @Column(name = "clothing_name", nullable = false, length = 50)
+    private String name;
+
+    @Column(name = "clothing_type", nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
+    private Type type;
+
+    @Column(name = "clothing_material", nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
+    private Material material;
+
+    @Column(name = "rainproofness", nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
+    private RainProofness rainProofness;
+
+    @Column(name = "clothing_occasion", nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
+    private Occasion occasion;
+
+    @Column(name = "clothing_weather_type", nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
+    private Weather weather;
+
+    @Column(name = "image_url", length = 200)
+    private String photoUrl;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name="user_id")
+    private User user;
+
+    protected ClothingItem() {
     }
 
-    //no photo yet
+    // TODO: Why are there 2 constructors here?
     public ClothingItem(String name, Material material, RainProofness rainProofness, Occasion occasion, Weather weather) {
         this.name = name;
         this.material = material;
@@ -124,8 +152,8 @@ public class ClothingItem extends Entity {
         return weather;
     }
 
-    public File getPhoto() {
-        return photo;
+    public String getPhoto() {
+        return photoUrl;
     }
 
     public Type getType() {
@@ -141,7 +169,7 @@ public class ClothingItem extends Entity {
                 ", rainProofness=" + rainProofness +
                 ", occasion=" + occasion +
                 ", weather=" + weather +
-                ", photo=" + photo +
+                ", photo=" + photoUrl +
                 '}';
     }
 }
