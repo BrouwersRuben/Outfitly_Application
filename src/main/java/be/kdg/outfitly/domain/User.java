@@ -50,6 +50,9 @@ public class User extends Entity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<ClothingItem> clothes;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ArduinoSensor> sensorData;
+
     // Constructor
     protected User() {
     }
@@ -90,6 +93,11 @@ public class User extends Entity {
     }
 
     // Getters
+
+    @Override
+    public int getId() {
+        return id;
+    }
 
     public String getEmail() {
         return email;
@@ -139,12 +147,21 @@ public class User extends Entity {
         return clothes;
     }
 
+    public List<ArduinoSensor> getSensorData() {
+        return sensorData;
+    }
+
     //function to get first name and surname together
     public String getName(){
         return firstName + " " + lastName;
     }
 
     //setters
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -196,6 +213,10 @@ public class User extends Entity {
 
     public void setApartmentNumber(String apartmentNumber) {
         this.apartmentNumber = apartmentNumber;
+    }
+
+    public void setSensorData(List<ArduinoSensor> sensorData) {
+        this.sensorData = sensorData;
     }
 
     @Override

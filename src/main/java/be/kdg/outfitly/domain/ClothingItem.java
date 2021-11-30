@@ -132,32 +132,78 @@ public class ClothingItem extends Entity {
         this.weather = weather;
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Material getMaterial() {
         return material;
     }
 
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
     public RainProofness getRainProofness() {
         return rainProofness;
+    }
+
+    public void setRainProofness(RainProofness rainProofness) {
+        this.rainProofness = rainProofness;
     }
 
     public Occasion getOccasion() {
         return occasion;
     }
 
+    public void setOccasion(Occasion occasion) {
+        this.occasion = occasion;
+    }
+
     public Weather getWeather() {
         return weather;
     }
 
-    public String getPhoto() {
+    public void setWeather(Weather weather) {
+        this.weather = weather;
+    }
+
+    public String getPhotoUrl() {
         return photoUrl;
     }
 
-    public Type getType() {
-        return type;
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
