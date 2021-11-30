@@ -1,30 +1,60 @@
 package be.kdg.outfitly.domain;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "costumers")
 public class User extends Entity {
 
     // Variables
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
+    @Column(name = "email", nullable = false, unique = true, length = 320)
     private String email;
+
+    @Column(name = "password", nullable = false, length = 50)
     private String password;
 
+    @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 50)
     private String lastName;
+
+    @Column(name = "phone_number", nullable = false, length = 50)
     //String --> 047/..
     private String phoneNumber;
+
+    @Column(name = "country", nullable = false, length = 56)
     private String country;
+
+    @Column(name = "city", nullable = false, length = 85)
     private String city;
+
+    @Column(name = "street_name", nullable = false, length = 50)
     private String streetName;
+
+    @Column(name = "street_number", nullable = false, length = 10)
     private int streetNumber;
+
+    @Column(name = "appartment_number", length = 10)
     private String apartmentNumber;
+
+    @Column(name = "zip_code", nullable = false, length = 10)
     private String zipcode;
+
+    //TODO: Relationship
     private List<ClothingItem> clothes;
 
     // Constructor
-
-    public User() {
+    protected User() {
     }
 
     //constructor for everything
