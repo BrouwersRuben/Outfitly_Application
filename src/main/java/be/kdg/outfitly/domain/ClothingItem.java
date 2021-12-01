@@ -1,7 +1,6 @@
 package be.kdg.outfitly.domain;
 
 import javax.persistence.*;
-import java.io.File;
 
 @javax.persistence.Entity
 @Table(name = "clothes")
