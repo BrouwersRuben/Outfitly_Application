@@ -27,7 +27,7 @@ public class UserDTO {
 
     //String --> 047/..
     @NotEmpty(message = "Please fill in your phone number.")
-    @Pattern(regexp = "\d{10}", message="Please fill in a valid phone number.")
+    @Pattern(regexp = "^\\d{10}$", message="Please fill in a valid phone number.")
     private String phoneNumber;
 
     @NotEmpty(message = "Please fill in your country.")
@@ -73,10 +73,6 @@ public class UserDTO {
         return firstName;
     }
 
-    public String getMiddleName() {
-        return middleName;
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -111,10 +107,6 @@ public class UserDTO {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
     }
 
     public void setLastName(String lastName) {
