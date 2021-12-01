@@ -30,7 +30,8 @@ public class RegisterController {
     }
 
     @RequestMapping
-    public String register(){
+    public String register(Model model){
+        model.addAttribute("userDTO", new UserDTO());
         return "register";
     }
 
