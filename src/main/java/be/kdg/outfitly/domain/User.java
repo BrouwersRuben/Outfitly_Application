@@ -54,7 +54,8 @@ public class User extends Entity {
     private List<ArduinoSensor> sensorData;
 
     // Constructor
-    protected User() {
+    // TODO: make this protected MULTI USER
+    public User() {
     }
 
     //constructor for everything
