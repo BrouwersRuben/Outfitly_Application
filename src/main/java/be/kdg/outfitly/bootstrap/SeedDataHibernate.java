@@ -19,13 +19,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
-@Profile("JavaCollections")
-public class SeedData implements CommandLineRunner {
-    private final Logger logger = LoggerFactory.getLogger(SeedData.class);
-    private final ArduinoSensorRepository arduinoSensorRepository;
-    private final UserRepository userRepository;
-    private final ClothingRepository clothingRepository;
-    private final WeatherForecastRepository weatherForecastRepository;
+@Profile("Hibernate")
+public class SeedDataHibernate implements CommandLineRunner {
+    private final Logger logger = LoggerFactory.getLogger(SeedDataHibernate.class);
     private JSONObject weatherAPIData;
 //    private final String arduinoAPI = "http://192.168.184.187/data";
 
@@ -35,20 +31,16 @@ public class SeedData implements CommandLineRunner {
 //    private MainUserListRepository mainUserListRepository;
 //    private ClothingItem clothingItem;
 
-    public SeedData(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository) {
-        this.arduinoSensorRepository = arduinoSensorRepository;
-        this.userRepository = userRepository;
-        this.clothingRepository = clothingRepository;
-        this.weatherForecastRepository = weatherForecastRepository;
-    }
+/*    public SeedDataHibernate() {
+
+    }*/
 
     @Override
     public void run(String... args) throws Exception {
-        logger.debug("Seeding the repositories");
-        //TODO: Make this so that the location changes per user it loads.
+        logger.debug("Seeding the repositories (Hibernate) ");
 //        arduinoAPIData = retrieveAPIData(logger, arduinoAPI);
 
-        //Test users with some clothing items
+        // This is some initial data for testing purposes.
 //        User user1 = new User("testUser1@gmail.com","test123","John", "Doe", "0475441658", "Belgium", "Antwerp", "Nationale Straat", 85, "2000");
         User user1 = new User("testUser1@gmail.com", "test123", "John", "Doe", "0475441658", "Belgium", "Antwerp", "Nationale Straat", 5, "200B", "2000");
 
@@ -67,31 +59,14 @@ public class SeedData implements CommandLineRunner {
         ClothingItem clothingItem13 = new ClothingItem("Black pants", ClothingItem.Material.OTHER, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.UNIVERSAL, ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.TROUSERS_LIKE);
         ClothingItem clothingItem14 = new ClothingItem("Black leather sneakers", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.UNIVERSAL, ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.SHOES);
 
-        clothingRepository.create(clothingItem1);
-        clothingRepository.create(clothingItem2);
-        clothingRepository.create(clothingItem3);
-        clothingRepository.create(clothingItem4);
-        clothingRepository.create(clothingItem5);
-        clothingRepository.create(clothingItem6);
-        clothingRepository.create(clothingItem7);
-        clothingRepository.create(clothingItem8);
-        clothingRepository.create(clothingItem9);
-        clothingRepository.create(clothingItem10);
-        clothingRepository.create(clothingItem11);
-        clothingRepository.create(clothingItem12);
-        clothingRepository.create(clothingItem13);
-        clothingRepository.create(clothingItem14);
+        // TODO: Add all clothing items to table
 
         final List<ClothingItem> clothingItemsUser1 = List.of(clothingItem1, clothingItem2, clothingItem3, clothingItem4, clothingItem5, clothingItem6, clothingItem7, clothingItem8, clothingItem9, clothingItem10, clothingItem11, clothingItem12, clothingItem13, clothingItem14);
         user1.setClothes(clothingItemsUser1);
 
-        User user2 = new User("testUser2@gmail.com","test123","Bob","Shannon","0458564572", "Spain", "Barcelona", "La Rambla", 15, "08001");
-//                List.of(new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD),
-//                        new ClothingItem("Hoodie", ClothingItem.Material.SYNTHETIC, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD),
-//                        new ClothingItem("Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD,ClothingItem.Occasion.UNIVERSAL,ClothingItem.Weather.UNIVERSAL),
-//                        new ClothingItem("T-Shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.WARM),
-//                        new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL)));
+        // TODO: Add user 1 to table
 
+        User user2 = new User("testUser2@gmail.com","test123","Bob","Shannon","0458564572", "Spain", "Barcelona", "La Rambla", 15, "08001");
 
         ClothingItem clothingItem15 = new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD);
         ClothingItem clothingItem16 = new ClothingItem("Hoodie", ClothingItem.Material.SYNTHETIC, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD);
@@ -99,11 +74,12 @@ public class SeedData implements CommandLineRunner {
         ClothingItem clothingItem18 = new ClothingItem("T-Shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.WARM);
         ClothingItem clothingItem19 = new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL);
 
+        // TODO: Add all clothing items to table
+
         final List<ClothingItem> clothingItemsUser2 = List.of(clothingItem15, clothingItem16, clothingItem17, clothingItem18, clothingItem19);
         user2.setClothes(clothingItemsUser2);
 
-        userRepository.create(user1);
-        userRepository.create(user2);
+        // TODO: Add user 2 to table
 
         // Arduino API
         ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
@@ -112,7 +88,7 @@ public class SeedData implements CommandLineRunner {
 //                Double.parseDouble(String.valueOf(arduinoAPIData.get("Humidity"))),
 //                LocalDateTime.parse(String.valueOf(arduinoAPIData.get("DateTime"))))                ;
 
-        arduinoSensorRepository.create(arduinoSensor);
+        // TODO: Add arduinoSensor to table
 
         // Weather API
 //        WeatherForecast forecast = new WeatherForecast(
@@ -129,7 +105,8 @@ public class SeedData implements CommandLineRunner {
 //        );
 
         WeatherForecast forecast = WeatherForecast.currentForecastForCountryCity("Belgium", "Antwerp");
-        if (forecast != null) weatherForecastRepository.create(forecast);
+//        TODO: Add forecast to table
+        if (forecast != null);
 
         // Slave and master accounts may be a bit easier to understand
     }
