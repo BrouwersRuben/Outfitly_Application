@@ -20,37 +20,33 @@ public class UserDTO {
     @NotEmpty(message = "Please fill in your first name.")
     @Size(max = 50)
     private String firstName;
-
+    private String middleName;
     @NotEmpty(message = "Please fill in your last name.")
     @Size(max = 50)
     private String lastName;
 
     //String --> 047/..
     @NotEmpty(message = "Please fill in your phone number.")
-    @Pattern(regexp = "^\\d{10}$", message="Please fill in a valid phone number.")
+    //10 digits
+    @Pattern(regexp = "^\\d{10}", message="Please fill in a valid phone number.")
     private String phoneNumber;
-
     @NotEmpty(message = "Please fill in your country.")
     @Size(max = 56)
     private String country;
-
     @NotEmpty(message ="Please fill in your city.")
-    @Size(max = 85)
+    @Size(max = 85, message = "City name cannot be larger than 85 characters.")
     private String city;
-
     @NotEmpty(message = "Please fill in a street name.")
-    @Size(max = 50)
+    @Size(max = 50, message =  "Street name cannot be larger than 50 characters.")
     private String streetName;
-
     @NotEmpty(message = "Please fill in a street number.")
+    @Size(max = 10, message = "Street number cannot be larger than 10 characters.")
     private int streetNumber;
-
     //can be empty
-    @Size(max = 10)
+    @Size(max = 10, message = "Apartment number cannot be larger than 10 characters.")
     private String apartmentNumber;
-
     @NotEmpty
-    @Size(max = 10, message = "Cannot be larger than 10 characters")
+    @Size(max = 10, message = "Zipcode cannot be larger than 10 characters")
     private String zipcode;
 
     public String getEmail() {
@@ -71,6 +67,10 @@ public class UserDTO {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
     }
 
     public String getLastName() {
@@ -107,6 +107,10 @@ public class UserDTO {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public void setLastName(String lastName) {

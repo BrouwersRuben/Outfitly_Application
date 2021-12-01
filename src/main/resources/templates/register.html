@@ -50,20 +50,24 @@
                 <input type="text" class="form-control" id="inputCity" placeholder="Antwerp" name="city">
             </div>
             <div class="form-group m-4">
-                <label for="inputStreet">Street</label>
-                <input type="text" class="form-control" id="inputStreet" placeholder="Nationale Straat" name="streetName">
+                <label for="streetName">Street</label>
+                <input type="text" class="form-control" id="streetName" placeholder="Nationale Straat" name="streetName">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}">Street Name Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputStreetNumber">Street Number</label>
-                <input type="number" class="form-control" id="inputStreetNumber" placeholder="5" name="streetNumber">
+                <label for="streetNumber">Street Number</label>
+                <input type="number" class="form-control" id="streetNumber" placeholder="5" name="streetNumber">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetNumber')}" th:errors="*{streetNumber}">Street Number Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputApartmentNumber">Apartment Number (optional)</label>
-                <input type="text" class="form-control" id="inputApartmentNumber" placeholder="5" name="apartmentNumber">
+                <label for="apartmentNumber">Apartment Number (optional)</label>
+                <input type="text" class="form-control" id="apartmentNumber" placeholder="5" name="apartmentNumber">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('apartmentNumber')}" th:errors="*{apartmentNumber}">Apartment Number Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputZipcode">Zipcode</label>
-                <input type="text" class="form-control" id="inputZipcode" placeholder="2000" name="zipcode">
+                <label for="zipcode">Zipcode</label>
+                <input type="text" class="form-control" id="zipcode" placeholder="2000" name="zipcode">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">Zipcode Error</div>
             </div>
             <button type="submit" class="btn btn-primary m-4">Create account</button>
         </form>
