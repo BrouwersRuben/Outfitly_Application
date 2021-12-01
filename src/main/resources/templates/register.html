@@ -27,8 +27,6 @@
             <div class="form-group m-4">
                 <label for="inputLastName">Last name</label>
                 <input type="text" class="form-control" id="inputLastName" placeholder="Doe" name="lastName">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="John" name="lastName">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">last name error</div>
             </div>
             <div class="form-group m-4">
@@ -46,8 +44,6 @@
             <div class="form-group m-4">
                 <label for="inputPhoneNumber">Phone Number</label>
                 <input type="text" class="form-control" id="inputPhoneNumber" placeholder="+32 3 613 13 13" name="phoneNumber">
-                <label for="phoneNumber">Phone Number</label>
-                <input type="text" class="form-control" id="phoneNumber" placeholder="John" name="phoneNumber">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phone number error</div>
             </div>
             <h2>Address:</h2>

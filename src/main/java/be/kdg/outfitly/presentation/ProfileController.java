@@ -101,26 +101,6 @@ public class ProfileController {
         }
     }
 
-/*    @PostMapping("/changepassword")
-    public String processChangePassword(@ModelAttribute("user") User user, String verifyPassword, String newPassword, BindingResult errors){
-        if (errors.hasErrors()) {
-            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
-            return "changepassword";
-        }else{
-            logger.debug("Verify password: " + verifyPassword + ", normal password: " + user.getPassword());
-            logger.debug("New password: " + newPassword);
-            if(Objects.equals(verifyPassword, user.getPassword())){
-                logger.debug("User correctly wrote their password");
-                user.setPassword(newPassword);
-                userService.update(user);
-                return "redirect:/profile";
-            }else{
-                logger.debug("User didn't write their password correctly");
-                return "changepassword";
-            }
-        }
-    }*/
-
     @GetMapping("/changename")
     public String changeName(Model model, @ModelAttribute("user") User user){
         logger.debug(user.getFirstName() + " is trying to change their name");
