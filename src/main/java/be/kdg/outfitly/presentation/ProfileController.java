@@ -3,14 +3,19 @@ package be.kdg.outfitly.presentation;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.ClothingDTO;
+import be.kdg.outfitly.presentation.dto.UserDTO;
+import be.kdg.outfitly.presentation.dto.profileChanges.LocationDTO;
 import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,24 +41,28 @@ public class ProfileController {
 
     @GetMapping("/changelocation")
     public String changeLocation(Model model, @ModelAttribute("user") User user){
+        model.addAttribute("locationDTO", new LocationDTO());
         model.addAttribute("loggedIn", user.getId() != -1);
-        logger.debug("User is trying to change their location. Their current location is: " + user.getCity());
-        logger.debug("User: " + user);
         model.addAttribute("user", user);
         return "changelocation";
     }
 
     @PostMapping("/changelocation")
-    public String processChangedLocation(@ModelAttribute("user") User user, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode){
-        logger.debug(user.getFirstName() + " changed their city to " + city);
-        user.setCity(city);
-        user.setCountry(country);
-        user.setStreetName(streetName);
-        user.setStreetNumber(streetNumber);
-        user.setApartmentNumber(apartmentNumber);
-        user.setZipcode(zipcode);
-        userService.update(user);
-        return "redirect:/profile";
+    public String processChangedLocation(@ModelAttribute("user") User user, @Valid @ModelAttribute("locationDTO") LocationDTO locationDTO, BindingResult errors){
+        if (errors.hasErrors()){
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
+            return "changelocation";
+        } else {
+//            logger.debug(user.getFirstName() + " changed their city to " + city);
+            user.setCity(locationDTO.getCity());
+            user.setCountry(locationDTO.getCountry());
+            user.setStreetName(locationDTO.getStreetName());
+            user.setStreetNumber(locationDTO.getStreetNumber());
+            user.setApartmentNumber(locationDTO.getApartmentNumber());
+            user.setZipcode(locationDTO.getZipcode());
+            userService.update(user);
+            return "redirect:/profile";
+        }
     }
 
     @GetMapping("/changepassword")

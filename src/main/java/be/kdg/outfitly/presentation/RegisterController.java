@@ -51,7 +51,7 @@ public class RegisterController {
             } else {
                 //No clothes yet
                 // TODO: Make it accept userDTO object
-                userService.create(userDTO.getEmail(),userDTO.getPassword(),userDTO.getFirstName(), userDTO.getLastName(), userDTO.getPhoneNumber(), userDTO.getCountry(), userDTO.getCity(), userDTO.getStreetName(), Integer.parseInt(userDTO.getStreetNumber()), userDTO.getApartmentNumber(), userDTO.getZipcode(), new ArrayList<>());
+                userService.create(userDTO.getEmail(),userDTO.getPassword(),userDTO.getFirstName(), userDTO.getLastName(), userDTO.getPhoneNumber(), userDTO.getCountry(), userDTO.getCity(), userDTO.getStreetName(), userDTO.getStreetNumber(), userDTO.getApartmentNumber(), userDTO.getZipcode(), new ArrayList<>());
                 return "redirect:/login";
             }
         }

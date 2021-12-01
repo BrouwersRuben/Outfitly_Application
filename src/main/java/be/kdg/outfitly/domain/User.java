@@ -17,7 +17,7 @@ public class User extends Entity {
     private String country;
     private String city;
     private String streetName;
-    private int streetNumber;
+    private String streetNumber;
     private String apartmentNumber;
     private String zipcode;
     private List<ClothingItem> clothes;
@@ -28,7 +28,7 @@ public class User extends Entity {
     }
 
     //constructor for everything
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -44,7 +44,7 @@ public class User extends Entity {
     }
 
     //Constructor for without apartmentNumber
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, String streetNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -96,7 +96,7 @@ public class User extends Entity {
         return streetName;
     }
 
-    public int getStreetNumber() {
+    public String getStreetNumber() {
         return streetNumber;
     }
 
@@ -159,7 +159,7 @@ public class User extends Entity {
         this.streetName = streetName;
     }
 
-    public void setStreetNumber(int streetNumber) {
+    public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
 

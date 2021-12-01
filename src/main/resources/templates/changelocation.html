@@ -12,30 +12,36 @@
     <div th:insert="~{fragments/header::header}">header</div>
 
     <div class="d-flex justify-content-center align-content-center">
-        <form method="post">
+        <form method="post" th:object="${locationDTO}">
             <div class="form-group row">
                 <label for="country" class="float-start">Change your country:</label>
                 <input type="text" name="country" id="country" th:value="${user.country}" class="float-end m-1 w-50">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">country error</div>
             </div>
             <div class="form-group row">
                 <label for="city" class="float-start">Change your city:</label>
                 <input type="text" name="city" id="city" th:value="${user.city}" class="float-end m-1 w-50">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">city error</div>
             </div>
             <div class="form-group row">
                 <label for="streetName" class="float-start">Change your street:</label>
                 <input type="text" name="streetName" id="streetName" th:value="${user.streetName}" class="float-end m-1 w-50">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}">street name error</div>
             </div>
             <div class="form-group row">
                 <label for="streetNumber" class="float-start">Change your street number:</label>
-                <input type="number" name="streetNumber" id="streetNumber" th:value="${user.streetNumber}" class="float-end m-1 w-50">
+                <input type="text" name="streetNumber" id="streetNumber" th:value="${user.streetNumber}" class="float-end m-1 w-50">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetNumber')}" th:errors="*{streetNumber}">street number error</div>
             </div>
             <div class="form-group row">
                 <label for="apartmentNumber" class="float-start">Change your Apartment number:</label>
                 <input type="text" name="apartmentNumber" id="apartmentNumber" th:value="${user.apartmentNumber}" class="float-end m-1 w-50">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('apartmentNumber')}" th:errors="*{apartmentNumber}">apartment number error</div>
             </div>
             <div class="form-group row">
                 <label for="zipcode" class="float-start">Change your zipcode:</label>
                 <input type="text" name="zipcode" id="zipcode" th:value="${user.zipcode}" class="float-end m-1 w-50">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">zipcode error</div>
             </div>
             <div class="d-flex justify-content-center">
                 <button class="btn btn-outline-dark m-4" type="submit">Change location</button>
