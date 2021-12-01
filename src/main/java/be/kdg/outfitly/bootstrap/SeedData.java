@@ -130,6 +130,8 @@ public class SeedData implements CommandLineRunner {
 
         WeatherForecast forecast = WeatherForecast.currentForecastForCountryCity("Belgium", "Antwerp");
         if (forecast != null) weatherForecastRepository.create(forecast);
+        WeatherForecast forecast2 = WeatherForecast.currentForecastForCountryCity("Spain", "Barcelona");
+        if (forecast2 != null) weatherForecastRepository.create(forecast2);
 
         // Slave and master accounts may be a bit easier to understand
     }

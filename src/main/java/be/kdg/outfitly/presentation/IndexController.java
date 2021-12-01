@@ -1,8 +1,10 @@
 package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.User;
+import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,26 +12,33 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/")
-@SessionAttributes("user")
 public class IndexController {
 
     private final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
+    private UserService userService;
 
     @GetMapping("/faq")
-    public String showFAQ(Model model , @ModelAttribute("user") User user) {
-        model.addAttribute("loggedIn", user.getId() != -1);
-        model.addAttribute("user", user);
-
+    public String showFAQ(Model model , Principal principal) {
+        model.addAttribute("loggedIn", principal != null);
+        if(principal!=null) {
+            User user = userService.findByEmail(principal.getName());
+            model.addAttribute("user", user);
+        }
         return "faq";
     }
 
     @GetMapping
-    public String indexPage(Model model , @ModelAttribute("user") User user){
-        model.addAttribute("loggedIn", user.getId() != -1);
-        model.addAttribute("user", user);
+    public String indexPage(Model model , Principal principal){
+        model.addAttribute("loggedIn", principal != null);
+        if(principal!=null) {
+            User user = userService.findByEmail(principal.getName());
+            model.addAttribute("user", user);
+        }
         return "index";
     }
 
@@ -38,10 +47,10 @@ public class IndexController {
         return "doesnotexist";
     }
 
-    @ModelAttribute("user")
-    public User user() {
-        User user = new User();
-        user.setId(-1);
-        return user;
+
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

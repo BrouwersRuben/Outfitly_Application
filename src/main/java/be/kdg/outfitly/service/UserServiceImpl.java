@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User findByEmail(String email) {
+       return userRepository.read().stream().filter(user -> user.getEmail().equals(email)).findFirst().orElse(null);
+    }
+
+    @Override
     public User create(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode, List<ClothingItem> clothes) {
         User user;
         if(apartmentNumber == null){

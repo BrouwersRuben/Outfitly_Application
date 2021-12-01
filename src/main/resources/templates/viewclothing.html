@@ -18,7 +18,7 @@
                     <span th:text="${clothing.getName()}"></span>
                     <form method="post" th:object="${clothingDTO}">
                         <input type="text" id="ID" name="ID" th:value="${clothing.getId()}" hidden>
-                        <input type="submit" class="btn" th:href="@{/profile/viewclothing}" value="Delete clothing">
+                        <input type="submit" class="btn" th:href="@{/user/profile/viewclothing}" value="Delete clothing">
                     </form>
                 </div>
             </div>

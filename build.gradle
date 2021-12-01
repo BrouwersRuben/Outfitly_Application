@@ -23,6 +23,7 @@ dependencies {
     implementation 'org.webjars:bootstrap:5.1.2'
     implementation 'org.apache.httpcomponents:httpclient:4.5.13'
     implementation 'org.json:json:20210307'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 }
 
 test {

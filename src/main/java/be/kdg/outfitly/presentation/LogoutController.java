@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @RequestMapping("/logout")
-@SessionAttributes("user")
 public class LogoutController {
 
-    @GetMapping
-    public String logout(@ModelAttribute("user") User user){
-        user.setId(-1);
-        return "logout";
-    }
+//    @GetMapping
+//    public String logout(@ModelAttribute("user") User user){
+//        user.setId(-1);
+//        return "logout";
+//    }
 
 }

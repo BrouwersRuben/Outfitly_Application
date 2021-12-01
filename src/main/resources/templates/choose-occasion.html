@@ -15,7 +15,7 @@
 
     <h3 class="font-weight-bold text-center m-4">Choose your occasion</h3>
 
-    <form method="post">
+    <form method="post" th:action="@{/user/outfit}">
         <div class="mt-3 d-flex justify-content-center">
             <div class="form-check m-4" th:each="occasion : ${occasions}">
                 <input class="form-check-input" name="occasion" th:id="${occasion.name()}" th:value="${occasion.name()}"

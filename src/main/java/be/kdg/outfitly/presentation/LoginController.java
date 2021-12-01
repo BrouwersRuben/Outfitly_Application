@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/login")
-@SessionAttributes("user")
 public class LoginController {
     private final Logger logger = LoggerFactory.getLogger(LoginController.class);
     UserService userService;
@@ -67,11 +66,6 @@ public class LoginController {
         }
     }
 
-    @ModelAttribute("user")
-    public User user() {
-        User user = new User();
-        user.setId(-1);
-        return user;
-    }
+
 
 }

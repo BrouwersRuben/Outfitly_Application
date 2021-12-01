@@ -10,11 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 
 @Controller
-@RequestMapping("/mainpage")
-@SessionAttributes("user")
+@RequestMapping("/user/mainpage")
 public class MainPageController {
     private final Logger logger = LoggerFactory.getLogger(MainPageController.class);
     private final ArduinoSensorService arduinoSensorService;
@@ -29,7 +29,8 @@ public class MainPageController {
     }
 
     @GetMapping
-    public String ShowWeather(Model model, @ModelAttribute("user") User user){
+    public String ShowWeather(Model model, Principal principal){
+        User user = userService.findByEmail(principal.getName());
         model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
         model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));

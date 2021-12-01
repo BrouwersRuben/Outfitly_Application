@@ -9,14 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/addclothing")
-@SessionAttributes("user")
+@RequestMapping("/user/addclothing")
 public class AddClothingController {
     private final Logger logger = LoggerFactory.getLogger(AddClothingController.class);
     private UserService userService;
@@ -26,7 +26,9 @@ public class AddClothingController {
     }
 
     @GetMapping
-    public String addClothing(Model model, @ModelAttribute("user") User user){
+    public String addClothing(Model model, Principal principal){
+
+        User user = userService.findByEmail(principal.getName());
 
         model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
@@ -45,8 +47,9 @@ public class AddClothingController {
 
     //Automatically gets converted to enum
     @PostMapping
-    public String processClothing(@ModelAttribute("user") User user, String clothingName, ClothingItem.Material material, ClothingItem.RainProofness rainproofness, ClothingItem.Occasion occasion, ClothingItem.Weather weather, ClothingItem.Type type){
+    public String processClothing(Principal principal, String clothingName, ClothingItem.Material material, ClothingItem.RainProofness rainproofness, ClothingItem.Occasion occasion, ClothingItem.Weather weather, ClothingItem.Type type){
         logger.debug("User filled in clothing: " + clothingName);
+        User user = userService.findByEmail(principal.getName());
 
 
         ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type);
