@@ -4,6 +4,8 @@ import be.kdg.outfitly.util.ValidPassword;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class UserDTO {
 
@@ -15,16 +17,27 @@ public class UserDTO {
     @NotEmpty(message = "The password should be given.")
     private String password;
 
+    @NotEmpty(message = "Please fill in your first name.")
     private String firstName;
     private String middleName;
+    @NotEmpty(message = "Please fill in your last name.")
     private String lastName;
     //String --> 047/..
+    @NotEmpty(message = "Please fill in your phone number.")
+    @Pattern(regexp = "\d{10}", message="Please fill in a valid phone number.")
     private String phoneNumber;
+    @NotEmpty(message = "Please fill in your country.")
     private String country;
+    @NotEmpty(message ="Please fill in your city.")
     private String city;
+    @NotEmpty(message = "Please fill in a street name.")
     private String streetName;
+    @NotEmpty(message = "Please fill in a street number.")
     private int streetNumber;
+    //can be empty
     private String apartmentNumber;
+    @NotEmpty
+    @Size(max = 10, message = "Cannot be larger than 10 characters")
     private String zipcode;
 
     public String getEmail() {
