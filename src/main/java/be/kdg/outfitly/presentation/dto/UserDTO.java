@@ -18,7 +18,7 @@ public class UserDTO {
     private String password;
 
     @NotEmpty(message = "Please fill in your first name.")
-    @Size(max = 50)
+    @Size(max = 50, message = "")
     private String firstName;
     private String middleName;
     @NotEmpty(message = "Please fill in your last name.")
@@ -28,7 +28,7 @@ public class UserDTO {
     //String --> 047/..
     @NotEmpty(message = "Please fill in your phone number.")
     //10 digits
-    @Pattern(regexp = "^\\d{10}", message="Please fill in a valid phone number.")
+    @Size(min = 10, max = 50, message = "Phone number must be between 10 to 50 characters long.")
     private String phoneNumber;
     @NotEmpty(message = "Please fill in your country.")
     @Size(max = 56)
