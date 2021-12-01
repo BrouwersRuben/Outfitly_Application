@@ -49,6 +49,7 @@ public class ProfileController {
         logger.debug("User is trying to change their location. Their current location is: " + user.getCity());
         logger.debug("User: " + user);
         model.addAttribute("user", user);
+        model.addAttribute("locationDTO", new LocationDTO());
         return "changelocation";
     }
 
@@ -105,6 +106,7 @@ public class ProfileController {
     public String changeName(Model model, @ModelAttribute("user") User user){
         logger.debug(user.getFirstName() + " is trying to change their name");
         model.addAttribute("user", user);
+        model.addAttribute("nameDTO", new NameDTO());
         return "changename";
     }
 
@@ -125,6 +127,7 @@ public class ProfileController {
     public String changePhoneNumber(Model model, @ModelAttribute("user") User user){
         logger.debug(user.getFirstName() + " is trying to change their phonenumber. It's cs currently: " + user.getPhoneNumber());
         model.addAttribute("user", user);
+        model.addAttribute("phoneNumberDTO", new PhoneNumberDTO());
         return "changephonenumber";
     }
 
