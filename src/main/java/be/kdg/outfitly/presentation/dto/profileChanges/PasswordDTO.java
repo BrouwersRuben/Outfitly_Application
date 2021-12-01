@@ -5,15 +5,27 @@ import be.kdg.outfitly.util.ValidPassword;
 import javax.validation.constraints.NotEmpty;
 
 public class PasswordDTO {
+
+    @NotEmpty
+    private String currentPassword;
+
     @ValidPassword
     @NotEmpty()
-    private String password;
+    private String newPassword;
 
-    public String getPassword() {
-        return password;
+    public String getNewPassword() {
+        return newPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getCurrentPassword() {
+        return currentPassword;
+    }
+
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
     }
 }

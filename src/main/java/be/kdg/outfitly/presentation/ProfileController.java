@@ -5,6 +5,7 @@ import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.ClothingDTO;
 import be.kdg.outfitly.presentation.dto.UserDTO;
 import be.kdg.outfitly.presentation.dto.profileChanges.LocationDTO;
+import be.kdg.outfitly.presentation.dto.profileChanges.PasswordDTO;
 import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
@@ -66,13 +67,37 @@ public class ProfileController {
     }
 
     @GetMapping("/changepassword")
-    public String changePassword(@ModelAttribute("user") User user){
-        logger.debug("User: " + user.getPassword());
-        logger.debug(user.getFirstName() + " wants to change their password");
+    public String changePassword(Model model, @ModelAttribute("user") User user){
+        model.addAttribute("passwordDTO", new PasswordDTO());
+        model.addAttribute("loggedIn", user.getId() != -1);
+        model.addAttribute("user", user);
+//        logger.debug(user.getFirstName() + " wants to change their password");
         return "changepassword";
     }
 
     @PostMapping("/changepassword")
+    public String processChangePassword(Model model, @ModelAttribute("user") User user, @Valid @ModelAttribute("passwordDTO") PasswordDTO passwordDTO, BindingResult errors){
+        logger.debug("currentPassword: " + user.getPassword());
+        if (errors.hasErrors()){
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
+            return "changepassword";
+        } else {
+            logger.debug("currentPasswordDTO: " + passwordDTO.getCurrentPassword());
+            logger.debug("newPasswordDTO: " + passwordDTO.getNewPassword());
+            if(passwordDTO.getCurrentPassword().equals(user.getPassword())){
+//                logger.debug("User correctly wrote their password");
+                user.setPassword(passwordDTO.getCurrentPassword());
+                userService.update(user);
+                return "redirect:/profile";
+            }else{
+//                logger.debug("User didn't write their password correctly");
+                model.addAttribute("errorMessage", "This password is incorrect");
+                return "changepassword";
+            }
+        }
+    }
+
+/*    @PostMapping("/changepassword")
     public String processChangePassword(@ModelAttribute("user") User user, String verifyPassword, String newPassword){
         logger.debug("Verify password: " + verifyPassword + ", normal password: " + user.getPassword());
         logger.debug("New password: " + newPassword);
@@ -85,7 +110,7 @@ public class ProfileController {
             logger.debug("User didn't write their password correctly");
             return "changepassword";
         }
-    }
+    }*/
 
     @GetMapping("/changename")
     public String changeName(Model model, @ModelAttribute("user") User user){
