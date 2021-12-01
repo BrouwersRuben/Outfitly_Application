@@ -17,37 +17,45 @@
     </div>
 
     <div class="container">
+<!--        TODO: Keep the faulty input when there is an error-->
         <form method="post" class="m-4" th:object="${userDTO}">
             <div class="form-group m-4">
                 <label for="firstName">First Name</label>
                 <input type="text" class="form-control" id="firstName" placeholder="John" name="firstName">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">first name error</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputLastName">Last name</label>
-                <input type="text" class="form-control" id="inputLastName" placeholder="John" name="lastName">
+                <label for="lastName">Last name</label>
+                <input type="text" class="form-control" id="lastName" placeholder="John" name="lastName">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">last name error</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputPassword">Password</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputEmail">Email address</label>
-                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                <label for="email">Email address</label>
+                <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email error</div>
+                <div class="m-2 alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}">This email has already been used.</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputPhoneNumber">Phone Number</label>
-                <input type="text" class="form-control" id="inputPhoneNumber" placeholder="John" name="phoneNumber">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" class="form-control" id="phoneNumber" placeholder="John" name="phoneNumber">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phone number error</div>
             </div>
             <h2>Address:</h2>
             <div class="form-group m-4">
-                <label for="inputCountry">Country</label>
-                <input type="text" class="form-control" id="inputCountry" placeholder="Belgium" name="country">
+                <label for="country">Country</label>
+                <input type="text" class="form-control" id="country" placeholder="Belgium" name="country">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">country number error</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputCity">City</label>
-                <input type="text" class="form-control" id="inputCity" placeholder="Antwerp" name="city">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" placeholder="Antwerp" name="city">
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">city number error</div>
             </div>
             <div class="form-group m-4">
                 <label for="streetName">Street</label>
@@ -56,7 +64,7 @@
             </div>
             <div class="form-group m-4">
                 <label for="streetNumber">Street Number</label>
-                <input type="number" class="form-control" id="streetNumber" placeholder="5" name="streetNumber">
+                <input type="text" class="form-control" id="streetNumber" placeholder="5" name="streetNumber">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetNumber')}" th:errors="*{streetNumber}">Street Number Error</div>
             </div>
             <div class="form-group m-4">

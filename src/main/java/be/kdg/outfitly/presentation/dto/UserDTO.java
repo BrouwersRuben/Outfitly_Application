@@ -14,7 +14,7 @@ public class UserDTO {
     private String email;
 
     @ValidPassword
-    @NotEmpty(message = "The password should be given.")
+    @NotEmpty()
     private String password;
 
     @NotEmpty(message = "Please fill in your first name.")
@@ -41,7 +41,7 @@ public class UserDTO {
     private String streetName;
     @NotEmpty(message = "Please fill in a street number.")
     @Size(max = 10, message = "Street number cannot be larger than 10 characters.")
-    private int streetNumber;
+    private String streetNumber;
     //can be empty
     @Size(max = 10, message = "Apartment number cannot be larger than 10 characters.")
     private String apartmentNumber;
@@ -93,7 +93,7 @@ public class UserDTO {
         return streetName;
     }
 
-    public int getStreetNumber() {
+    public String getStreetNumber() {
         return streetNumber;
     }
 
@@ -133,7 +133,7 @@ public class UserDTO {
         this.streetName = streetName;
     }
 
-    public void setStreetNumber(int streetNumber) {
+    public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
 
