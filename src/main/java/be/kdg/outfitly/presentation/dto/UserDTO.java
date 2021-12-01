@@ -1,7 +1,18 @@
 package be.kdg.outfitly.presentation.dto;
 
+import be.kdg.outfitly.util.ValidPassword;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
 public class UserDTO {
+
+    @Email
+    @NotEmpty(message = "The email should be given.")
     private String email;
+
+    @ValidPassword
+    @NotEmpty(message = "The password should be given.")
     private String password;
 
     private String firstName;
