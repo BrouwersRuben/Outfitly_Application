@@ -3,14 +3,23 @@ package be.kdg.outfitly.presentation;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.ClothingDTO;
+import be.kdg.outfitly.presentation.dto.profileChanges.NameDTO;
+import be.kdg.outfitly.presentation.dto.profileChanges.PhoneNumberDTO;
+import be.kdg.outfitly.presentation.dto.UserDTO;
+import be.kdg.outfitly.presentation.dto.profileChanges.LocationDTO;
+import be.kdg.outfitly.presentation.dto.profileChanges.PasswordDTO;
 import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,39 +53,73 @@ public class ProfileController {
     }
 
     @PostMapping("/changelocation")
-    public String processChangedLocation(@ModelAttribute("user") User user, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode){
-        logger.debug(user.getFirstName() + " changed their city to " + city);
-        user.setCity(city);
-        user.setCountry(country);
-        user.setStreetName(streetName);
-        user.setStreetNumber(streetNumber);
-        user.setApartmentNumber(apartmentNumber);
-        user.setZipcode(zipcode);
-        userService.update(user);
-        return "redirect:/profile";
+    public String processChangedLocation(@ModelAttribute("user") User user, @Valid @ModelAttribute("locationDTO") LocationDTO locationDTO, BindingResult errors){
+        if (errors.hasErrors()){
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
+            return "changelocation";
+        } else {
+//            logger.debug(user.getFirstName() + " changed their city to " + city);
+            user.setCity(locationDTO.getCity());
+            user.setCountry(locationDTO.getCountry());
+            user.setStreetName(locationDTO.getStreetName());
+            user.setStreetNumber(locationDTO.getStreetNumber());
+            user.setApartmentNumber(locationDTO.getApartmentNumber());
+            user.setZipcode(locationDTO.getZipcode());
+            userService.update(user);
+            return "redirect:/profile";
+        }
     }
 
     @GetMapping("/changepassword")
-    public String changePassword(@ModelAttribute("user") User user){
-        logger.debug("User: " + user.getPassword());
-        logger.debug(user.getFirstName() + " wants to change their password");
+    public String changePassword(Model model, @ModelAttribute("user") User user){
+        model.addAttribute("passwordDTO", new PasswordDTO());
+        model.addAttribute("loggedIn", user.getId() != -1);
+        model.addAttribute("user", user);
+//        logger.debug(user.getFirstName() + " wants to change their password");
         return "changepassword";
     }
 
     @PostMapping("/changepassword")
-    public String processChangePassword(@ModelAttribute("user") User user, String verifyPassword, String newPassword){
-        logger.debug("Verify password: " + verifyPassword + ", normal password: " + user.getPassword());
-        logger.debug("New password: " + newPassword);
-        if(Objects.equals(verifyPassword, user.getPassword())){
-            logger.debug("User correctly wrote their password");
-            user.setPassword(newPassword);
-            userService.update(user);
-            return "redirect:/profile";
-        }else{
-            logger.debug("User didn't write their password correctly");
+    public String processChangePassword(Model model, @ModelAttribute("user") User user, @Valid @ModelAttribute("passwordDTO") PasswordDTO passwordDTO, BindingResult errors){
+        logger.debug("currentPassword: " + user.getPassword());
+        if (errors.hasErrors()){
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
             return "changepassword";
+        } else {
+            logger.debug("currentPasswordDTO: " + passwordDTO.getCurrentPassword());
+            logger.debug("newPasswordDTO: " + passwordDTO.getNewPassword());
+            if(passwordDTO.getCurrentPassword().equals(user.getPassword())){
+//                logger.debug("User correctly wrote their password");
+                user.setPassword(passwordDTO.getCurrentPassword());
+                userService.update(user);
+                return "redirect:/profile";
+            }else{
+//                logger.debug("User didn't write their password correctly");
+                model.addAttribute("errorMessage", "This password is incorrect");
+                return "changepassword";
+            }
         }
     }
+
+/*    @PostMapping("/changepassword")
+    public String processChangePassword(@ModelAttribute("user") User user, String verifyPassword, String newPassword, BindingResult errors){
+        if (errors.hasErrors()) {
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
+            return "changepassword";
+        }else{
+            logger.debug("Verify password: " + verifyPassword + ", normal password: " + user.getPassword());
+            logger.debug("New password: " + newPassword);
+            if(Objects.equals(verifyPassword, user.getPassword())){
+                logger.debug("User correctly wrote their password");
+                user.setPassword(newPassword);
+                userService.update(user);
+                return "redirect:/profile";
+            }else{
+                logger.debug("User didn't write their password correctly");
+                return "changepassword";
+            }
+        }
+    }*/
 
     @GetMapping("/changename")
     public String changeName(Model model, @ModelAttribute("user") User user){
@@ -86,11 +129,16 @@ public class ProfileController {
     }
 
     @PostMapping("/changename")
-    public String processChangeName(@ModelAttribute("user") User user, String firstName, String lastName){
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        userService.update(user);
-        return "redirect:/profile";
+    public String processChangeName(@ModelAttribute("user") User user, @Valid @ModelAttribute("nameDTO") NameDTO nameDTO, BindingResult errors){
+        if (errors.hasErrors()){
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
+            return "changename";
+        } else {
+            user.setFirstName(nameDTO.getFirstName());
+            user.setLastName(nameDTO.getLastName());
+            userService.update(user);
+            return "redirect:/profile";
+        }
     }
 
     @GetMapping("/changephonenumber")
@@ -101,12 +149,17 @@ public class ProfileController {
     }
 
     @PostMapping("/changephonenumber")
-    public String processChangePhoneNumber(@ModelAttribute("user") User user, String newPhoneNumber){
-        user.setPhoneNumber(newPhoneNumber);
-        logger.debug("New phone number: " + newPhoneNumber);
-        logger.debug("Succesfully changed " + user.getFirstName() + "'s phone number to: " + user.getPhoneNumber());
-        userService.update(user);
-        return "redirect:/profile";
+    public String processChangePhoneNumber(@ModelAttribute("user") User user, @Valid @ModelAttribute("phoneNumberDTO")PhoneNumberDTO phoneNumberDTO, BindingResult errors){
+        if (errors.hasErrors()){
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
+            return "changephonenumber";
+        } else {
+            user.setPhoneNumber(phoneNumberDTO.getNewPhoneNumber());
+            logger.debug("New phone number: " + phoneNumberDTO.getNewPhoneNumber());
+            logger.debug("Succesfully changed " + user.getFirstName() + "'s phone number to: " + user.getPhoneNumber());
+            userService.update(user);
+            return "redirect:/profile";
+        }
     }
 
     @GetMapping("/viewclothing")
