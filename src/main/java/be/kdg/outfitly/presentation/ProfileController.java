@@ -3,6 +3,8 @@ package be.kdg.outfitly.presentation;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.ClothingDTO;
+import be.kdg.outfitly.presentation.dto.profileChanges.NameDTO;
+import be.kdg.outfitly.presentation.dto.profileChanges.PhoneNumberDTO;
 import be.kdg.outfitly.presentation.dto.UserDTO;
 import be.kdg.outfitly.presentation.dto.profileChanges.LocationDTO;
 import be.kdg.outfitly.presentation.dto.profileChanges.PasswordDTO;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +45,9 @@ public class ProfileController {
 
     @GetMapping("/changelocation")
     public String changeLocation(Model model, @ModelAttribute("user") User user){
-        model.addAttribute("locationDTO", new LocationDTO());
         model.addAttribute("loggedIn", user.getId() != -1);
+        logger.debug("User is trying to change their location. Their current location is: " + user.getCity());
+        logger.debug("User: " + user);
         model.addAttribute("user", user);
         return "changelocation";
     }
@@ -98,17 +102,22 @@ public class ProfileController {
     }
 
 /*    @PostMapping("/changepassword")
-    public String processChangePassword(@ModelAttribute("user") User user, String verifyPassword, String newPassword){
-        logger.debug("Verify password: " + verifyPassword + ", normal password: " + user.getPassword());
-        logger.debug("New password: " + newPassword);
-        if(Objects.equals(verifyPassword, user.getPassword())){
-            logger.debug("User correctly wrote their password");
-            user.setPassword(newPassword);
-            userService.update(user);
-            return "redirect:/profile";
-        }else{
-            logger.debug("User didn't write their password correctly");
+    public String processChangePassword(@ModelAttribute("user") User user, String verifyPassword, String newPassword, BindingResult errors){
+        if (errors.hasErrors()) {
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
             return "changepassword";
+        }else{
+            logger.debug("Verify password: " + verifyPassword + ", normal password: " + user.getPassword());
+            logger.debug("New password: " + newPassword);
+            if(Objects.equals(verifyPassword, user.getPassword())){
+                logger.debug("User correctly wrote their password");
+                user.setPassword(newPassword);
+                userService.update(user);
+                return "redirect:/profile";
+            }else{
+                logger.debug("User didn't write their password correctly");
+                return "changepassword";
+            }
         }
     }*/
 
@@ -120,11 +129,16 @@ public class ProfileController {
     }
 
     @PostMapping("/changename")
-    public String processChangeName(@ModelAttribute("user") User user, String firstName, String lastName){
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        userService.update(user);
-        return "redirect:/profile";
+    public String processChangeName(@ModelAttribute("user") User user, @Valid @ModelAttribute("nameDTO") NameDTO nameDTO, BindingResult errors){
+        if (errors.hasErrors()){
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
+            return "changename";
+        } else {
+            user.setFirstName(nameDTO.getFirstName());
+            user.setLastName(nameDTO.getLastName());
+            userService.update(user);
+            return "redirect:/profile";
+        }
     }
 
     @GetMapping("/changephonenumber")
@@ -135,12 +149,17 @@ public class ProfileController {
     }
 
     @PostMapping("/changephonenumber")
-    public String processChangePhoneNumber(@ModelAttribute("user") User user, String newPhoneNumber){
-        user.setPhoneNumber(newPhoneNumber);
-        logger.debug("New phone number: " + newPhoneNumber);
-        logger.debug("Succesfully changed " + user.getFirstName() + "'s phone number to: " + user.getPhoneNumber());
-        userService.update(user);
-        return "redirect:/profile";
+    public String processChangePhoneNumber(@ModelAttribute("user") User user, @Valid @ModelAttribute("phoneNumberDTO")PhoneNumberDTO phoneNumberDTO, BindingResult errors){
+        if (errors.hasErrors()){
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
+            return "changephonenumber";
+        } else {
+            user.setPhoneNumber(phoneNumberDTO.getNewPhoneNumber());
+            logger.debug("New phone number: " + phoneNumberDTO.getNewPhoneNumber());
+            logger.debug("Succesfully changed " + user.getFirstName() + "'s phone number to: " + user.getPhoneNumber());
+            userService.update(user);
+            return "redirect:/profile";
+        }
     }
 
     @GetMapping("/viewclothing")

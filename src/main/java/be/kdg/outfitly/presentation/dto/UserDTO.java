@@ -18,11 +18,11 @@ public class UserDTO {
     private String password;
 
     @NotEmpty(message = "Please fill in your first name.")
-    @Size(max = 50, message = "")
+    @Size(max = 50, message = "First name cannot be larger than 50 characters.")
     private String firstName;
     private String middleName;
     @NotEmpty(message = "Please fill in your last name.")
-    @Size(max = 50)
+    @Size(max = 50, message = "Last name cannot be larger than 50 characters.")
     private String lastName;
 
     //String --> 047/..
