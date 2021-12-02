@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class WeatherForecastRepositoryImpl extends ListRepository<WeatherForecast> implements WeatherForecastRepository{
@@ -16,14 +18,4 @@ public class WeatherForecastRepositoryImpl extends ListRepository<WeatherForecas
         logger.debug("Creating Weather API repository");
     }
 
-    @Override
-    public WeatherForecast findByDate(LocalDateTime time) {
-        return weatherForecastRepository.read().stream().filter(weatherData -> weatherData.getTimeOfReading().equals(time)).findFirst().get();
-    }
-
-    @Override
-    public WeatherForecast findByCountryAndCity(String country, String city){
-        logger.debug("Find by country: "+country+" and city: "+city);
-        return weatherForecastRepository.read().stream().filter(weatherData -> weatherData.getCountry().equals(country) && weatherData.getCity().equals(city)).findFirst().get();
-    }
 }

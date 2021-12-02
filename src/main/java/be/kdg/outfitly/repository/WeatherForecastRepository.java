@@ -3,8 +3,8 @@ package be.kdg.outfitly.repository;
 import be.kdg.outfitly.domain.WeatherForecast;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface WeatherForecastRepository {
-    WeatherForecast findByDate(LocalDateTime time);
-    WeatherForecast findByCountryAndCity(String country, String city);
+    List<WeatherForecast> read();
 }
