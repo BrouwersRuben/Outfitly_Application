@@ -12,24 +12,53 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
 // TODO: This is only for the CURRENT weather forecast, we still need a separate class for future forecast I guess.
+@javax.persistence.Entity
+@Table(name = "current_weather_forecast")
 public class WeatherForecast extends Entity {
 
+    private static final Logger logger = LoggerFactory.getLogger(WeatherForecast.class);
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "forecast_timestamp", nullable = false)
     private LocalDateTime date;
+
+    //TODO: city + country --> location
+    @Column(name = "forecast_location", nullable = false)
     private String city;
+
     private String country;
+
+    @Column(name = "temperature", nullable = false)
     private double temperature;
-    private double feelsLikeTemperature;
-    private double lowestTemperature;
-    private double highestTemperature;
-    private double windSpeed;
+
+    @Column(name = "humidity", nullable = false)
     private int humidity;
+
+    @Column(name = "feels_like_temperature", nullable = false)
+    private double feelsLikeTemperature;
+
+    @Column(name = "lowest_temperature", nullable = false)
+    private double lowestTemperature;
+
+    @Column(name = "highest_temperature", nullable = false)
+    private double highestTemperature;
+
+    @Column(name = "wind_speed", nullable = false)
+    private double windSpeed;
+
+    @Column(name = "weather_description", nullable = false)
     private String weatherDescription;
 
-    private static final Logger logger = LoggerFactory.getLogger(WeatherForecast.class);
+    protected WeatherForecast() {
+    }
 
     public WeatherForecast(LocalDateTime date, String city, String country, double temperature, double feelsLikeTemperature, double lowestTemperature, double highestTemperature, double windSpeed, int humidity, String weatherDescription) {
         this.date = date;
@@ -42,9 +71,6 @@ public class WeatherForecast extends Entity {
         this.windSpeed = windSpeed;
         this.humidity = humidity;
         this.weatherDescription = weatherDescription;
-    }
-
-    public WeatherForecast() {
     }
 
     public static WeatherForecast currentForecastForCountryCity(String country, String city){

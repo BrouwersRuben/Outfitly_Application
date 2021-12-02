@@ -1,11 +1,11 @@
 package be.kdg.outfitly.service;
 
 import be.kdg.outfitly.domain.WeatherForecast;
-import be.kdg.outfitly.repository.WeatherForecastRepositoryImpl;
+import be.kdg.outfitly.repository.WeatherForecastRepository;
+import be.kdg.outfitly.repository.WeatherForecastRepositoryCollectionsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 @Service
 public class WeatherForecastServiceImpl implements WeatherForecastService {
     private final Logger logger = LoggerFactory.getLogger(WeatherForecastServiceImpl.class);
-    private final WeatherForecastRepositoryImpl weatherForecastRepository;
+    private final WeatherForecastRepository weatherForecastRepository;
 
     @Autowired
-    public WeatherForecastServiceImpl(WeatherForecastRepositoryImpl weatherForecastRepository) {
+    public WeatherForecastServiceImpl(WeatherForecastRepository weatherForecastRepository) {
         this.weatherForecastRepository = weatherForecastRepository;
     }
 

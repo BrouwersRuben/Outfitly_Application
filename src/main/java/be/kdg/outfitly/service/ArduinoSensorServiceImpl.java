@@ -1,11 +1,11 @@
 package be.kdg.outfitly.service;
 
 import be.kdg.outfitly.domain.ArduinoSensor;
-import be.kdg.outfitly.repository.ArduinoSensorRepositoryImpl;
+import be.kdg.outfitly.repository.ArduinoSensorRepository;
+import be.kdg.outfitly.repository.ArduinoSensorRepositoryCollectionsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 @Service
 public class ArduinoSensorServiceImpl implements ArduinoSensorService{
     private final Logger logger = LoggerFactory.getLogger(ArduinoSensorServiceImpl.class);
-    private final ArduinoSensorRepositoryImpl arduinoSensorRepository;
+    private final ArduinoSensorRepository arduinoSensorRepository;
 
     @Autowired
-    public ArduinoSensorServiceImpl(ArduinoSensorRepositoryImpl arduinoSensorRepository) {
+    public ArduinoSensorServiceImpl(ArduinoSensorRepository arduinoSensorRepository) {
         this.arduinoSensorRepository = arduinoSensorRepository;
     }
 

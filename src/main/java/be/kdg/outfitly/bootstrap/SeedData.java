@@ -4,28 +4,23 @@ import be.kdg.outfitly.domain.ArduinoSensor;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.domain.WeatherForecast;
-import be.kdg.outfitly.repository.ArduinoSensorRepositoryImpl;
-import be.kdg.outfitly.repository.ClothingRepository;
-import be.kdg.outfitly.repository.UserRepositoryImpl;
-import be.kdg.outfitly.repository.WeatherForecastRepositoryImpl;
+import be.kdg.outfitly.repository.*;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
-@Profile("JavaCollections")
-public class SeedDataCollections implements CommandLineRunner {
-    private final Logger logger = LoggerFactory.getLogger(SeedDataCollections.class);
-    private final ArduinoSensorRepositoryImpl arduinoSensorRepository;
-    private final UserRepositoryImpl userRepository;
+public class SeedData implements CommandLineRunner {
+    private final Logger logger = LoggerFactory.getLogger(SeedData.class);
+    private final ArduinoSensorRepository arduinoSensorRepository;
+    private final UserRepository userRepository;
     private final ClothingRepository clothingRepository;
-    private final WeatherForecastRepositoryImpl weatherForecastRepository;
+    private final WeatherForecastRepository weatherForecastRepository;
     private JSONObject weatherAPIData;
 //    private final String arduinoAPI = "http://192.168.184.187/data";
 
@@ -35,7 +30,8 @@ public class SeedDataCollections implements CommandLineRunner {
 //    private MainUserListRepository mainUserListRepository;
 //    private ClothingItem clothingItem;
 
-    public SeedDataCollections(ArduinoSensorRepositoryImpl arduinoSensorRepository, UserRepositoryImpl userRepository, ClothingRepository clothingRepository, WeatherForecastRepositoryImpl weatherForecastRepository) {
+
+    public SeedData(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository) {
         this.arduinoSensorRepository = arduinoSensorRepository;
         this.userRepository = userRepository;
         this.clothingRepository = clothingRepository;
@@ -44,7 +40,7 @@ public class SeedDataCollections implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        logger.debug("Seeding the repositories (Collections) ");
+        logger.debug("Seeding the repositories ");
         //TODO: Make this so that the location changes per user it loads.
 //        arduinoAPIData = retrieveAPIData(logger, arduinoAPI);
 
