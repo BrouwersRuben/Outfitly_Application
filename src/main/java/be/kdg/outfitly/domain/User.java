@@ -9,12 +9,12 @@ public class User extends Entity {
 
     private String email;
     private String password;
-
     private String firstName;
     private String lastName;
     //String --> 047/..
     private String phoneNumber;
     private String country;
+    private String countryCode;
     private String city;
     private String streetName;
     private String streetNumber;
@@ -28,13 +28,14 @@ public class User extends Entity {
     }
 
     //constructor for everything
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.country = country;
+        this.countryCode = countryCode;
         this.city = city;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
@@ -44,13 +45,14 @@ public class User extends Entity {
     }
 
     //Constructor for without apartmentNumber
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, String streetNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.country = country;
+        this.countryCode = countryCode;
         this.city = city;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
@@ -112,6 +114,10 @@ public class User extends Entity {
         return clothes;
     }
 
+    public String getCountryCode() {
+        return countryCode;
+    }
+
     //function to get first name and surname together
     public String getName(){
         return firstName + " " + lastName;
@@ -171,6 +177,12 @@ public class User extends Entity {
         this.apartmentNumber = apartmentNumber;
     }
 
+
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -180,9 +192,10 @@ public class User extends Entity {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", country='" + country + '\'' +
+                ", countryCode='" + countryCode + '\'' +
                 ", city='" + city + '\'' +
                 ", streetName='" + streetName + '\'' +
-                ", streetNumber=" + streetNumber +
+                ", streetNumber='" + streetNumber + '\'' +
                 ", apartmentNumber='" + apartmentNumber + '\'' +
                 ", zipcode='" + zipcode + '\'' +
                 ", clothes=" + clothes +

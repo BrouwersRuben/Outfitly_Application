@@ -27,7 +27,7 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
     @Override
     public WeatherForecast findByCountryAndCity(String country, String city){
         logger.debug("Find by country: "+country+" and city: "+city);
-        return weatherForecastRepository.read().stream().filter(weatherData -> weatherData.getCountry().equals(country) && weatherData.getCity().equals(city)).findFirst().get();
+        return weatherForecastRepository.read().stream().filter(weatherData -> weatherData.getCountryCode().equals(country) && weatherData.getCity().equals(city)).findFirst().get();
     }
 
 }

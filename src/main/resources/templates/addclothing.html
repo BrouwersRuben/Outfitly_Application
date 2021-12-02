@@ -13,7 +13,7 @@
     <div th:insert="~{fragments/header::header}">header</div>
 
     <div class="m-4">
-        <form method="post">
+        <form method="post" th:action="@{/user/addclothing}">
             <div class="d-flex justify-content-center">
                 <label for="clothingName">Clothing name</label>
             </div>

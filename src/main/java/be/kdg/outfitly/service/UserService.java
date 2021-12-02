@@ -9,7 +9,7 @@ public interface UserService {
 
     String getUsername(User user);
     User findBytId(int id);
-    User create(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode, List<ClothingItem> clothes);
+    User create(String email, String password, String firstName, String lastName, String phoneNumber, String country,String countryCode, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode, List<ClothingItem> clothes);
     User findByEmail(String email);
     List<User> read();
     void update(User updatedUser);

@@ -50,7 +50,7 @@ public class OutfitController {
 //        outfitSelector = new OutfitSelector(WeatherForecast.randomForecast(), user, occasion);
         User user = userService.findByEmail(principal.getName());
         logger.debug("User for the outfit: "+user.toString());
-        WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountry(), user.getCity());
+        WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity());
         logger.debug("Weather forecast from the API: " + weatherForecast);
         outfitSelector = new OutfitSelector(weatherForecast, user, occasion);
         model.addAttribute("clothes", outfitSelector.getSuitableClothesMap());

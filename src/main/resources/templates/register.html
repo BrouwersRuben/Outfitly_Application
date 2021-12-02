@@ -18,7 +18,7 @@
 
     <div class="container">
 <!--        TODO: Keep the faulty input when there is an error-->
-        <form method="post" class="m-4" th:object="${userDTO}">
+        <form method="post" class="m-4" th:object="${userDTO}" th:action="@{/register}">
             <div class="form-group m-4">
                 <label for="firstName">First Name</label>
                 <input type="text" class="form-control" id="firstName" placeholder="John" name="firstName">
@@ -52,10 +52,21 @@
                 <input type="text" class="form-control" id="country" placeholder="Belgium" name="country">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">country number error</div>
             </div>
+
+            <div class="form-group m-4">
+                <label for="countryCode">Country code</label>
+                <select class="form-control" id="countryCode" name="countryCode" >
+<!--                    <option th:each="country : ${countries}" th:text="${country.getValue()}" th:value="${country.getKey()}"></option>-->
+                    <option th:each="code : ${countryCodes}" th:text="${code}" th:value="${code}"></option>
+                </select>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('countryCode')}" th:errors="*{countryCode}">country code error</div>
+            </div>
+
             <div class="form-group m-4">
                 <label for="city">City</label>
                 <input type="text" class="form-control" id="city" placeholder="Antwerp" name="city">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">city number error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors().get(0)}">Invalid location error</div>
             </div>
             <div class="form-group m-4">
                 <label for="streetName">Street</label>

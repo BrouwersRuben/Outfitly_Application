@@ -2,12 +2,14 @@ package be.kdg.outfitly.presentation.dto;
 
 import be.kdg.outfitly.util.ValidPassword;
 
+import javax.validation.Constraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class UserDTO {
+@LocationValidation
+public class UserDTO implements Locatable {
 
     @Email
     @NotEmpty(message = "The email should be given.")
@@ -33,6 +35,11 @@ public class UserDTO {
     @NotEmpty(message = "Please fill in your country.")
     @Size(max = 56)
     private String country;
+
+    @NotEmpty(message = "Please fill in your country.")
+    @Size(min = 2, max = 2)
+    private String countryCode;
+
     @NotEmpty(message ="Please fill in your city.")
     @Size(max = 85, message = "City name cannot be larger than 85 characters.")
     private String city;
@@ -85,6 +92,10 @@ public class UserDTO {
         return country;
     }
 
+    public String getCountryCode() {
+        return countryCode;
+    }
+
     public String getCity() {
         return city;
     }
@@ -123,6 +134,10 @@ public class UserDTO {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public void setCity(String city) {

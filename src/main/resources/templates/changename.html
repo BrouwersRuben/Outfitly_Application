@@ -12,7 +12,7 @@
     <div th:insert="~{fragments/header::header}">header</div>
 
     <div class="d-flex justify-content-center align-content-center">
-        <form method="post" th:object="${nameDTO}">
+        <form method="post" th:object="${nameDTO}" th:action="@{/user/profile/changename}">
             <div class="form-group row">
                 <label for="firstName" class="float-start">Change your first name:</label>
                 <input type="text" name="firstName" id="firstName" th:value="${user.getFirstName()}" class="float-end m-1 w-50">

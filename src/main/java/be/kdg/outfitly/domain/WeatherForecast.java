@@ -20,7 +20,7 @@ public class WeatherForecast extends Entity {
 
     private LocalDateTime date;
     private String city;
-    private String country;
+    private String countryCode;
     private double temperature;
     private double feelsLikeTemperature;
     private double lowestTemperature;
@@ -31,10 +31,10 @@ public class WeatherForecast extends Entity {
 
     private static final Logger logger = LoggerFactory.getLogger(WeatherForecast.class);
 
-    public WeatherForecast(LocalDateTime date, String city, String country, double temperature, double feelsLikeTemperature, double lowestTemperature, double highestTemperature, double windSpeed, int humidity, String weatherDescription) {
+    public WeatherForecast(LocalDateTime date, String city, String countryCode, double temperature, double feelsLikeTemperature, double lowestTemperature, double highestTemperature, double windSpeed, int humidity, String weatherDescription) {
         this.date = date;
         this.city = city;
-        this.country = country;
+        this.countryCode = countryCode;
         this.temperature = temperature;
         this.feelsLikeTemperature = feelsLikeTemperature;
         this.lowestTemperature = lowestTemperature;
@@ -47,18 +47,18 @@ public class WeatherForecast extends Entity {
     public WeatherForecast() {
     }
 
-    public static WeatherForecast currentForecastForCountryCity(String country, String city){
+    public static WeatherForecast currentForecastForCountryCity(String countryCode, String city) {
         WeatherForecast wf = new WeatherForecast();
         JSONObject weatherAPIData;
         try {
-            weatherAPIData = retrieveAPIData(city + "," + country);
-        }catch (Exception e){
+            weatherAPIData = retrieveAPIData(city + "," + countryCode);
+        } catch (Exception e) {
             logger.error("An error occurred while data was being retrieved from the API.");
             return null;
         }
 
         wf.setDate(LocalDateTime.now());
-        wf.setCountry(country);
+        wf.setCountryCode(countryCode);
         wf.setCity(city);
         wf.setTemperature(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp"))));
         wf.setFeelsLikeTemperature(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("feels_like"))));
@@ -73,9 +73,8 @@ public class WeatherForecast extends Entity {
         return wf;
     }
 
-    private static JSONObject retrieveAPIData(String location) throws Exception{
+    private static JSONObject retrieveAPIData(String location) throws Exception {
         String APILink = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c";
-        // TODO: Reload api on refresh
         URIBuilder builder = new URIBuilder(APILink);
         HttpGet get = new HttpGet(builder.build());
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -94,7 +93,7 @@ public class WeatherForecast extends Entity {
                 json = new JSONObject(rawResult);
             }
 
-            if (json ==null) {
+            if (json == null) {
                 logger.error("No weather forecast data retrieved!");
             } else {
                 logger.debug("Forecast data successfully retrieved!");
@@ -102,6 +101,34 @@ public class WeatherForecast extends Entity {
         }
         return json;
     }
+
+
+    public static boolean isValidCountryCity(String countryCode, String city) {
+        return isValidLocation(city+","+countryCode);
+    }
+
+    public static boolean isValidLocation(String location){
+
+        if(location.length() <= 3){
+            logger.debug("Invalid location. City not chosen. - " + location);
+            return false;
+        }
+
+        JSONObject weatherAPIData;
+        try {
+            weatherAPIData = retrieveAPIData(location);
+        } catch (Exception e) {
+            logger.error("An error occurred while data was being retrieved from the API.");
+            return false;
+        }
+        boolean valid = !weatherAPIData.get("cod").equals("404");
+
+
+        logger.debug("Location: " + location + " is "+ (valid? "" :"not")+ " valid.");
+
+        return valid;
+    }
+
 
     // Note: I can retrieve any info from the API, though retrieving some data might be tricky due to the fact that we're using a trial version.
     // https://openweathermap.org/api
@@ -116,8 +143,8 @@ public class WeatherForecast extends Entity {
         return city;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCountryCode() {
+        return countryCode;
     }
 
     public double getTemperature() {
@@ -160,8 +187,8 @@ public class WeatherForecast extends Entity {
         this.city = city;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public void setTemperature(double temperature) {
@@ -203,7 +230,7 @@ public class WeatherForecast extends Entity {
         return "WeatherForecast{" +
                 "date=" + date +
                 ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
+                ", countryCode='" + countryCode + '\'' +
                 ", temperature=" + temperature +
                 ", feelsLikeTemperature=" + feelsLikeTemperature +
                 ", lowestTemperature=" + lowestTemperature +

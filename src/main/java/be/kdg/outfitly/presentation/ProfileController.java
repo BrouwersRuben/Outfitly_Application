@@ -23,6 +23,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 @Controller
@@ -47,26 +48,28 @@ public class ProfileController {
     }
 
     @GetMapping("/changelocation")
-    public String changeLocation(Model model, Principal principal){
+    public String changeLocation(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("loggedIn", user.getId() != -1);
         logger.debug("User is trying to change their location. Their current location is: " + user.getCity());
         logger.debug("User: " + user);
         model.addAttribute("user", user);
+        model.addAttribute("codes", Locale.getISOCountries());
         model.addAttribute("locationDTO", new LocationDTO());
         return "changelocation";
     }
 
     @PostMapping("/changelocation")
-    public String processChangedLocation(Principal principal, @Valid @ModelAttribute("locationDTO") LocationDTO locationDTO, BindingResult errors){
+    public String processChangedLocation(Principal principal, @Valid @ModelAttribute("locationDTO") LocationDTO locationDTO, BindingResult errors) {
         User user = userService.findByEmail(principal.getName());
-        if (errors.hasErrors()){
+        if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
             return "changelocation";
         } else {
 //            logger.debug(user.getFirstName() + " changed their city to " + city);
             user.setCity(locationDTO.getCity());
             user.setCountry(locationDTO.getCountry());
+            user.setCountryCode(locationDTO.getCountryCode());
             user.setStreetName(locationDTO.getStreetName());
             user.setStreetNumber(locationDTO.getStreetNumber());
             user.setApartmentNumber(locationDTO.getApartmentNumber());
@@ -77,7 +80,7 @@ public class ProfileController {
     }
 
     @GetMapping("/changepassword")
-    public String changePassword(Model model, Principal principal){
+    public String changePassword(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("passwordDTO", new PasswordDTO());
         model.addAttribute("loggedIn", user.getId() != -1);
@@ -87,21 +90,21 @@ public class ProfileController {
     }
 
     @PostMapping("/changepassword")
-    public String processChangePassword(Model model, Principal principal, @Valid @ModelAttribute("passwordDTO") PasswordDTO passwordDTO, BindingResult errors){
+    public String processChangePassword(Model model, Principal principal, @Valid @ModelAttribute("passwordDTO") PasswordDTO passwordDTO, BindingResult errors) {
         User user = userService.findByEmail(principal.getName());
         logger.debug("currentPassword: " + user.getPassword());
-        if (errors.hasErrors()){
+        if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
             return "changepassword";
         } else {
             logger.debug("currentPasswordDTO: " + passwordDTO.getCurrentPassword());
             logger.debug("newPasswordDTO: " + passwordDTO.getNewPassword());
-            if(passwordDTO.getCurrentPassword().equals(user.getPassword())){
+            if (passwordDTO.getCurrentPassword().equals(user.getPassword())) {
 //                logger.debug("User correctly wrote their password");
                 user.setPassword(passwordDTO.getCurrentPassword());
                 userService.update(user);
                 return "redirect:/profile";
-            }else{
+            } else {
 //                logger.debug("User didn't write their password correctly");
                 model.addAttribute("errorMessage", "This password is incorrect");
                 return "changepassword";
@@ -110,7 +113,7 @@ public class ProfileController {
     }
 
     @GetMapping("/changename")
-    public String changeName(Model model, Principal principal){
+    public String changeName(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
         logger.debug(user.getFirstName() + " is trying to change their name");
         model.addAttribute("user", user);
@@ -119,9 +122,9 @@ public class ProfileController {
     }
 
     @PostMapping("/changename")
-    public String processChangeName(Principal principal, @Valid @ModelAttribute("nameDTO") NameDTO nameDTO, BindingResult errors){
+    public String processChangeName(Principal principal, @Valid @ModelAttribute("nameDTO") NameDTO nameDTO, BindingResult errors) {
         User user = userService.findByEmail(principal.getName());
-        if (errors.hasErrors()){
+        if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
             return "changename";
         } else {
@@ -133,7 +136,7 @@ public class ProfileController {
     }
 
     @GetMapping("/changephonenumber")
-    public String changePhoneNumber(Model model, Principal principal){
+    public String changePhoneNumber(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
         logger.debug(user.getFirstName() + " is trying to change their phonenumber. It's cs currently: " + user.getPhoneNumber());
         model.addAttribute("user", user);
@@ -142,9 +145,9 @@ public class ProfileController {
     }
 
     @PostMapping("/changephonenumber")
-    public String processChangePhoneNumber(Principal principal, @Valid @ModelAttribute("phoneNumberDTO")PhoneNumberDTO phoneNumberDTO, BindingResult errors){
+    public String processChangePhoneNumber(Principal principal, @Valid @ModelAttribute("phoneNumberDTO") PhoneNumberDTO phoneNumberDTO, BindingResult errors) {
         User user = userService.findByEmail(principal.getName());
-        if (errors.hasErrors()){
+        if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
             return "changephonenumber";
         } else {
@@ -157,20 +160,21 @@ public class ProfileController {
     }
 
     @GetMapping("/viewclothing")
-    public String viewClothing(Model model, Principal principal){
+    public String viewClothing(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
         return "viewclothing";
     }
 
     @PostMapping("/viewclothing")
-    public String processRemoveClothing(@ModelAttribute("clothingDTO") ClothingDTO clothingDTO, Principal principal){
+    public String processRemoveClothing(@ModelAttribute("clothingDTO") ClothingDTO clothingDTO, Principal principal, Model model) {
         User user = userService.findByEmail(principal.getName());
         logger.warn(clothingDTO.toString());
         clothingService.delete(clothingDTO.getID());
         List<ClothingItem> newClothingList = clothingService.read();
         user.setClothes(newClothingList);
         userService.update(user);
+        model.addAttribute("user", user);
         return "viewclothing";
     }
 }

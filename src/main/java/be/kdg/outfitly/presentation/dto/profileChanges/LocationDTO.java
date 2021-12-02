@@ -1,13 +1,22 @@
 package be.kdg.outfitly.presentation.dto.profileChanges;
 
+import be.kdg.outfitly.presentation.dto.Locatable;
+import be.kdg.outfitly.presentation.dto.LocationValidation;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-public class LocationDTO {
+@LocationValidation
+public class LocationDTO implements Locatable {
 
     @NotEmpty(message = "Please fill in your country.")
     @Size(max = 56)
     private String country;
+
+    @NotEmpty(message = "Please select your country code.")
+    @Size(max = 2, min = 2)
+    private String countryCode;
+
     @NotEmpty(message ="Please fill in your city.")
     @Size(max = 85, message = "City name cannot be larger than 85 characters.")
     private String city;
@@ -70,5 +79,13 @@ public class LocationDTO {
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 }

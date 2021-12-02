@@ -64,6 +64,6 @@ public class AddClothingController {
         logger.debug(user.getName() + " Added a new clothing item: " + newClothingItem);
 
         user.setClothes(userClothing);
-        return "redirect:/mainpage";
+        return "redirect:/user/mainpage";
     }
 }
