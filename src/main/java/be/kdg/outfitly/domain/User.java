@@ -184,7 +184,7 @@ public class User extends Entity {
         this.clothes = clothes;
     }
 
-    public void setClothingItem(ClothingItem clothingItem) {
+    public void addClothingItem(ClothingItem clothingItem) {
         this.clothes.add(clothingItem);
     }
 
