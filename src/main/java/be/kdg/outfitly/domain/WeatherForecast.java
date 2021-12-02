@@ -28,10 +28,12 @@ public class WeatherForecast extends Entity {
     private double windSpeed;
     private int humidity;
     private String weatherDescription;
+    private double latitude;
+    private double longitude;
 
     private static final Logger logger = LoggerFactory.getLogger(WeatherForecast.class);
 
-    public WeatherForecast(LocalDateTime date, String city, String countryCode, double temperature, double feelsLikeTemperature, double lowestTemperature, double highestTemperature, double windSpeed, int humidity, String weatherDescription) {
+    public WeatherForecast(LocalDateTime date, String city, String countryCode, double temperature, double feelsLikeTemperature, double lowestTemperature, double highestTemperature, double windSpeed, int humidity, String weatherDescription, double latitude, double longitude) {
         this.date = date;
         this.city = city;
         this.countryCode = countryCode;
@@ -42,6 +44,8 @@ public class WeatherForecast extends Entity {
         this.windSpeed = windSpeed;
         this.humidity = humidity;
         this.weatherDescription = weatherDescription;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public WeatherForecast() {
@@ -67,7 +71,8 @@ public class WeatherForecast extends Entity {
         wf.setWindSpeed(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("wind").get("speed"))));
         wf.setHumidity(Integer.parseInt(String.valueOf(weatherAPIData.getJSONObject("main").get("humidity"))));
         wf.setWeatherDescription(String.valueOf(weatherAPIData.getJSONArray("weather").getJSONObject(0).get("main")));
-
+        wf.setLatitude(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("coord").get("lat"))));
+        wf.setLongitude(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("coord").get("lon"))));
         logger.debug("Weather forecast object created: ");
 
         return wf;
@@ -217,6 +222,22 @@ public class WeatherForecast extends Entity {
 
     public void setWeatherDescription(String weatherDescription) {
         this.weatherDescription = weatherDescription;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     // https://openweathermap.org/weather-conditions

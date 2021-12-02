@@ -91,7 +91,7 @@ public class SeedData implements CommandLineRunner {
 //                        new ClothingItem("Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD,ClothingItem.Occasion.UNIVERSAL,ClothingItem.Weather.UNIVERSAL),
 //                        new ClothingItem("T-Shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.WARM),
 //                        new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL)));
-//        user2.setCountryCode("ES");
+
 
         ClothingItem clothingItem15 = new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL, ClothingItem.Occasion.CASUAL, ClothingItem.Weather.MILD);
         ClothingItem clothingItem16 = new ClothingItem("Hoodie", ClothingItem.Material.SYNTHETIC, ClothingItem.RainProofness.NORMAL, ClothingItem.Occasion.CASUAL, ClothingItem.Weather.COLD);
@@ -113,20 +113,6 @@ public class SeedData implements CommandLineRunner {
 //                LocalDateTime.parse(String.valueOf(arduinoAPIData.get("DateTime"))))                ;
 
         arduinoSensorRepository.create(arduinoSensor);
-
-        // Weather API
-//        WeatherForecast forecast = new WeatherForecast(
-//                LocalDateTime.of(2021, 10, 29, 12, 30, 30),
-//                String.valueOf(weatherAPIData.get("name")),
-//                String.valueOf(weatherAPIData.getJSONObject("sys").get("country")),
-//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp"))),
-//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("feels_like"))),
-//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_min"))),
-//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_max"))),
-//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("wind").get("speed"))),
-//                Integer.parseInt(String.valueOf(weatherAPIData.getJSONObject("main").get("humidity"))),
-//                String.valueOf(weatherAPIData.getJSONArray("weather").getJSONObject(0).get("main"))
-//        );
 
         WeatherForecast forecast = WeatherForecast.currentForecastForCountryCity(user1.getCountryCode(), user1.getCity());
         if (forecast != null) weatherForecastRepository.create(forecast);
