@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@3.6.1/dist/chart.min.js"></script>
+    <script type="text/javascript" th:src="@{/daily-weather.js}"></script>
+</head>
+<body class="m-4">
+
+<div th:insert="~{fragments/navbarLoggedIn::navbarLoggedIn}">navbarLoggedIn</div>
+
+<div th:insert="~{fragments/header::header}">header</div>
+
+<div class="d-flex flex-column m-5" style="max-height: 100vh">
+
+    <h2 class="">Hello, <span th:text="${username}"></span></h2>
+
+    <input type="hidden" id="latitude" th:value="${weatherForecastData.latitude}"/>
+    <input type="hidden" id="longitude" th:value="${weatherForecastData.longitude}"/>
+
+    <div class="d-flex flex-row">
+
+        <div class='d-flex justify-content-center flex-column w-50'>
+            <div>
+                <p>The current forecast for today in <span th:text="${city}"></span> is <span id="description"></span>.</p>
+                <p>The forecast for today shows a high of <span id="maxTemperature"></span>°C and a low of <span id="minTemperature"></span>°C.</p>
+                <p>There is a <span id="rainProbability"></span>% chance of rain today.</p>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-center w-50">
+            <div><img id="weatherIcon" style="width: auto; height: auto" src="" alt="weather-icon" class="img-fluid"></div>
+            <div class="justify-content-center d-flex flex-column w-50">
+                <div>Current temperature: <span id="currentTemperature"></span>°C</div>
+                <div>Humidity: <span id="currentHumidity"></span>%</div>
+                <div>Wind: <span id="currentWindSpeed"></span>m/s</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="alerts">
+        <div><h2 id="warning"></h2></div>
+        <div id="weatherAlerts" class="d-flex flex-column"></div>
+    </div>
+
+    <div class="mt-4">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="m-4">
+        <a class="btn btn-outline-dark" th:href="@{/user/outfit}">View suggested clothing</a>
+    </div>
+<!--    <div class="m-4">-->
+<!--        <a class="btn btn-outline-dark" th:href="@{/...}">View weekly broadcast</a>-->
+<!--    </div>-->
+</div>
+
+<div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+</body>
+</html>

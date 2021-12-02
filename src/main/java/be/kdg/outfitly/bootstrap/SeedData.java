@@ -114,20 +114,6 @@ public class SeedData implements CommandLineRunner {
 
         arduinoSensorRepository.create(arduinoSensor);
 
-        // Weather API
-//        WeatherForecast forecast = new WeatherForecast(
-//                LocalDateTime.of(2021, 10, 29, 12, 30, 30),
-//                String.valueOf(weatherAPIData.get("name")),
-//                String.valueOf(weatherAPIData.getJSONObject("sys").get("country")),
-//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp"))),
-//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("feels_like"))),
-//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_min"))),
-//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_max"))),
-//                Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("wind").get("speed"))),
-//                Integer.parseInt(String.valueOf(weatherAPIData.getJSONObject("main").get("humidity"))),
-//                String.valueOf(weatherAPIData.getJSONArray("weather").getJSONObject(0).get("main"))
-//        );
-
         WeatherForecast forecast = WeatherForecast.currentForecastForCountryCity("Belgium", "Antwerp");
         if (forecast != null) weatherForecastRepository.create(forecast);
         WeatherForecast forecast2 = WeatherForecast.currentForecastForCountryCity("Spain", "Barcelona");
