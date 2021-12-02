@@ -114,13 +114,6 @@ public class ClothingItem extends Entity {
     }
 
     // TODO: Why are there 2 constructors here?
-    public ClothingItem(String name, Material material, RainProofness rainProofness, Occasion occasion, Weather weather) {
-        this.name = name;
-        this.material = material;
-        this.rainProofness = rainProofness;
-        this.occasion = occasion;
-        this.weather = weather;
-    }
 
     public ClothingItem(String name, Material material, RainProofness rainProofness, Occasion occasion, Weather weather, Type type) {
         this.name = name;
