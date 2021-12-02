@@ -63,7 +63,7 @@ public class ClothingRepositoryHSQLImpl implements ClothingRepository{
         logger.debug("(HSQL) Removed clothing item: " + clothingItem.toString());
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
-        em.remove(clothingItem);
+        em.remove(em.contains(clothingItem) ? clothingItem : em.merge(clothingItem));
         em.getTransaction().commit();
         em.close();
     }

@@ -47,7 +47,7 @@ public class User extends Entity {
     @Column(name = "zip_code", nullable = false, length = 10)
     private String zipcode;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private List<ClothingItem> clothes;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -93,8 +93,22 @@ public class User extends Entity {
         clothes.add(clothingItem);
     }
 
-    // Getters
+//    public User merge(User other){
+//        setEmail(other.getEmail());
+//        setPassword(other.getPassword());
+//        setFirstName(other.getFirstName());
+//        setLastName(other.getLastName());
+//        setPhoneNumber(other.getPhoneNumber());
+//        setCountry(other.getCountry());
+//        setCity(other.getCity());
+//        setStreetName(other.getStreetName());
+//        setStreetNumber(other.getStreetNumber());
+//        setZipcode(other.getZipcode());
+//        setClothes(other.getClothes());
+//        return other;
+//    }
 
+    // Getters
     @Override
     public int getId() {
         return id;
