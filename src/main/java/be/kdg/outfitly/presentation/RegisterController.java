@@ -1,9 +1,7 @@
 package be.kdg.outfitly.presentation;
 
-import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.UserDTO;
-import be.kdg.outfitly.repository.UserRepository;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

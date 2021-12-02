@@ -55,7 +55,7 @@ public class AddClothingController {
         //or addClothing method inside of User
         List<ClothingItem> userClothing = new ArrayList<>(user.getClothes());
         userClothing.add(newClothingItem);
-        User userFromRepository = userService.findBytId(user.getId());
+        User userFromRepository = userService.findById(user.getId());
         userFromRepository.setClothes(userClothing);
 
         logger.debug(user.getName() + " Added a new clothing item: " + newClothingItem);

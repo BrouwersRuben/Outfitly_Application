@@ -4,10 +4,10 @@ import be.kdg.outfitly.domain.ArduinoSensor;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.domain.WeatherForecast;
-import be.kdg.outfitly.repository.ArduinoSensorRepository;
+import be.kdg.outfitly.repository.ArduinoSensorRepositoryImpl;
 import be.kdg.outfitly.repository.ClothingRepository;
-import be.kdg.outfitly.repository.UserRepository;
-import be.kdg.outfitly.repository.WeatherForecastRepository;
+import be.kdg.outfitly.repository.UserRepositoryImpl;
+import be.kdg.outfitly.repository.WeatherForecastRepositoryImpl;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +22,10 @@ import java.util.List;
 @Profile("JavaCollections")
 public class SeedDataCollections implements CommandLineRunner {
     private final Logger logger = LoggerFactory.getLogger(SeedDataCollections.class);
-    private final ArduinoSensorRepository arduinoSensorRepository;
-    private final UserRepository userRepository;
+    private final ArduinoSensorRepositoryImpl arduinoSensorRepository;
+    private final UserRepositoryImpl userRepository;
     private final ClothingRepository clothingRepository;
-    private final WeatherForecastRepository weatherForecastRepository;
+    private final WeatherForecastRepositoryImpl weatherForecastRepository;
     private JSONObject weatherAPIData;
 //    private final String arduinoAPI = "http://192.168.184.187/data";
 
@@ -35,7 +35,7 @@ public class SeedDataCollections implements CommandLineRunner {
 //    private MainUserListRepository mainUserListRepository;
 //    private ClothingItem clothingItem;
 
-    public SeedDataCollections(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository) {
+    public SeedDataCollections(ArduinoSensorRepositoryImpl arduinoSensorRepository, UserRepositoryImpl userRepository, ClothingRepository clothingRepository, WeatherForecastRepositoryImpl weatherForecastRepository) {
         this.arduinoSensorRepository = arduinoSensorRepository;
         this.userRepository = userRepository;
         this.clothingRepository = clothingRepository;

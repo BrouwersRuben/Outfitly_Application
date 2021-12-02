@@ -3,21 +3,22 @@ package be.kdg.outfitly.service;
 
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
-import be.kdg.outfitly.repository.UserRepository;
+import be.kdg.outfitly.repository.UserRepositoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class UserServiceImpl implements UserService{
     private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-    private final UserRepository userRepository;
+    private final UserRepositoryImpl userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepositoryImpl userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User findBytId(int id) {
+    public User findById(int id) {
         return userRepository.findById(id);
     }
 
