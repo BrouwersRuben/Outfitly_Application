@@ -1,13 +1,7 @@
 package be.kdg.outfitly.bootstrap;
 
-import be.kdg.outfitly.domain.ArduinoSensor;
-import be.kdg.outfitly.domain.ClothingItem;
-import be.kdg.outfitly.domain.User;
-import be.kdg.outfitly.domain.WeatherForecast;
-import be.kdg.outfitly.repository.ArduinoSensorRepository;
-import be.kdg.outfitly.repository.ClothingRepository;
-import be.kdg.outfitly.repository.UserRepository;
-import be.kdg.outfitly.repository.WeatherForecastRepository;
+import be.kdg.outfitly.domain.*;
+import be.kdg.outfitly.repository.*;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +20,7 @@ public class SeedData implements CommandLineRunner {
     private final UserRepository userRepository;
     private final ClothingRepository clothingRepository;
     private final WeatherForecastRepository weatherForecastRepository;
+    private final DailyWeatherForecastRepository dailyWeatherForecastRepository;
     private JSONObject weatherAPIData;
 //    private final String arduinoAPI = "http://192.168.184.187/data";
 
@@ -35,11 +30,12 @@ public class SeedData implements CommandLineRunner {
 //    private MainUserListRepository mainUserListRepository;
 //    private ClothingItem clothingItem;
 
-    public SeedData(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository) {
+    public SeedData(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository, DailyWeatherForecastRepository dailyWeatherForecastRepository) {
         this.arduinoSensorRepository = arduinoSensorRepository;
         this.userRepository = userRepository;
         this.clothingRepository = clothingRepository;
         this.weatherForecastRepository = weatherForecastRepository;
+        this.dailyWeatherForecastRepository = dailyWeatherForecastRepository;
     }
 
     @Override
@@ -116,8 +112,8 @@ public class SeedData implements CommandLineRunner {
 
         WeatherForecast forecast = WeatherForecast.currentForecastForCountryCity(user1.getCountryCode(), user1.getCity());
         if (forecast != null) weatherForecastRepository.create(forecast);
-        WeatherForecast forecast2 = WeatherForecast.currentForecastForCountryCity(user2.getCountryCode(), user2.getCity());
-        if (forecast2 != null) weatherForecastRepository.create(forecast2);
+        DailyWeatherForecast forecast2 = DailyWeatherForecast.dailyForecast(user1.getCountryCode(), user1.getCity(), forecast.getLatitude(), forecast.getLongitude());
+        if (forecast2 != null) dailyWeatherForecastRepository.create(forecast2);
 
         // Slave and master accounts may be a bit easier to understand
     }

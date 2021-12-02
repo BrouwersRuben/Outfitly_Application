@@ -6,7 +6,72 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@3.6.1/dist/chart.min.js"></script>
-    <script type="text/javascript" th:src="@{/daily-weather.js}"></script>
+    <script th:inline="javascript" th:type="module">
+        let valueCount = 10;
+        let temperatureArray = [[${dailyWeatherForecastData.getDailyTemperatures}]].slice(0, valueCount);
+        let timestampArray = [[${dailyWeatherForecastData.getDailyTemperatureTimestamps}]];
+        let weatherAlertArray = [[${dailyWeatherForecastData.getWeatherAlerts}]];
+        let weatherAlertTimestampArray = [[${dailyWeatherForecastData.getWeatherAlertTimestamps}]];
+        let timeArray = [];
+        console.log(temperatureArray);
+
+        for (let i = 0; i < valueCount * 2; i+=2) {
+            let date = new Date(timestampArray[i] * 1000);
+            let hours = date.getHours();
+            let minutes = '0'+date.getMinutes();
+
+            timeArray.push(hours+':'+minutes.substr(-2));
+        }
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx,  {
+            type: 'line',
+            data: {
+                labels: timeArray,
+                datasets: [{
+                    data: temperatureArray,
+                    borderColor: '#3e95cd',
+                    fill: true,
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        function unixTimeConverter(timestamp) {
+            let time = new Date(timestamp * 1000);
+            let year = time.getFullYear();
+            let month = time.getMonth();
+            let date = time.getDate();
+            let hour = time.getHours();
+            let min = time.getMinutes();
+            let sec = time.getSeconds();
+            return year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec;
+        }
+
+        if (weatherAlertArray.length != 0) {
+                    document.getElementById('warning').innerText = 'Weather warnings for today.';
+                    document.getElementById('alerts').className = 'd-flex flex-column justify-content-center alert alert-warning';
+
+                    for (let i = 0; i < weatherAlertArray.length; i++) {
+                        let type1 = document.createElement('span');
+                        let type2 = document.createElement('span');
+                        let text1 = document.createTextNode('\n[' + unixTimeConverter(weatherAlertTimestampArray[i]) + ']');
+                        let text2 = document.createTextNode(weatherAlertArray[i]);
+                        type1.appendChild(text1);
+                        type2.appendChild(text2);
+                        document.getElementById('weatherAlerts').appendChild(type1);
+                        document.getElementById('weatherAlerts').appendChild(type2);
+                    }
+                }
+    </script>
 </head>
 <body class="m-4">
 
@@ -18,25 +83,22 @@
 
     <h2 class="">Hello, <span th:text="${username}"></span></h2>
 
-    <input type="hidden" id="latitude" th:value="${weatherForecastData.latitude}"/>
-    <input type="hidden" id="longitude" th:value="${weatherForecastData.longitude}"/>
-
     <div class="d-flex flex-row">
 
         <div class='d-flex justify-content-center flex-column w-50'>
             <div>
-                <p>The current forecast for today in <span th:text="${city}"></span> is <span id="description"></span>.</p>
-                <p>The forecast for today shows a high of <span id="maxTemperature"></span>°C and a low of <span id="minTemperature"></span>°C.</p>
-                <p>There is a <span id="rainProbability"></span>% chance of rain today.</p>
+                <p>The current forecast for today in <span th:text="${city}"></span> is <span th:text="${dailyWeatherForecastData.getDescription}"></span>.</p>
+                <p>The forecast for today shows a high of <span th:text="${dailyWeatherForecastData.getMaxTemperature}"></span>°C and a low of <span th:text="${dailyWeatherForecastData.getMinTemperature}"></span>°C.</p>
+                <p>There is a <span th:text="${dailyWeatherForecastData.getRainProbability}"></span>% chance of rain today.</p>
             </div>
         </div>
 
         <div class="d-flex flex-row justify-content-center w-50">
-            <div><img id="weatherIcon" style="width: auto; height: auto" src="" alt="weather-icon" class="img-fluid"></div>
+            <div><img th:src="${dailyWeatherForecastData.getWeatherIcon()}" alt="weather-icon" class="img-fluid"></div>
             <div class="justify-content-center d-flex flex-column w-50">
-                <div>Current temperature: <span id="currentTemperature"></span>°C</div>
-                <div>Humidity: <span id="currentHumidity"></span>%</div>
-                <div>Wind: <span id="currentWindSpeed"></span>m/s</div>
+                <div>Current temperature: <span th:text="${dailyWeatherForecastData.getCurrentTemperature}"></span>°C</div>
+                <div>Humidity: <span th:text="${dailyWeatherForecastData.getCurrentHumidity}"></span>%</div>
+                <div>Wind: <span th:text="${dailyWeatherForecastData.getCurrentWindSpeed}"></span>m/s</div>
             </div>
         </div>
     </div>

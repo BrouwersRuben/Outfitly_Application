@@ -259,6 +259,8 @@ public class WeatherForecast extends Entity {
                 ", windSpeed=" + windSpeed +
                 ", humidity=" + humidity +
                 ", weatherDescription='" + weatherDescription + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
                 '}';
     }
 }

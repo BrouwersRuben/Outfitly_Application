@@ -1,6 +1,8 @@
 package be.kdg.outfitly.presentation;
 
+import be.kdg.outfitly.domain.DailyWeatherForecast;
 import be.kdg.outfitly.domain.User;
+import be.kdg.outfitly.service.DailyWeatherForecastService;
 import be.kdg.outfitly.service.UserService;
 import be.kdg.outfitly.service.WeatherForecastService;
 import org.slf4j.Logger;
@@ -17,11 +19,11 @@ import java.security.Principal;
 public class DailyWeatherForecastController {
     private final Logger logger = LoggerFactory.getLogger(DailyWeatherForecastController.class);
     private final UserService userService;
-    private final WeatherForecastService weatherForecastService;
+    private final DailyWeatherForecastService dailyWeatherForecastService;
 
-    public DailyWeatherForecastController(UserService userService, WeatherForecastService weatherForecastService) {
+    public DailyWeatherForecastController(UserService userService, DailyWeatherForecastService dailyWeatherForecastService) {
         this.userService = userService;
-        this.weatherForecastService = weatherForecastService;
+        this.dailyWeatherForecastService = dailyWeatherForecastService;
     }
 
     @GetMapping
@@ -32,7 +34,7 @@ public class DailyWeatherForecastController {
 
         model.addAttribute("username", user.getName());
         model.addAttribute("city", user.getCity());
-        model.addAttribute("weatherForecastData", weatherForecastService.findByCountryAndCity(user.getCountry(), user.getCity()));
+        model.addAttribute("dailyWeatherForecastData", dailyWeatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity()));
         return "weather-forecast";
     }
 }
