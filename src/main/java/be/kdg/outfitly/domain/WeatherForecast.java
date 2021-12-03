@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 // TODO: This is only for the CURRENT weather forecast, we still need a separate class for future forecast I guess.
 public class WeatherForecast extends Entity {
@@ -70,7 +71,7 @@ public class WeatherForecast extends Entity {
         wf.setHighestTemperature(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_max"))));
         wf.setWindSpeed(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("wind").get("speed"))));
         wf.setHumidity(Integer.parseInt(String.valueOf(weatherAPIData.getJSONObject("main").get("humidity"))));
-        wf.setWeatherDescription(String.valueOf(weatherAPIData.getJSONArray("weather").getJSONObject(0).get("main")));
+        wf.setWeatherDescription(String.valueOf(weatherAPIData.getJSONArray("weather").getJSONObject(0).get("description")));
         wf.setLatitude(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("coord").get("lat"))));
         wf.setLongitude(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("coord").get("lon"))));
         logger.debug("Weather forecast object created: ");
@@ -242,8 +243,7 @@ public class WeatherForecast extends Entity {
 
     // https://openweathermap.org/weather-conditions
     public boolean isGoingToRain() {
-        //TODO
-        return getWeatherDescription().equals("rain") || getWeatherDescription().equals("drizzle");
+        return getWeatherDescription().toLowerCase().contains("rain") || getWeatherDescription().toLowerCase().contains("drizzle");
     }
 
     @Override
