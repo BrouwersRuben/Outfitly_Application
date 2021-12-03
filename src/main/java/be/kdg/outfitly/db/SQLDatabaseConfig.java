@@ -10,17 +10,17 @@ import org.springframework.context.annotation.Profile;
 import javax.sql.DataSource;
 
 @Configuration
-@Profile("dev")
-public class HSQLDatabaseConfig {
-    private static final Logger logger = LoggerFactory.getLogger(HSQLDatabaseConfig.class);
+@Profile("Hibernate")
+public class SQLDatabaseConfig {
+    private static final Logger logger = LoggerFactory.getLogger(SQLDatabaseConfig.class);
 
     @Bean
     public DataSource dataSource(){
         logger.debug("Connection with database made");
         DataSource dataSource = DataSourceBuilder.create()
-                .driverClassName("org.hsqldb.jdbcDriver")
-                .url("jdbc:hsqldb:file:dbData/demo")
-                .username("sa")
+                .driverClassName("org.h2.Driver")
+                .url("jdbc:h2:mem:outfitlydevdb")
+                .username("")
                 .password("")
                 .build();
         return dataSource;

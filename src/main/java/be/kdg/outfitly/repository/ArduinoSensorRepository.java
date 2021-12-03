@@ -1,15 +1,12 @@
 package be.kdg.outfitly.repository;
 
 import be.kdg.outfitly.domain.ArduinoSensor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import be.kdg.outfitly.domain.ClothingItem;
 
-@Component
-public class ArduinoSensorRepository extends ListRepository<ArduinoSensor>{
-    private final Logger logger = LoggerFactory.getLogger(ArduinoSensorRepository.class);
+import java.util.List;
 
-    public ArduinoSensorRepository(){
-        logger.debug("Creating Arduino Sensor repository");
-    }
+public interface ArduinoSensorRepository {
+    List<ArduinoSensor> read();
+    ArduinoSensor findById(int id);
+    ArduinoSensor create(ArduinoSensor arduinoSensor);
 }

@@ -1,41 +1,71 @@
 package be.kdg.outfitly.domain;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@javax.persistence.Entity
+@Table(name = "costumers")
 public class User extends Entity {
 
     // Variables
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
+    @Column(name = "email", nullable = false, unique = true, length = 320)
     private String email;
+
+    @Column(name = "password", nullable = false, length = 50)
     private String password;
+
+    @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 50)
     private String lastName;
+
+    @Column(name = "phone_number", nullable = false, length = 50)
     //String --> 047/..
     private String phoneNumber;
+
+    @Column(name = "country", nullable = false, length = 56)
     private String country;
-    private String countryCode;
+
+    @Column(name = "city", nullable = false, length = 85)
     private String city;
+
+    @Column(name = "street_name", nullable = false, length = 50)
     private String streetName;
-    private String streetNumber;
+
+    @Column(name = "street_number", nullable = false, length = 10)
+    private int streetNumber;
+
+    @Column(name = "appartment_number", length = 10)
     private String apartmentNumber;
+
+    @Column(name = "zip_code", nullable = false, length = 10)
     private String zipcode;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private List<ClothingItem> clothes;
 
-    // Constructor
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ArduinoSensor> sensorData;
 
+    // Constructor
+    // TODO: make this protected MULTI USER
     public User() {
     }
 
     //constructor for everything
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.country = country;
-        this.countryCode = countryCode;
         this.city = city;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
@@ -45,14 +75,13 @@ public class User extends Entity {
     }
 
     //Constructor for without apartmentNumber
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.country = country;
-        this.countryCode = countryCode;
         this.city = city;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
@@ -64,7 +93,26 @@ public class User extends Entity {
         clothes.add(clothingItem);
     }
 
+//    public User merge(User other){
+//        setEmail(other.getEmail());
+//        setPassword(other.getPassword());
+//        setFirstName(other.getFirstName());
+//        setLastName(other.getLastName());
+//        setPhoneNumber(other.getPhoneNumber());
+//        setCountry(other.getCountry());
+//        setCity(other.getCity());
+//        setStreetName(other.getStreetName());
+//        setStreetNumber(other.getStreetNumber());
+//        setZipcode(other.getZipcode());
+//        setClothes(other.getClothes());
+//        return other;
+//    }
+
     // Getters
+    @Override
+    public int getId() {
+        return id;
+    }
 
     public String getEmail() {
         return email;
@@ -98,7 +146,7 @@ public class User extends Entity {
         return streetName;
     }
 
-    public String getStreetNumber() {
+    public int getStreetNumber() {
         return streetNumber;
     }
 
@@ -114,6 +162,10 @@ public class User extends Entity {
         return clothes;
     }
 
+    public List<ArduinoSensor> getSensorData() {
+        return sensorData;
+    }
+
     public String getCountryCode() {
         return countryCode;
     }
@@ -124,6 +176,11 @@ public class User extends Entity {
     }
 
     //setters
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -145,7 +202,7 @@ public class User extends Entity {
         this.clothes = clothes;
     }
 
-    public void setClothingItem(ClothingItem clothingItem) {
+    public void addClothingItem(ClothingItem clothingItem) {
         this.clothes.add(clothingItem);
     }
 
@@ -177,6 +234,10 @@ public class User extends Entity {
         this.apartmentNumber = apartmentNumber;
     }
 
+    public void setSensorData(List<ArduinoSensor> sensorData) {
+        this.sensorData = sensorData;
+    }
+
 
 
     public void setCountryCode(String countryCode) {
@@ -192,10 +253,9 @@ public class User extends Entity {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", country='" + country + '\'' +
-                ", countryCode='" + countryCode + '\'' +
                 ", city='" + city + '\'' +
                 ", streetName='" + streetName + '\'' +
-                ", streetNumber='" + streetNumber + '\'' +
+                ", streetNumber=" + streetNumber +
                 ", apartmentNumber='" + apartmentNumber + '\'' +
                 ", zipcode='" + zipcode + '\'' +
                 ", clothes=" + clothes +

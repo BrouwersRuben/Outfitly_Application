@@ -19,7 +19,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -170,11 +169,23 @@ public class ProfileController {
     public String processRemoveClothing(@ModelAttribute("clothingDTO") ClothingDTO clothingDTO, Principal principal, Model model) {
         User user = userService.findByEmail(principal.getName());
         logger.warn(clothingDTO.toString());
+
+        ClothingItem clothingItemToRemove = clothingService.findById(clothingDTO.getID());
+
         clothingService.delete(clothingDTO.getID());
         List<ClothingItem> newClothingList = clothingService.read();
         user.setClothes(newClothingList);
         userService.update(user);
         model.addAttribute("user", user);
         return "viewclothing";
+
+        User userFromRepo = userService.findById(user.getId());
+        List<ClothingItem> clothes = new ArrayList<>(userFromRepo.getClothes());
+
+        clothes.remove(clothingItemToRemove);
+
+        userFromRepo.setClothes(clothes);
+        userService.update(userFromRepo);
+        return "redirect:/profile/viewclothing";
     }
 }

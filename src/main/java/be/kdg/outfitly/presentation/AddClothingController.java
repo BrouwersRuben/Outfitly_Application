@@ -20,9 +20,12 @@ import java.util.Map;
 public class AddClothingController {
     private final Logger logger = LoggerFactory.getLogger(AddClothingController.class);
     private UserService userService;
+    private ClothingService clothingService;
+
 
     public AddClothingController(UserService userService) {
         this.userService = userService;
+        this.clothingService = clothingService;
     }
 
     @GetMapping
@@ -56,10 +59,23 @@ public class AddClothingController {
         //quick fix, gives "java.lang.UnsupportedOperationException: null" error
         //with ex. userClothing.getClothes().add(..)
         //or addClothing method inside of User
-        List<ClothingItem> userClothing = new ArrayList<>(user.getClothes());
+//        List<ClothingItem> userClothing = new ArrayList<>(user.getClothes());
+//        userClothing.add(newClothingItem);
+        User userFromRepository = userService.findById(user.getId());
+//        userFromRepository.setClothes(userClothing);
+
+        logger.debug(user.getName() + " Added a new clothing item: " + newClothingItem);
+
+//        user.setClothes(userClothing);
+
+        //newClothingItem.setUser(userFromRepository);
+        //clothingService.create(newClothingItem);
+
+        List<ClothingItem> userClothing = new ArrayList<>(userFromRepository.getClothes());
         userClothing.add(newClothingItem);
-        User userFromRepository = userService.findBytId(user.getId());
         userFromRepository.setClothes(userClothing);
+        userService.update(userFromRepository);
+        clothingService.create(newClothingItem);
 
         logger.debug(user.getName() + " Added a new clothing item: " + newClothingItem);
 

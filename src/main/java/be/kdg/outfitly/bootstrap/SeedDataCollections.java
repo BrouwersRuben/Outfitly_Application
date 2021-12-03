@@ -14,8 +14,8 @@ import java.util.List;
 
 @Component
 @Profile("JavaCollections")
-public class SeedData implements CommandLineRunner {
-    private final Logger logger = LoggerFactory.getLogger(SeedData.class);
+public class SeedDataCollections implements CommandLineRunner {
+    private final Logger logger = LoggerFactory.getLogger(SeedDataCollections.class);
     private final ArduinoSensorRepository arduinoSensorRepository;
     private final UserRepository userRepository;
     private final ClothingRepository clothingRepository;
@@ -30,12 +30,11 @@ public class SeedData implements CommandLineRunner {
 //    private MainUserListRepository mainUserListRepository;
 //    private ClothingItem clothingItem;
 
-    public SeedData(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository, DailyWeatherForecastRepository dailyWeatherForecastRepository) {
+    public SeedDataCollections(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository) {
         this.arduinoSensorRepository = arduinoSensorRepository;
         this.userRepository = userRepository;
         this.clothingRepository = clothingRepository;
         this.weatherForecastRepository = weatherForecastRepository;
-        this.dailyWeatherForecastRepository = dailyWeatherForecastRepository;
     }
 
     @Override
@@ -86,20 +85,13 @@ public class SeedData implements CommandLineRunner {
 //                        new ClothingItem("Hoodie", ClothingItem.Material.SYNTHETIC, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD),
 //                        new ClothingItem("Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD,ClothingItem.Occasion.UNIVERSAL,ClothingItem.Weather.UNIVERSAL),
 //                        new ClothingItem("T-Shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.WARM),
-//                        new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL));
+//                        new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL)));
 
-
-        ClothingItem clothingItem15 = new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL, ClothingItem.Occasion.CASUAL, ClothingItem.Weather.MILD);
-        ClothingItem clothingItem16 = new ClothingItem("Hoodie", ClothingItem.Material.SYNTHETIC, ClothingItem.RainProofness.NORMAL, ClothingItem.Occasion.CASUAL, ClothingItem.Weather.COLD);
-        ClothingItem clothingItem17 = new ClothingItem("Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD, ClothingItem.Occasion.UNIVERSAL, ClothingItem.Weather.UNIVERSAL);
-        ClothingItem clothingItem18 = new ClothingItem("T-Shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.CASUAL, ClothingItem.Weather.WARM);
-        ClothingItem clothingItem19 = new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.ELEGANT, ClothingItem.Weather.UNIVERSAL);
-
-//        clothingRepository.create(clothingItem15);
-//        clothingRepository.create(clothingItem16);
-//        clothingRepository.create(clothingItem17);
-//        clothingRepository.create(clothingItem18);
-//        clothingRepository.create(clothingItem19);
+        ClothingItem clothingItem15 = new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD, ClothingItem.Type.JACKET_LIKE);
+        ClothingItem clothingItem16 = new ClothingItem("Hoodie", ClothingItem.Material.SYNTHETIC, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD, ClothingItem.Type.SWEATSHIRT_LIKE);
+        ClothingItem clothingItem17 = new ClothingItem("Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD,ClothingItem.Occasion.UNIVERSAL,ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.TROUSERS_LIKE);
+        ClothingItem clothingItem18 = new ClothingItem("T-Shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.WARM, ClothingItem.Type.T_SHIRT_LIKE);
+        ClothingItem clothingItem19 = new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.SHIRT_LIKE);
 
         final List<ClothingItem> clothingItemsUser2 = List.of(clothingItem15, clothingItem16, clothingItem17, clothingItem18, clothingItem19);
         user2.setClothes(clothingItemsUser2);

@@ -1,7 +1,10 @@
 package be.kdg.outfitly.domain;
 
-import java.io.File;
+import javax.persistence.*;
+import java.util.Objects;
 
+@javax.persistence.Entity
+@Table(name = "clothes")
 public class ClothingItem extends Entity {
 
     public enum Material{
@@ -74,26 +77,44 @@ public class ClothingItem extends Entity {
         }
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "clothing_name", nullable = false, length = 50)
     private String name;
+
+    @Column(name = "clothing_type", nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
     private Type type;
+
+    @Column(name = "clothing_material", nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
     private Material material;
+
+    @Column(name = "rainproofness", nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
     private RainProofness rainProofness;
+
+    @Column(name = "clothing_occasion", nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
     private Occasion occasion;
+
+    @Column(name = "clothing_weather_type", nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
     private Weather weather;
-//    ??
-    private File photo;
 
-    public ClothingItem() {
+    @Column(name = "image_url", length = 200)
+    private String photoUrl;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name="user_id")
+    private User user;
+
+    protected ClothingItem() {
     }
 
-    //no photo yet
-    public ClothingItem(String name, Material material, RainProofness rainProofness, Occasion occasion, Weather weather) {
-        this.name = name;
-        this.material = material;
-        this.rainProofness = rainProofness;
-        this.occasion = occasion;
-        this.weather = weather;
-    }
+    // TODO: Why are there 2 constructors here?
 
     public ClothingItem(String name, Material material, RainProofness rainProofness, Occasion occasion, Weather weather, Type type) {
         this.name = name;
@@ -104,32 +125,78 @@ public class ClothingItem extends Entity {
         this.weather = weather;
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Material getMaterial() {
         return material;
     }
 
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
     public RainProofness getRainProofness() {
         return rainProofness;
+    }
+
+    public void setRainProofness(RainProofness rainProofness) {
+        this.rainProofness = rainProofness;
     }
 
     public Occasion getOccasion() {
         return occasion;
     }
 
+    public void setOccasion(Occasion occasion) {
+        this.occasion = occasion;
+    }
+
     public Weather getWeather() {
         return weather;
     }
 
-    public File getPhoto() {
-        return photo;
+    public void setWeather(Weather weather) {
+        this.weather = weather;
     }
 
-    public Type getType() {
-        return type;
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -141,7 +208,21 @@ public class ClothingItem extends Entity {
                 ", rainProofness=" + rainProofness +
                 ", occasion=" + occasion +
                 ", weather=" + weather +
-                ", photo=" + photo +
+                ", photo=" + photoUrl +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        ClothingItem that = (ClothingItem) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id);
     }
 }

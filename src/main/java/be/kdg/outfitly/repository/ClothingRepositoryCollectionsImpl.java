@@ -12,6 +12,6 @@ public class ClothingRepositoryCollectionsImpl extends ListRepository<ClothingIt
     private final Logger logger = LoggerFactory.getLogger(ClothingRepositoryCollectionsImpl.class);
 
     public ClothingRepositoryCollectionsImpl() {
-        logger.debug("Creating Clothing repository collections implementation");
+        logger.debug("Creating Clothing repository (Collections)");
     }
 }
