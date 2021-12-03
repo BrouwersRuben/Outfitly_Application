@@ -50,7 +50,7 @@ public class User extends Entity {
     @Column(name = "zip_code", nullable = false, length = 10)
     private String zipcode;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE}, fetch=FetchType.EAGER)
     private List<ClothingItem> clothes;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -105,11 +105,12 @@ public class User extends Entity {
         setLastName(other.getLastName());
         setPhoneNumber(other.getPhoneNumber());
         setCountry(other.getCountry());
+        setCountryCode(other.getCountryCode());
         setCity(other.getCity());
         setStreetName(other.getStreetName());
         setStreetNumber(other.getStreetNumber());
+        setApartmentNumber(other.getApartmentNumber());
         setZipcode(other.getZipcode());
-        setClothes(other.getClothes());
         return other;
     }
 
@@ -243,8 +244,6 @@ public class User extends Entity {
         this.sensorData = sensorData;
     }
 
-
-
     public void setCountryCode(String country) {
         this.country = country;
     }
@@ -258,6 +257,7 @@ public class User extends Entity {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", country='" + country + '\'' +
+                ", countryCODE='" + countryCode + '\'' +
                 ", city='" + city + '\'' +
                 ", streetName='" + streetName + '\'' +
                 ", streetNumber=" + streetNumber +
