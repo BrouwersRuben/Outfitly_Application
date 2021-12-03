@@ -124,9 +124,14 @@ public class ProfileController {
         ClothingItem clothingItemToRemove = clothingService.findById(clothingDTO.getID());
 
         clothingService.delete(clothingDTO.getID());
-        List<ClothingItem> newClothingList = clothingService.read();
-        user.setClothes(newClothingList);
-        userService.update(user);
-        return "viewclothing";
+
+        User userFromRepo = userService.findById(user.getId());
+        List<ClothingItem> clothes = new ArrayList<>(userFromRepo.getClothes());
+
+        clothes.remove(clothingItemToRemove);
+
+        userFromRepo.setClothes(clothes);
+        userService.update(userFromRepo);
+        return "redirect:/profile/viewclothing";
     }
 }

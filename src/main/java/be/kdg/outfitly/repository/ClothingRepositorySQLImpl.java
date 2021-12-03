@@ -13,21 +13,21 @@ import java.util.List;
 
 @Repository
 @Profile("Hibernate")
-public class ClothingRepositoryHSQLImpl implements ClothingRepository{
+public class ClothingRepositorySQLImpl implements ClothingRepository{
 
-    private final Logger logger = LoggerFactory.getLogger(ClothingRepositoryHSQLImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(ClothingRepositorySQLImpl.class);
 
     @PersistenceUnit
     private EntityManagerFactory emFactory;
     EntityManager em;
 
-    public ClothingRepositoryHSQLImpl() {
-        logger.debug("Creating clothing repository (HSQL)");
+    public ClothingRepositorySQLImpl() {
+        logger.debug("Creating clothing repository (SQL)");
     }
 
     @Override
     public List<ClothingItem> read() {
-        logger.debug("Read clothing items (HSQL)");
+        logger.debug("Read clothing items (SQL)");
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         List<ClothingItem> clothingItems = em.createQuery("select c from ClothingItem c").getResultList();
@@ -38,7 +38,7 @@ public class ClothingRepositoryHSQLImpl implements ClothingRepository{
 
     @Override
     public ClothingItem findById(int id) {
-        logger.debug("(HSQL) Found clothingItem with id " + id);
+        logger.debug("(SQL) Found clothingItem with id " + id);
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         ClothingItem clothingItem = em.find(ClothingItem.class, id);
@@ -49,7 +49,7 @@ public class ClothingRepositoryHSQLImpl implements ClothingRepository{
 
     @Override
     public ClothingItem create(ClothingItem clothingItem) {
-        logger.debug("(HSQL) Created clothing item: " + clothingItem.toString());
+        logger.debug("(SQL) Created clothing item: " + clothingItem.toString());
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
 //        while(!em.contains(clothingItem)){
@@ -64,10 +64,17 @@ public class ClothingRepositoryHSQLImpl implements ClothingRepository{
 
     @Override
     public void delete(ClothingItem clothingItem) {
-        logger.debug("(HSQL) Removed clothing item: " + clothingItem.toString());
+        logger.debug("(SQL) Removed clothing item: " + clothingItem.toString());
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
-        em.remove(em.contains(clothingItem) ? clothingItem : em.merge(clothingItem));
+//        em.merge(em.contains(clothingItem) ? clothingItem : em.merge(clothingItem) );
+//        while(!em.contains(clothingItem)){
+//            em.merge(clothingItem);
+//        }
+        ClothingItem managedClothingItem = em.merge(clothingItem);
+
+        managedClothingItem.setUser(null);
+        em.remove(managedClothingItem);
         em.getTransaction().commit();
         em.close();
     }

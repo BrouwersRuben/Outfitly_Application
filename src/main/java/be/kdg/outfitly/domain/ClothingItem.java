@@ -1,6 +1,7 @@
 package be.kdg.outfitly.domain;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @javax.persistence.Entity
 @Table(name = "clothes")
@@ -209,5 +210,19 @@ public class ClothingItem extends Entity {
                 ", weather=" + weather +
                 ", photo=" + photoUrl +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        ClothingItem that = (ClothingItem) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id);
     }
 }

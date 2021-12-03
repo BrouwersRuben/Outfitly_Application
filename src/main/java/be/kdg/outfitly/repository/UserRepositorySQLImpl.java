@@ -1,6 +1,5 @@
 package be.kdg.outfitly.repository;
 
-import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,21 +13,21 @@ import java.util.List;
 
 @Repository
 @Profile("Hibernate")
-public class UserRepositoryHSQLImpl implements UserRepository{
+public class UserRepositorySQLImpl implements UserRepository{
 
-    private final Logger logger = LoggerFactory.getLogger(UserRepositoryHSQLImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(UserRepositorySQLImpl.class);
 
     @PersistenceUnit
     private EntityManagerFactory emFactory;
     EntityManager em;
 
-    public UserRepositoryHSQLImpl() {
-        logger.debug("Creating user repository (HSQL)");
+    public UserRepositorySQLImpl() {
+        logger.debug("Creating user repository (SQL)");
     }
 
     @Override
     public User create(User user) {
-        logger.debug("Created user (HSQL): " + user.toString());
+        logger.debug("Created user (SQL): " + user.toString());
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         em.persist(user);
@@ -39,7 +38,7 @@ public class UserRepositoryHSQLImpl implements UserRepository{
 
     @Override
     public List<User> read() {
-        logger.debug("Read users (HSQL)");
+        logger.debug("Read users (SQL)");
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         List<User> users = em.createQuery("select u from User u").getResultList();
@@ -50,7 +49,7 @@ public class UserRepositoryHSQLImpl implements UserRepository{
 
     @Override
     public User findById(int id) {
-        logger.debug("(HSQL) Found user with id " + id);
+        logger.debug("(SQL) Found user with id " + id);
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         User user = em.find(User.class, id);

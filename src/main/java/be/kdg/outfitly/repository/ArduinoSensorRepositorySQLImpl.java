@@ -1,7 +1,6 @@
 package be.kdg.outfitly.repository;
 
 import be.kdg.outfitly.domain.ArduinoSensor;
-import be.kdg.outfitly.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
@@ -14,21 +13,21 @@ import java.util.List;
 
 @Repository
 @Profile("Hibernate")
-public class ArduinoSensorRepositoryHSQLImpl implements ArduinoSensorRepository{
+public class ArduinoSensorRepositorySQLImpl implements ArduinoSensorRepository{
 
-    private final Logger logger = LoggerFactory.getLogger(ArduinoSensorRepositoryHSQLImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(ArduinoSensorRepositorySQLImpl.class);
 
     @PersistenceUnit
     private EntityManagerFactory emFactory;
     EntityManager em;
 
-    public ArduinoSensorRepositoryHSQLImpl() {
-        logger.debug("Creating Weather forecast repository (HSQL)");
+    public ArduinoSensorRepositorySQLImpl() {
+        logger.debug("Creating Weather forecast repository (SQL)");
     }
 
     @Override
     public List<ArduinoSensor> read() {
-        logger.debug("Read arduino sensor (HSQL)");
+        logger.debug("Read arduino sensor (SQL)");
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         List<ArduinoSensor> arduinoSensors = em.createQuery("select a from ArduinoSensor a").getResultList();
@@ -39,7 +38,7 @@ public class ArduinoSensorRepositoryHSQLImpl implements ArduinoSensorRepository{
 
     @Override
     public ArduinoSensor findById(int id) {
-        logger.debug("(HSQL) Found arduino sensor with id " + id);
+        logger.debug("(SQL) Found arduino sensor with id " + id);
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         ArduinoSensor arduinoSensor = em.find(ArduinoSensor.class, id);
@@ -50,7 +49,7 @@ public class ArduinoSensorRepositoryHSQLImpl implements ArduinoSensorRepository{
 
     @Override
     public ArduinoSensor create(ArduinoSensor arduinoSensor) {
-        logger.debug("Created arduino sensor (HSQL): " + arduinoSensor.toString());
+        logger.debug("Created arduino sensor (SQL): " + arduinoSensor.toString());
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         em.persist(arduinoSensor);
