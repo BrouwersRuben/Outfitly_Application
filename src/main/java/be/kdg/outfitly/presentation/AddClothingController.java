@@ -2,6 +2,7 @@ package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
+import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ public class AddClothingController {
     private ClothingService clothingService;
 
 
-    public AddClothingController(UserService userService) {
+    public AddClothingController(UserService userService, ClothingService clothingService) {
         this.userService = userService;
         this.clothingService = clothingService;
     }

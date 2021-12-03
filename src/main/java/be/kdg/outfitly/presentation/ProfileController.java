@@ -74,7 +74,7 @@ public class ProfileController {
             user.setApartmentNumber(locationDTO.getApartmentNumber());
             user.setZipcode(locationDTO.getZipcode());
             userService.update(user);
-            return "redirect:/profile";
+            return "redirect:/user/profile";
         }
     }
 
@@ -102,7 +102,7 @@ public class ProfileController {
 //                logger.debug("User correctly wrote their password");
                 user.setPassword(passwordDTO.getCurrentPassword());
                 userService.update(user);
-                return "redirect:/profile";
+                return "redirect:/user/profile";
             } else {
 //                logger.debug("User didn't write their password correctly");
                 model.addAttribute("errorMessage", "This password is incorrect");
@@ -130,7 +130,7 @@ public class ProfileController {
             user.setFirstName(nameDTO.getFirstName());
             user.setLastName(nameDTO.getLastName());
             userService.update(user);
-            return "redirect:/profile";
+            return "redirect:/user/profile";
         }
     }
 
@@ -154,7 +154,7 @@ public class ProfileController {
             logger.debug("New phone number: " + phoneNumberDTO.getNewPhoneNumber());
             logger.debug("Succesfully changed " + user.getFirstName() + "'s phone number to: " + user.getPhoneNumber());
             userService.update(user);
-            return "redirect:/profile";
+            return "redirect:/user/profile";
         }
     }
 
@@ -177,7 +177,6 @@ public class ProfileController {
         user.setClothes(newClothingList);
         userService.update(user);
         model.addAttribute("user", user);
-        return "viewclothing";
 
         User userFromRepo = userService.findById(user.getId());
         List<ClothingItem> clothes = new ArrayList<>(userFromRepo.getClothes());
@@ -186,6 +185,6 @@ public class ProfileController {
 
         userFromRepo.setClothes(clothes);
         userService.update(userFromRepo);
-        return "redirect:/profile/viewclothing";
+        return "redirect:/user/profile/viewclothing";
     }
 }

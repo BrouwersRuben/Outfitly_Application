@@ -20,7 +20,7 @@ public class SeedDataCollections implements CommandLineRunner {
     private final UserRepository userRepository;
     private final ClothingRepository clothingRepository;
     private final WeatherForecastRepository weatherForecastRepository;
-    private final DailyWeatherForecastRepository dailyWeatherForecastRepository;
+    private DailyWeatherForecastRepository dailyWeatherForecastRepository;
     private JSONObject weatherAPIData;
 //    private final String arduinoAPI = "http://192.168.184.187/data";
 
@@ -30,11 +30,13 @@ public class SeedDataCollections implements CommandLineRunner {
 //    private MainUserListRepository mainUserListRepository;
 //    private ClothingItem clothingItem;
 
-    public SeedDataCollections(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository) {
+
+    public SeedDataCollections(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository, DailyWeatherForecastRepository dailyWeatherForecastRepository) {
         this.arduinoSensorRepository = arduinoSensorRepository;
         this.userRepository = userRepository;
         this.clothingRepository = clothingRepository;
         this.weatherForecastRepository = weatherForecastRepository;
+        this.dailyWeatherForecastRepository = dailyWeatherForecastRepository;
     }
 
     @Override

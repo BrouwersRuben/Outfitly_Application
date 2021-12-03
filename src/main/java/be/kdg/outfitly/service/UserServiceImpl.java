@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService{
             user = new User(email, password, firstName, lastName, phoneNumber, country, countryCode, city, streetName, streetNumber, zipcode);
         }else{
             logger.debug("User filled in an ap number");
-            user = new User(email, password, firstName, lastName, phoneNumber, country, countryCode, city, streetName, streetNumber, apartmentNumber,zipcode);
+            user = new User(email, password, firstName, lastName, phoneNumber, country, countryCode, city, streetName, streetNumber, apartmentNumber, zipcode);
         }
         return userRepository.create(user);
     }

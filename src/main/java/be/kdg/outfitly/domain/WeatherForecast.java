@@ -57,7 +57,11 @@ public class WeatherForecast extends Entity {
 
     @Column(name = "weather_description", nullable = false)
     private String weatherDescription;
+
+    @Column(name = "latitude", nullable = false)
     private double latitude;
+
+    @Column(name = "longtitude", nullable = false)
     private double longitude;
 
     protected WeatherForecast() {
@@ -78,8 +82,6 @@ public class WeatherForecast extends Entity {
         this.longitude = longitude;
     }
 
-    public WeatherForecast() {
-    }
 
     public static WeatherForecast currentForecastForCountryCity(String countryCode, String city) {
         WeatherForecast wf = new WeatherForecast();

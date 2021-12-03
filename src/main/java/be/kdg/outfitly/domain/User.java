@@ -32,6 +32,9 @@ public class User extends Entity {
     @Column(name = "country", nullable = false, length = 56)
     private String country;
 
+    @Column(name = "countryCode", nullable = false, length = 56)
+    private String countryCode;
+
     @Column(name = "city", nullable = false, length = 85)
     private String city;
 
@@ -39,7 +42,7 @@ public class User extends Entity {
     private String streetName;
 
     @Column(name = "street_number", nullable = false, length = 10)
-    private int streetNumber;
+    private String streetNumber;
 
     @Column(name = "appartment_number", length = 10)
     private String apartmentNumber;
@@ -59,13 +62,14 @@ public class User extends Entity {
     }
 
     //constructor for everything
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String apartmentNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.country = country;
+        this.countryCode = countryCode;
         this.city = city;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
@@ -75,7 +79,7 @@ public class User extends Entity {
     }
 
     //Constructor for without apartmentNumber
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String city, String streetName, int streetNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -94,20 +98,20 @@ public class User extends Entity {
         clothes.add(clothingItem);
     }
 
-//    public User merge(User other){
-//        setEmail(other.getEmail());
-//        setPassword(other.getPassword());
-//        setFirstName(other.getFirstName());
-//        setLastName(other.getLastName());
-//        setPhoneNumber(other.getPhoneNumber());
-//        setCountry(other.getCountry());
-//        setCity(other.getCity());
-//        setStreetName(other.getStreetName());
-//        setStreetNumber(other.getStreetNumber());
-//        setZipcode(other.getZipcode());
-//        setClothes(other.getClothes());
-//        return other;
-//    }
+    public User merge(User other){
+        setEmail(other.getEmail());
+        setPassword(other.getPassword());
+        setFirstName(other.getFirstName());
+        setLastName(other.getLastName());
+        setPhoneNumber(other.getPhoneNumber());
+        setCountry(other.getCountry());
+        setCity(other.getCity());
+        setStreetName(other.getStreetName());
+        setStreetNumber(other.getStreetNumber());
+        setZipcode(other.getZipcode());
+        setClothes(other.getClothes());
+        return other;
+    }
 
     // Getters
     @Override
@@ -147,7 +151,7 @@ public class User extends Entity {
         return streetName;
     }
 
-    public int getStreetNumber() {
+    public String getStreetNumber() {
         return streetNumber;
     }
 
@@ -168,7 +172,7 @@ public class User extends Entity {
     }
 
     public String getCountryCode() {
-        return countryCode;
+        return country;
     }
 
     //function to get first name and surname together
@@ -241,8 +245,8 @@ public class User extends Entity {
 
 
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public void setCountryCode(String country) {
+        this.country = country;
     }
 
     @Override
