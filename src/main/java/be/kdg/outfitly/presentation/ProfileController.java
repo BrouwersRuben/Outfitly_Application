@@ -59,8 +59,9 @@ public class ProfileController {
     }
 
     @PostMapping("/changelocation")
-    public String processChangedLocation(Principal principal, @Valid @ModelAttribute("locationDTO") LocationDTO locationDTO, BindingResult errors) {
+    public String processChangedLocation(Principal principal, @Valid @ModelAttribute("locationDTO") LocationDTO locationDTO, BindingResult errors, Model model) {
         User user = userService.findByEmail(principal.getName());
+        model.addAttribute("user", user);
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
             return "changelocation";
