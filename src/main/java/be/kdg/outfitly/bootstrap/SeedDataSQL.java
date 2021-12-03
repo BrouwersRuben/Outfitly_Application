@@ -4,19 +4,25 @@ import be.kdg.outfitly.domain.ArduinoSensor;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.domain.WeatherForecast;
-import be.kdg.outfitly.repository.*;
+import be.kdg.outfitly.repository.ArduinoSensorRepository;
+import be.kdg.outfitly.repository.ClothingRepository;
+import be.kdg.outfitly.repository.UserRepository;
+import be.kdg.outfitly.repository.WeatherForecastRepository;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
-public class SeedData implements CommandLineRunner {
-    private final Logger logger = LoggerFactory.getLogger(SeedData.class);
+@Profile("Hibernate")
+public class SeedDataSQL implements CommandLineRunner {
+    private final Logger logger = LoggerFactory.getLogger(SeedDataSQL.class);
     private final ArduinoSensorRepository arduinoSensorRepository;
     private final UserRepository userRepository;
     private final ClothingRepository clothingRepository;
@@ -31,7 +37,7 @@ public class SeedData implements CommandLineRunner {
 //    private ClothingItem clothingItem;
 
 
-    public SeedData(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository) {
+    public SeedDataSQL(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository) {
         this.arduinoSensorRepository = arduinoSensorRepository;
         this.userRepository = userRepository;
         this.clothingRepository = clothingRepository;
