@@ -83,25 +83,9 @@ public class SeedDataSQL implements CommandLineRunner {
         clothingRepository.create(clothingItem13);
         clothingRepository.create(clothingItem14);*/
 
-        final List<ClothingItem> clothingItemsUser1 = List.of(clothingItem1, clothingItem2, clothingItem3, clothingItem4, clothingItem5, clothingItem6, clothingItem7, clothingItem8, clothingItem9, clothingItem10, clothingItem11, clothingItem12, clothingItem13, clothingItem14);
-        clothingItemsUser1.forEach(clothingItem -> {
-            user1.addClothingItem(clothingItem);
-            clothingItem.setUser(user1);
-        });
 
-        // Arduino API
-        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
-//        ArduinoSensor arduinoSensor = new ArduinoSensor(
-//                Double.parseDouble(String.valueOf(arduinoAPIData.get("Temperature"))),
-//                Double.parseDouble(String.valueOf(arduinoAPIData.get("Humidity"))),
-//                LocalDateTime.parse(String.valueOf(arduinoAPIData.get("DateTime"))))                ;
 
-        /*arduinoSensorRepository.create(arduinoSensor);*/
-
-        arduinoSensor.setUser(user1);
-        user1.setSensorData(List.of(arduinoSensor));
-
-        userRepository.create(user1);
+        logger.warn("Test user creation to see clothes: "+testUser);
 
         User user2 = new User("testUser2@gmail.com","test123","Bob","Shannon","0458564572", "Spain", "ES", "Barcelona", "La Rambla", "15", "08001");
 //                List.of(new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD),

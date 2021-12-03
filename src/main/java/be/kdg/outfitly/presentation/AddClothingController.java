@@ -76,6 +76,7 @@ public class AddClothingController {
         userClothing.add(newClothingItem);
         userFromRepository.setClothes(userClothing);
         userService.update(userFromRepository);
+        newClothingItem.setUser(userFromRepository);
         clothingService.create(newClothingItem);
 
         logger.debug(user.getName() + " Added a new clothing item: " + newClothingItem);

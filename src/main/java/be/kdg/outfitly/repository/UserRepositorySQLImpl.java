@@ -42,6 +42,7 @@ public class UserRepositorySQLImpl implements UserRepository{
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         List<User> users = em.createQuery("select u from User u").getResultList();
+        logger.warn("All users read: "+users);
         em.getTransaction().commit();
         em.close();
         return users;
