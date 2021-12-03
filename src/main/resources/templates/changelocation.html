@@ -33,6 +33,7 @@
                 <label for="city" class="m-1 w-75">City:</label>
                 <input type="text" name="city" id="city" th:value="${user.city}" class="m-1 w-75">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">city error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors().get(0)}">Invalid location error</div>
             </div>
             <div class="form-group row d-flex justify-content-center">
                 <label for="streetName" class="m-1 w-75">Street:</label>
