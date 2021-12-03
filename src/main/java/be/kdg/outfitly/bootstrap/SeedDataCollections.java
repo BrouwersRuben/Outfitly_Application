@@ -82,7 +82,7 @@ public class SeedDataCollections implements CommandLineRunner {
         final List<ClothingItem> clothingItemsUser1 = List.of(clothingItem1, clothingItem2, clothingItem3, clothingItem4, clothingItem5, clothingItem6, clothingItem7, clothingItem8, clothingItem9, clothingItem10, clothingItem11, clothingItem12, clothingItem13, clothingItem14);
         user1.setClothes(clothingItemsUser1);
 
-        User user2 = new User("testUser2@gmail.com", "test123", "Bob", "Shannon", "0458564572", "Spain", "ES", "Barcelona", "La Rambla", "15", "08001");
+        User user2 = new User("testUser2@gmail.com", "test123", "Bob", "Shannon", "0458564572", "Belgium", "BE", "Antwerp", "La Rambla", "15", "08001");
 //                List.of(new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD),
 //                        new ClothingItem("Hoodie", ClothingItem.Material.SYNTHETIC, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD),
 //                        new ClothingItem("Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD,ClothingItem.Occasion.UNIVERSAL,ClothingItem.Weather.UNIVERSAL),
