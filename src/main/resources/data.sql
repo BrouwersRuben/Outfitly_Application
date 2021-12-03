@@ -5,9 +5,6 @@ INSERT INTO customer(customer_id, email, account_password, first_name, last_name
 VALUES (1, 'testUser1@gmail.com', 'password', 'John', 'Doe', '2000-01-01', '0488112654', 'Belgium', 'Antwerp',
         'Nationalestraat', '5', DEFAULT, '2000');
 
-INSERT INTO customer_settings(customer_id, preferred_forecast_country, preferred_forecast_city)
-VALUES (1, 'Belgium', 'Antwerp');
-
 INSERT INTO clothes(customer_id, clothing_id, clothing_name, material, clothing_type, rain_proofness, occasion, weather,
                     image_file_path)
 VALUES (1, 1, 'White T-Shirt', 'Cotton', 'T-Shirts', 'Bad', 'Casual', 'Warm',

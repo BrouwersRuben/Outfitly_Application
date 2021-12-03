@@ -43,23 +43,6 @@ ALTER TABLE customer
     ADD CONSTRAINT customer_customer_id_pk PRIMARY KEY (customer_id);
 
 
--- Preferred_location is "antwerp,be" City + 2char ISO identifier for the country. Maybe redundant, not sure atm.
--- Is used to make comparison with weather_forecast table easier (if that table has a recently updated entry of that location).
--- Also could be used to insert it automatically into the API link.
-CREATE TABLE IF NOT EXISTS customer_settings
-(
-    customer_id                INTEGER
-        CONSTRAINT clothes_settings_customer_id_nn NOT NULL,
-    preferred_forecast_country VARCHAR(56)
-        CONSTRAINT customer_settings_preferred_forecast_country_nn NOT NULL,
-    preferred_forecast_city    VARCHAR(85)
-        CONSTRAINT customer_settings_preferred_forecast_city_nn NOT NULL
-);
-
-ALTER TABLE customer_settings
-    ADD CONSTRAINT customer_settings_customer_id_fk FOREIGN KEY (customer_id) REFERENCES customer (customer_id) ON DELETE CASCADE;
-
-
 CREATE TABLE IF NOT EXISTS clothes
 (
     customer_id     INTEGER
@@ -128,7 +111,3 @@ CREATE TABLE IF NOT EXISTS current_weather_forecast
         CONSTRAINT current_weather_description_nn NOT NULL
 );
 
-
-
--- For 5 day weather forecast.
--- I will work with JS and localStorage.
