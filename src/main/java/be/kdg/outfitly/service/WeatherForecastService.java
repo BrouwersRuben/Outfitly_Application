@@ -8,4 +8,5 @@ public interface WeatherForecastService {
 
     WeatherForecast findByDate(LocalDateTime time);
     WeatherForecast findByCountryAndCity(String country, String city);
+    WeatherForecast create(String country, String city);
 }

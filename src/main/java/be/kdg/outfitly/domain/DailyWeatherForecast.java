@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class DailyWeatherForecast extends Entity {
@@ -28,6 +29,7 @@ public class DailyWeatherForecast extends Entity {
     private double minTemperature;
     private String description;
     private String weatherIcon;
+    private LocalDateTime date;
     private ArrayList<Double> dailyTemperatures = new ArrayList<>();
     private ArrayList<Long> dailyTemperatureTimestamps = new ArrayList<>();
     private ArrayList<String> weatherAlerts = new ArrayList<>();
@@ -51,10 +53,11 @@ public class DailyWeatherForecast extends Entity {
         this.dailyTemperatureTimestamps = dailyTemperatureTimestamps;
         this.weatherAlerts = weatherAlerts;
         this.weatherAlertTimeStamps = weatherAlertTimeStamps;
+        this.date = LocalDateTime.now();
     }
 
     public DailyWeatherForecast() {
-
+        this.date = LocalDateTime.now();
     }
 
 
@@ -249,5 +252,13 @@ public class DailyWeatherForecast extends Entity {
 
     public void setWeatherAlertTimeStamps(ArrayList<Long> weatherAlertTimeStamps) {
         this.weatherAlertTimeStamps = weatherAlertTimeStamps;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 }

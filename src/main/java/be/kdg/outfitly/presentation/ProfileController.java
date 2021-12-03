@@ -74,6 +74,7 @@ public class ProfileController {
             user.setApartmentNumber(locationDTO.getApartmentNumber());
             user.setZipcode(locationDTO.getZipcode());
             userService.update(user);
+            logger.debug("User with changed location: "+ user);
             return "redirect:/user/profile";
         }
     }

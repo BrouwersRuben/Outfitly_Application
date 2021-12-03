@@ -12,7 +12,7 @@
     <div th:insert="~{fragments/header::header}">header</div>
 
     <div class="d-flex justify-content-center align-content-center">
-        <form method="post" th:object="${locationDTO}">
+        <form method="post" th:object="${locationDTO}" th:action="@{/user/profile/changelocation}">
             <div class="form-group row d-flex justify-content-center">
                 <label for="country" class="m-1 w-75">Country:</label>
                 <input type="text" name="country" id="country" th:value="${user.country}" class="m-1 w-75">
