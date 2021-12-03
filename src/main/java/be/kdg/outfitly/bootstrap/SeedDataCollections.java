@@ -102,7 +102,7 @@ public class SeedDataCollections implements CommandLineRunner {
         userRepository.create(user2);
 
         // Arduino API
-        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
+        ArduinoSensor arduinoSensor = new ArduinoSensor(99, 300, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
 //        ArduinoSensor arduinoSensor = new ArduinoSensor(
 //                Double.parseDouble(String.valueOf(arduinoAPIData.get("Temperature"))),
 //                Double.parseDouble(String.valueOf(arduinoAPIData.get("Humidity"))),

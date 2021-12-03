@@ -68,7 +68,29 @@ public class SeedDataSQL implements CommandLineRunner {
         ClothingItem clothingItem13 = new ClothingItem("Black pants", ClothingItem.Material.OTHER, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.UNIVERSAL, ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.TROUSERS_LIKE);
         ClothingItem clothingItem14 = new ClothingItem("Black leather sneakers", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.BAD, ClothingItem.Occasion.UNIVERSAL, ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.SHOES);
 
-/*        clothingRepository.create(clothingItem1);
+        final List<ClothingItem> clothingItemsUser1 = List.of(clothingItem1, clothingItem2, clothingItem3, clothingItem4, clothingItem5, clothingItem6, clothingItem7, clothingItem8, clothingItem9, clothingItem10, clothingItem11, clothingItem12, clothingItem13, clothingItem14);
+        clothingItemsUser1.forEach(clothingItem -> {
+            user1.addClothingItem(clothingItem);
+            clothingItem.setUser(user1);
+        });
+
+
+        // Arduino API
+        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
+//        ArduinoSensor arduinoSensor = new ArduinoSensor(
+//                Double.parseDouble(String.valueOf(arduinoAPIData.get("Temperature"))),
+//                Double.parseDouble(String.valueOf(arduinoAPIData.get("Humidity"))),
+//                LocalDateTime.parse(String.valueOf(arduinoAPIData.get("DateTime"))))                ;
+
+        /*arduinoSensorRepository.create(arduinoSensor);*/
+
+        arduinoSensor.setUser(user1);
+        user1.setSensorData(List.of(arduinoSensor));
+
+        User testUser = userRepository.create(user1);
+
+
+        clothingRepository.create(clothingItem1);
         clothingRepository.create(clothingItem2);
         clothingRepository.create(clothingItem3);
         clothingRepository.create(clothingItem4);
@@ -81,7 +103,7 @@ public class SeedDataSQL implements CommandLineRunner {
         clothingRepository.create(clothingItem11);
         clothingRepository.create(clothingItem12);
         clothingRepository.create(clothingItem13);
-        clothingRepository.create(clothingItem14);*/
+        clothingRepository.create(clothingItem14);
 
 
 
@@ -101,11 +123,11 @@ public class SeedDataSQL implements CommandLineRunner {
         ClothingItem clothingItem18 = new ClothingItem("T-Shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.WARM, ClothingItem.Type.T_SHIRT_LIKE);
         ClothingItem clothingItem19 = new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.SHIRT_LIKE);
 
-        /*clothingRepository.create(clothingItem15);
+        clothingRepository.create(clothingItem15);
         clothingRepository.create(clothingItem16);
         clothingRepository.create(clothingItem17);
         clothingRepository.create(clothingItem18);
-        clothingRepository.create(clothingItem19);*/
+        clothingRepository.create(clothingItem19);
 
         final List<ClothingItem> clothingItemsUser2 = List.of(clothingItem15, clothingItem16, clothingItem17, clothingItem18, clothingItem19);
         clothingItemsUser2.forEach(clothingItem -> {
@@ -113,12 +135,11 @@ public class SeedDataSQL implements CommandLineRunner {
             clothingItem.setUser(user2);
         });
 
-        ArduinoSensor arduinoSensor2 = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
+        ArduinoSensor arduinoSensor2 = new ArduinoSensor(99, 300, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
         user2.setSensorData(List.of(arduinoSensor2));
         arduinoSensor2.setUser(user2);
 
         userRepository.create(user2);
-
 
         // Weather API
 //        WeatherForecast forecast = new WeatherForecast(

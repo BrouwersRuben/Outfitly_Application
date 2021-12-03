@@ -31,6 +31,7 @@ public class ClothingRepositorySQLImpl implements ClothingRepository{
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         List<ClothingItem> clothingItems = em.createQuery("select c from ClothingItem c").getResultList();
+        clothingItems.forEach(System.out::println);
         em.getTransaction().commit();
         em.close();
         return clothingItems;

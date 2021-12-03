@@ -61,17 +61,11 @@ public class UserRepositorySQLImpl implements UserRepository{
 
     @Override
     public void update(User user) {
-        //TODO: Need help
-//        em = entityManagerFactory.createEntityManager();
-//        em.getTransaction().begin();
-//        em.createQuery("update Book b set b.title = 'good book' where b.pages < 200").executeUpdate();
-//        em.getTransaction().commit();
-//        em.close();
-
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         User fetchedUser = em.find(User.class, user.getId());
         fetchedUser.merge(em.contains(fetchedUser) ? user : em.merge(fetchedUser));
+        em.persist(fetchedUser);
         em.getTransaction().commit();
         em.close();
     }

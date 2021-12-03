@@ -95,7 +95,7 @@ public class ProfileController {
         logger.debug("currentPassword: " + user.getPassword());
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
-            return "changepassword";
+            return "user/profile/changepassword";
         } else {
             logger.debug("currentPasswordDTO: " + passwordDTO.getCurrentPassword());
             logger.debug("newPasswordDTO: " + passwordDTO.getNewPassword());
@@ -126,7 +126,7 @@ public class ProfileController {
         User user = userService.findByEmail(principal.getName());
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
-            return "changename";
+            return "user/profile/changename";
         } else {
             user.setFirstName(nameDTO.getFirstName());
             user.setLastName(nameDTO.getLastName());
@@ -149,7 +149,7 @@ public class ProfileController {
         User user = userService.findByEmail(principal.getName());
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
-            return "changephonenumber";
+            return "user/profile/changephonenumber";
         } else {
             user.setPhoneNumber(phoneNumberDTO.getNewPhoneNumber());
             logger.debug("New phone number: " + phoneNumberDTO.getNewPhoneNumber());
@@ -163,6 +163,10 @@ public class ProfileController {
     public String viewClothing(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
+        model.addAttribute("clothingDTO", new ClothingDTO());
+
+        logger.debug("User to see clothing: "+user);
+
         return "viewclothing";
     }
 
