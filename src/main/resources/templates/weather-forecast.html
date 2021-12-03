@@ -15,16 +15,22 @@
         let timeArray = [];
         console.log(temperatureArray);
 
-        for (let i = 0; i < valueCount * 2; i+=2) {
+        for (let i = 0; i < valueCount * 2; i += 2) {
             let date = new Date(timestampArray[i] * 1000);
             let hours = date.getHours();
-            let minutes = '0'+date.getMinutes();
+            let minutes = '0' + date.getMinutes();
 
-            timeArray.push(hours+':'+minutes.substr(-2));
+            timeArray.push(hours + ':' + minutes.substr(-2));
         }
 
         const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx,  {
+
+        let gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(58, 123, 213, 1');
+        gradient.addColorStop(1, 'rgba(0, 210, 255, 0.3');
+
+        // TODO: Values on top of line.
+        const myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: timeArray,
@@ -32,6 +38,9 @@
                     data: temperatureArray,
                     borderColor: '#3e95cd',
                     fill: true,
+                    backgroundColor: gradient,
+                    borderColor: '#fff',
+                    borderWidth: 1.5
                 }]
             },
             options: {
@@ -41,7 +50,12 @@
                     }
                 },
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                }
             }
         });
 
@@ -57,20 +71,20 @@
         }
 
         if (weatherAlertArray.length != 0) {
-                    document.getElementById('warning').innerText = 'Weather warnings for today.';
-                    document.getElementById('alerts').className = 'd-flex flex-column justify-content-center alert alert-warning';
+            document.getElementById('warning').innerText = 'Weather warnings for today.';
+            document.getElementById('alerts').className = 'd-flex flex-column justify-content-center alert alert-warning';
 
-                    for (let i = 0; i < weatherAlertArray.length; i++) {
-                        let type1 = document.createElement('span');
-                        let type2 = document.createElement('span');
-                        let text1 = document.createTextNode('\n[' + unixTimeConverter(weatherAlertTimestampArray[i]) + ']');
-                        let text2 = document.createTextNode(weatherAlertArray[i]);
-                        type1.appendChild(text1);
-                        type2.appendChild(text2);
-                        document.getElementById('weatherAlerts').appendChild(type1);
-                        document.getElementById('weatherAlerts').appendChild(type2);
-                    }
-                }
+            for (let i = 0; i < weatherAlertArray.length; i++) {
+                let type1 = document.createElement('span');
+                let type2 = document.createElement('span');
+                let text1 = document.createTextNode('\n[' + unixTimeConverter(weatherAlertTimestampArray[i]) + ']');
+                let text2 = document.createTextNode(weatherAlertArray[i]);
+                type1.appendChild(text1);
+                type2.appendChild(text2);
+                document.getElementById('weatherAlerts').appendChild(type1);
+                document.getElementById('weatherAlerts').appendChild(type2);
+            }
+        }
     </script>
 </head>
 <body class="m-4">
@@ -87,16 +101,21 @@
 
         <div class='d-flex justify-content-center flex-column w-50'>
             <div>
-                <p>The current forecast for today in <span th:text="${city}"></span> is <span th:text="${dailyWeatherForecastData.getDescription}"></span>.</p>
-                <p>The forecast for today shows a high of <span th:text="${dailyWeatherForecastData.getMaxTemperature}"></span>°C and a low of <span th:text="${dailyWeatherForecastData.getMinTemperature}"></span>°C.</p>
-                <p>There is a <span th:text="${dailyWeatherForecastData.getRainProbability}"></span>% chance of rain today.</p>
+                <p>The current forecast for today in <span th:text="${city}"></span> is <span
+                        th:text="${dailyWeatherForecastData.getDescription}"></span>.</p>
+                <p>The forecast for today shows a high of <span
+                        th:text="${dailyWeatherForecastData.getMaxTemperature}"></span>°C and a low of <span
+                        th:text="${dailyWeatherForecastData.getMinTemperature}"></span>°C.</p>
+                <p>There is a <span th:text="${dailyWeatherForecastData.getRainProbability}"></span>% chance of rain
+                    today.</p>
             </div>
         </div>
 
         <div class="d-flex flex-row justify-content-center w-50">
             <div><img th:src="${dailyWeatherForecastData.getWeatherIcon()}" alt="weather-icon" class="img-fluid"></div>
             <div class="justify-content-center d-flex flex-column w-50">
-                <div>Current temperature: <span th:text="${dailyWeatherForecastData.getCurrentTemperature}"></span>°C</div>
+                <div>Current temperature: <span th:text="${dailyWeatherForecastData.getCurrentTemperature}"></span>°C
+                </div>
                 <div>Humidity: <span th:text="${dailyWeatherForecastData.getCurrentHumidity}"></span>%</div>
                 <div>Wind: <span th:text="${dailyWeatherForecastData.getCurrentWindSpeed}"></span>m/s</div>
             </div>
@@ -117,9 +136,9 @@
     <div class="m-4">
         <a class="btn btn-outline-dark" th:href="@{/user/outfit}">View suggested clothing</a>
     </div>
-<!--    <div class="m-4">-->
-<!--        <a class="btn btn-outline-dark" th:href="@{/...}">View weekly broadcast</a>-->
-<!--    </div>-->
+    <!--    <div class="m-4">-->
+    <!--        <a class="btn btn-outline-dark" th:href="@{/...}">View weekly broadcast</a>-->
+    <!--    </div>-->
 </div>
 
 <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
