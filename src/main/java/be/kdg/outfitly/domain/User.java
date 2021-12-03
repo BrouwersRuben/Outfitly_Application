@@ -82,6 +82,7 @@ public class User extends Entity {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.country = country;
+        this.countryCode = countryCode;
         this.city = city;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
