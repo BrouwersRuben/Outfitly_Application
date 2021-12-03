@@ -42,10 +42,16 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/...")
-    public String showDoesNotExist(Model model) {
-        return "doesnotexist";
+    @GetMapping("/pricing")
+    public String showDoesNotExist(Model model, Principal principal) {
+        model.addAttribute("loggedIn", principal != null);
+        if(principal!=null) {
+            User user = userService.findByEmail(principal.getName());
+            model.addAttribute("user", user);
+        }
+        return "pricing";
     }
+
 
 
 

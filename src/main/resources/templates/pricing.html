@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pricing</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body class="m-4">
+
+<nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
+
+<div th:insert="~{fragments/header::header}">header</div>
+
+<div class="container mt-4">
+    <div class="pricing m-3 mx-auto text-center">
+        <h1>PRICING AND PLANS</h1>
+        <p>Choose the plan that's right for you.</p>
+        <p>Paid plans start with a 14-day free trial.</p>
+        <p>Upgrade, downgrade or cancel anytime.</p>
+    </div>
+    <div class="card-deck mx-5 text-center d-flex flex-row justify-content-center">
+        <div class="card m-4 box-shadow" style="width:20rem">
+            <div class="card-header">
+                <h2 class="font-weight-normal">Individual</h2>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title"><span style="font-size: 22px">$</span>2.99<span style="font-size: 22px"> / month</span></h1>
+                <ul class="list-unstyled my-4">
+                    <li>One User Account</li>
+                    <li>24/7 Customer Support</li>
+                    <li>Access To All Features</li>
+                    <li>Cancel Anytime</li>
+                </ul>
+                <div class="m-4">
+                    <a class="btn btn-outline-dark">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card m-4 box-shadow" style="width:20rem">
+            <div class="card-header">
+                <h2 class="font-weight-normal">Family</h2>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title"><span style="font-size: 22px">$</span>4.99<span style="font-size: 22px"> / month</span></h1>
+                <ul class="list-unstyled my-4">
+                    <li>Up To 5 User Accounts</li>
+                    <li>24/7 Customer Support</li>
+                    <li>Access To All Features</li>
+                    <li>Cancel Anytime</li>
+                </ul>
+                <div class="m-4">
+                    <a class="btn btn-outline-dark">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-description p-3 mx-auto text-center">
+        <p>Save time and dress confidently with Outfitly.</p>
+    </div>
+</div>
+
+<div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+
+</body>
+</html>
