@@ -2,6 +2,7 @@ package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
+import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +21,16 @@ import java.util.Map;
 public class AddClothingController {
     private final Logger logger = LoggerFactory.getLogger(AddClothingController.class);
     private UserService userService;
+    private ClothingService clothingService;
 
-    public AddClothingController(UserService userService) {
+
+//    public AddClothingController(UserService userService) {
+//        this.userService = userService;
+//    }
+
+    public AddClothingController(UserService userService, ClothingService clothingService) {
         this.userService = userService;
+        this.clothingService = clothingService;
     }
 
     @GetMapping
@@ -53,14 +61,24 @@ public class AddClothingController {
         //quick fix, gives "java.lang.UnsupportedOperationException: null" error
         //with ex. userClothing.getClothes().add(..)
         //or addClothing method inside of User
-        List<ClothingItem> userClothing = new ArrayList<>(user.getClothes());
-        userClothing.add(newClothingItem);
+//        List<ClothingItem> userClothing = new ArrayList<>(user.getClothes());
+//        userClothing.add(newClothingItem);
         User userFromRepository = userService.findById(user.getId());
-        userFromRepository.setClothes(userClothing);
+//        userFromRepository.setClothes(userClothing);
 
         logger.debug(user.getName() + " Added a new clothing item: " + newClothingItem);
 
-        user.setClothes(userClothing);
+//        user.setClothes(userClothing);
+
+        //newClothingItem.setUser(userFromRepository);
+        //clothingService.create(newClothingItem);
+
+        List<ClothingItem> userClothing = new ArrayList<>(userFromRepository.getClothes());
+        userClothing.add(newClothingItem);
+        userFromRepository.setClothes(userClothing);
+        userService.update(userFromRepository);
+        clothingService.create(newClothingItem);
+
         return "redirect:/mainpage";
     }
 }

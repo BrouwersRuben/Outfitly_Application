@@ -52,6 +52,10 @@ public class ClothingRepositoryHSQLImpl implements ClothingRepository{
         logger.debug("(HSQL) Created clothing item: " + clothingItem.toString());
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
+//        while(!em.contains(clothingItem)){
+//            em.merge(clothingItem);
+//        }
+
         em.persist(clothingItem);
         em.getTransaction().commit();
         em.close();

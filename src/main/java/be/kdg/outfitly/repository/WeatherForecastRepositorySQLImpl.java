@@ -1,7 +1,5 @@
 package be.kdg.outfitly.repository;
 
-import be.kdg.outfitly.domain.ClothingItem;
-import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.domain.WeatherForecast;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,21 +13,21 @@ import java.util.List;
 
 @Repository
 @Profile("Hibernate")
-public class WeatherForecastRepositoryHSQLImpl implements WeatherForecastRepository{
+public class WeatherForecastRepositorySQLImpl implements WeatherForecastRepository{
 
-    private final Logger logger = LoggerFactory.getLogger(WeatherForecastRepositoryHSQLImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(WeatherForecastRepositorySQLImpl.class);
 
     @PersistenceUnit
     private EntityManagerFactory emFactory;
     EntityManager em;
 
-    public WeatherForecastRepositoryHSQLImpl() {
-        logger.debug("Creating Weather forecast repository (HSQL)");
+    public WeatherForecastRepositorySQLImpl() {
+        logger.debug("Creating Weather forecast repository (SQL)");
     }
 
     @Override
     public WeatherForecast create(WeatherForecast weatherForecast) {
-        logger.debug("Created weatherForecast (HSQL): " + weatherForecast.toString());
+        logger.debug("Created weatherForecast (SQL): " + weatherForecast.toString());
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         em.persist(weatherForecast);
@@ -40,7 +38,7 @@ public class WeatherForecastRepositoryHSQLImpl implements WeatherForecastReposit
 
     @Override
     public List<WeatherForecast> read() {
-        logger.debug("Read weather forecast (HSQL)");
+        logger.debug("Read weather forecast (SQL)");
         em = emFactory.createEntityManager();
         em.getTransaction().begin();
         List<WeatherForecast> weatherForecasts = em.createQuery("select w from WeatherForecast w").getResultList();

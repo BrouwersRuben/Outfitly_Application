@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -111,13 +112,17 @@ public class ProfileController {
 
     @GetMapping("/viewclothing")
     public String viewClothing(Model model, @ModelAttribute("user") User user){
-        model.addAttribute("user", user);
+        User userFromRepo = userService.findById(user.getId());
+        model.addAttribute("user", userFromRepo);
         return "viewclothing";
     }
 
     @PostMapping("/viewclothing")
     public String processRemoveClothing(@ModelAttribute("clothingDTO") ClothingDTO clothingDTO, @ModelAttribute("user") User user){
         logger.warn(clothingDTO.toString());
+
+        ClothingItem clothingItemToRemove = clothingService.findById(clothingDTO.getID());
+
         clothingService.delete(clothingDTO.getID());
         List<ClothingItem> newClothingList = clothingService.read();
         user.setClothes(newClothingList);
