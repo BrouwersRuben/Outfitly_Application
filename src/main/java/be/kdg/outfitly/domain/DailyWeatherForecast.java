@@ -89,10 +89,13 @@ public class DailyWeatherForecast extends Entity {
             forecast.dailyTemperatureTimestamps.add(Long.parseLong(String.valueOf(hourlyForecastData.getJSONArray("hourly").getJSONObject(i).get("dt"))));
         }
 
-        for (int i = 0; i <hourlyForecastData.getJSONArray("alerts").length(); i++) {
-            forecast.weatherAlerts.add(String.valueOf(hourlyForecastData.getJSONArray("alerts").getJSONObject(i).get("description")));
-            forecast.weatherAlertTimeStamps.add(Long.parseLong(String.valueOf(hourlyForecastData.getJSONArray("alerts").getJSONObject(i).get("start"))));
+        if (hourlyForecastData.has("alerts")) {
+            for (int i = 0; i <hourlyForecastData.getJSONArray("alerts").length(); i++) {
+                forecast.weatherAlerts.add(String.valueOf(hourlyForecastData.getJSONArray("alerts").getJSONObject(i).get("description")));
+                forecast.weatherAlertTimeStamps.add(Long.parseLong(String.valueOf(hourlyForecastData.getJSONArray("alerts").getJSONObject(i).get("start"))));
+            }
         }
+
 
 
         logger.debug("Daily weather forecast object created: ");
