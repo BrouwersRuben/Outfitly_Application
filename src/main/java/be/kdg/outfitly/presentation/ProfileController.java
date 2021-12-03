@@ -61,6 +61,7 @@ public class ProfileController {
     @PostMapping("/changelocation")
     public String processChangedLocation(Principal principal, @Valid @ModelAttribute("locationDTO") LocationDTO locationDTO, BindingResult errors, Model model) {
         User user = userService.findByEmail(principal.getName());
+        model.addAttribute("codes", Locale.getISOCountries());
         model.addAttribute("user", user);
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
@@ -75,6 +76,7 @@ public class ProfileController {
             user.setApartmentNumber(locationDTO.getApartmentNumber());
             user.setZipcode(locationDTO.getZipcode());
             userService.update(user);
+            logger.debug("User with changed location: "+ user);
             return "redirect:/user/profile";
         }
     }
