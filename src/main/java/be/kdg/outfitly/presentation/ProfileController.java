@@ -3,11 +3,7 @@ package be.kdg.outfitly.presentation;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.ClothingDTO;
-import be.kdg.outfitly.presentation.dto.profileChanges.NameDTO;
-import be.kdg.outfitly.presentation.dto.profileChanges.PhoneNumberDTO;
-import be.kdg.outfitly.presentation.dto.UserDTO;
-import be.kdg.outfitly.presentation.dto.profileChanges.LocationDTO;
-import be.kdg.outfitly.presentation.dto.profileChanges.PasswordDTO;
+import be.kdg.outfitly.presentation.dto.profileChanges.*;
 import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
@@ -23,7 +19,6 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/user/profile")
@@ -193,5 +188,33 @@ public class ProfileController {
         userFromRepo.setClothes(clothes);
         userService.update(userFromRepo);
         return "redirect:/user/profile/viewclothing";
+    }
+
+    @GetMapping("/changewashingresetday")
+    public String changeWashingDay(Model model, Principal principal){
+        User user = userService.findByEmail(principal.getName());
+        logger.debug(user.getFirstName() + " is trying to change their washing day. It's currently: " + user.getWashingResetDay());
+        model.addAttribute("user", user);
+        model.addAttribute("washingDayDTO", new WashingDayDTO());
+        return "changewashingresetday";
+    }
+
+    @PostMapping("/changewashingresetday")
+    public String processChangePhoneNumber(Model model, Principal principal, @Valid @ModelAttribute("washingDayDTO") WashingDayDTO washingDayDTO, BindingResult errors) {
+        User user = userService.findByEmail(principal.getName());
+        if (errors.hasErrors()) {
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
+            model.addAttribute("user", user);
+            model.addAttribute("washingDayDTO", new WashingDayDTO());
+            return "user/profile/changewashingresetday";
+        } else {
+            user.setWashingResetDay(washingDayDTO.getNewWashingResetDay());
+            userService.update(user);
+            logger.debug("Changed user: " + user);
+            logger.debug("Washing day dto: " + washingDayDTO);
+            logger.debug("New washing reset day: " + washingDayDTO.getNewWashingResetDay());
+            logger.debug("Succesfully changed " + user.getFirstName() + "'s washing reset day to: " + user.getWashingResetDay());
+            return "redirect:/user/profile";
+        }
     }
 }

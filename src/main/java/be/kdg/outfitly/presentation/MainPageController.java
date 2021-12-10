@@ -33,7 +33,8 @@ public class MainPageController {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
-        model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.of(2021, 10, 29, 12, 30, 30)));
+        //LocalDateTime.of(2021, 10, 29, 12, 30, 30)
+        //model.addAttribute("arduinoSensorData", arduinoSensorService.findByDate(LocalDateTime.now()));
         model.addAttribute("username", user.getName());
         model.addAttribute("weatherForecastData", weatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity()));
         return "mainpage";
