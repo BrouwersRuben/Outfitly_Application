@@ -56,7 +56,8 @@ public class AddClothingController {
         User user = userService.findByEmail(principal.getName());
 
 
-        ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type);
+        //Upon clothing creation it is set to false
+        ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type, false);
         //quick fix, gives "java.lang.UnsupportedOperationException: null" error
         //with ex. userClothing.getClothes().add(..)
         //or addClothing method inside of User
