@@ -77,7 +77,7 @@ public class SeedDataSQL implements CommandLineRunner {
 
 
         // Arduino API
-        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
+        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.now());
 //        ArduinoSensor arduinoSensor = new ArduinoSensor(
 //                Double.parseDouble(String.valueOf(arduinoAPIData.get("Temperature"))),
 //                Double.parseDouble(String.valueOf(arduinoAPIData.get("Humidity"))),
@@ -137,7 +137,7 @@ public class SeedDataSQL implements CommandLineRunner {
             clothingItem.setUser(user2);
         });
 
-        ArduinoSensor arduinoSensor2 = new ArduinoSensor(99, 300, LocalDateTime.of(2021, 10, 29, 12, 30, 30));
+        ArduinoSensor arduinoSensor2 = new ArduinoSensor(99, 300, LocalDateTime.now());
         user2.setSensorData(List.of(arduinoSensor2));
         arduinoSensor2.setUser(user2);
 
