@@ -67,7 +67,7 @@ public class RegisterController {
                 //No clothes yet
                 // TODO: Make it accept userDTO object
                 logger.debug("Country code of the registering user: "+userDTO.getCountryCode());
-                userService.create(userDTO.getEmail(),userDTO.getPassword(),userDTO.getFirstName(), userDTO.getLastName(), userDTO.getPhoneNumber(), userDTO.getCountry(), userDTO.getCountryCode(), userDTO.getCity(), userDTO.getStreetName(), userDTO.getStreetNumber(), userDTO.getApartmentNumber(), userDTO.getZipcode(), new ArrayList<>());
+                userService.create(userDTO.getEmail(),userDTO.getPassword(),userDTO.getFirstName(), userDTO.getLastName(), userDTO.getWashday(), userDTO.getPhoneNumber(), userDTO.getCountry(), userDTO.getCountryCode(), userDTO.getCity(), userDTO.getStreetName(), userDTO.getStreetNumber(), userDTO.getApartmentNumber(), userDTO.getZipcode(), new ArrayList<>());
                 return "redirect:/login";
             }
         }
