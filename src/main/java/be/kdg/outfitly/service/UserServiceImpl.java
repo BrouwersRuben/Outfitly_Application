@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.util.List;
 
 @Service
@@ -38,14 +39,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User create(String email, String password, String firstName, String lastName, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode, List<ClothingItem> clothes) {
+    public User create(String email, String password, String firstName, String lastName, DayOfWeek washday,String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode, List<ClothingItem> clothes) {
         User user;
         if(apartmentNumber == null){
             logger.debug("User didn't fill in a ap number");
-            user = new User(email, password, firstName, lastName, phoneNumber, country, countryCode, city, streetName, streetNumber, zipcode);
+            user = new User(email, password, firstName, lastName, washday, phoneNumber, country, countryCode, city, streetName, streetNumber, zipcode);
         }else{
             logger.debug("User filled in an ap number");
-            user = new User(email, password, firstName, lastName, phoneNumber, country, countryCode, city, streetName, streetNumber, apartmentNumber, zipcode);
+            user = new User(email, password, firstName, lastName, washday, phoneNumber, country, countryCode, city, streetName, streetNumber, apartmentNumber, zipcode);
         }
         return userRepository.create(user);
     }
