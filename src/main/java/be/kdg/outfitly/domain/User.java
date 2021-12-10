@@ -110,6 +110,7 @@ public class User extends Entity {
         setPassword(other.getPassword());
         setFirstName(other.getFirstName());
         setLastName(other.getLastName());
+        setWashingResetDay(other.getWashingResetDay());
         setPhoneNumber(other.getPhoneNumber());
         setCountry(other.getCountry());
         setCountryCode(other.getCountryCode());
@@ -272,13 +273,15 @@ public class User extends Entity {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", country='" + country + '\'' +
-                ", countryCODE='" + countryCode + '\'' +
+                ", countryCode='" + countryCode + '\'' +
                 ", city='" + city + '\'' +
                 ", streetName='" + streetName + '\'' +
-                ", streetNumber=" + streetNumber +
+                ", streetNumber='" + streetNumber + '\'' +
                 ", apartmentNumber='" + apartmentNumber + '\'' +
                 ", zipcode='" + zipcode + '\'' +
                 ", clothes=" + clothes +
+                ", washingResetDay=" + washingResetDay +
+                ", sensorData=" + sensorData +
                 '}';
     }
 }
