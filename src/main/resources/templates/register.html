@@ -42,7 +42,9 @@
                 <div class="m-2 alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}">This email has already been used.</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputWashingDay">Last name</label>
+                <label for="inputWashingDay">Wash day</label>
+<!--                TODO: maybe give some more info here. (popup?)-->
+                <small id="washDayHelp" class="form-text text-muted">This is the day you normally do the washing.</small>
                 <input type="text" class="form-control" id="inputWashingDay" placeholder="Wednesday" name="washDay">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('washDay')}" th:errors="*{washday}">wash day error</div>
             </div>
