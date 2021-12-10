@@ -1,6 +1,7 @@
 package be.kdg.outfitly.domain;
 
 import javax.persistence.*;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +54,10 @@ public class User extends Entity {
     @OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE}, fetch=FetchType.EAGER)
     private List<ClothingItem> clothes;
 
+    @Column(name = "washing_reset_day", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private DayOfWeek washingResetDay;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<ArduinoSensor> sensorData;
 
@@ -62,11 +67,12 @@ public class User extends Entity {
     }
 
     //constructor for everything
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, DayOfWeek washingResetDay, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.washingResetDay = washingResetDay;
         this.phoneNumber = phoneNumber;
         this.country = country;
         this.countryCode = countryCode;
@@ -79,11 +85,12 @@ public class User extends Entity {
     }
 
     //Constructor for without apartmentNumber
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, DayOfWeek washingResetDay, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.washingResetDay = washingResetDay;
         this.phoneNumber = phoneNumber;
         this.country = country;
         this.countryCode = countryCode;
@@ -134,6 +141,10 @@ public class User extends Entity {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public DayOfWeek getWashingResetDay() {
+        return washingResetDay;
     }
 
     public String getPhoneNumber() {
@@ -202,6 +213,10 @@ public class User extends Entity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setWashingResetDay(DayOfWeek washingResetDay) {
+        this.washingResetDay = washingResetDay;
     }
 
     public void setClothes(List<ClothingItem> clothes) {

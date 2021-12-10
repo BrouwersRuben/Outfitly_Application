@@ -107,6 +107,10 @@ public class ClothingItem extends Entity {
     @Column(name = "image_url", length = 200)
     private String photoUrl;
 
+    @Column(name = "wash_cycle", nullable = false)
+    private boolean wash_cycle;
+    //TODO: Should be set to false upon registering clothes
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, /*CascadeType.PERSIST,*/ CascadeType.REFRESH})
     @JoinColumn(name="user_id")
     private User user;
@@ -116,13 +120,15 @@ public class ClothingItem extends Entity {
 
     // TODO: Why are there 2 constructors here?
 
-    public ClothingItem(String name, Material material, RainProofness rainProofness, Occasion occasion, Weather weather, Type type) {
+
+    public ClothingItem(String name, Material material, RainProofness rainProofness, Occasion occasion, Weather weather, Type type, boolean wash_cycle) {
         this.name = name;
         this.type = type;
         this.material = material;
         this.rainProofness = rainProofness;
         this.occasion = occasion;
         this.weather = weather;
+        this.wash_cycle = wash_cycle;
     }
 
     @Override
@@ -191,6 +197,14 @@ public class ClothingItem extends Entity {
         this.photoUrl = photoUrl;
     }
 
+    public boolean isWash_cycle() {
+        return wash_cycle;
+    }
+
+    public void setWash_cycle(boolean wash_cycle) {
+        this.wash_cycle = wash_cycle;
+    }
+
     public User getUser() {
         return user;
     }
@@ -202,13 +216,16 @@ public class ClothingItem extends Entity {
     @Override
     public String toString() {
         return "ClothingItem{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", type=" + type +
                 ", material=" + material +
                 ", rainProofness=" + rainProofness +
                 ", occasion=" + occasion +
                 ", weather=" + weather +
-                ", photo=" + photoUrl +
+                ", photoUrl='" + photoUrl + '\'' +
+                ", wash_cycle=" + wash_cycle +
+                ", user=" + user +
                 '}';
     }
 
