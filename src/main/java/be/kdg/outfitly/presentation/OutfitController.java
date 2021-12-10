@@ -1,9 +1,7 @@
 package be.kdg.outfitly.presentation;
 
-import be.kdg.outfitly.domain.ClothingItem;
-import be.kdg.outfitly.domain.OutfitSelector;
-import be.kdg.outfitly.domain.User;
-import be.kdg.outfitly.domain.WeatherForecast;
+import be.kdg.outfitly.domain.*;
+import be.kdg.outfitly.service.ArduinoSensorService;
 import be.kdg.outfitly.service.UserService;
 import be.kdg.outfitly.service.WeatherForecastService;
 import org.slf4j.Logger;
@@ -14,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -23,10 +22,12 @@ public class OutfitController {
     private OutfitSelector outfitSelector;
     private final Logger logger = LoggerFactory.getLogger(OutfitController.class);
     private WeatherForecastService weatherForecastService;
+    private ArduinoSensorService arduinoSensorService;
     private UserService userService;
 
-    public OutfitController(WeatherForecastService weatherForecastService) {
+    public OutfitController(WeatherForecastService weatherForecastService, ArduinoSensorService arduinoSensorService) {
         this.weatherForecastService = weatherForecastService;
+        this.arduinoSensorService = arduinoSensorService;
     }
 
     @GetMapping
@@ -50,9 +51,13 @@ public class OutfitController {
 //        outfitSelector = new OutfitSelector(WeatherForecast.randomForecast(), user, occasion);
         User user = userService.findByEmail(principal.getName());
         logger.debug("User for the outfit: "+user.toString());
+        //API
         WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity());
         logger.debug("Weather forecast from the API: " + weatherForecast);
-        outfitSelector = new OutfitSelector(weatherForecast, user, occasion);
+        //Arduino
+        ArduinoSensor arduinoSensor = arduinoSensorService.findByUser(userService.findByEmail(principal.getName()), LocalDateTime.now());
+        logger.debug("Weather forecast from the Arduino: " + arduinoSensor);
+        outfitSelector = new OutfitSelector(weatherForecast, arduinoSensor, user, occasion);
         model.addAttribute("clothes", outfitSelector.getSuitableClothesMap());
         model.addAttribute("types", List.of(ClothingItem.Type.values()));
         model.addAttribute("aiDecision", outfitSelector.getAiDecision());
