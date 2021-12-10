@@ -214,22 +214,6 @@ public class ClothingItem extends Entity {
     }
 
     @Override
-    public String toString() {
-        return "ClothingItem{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type=" + type +
-                ", material=" + material +
-                ", rainProofness=" + rainProofness +
-                ", occasion=" + occasion +
-                ", weather=" + weather +
-                ", photoUrl='" + photoUrl + '\'' +
-                ", wash_cycle=" + wash_cycle +
-                ", user=" + user +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
