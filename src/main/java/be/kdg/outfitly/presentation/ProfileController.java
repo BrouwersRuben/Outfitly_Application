@@ -92,7 +92,7 @@ public class ProfileController {
         logger.debug("currentPassword: " + user.getPassword());
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
-            return "user/profile/changepassword";
+            return "changepassword";
         } else {
             logger.debug("currentPasswordDTO: " + passwordDTO.getCurrentPassword());
             logger.debug("newPasswordDTO: " + passwordDTO.getNewPassword());
@@ -102,8 +102,6 @@ public class ProfileController {
                 userService.update(user);
                 return "redirect:/user/profile";
             } else {
-//                logger.debug("User didn't write their password correctly");
-                model.addAttribute("errorMessage", "This password is incorrect");
                 return "changepassword";
             }
         }
@@ -119,11 +117,12 @@ public class ProfileController {
     }
 
     @PostMapping("/changename")
-    public String processChangeName(Principal principal, @Valid @ModelAttribute("nameDTO") NameDTO nameDTO, BindingResult errors) {
+    public String processChangeName(Model model, Principal principal, @Valid @ModelAttribute("nameDTO") NameDTO nameDTO, BindingResult errors) {
         User user = userService.findByEmail(principal.getName());
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
-            return "user/profile/changename";
+            model.addAttribute("user", user);
+            return "changename";
         } else {
             user.setFirstName(nameDTO.getFirstName());
             user.setLastName(nameDTO.getLastName());
@@ -142,11 +141,12 @@ public class ProfileController {
     }
 
     @PostMapping("/changephonenumber")
-    public String processChangePhoneNumber(Principal principal, @Valid @ModelAttribute("phoneNumberDTO") PhoneNumberDTO phoneNumberDTO, BindingResult errors) {
+    public String processChangePhoneNumber(Model model, Principal principal, @Valid @ModelAttribute("phoneNumberDTO") PhoneNumberDTO phoneNumberDTO, BindingResult errors) {
         User user = userService.findByEmail(principal.getName());
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
-            return "user/profile/changephonenumber";
+            model.addAttribute("user", user);
+            return "changephonenumber";
         } else {
             user.setPhoneNumber(phoneNumberDTO.getNewPhoneNumber());
             logger.debug("New phone number: " + phoneNumberDTO.getNewPhoneNumber());
@@ -191,29 +191,23 @@ public class ProfileController {
     }
 
     @GetMapping("/changewashingresetday")
-    public String changeWashingDay(Model model, Principal principal){
+    public String changeWashingDay(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
-        logger.debug(user.getFirstName() + " is trying to change their washing day. It's currently: " + user.getWashingResetDay());
         model.addAttribute("user", user);
         model.addAttribute("washingDayDTO", new WashingDayDTO());
         return "changewashingresetday";
     }
 
     @PostMapping("/changewashingresetday")
-    public String processChangePhoneNumber(Model model, Principal principal, @Valid @ModelAttribute("washingDayDTO") WashingDayDTO washingDayDTO, BindingResult errors) {
+    public String processChangeWashingDay(Model model, Principal principal, @Valid @ModelAttribute("washingDayDTO") WashingDayDTO washingDayDTO, BindingResult errors) {
         User user = userService.findByEmail(principal.getName());
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
             model.addAttribute("user", user);
-            model.addAttribute("washingDayDTO", new WashingDayDTO());
-            return "user/profile/changewashingresetday";
+            return "changewashingresetday";
         } else {
             user.setWashingResetDay(washingDayDTO.getNewWashingResetDay());
             userService.update(user);
-            logger.debug("Changed user: " + user);
-            logger.debug("Washing day dto: " + washingDayDTO);
-            logger.debug("New washing reset day: " + washingDayDTO.getNewWashingResetDay());
-            logger.debug("Succesfully changed " + user.getFirstName() + "'s washing reset day to: " + user.getWashingResetDay());
             return "redirect:/user/profile";
         }
     }

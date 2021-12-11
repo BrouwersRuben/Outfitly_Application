@@ -9,8 +9,6 @@ import javax.validation.constraints.Size;
 import java.time.DayOfWeek;
 
 public class WashingDayDTO {
-    @Column(name = "washing_reset_day", nullable = false)
-    @Enumerated(EnumType.STRING)
     @NotNull(message ="Please fill in the washing reset day.")
     private DayOfWeek newWashingResetDay;
 
