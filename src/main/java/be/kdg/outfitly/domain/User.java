@@ -1,11 +1,14 @@
 package be.kdg.outfitly.domain;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
 @javax.persistence.Entity
+@DynamicUpdate
 @Table(name = "costumers")
 public class User extends Entity {
 
