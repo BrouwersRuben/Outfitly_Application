@@ -1,3 +1,4 @@
+/*
 package be.kdg.outfitly.service;
 
 import be.kdg.outfitly.domain.DailyWeatherForecast;
@@ -53,3 +54,4 @@ public class DailyWeatherForecastServiceImpl implements DailyWeatherForecastServ
     }
 }
 
+*/

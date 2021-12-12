@@ -7,7 +7,7 @@ import be.kdg.outfitly.domain.WeatherForecast;
 import be.kdg.outfitly.repository.ArduinoSensorRepository;
 import be.kdg.outfitly.repository.ClothingRepository;
 import be.kdg.outfitly.repository.UserRepository;
-import be.kdg.outfitly.repository.WeatherForecastRepository;
+//import be.kdg.outfitly.repository.WeatherForecastRepository;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class SeedDataSQL implements CommandLineRunner {
     private final ArduinoSensorRepository arduinoSensorRepository;
     private final UserRepository userRepository;
     private final ClothingRepository clothingRepository;
-    private final WeatherForecastRepository weatherForecastRepository;
+//    private final WeatherForecastRepository weatherForecastRepository;
     private JSONObject weatherAPIData;
 //    private final String arduinoAPI = "http://192.168.184.187/data";
 
@@ -41,11 +41,11 @@ public class SeedDataSQL implements CommandLineRunner {
 //    private ClothingItem clothingItem;
 
 
-    public SeedDataSQL(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository, WeatherForecastRepository weatherForecastRepository) {
+    public SeedDataSQL(ArduinoSensorRepository arduinoSensorRepository, UserRepository userRepository, ClothingRepository clothingRepository/*, WeatherForecastRepository weatherForecastRepository*/) {
         this.arduinoSensorRepository = arduinoSensorRepository;
         this.userRepository = userRepository;
         this.clothingRepository = clothingRepository;
-        this.weatherForecastRepository = weatherForecastRepository;
+//        this.weatherForecastRepository = weatherForecastRepository;
     }
 
     @Override
@@ -161,7 +161,7 @@ public class SeedDataSQL implements CommandLineRunner {
 //        );
 
         WeatherForecast forecast = WeatherForecast.currentForecastForCountryCity("Belgium", "Antwerp");
-        if (forecast != null) weatherForecastRepository.save(forecast);
+//        if (forecast != null) weatherForecastRepository.save(forecast);
 
         // Slave and master accounts may be a bit easier to understand
     }

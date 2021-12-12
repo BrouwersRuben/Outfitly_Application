@@ -1,3 +1,4 @@
+/*
 package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.DailyWeatherForecast;
@@ -34,7 +35,8 @@ public class DailyWeatherForecastController {
 
         model.addAttribute("username", user.getName());
         model.addAttribute("city", user.getCity());
-        model.addAttribute("dailyWeatherForecastData", dailyWeatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity()));
+//        model.addAttribute("dailyWeatherForecastData", dailyWeatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity()));
         return "weather-forecast";
     }
 }
+*/
