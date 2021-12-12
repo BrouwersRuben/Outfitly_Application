@@ -12,16 +12,19 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Component
-@Profile("Hibernate")
+@Configuration
+@Transactional
+//@Profile("Hibernate")
 public class SeedDataSQL implements CommandLineRunner {
     private final Logger logger = LoggerFactory.getLogger(SeedDataSQL.class);
     private final ArduinoSensorRepository arduinoSensorRepository;
@@ -89,23 +92,23 @@ public class SeedDataSQL implements CommandLineRunner {
         arduinoSensor.setUser(user1);
         user1.setSensorData(List.of(arduinoSensor));
 
-        User testUser = userRepository.create(user1);
+        User testUser = userRepository.save(user1);
 
 
-        clothingRepository.create(clothingItem1);
-        clothingRepository.create(clothingItem2);
-        clothingRepository.create(clothingItem3);
-        clothingRepository.create(clothingItem4);
-        clothingRepository.create(clothingItem5);
-        clothingRepository.create(clothingItem6);
-        clothingRepository.create(clothingItem7);
-        clothingRepository.create(clothingItem8);
-        clothingRepository.create(clothingItem9);
-        clothingRepository.create(clothingItem10);
-        clothingRepository.create(clothingItem11);
-        clothingRepository.create(clothingItem12);
-        clothingRepository.create(clothingItem13);
-        clothingRepository.create(clothingItem14);
+        clothingRepository.save(clothingItem1);
+        clothingRepository.save(clothingItem2);
+        clothingRepository.save(clothingItem3);
+        clothingRepository.save(clothingItem4);
+        clothingRepository.save(clothingItem5);
+        clothingRepository.save(clothingItem6);
+        clothingRepository.save(clothingItem7);
+        clothingRepository.save(clothingItem8);
+        clothingRepository.save(clothingItem9);
+        clothingRepository.save(clothingItem10);
+        clothingRepository.save(clothingItem11);
+        clothingRepository.save(clothingItem12);
+        clothingRepository.save(clothingItem13);
+        clothingRepository.save(clothingItem14);
 
 
 
@@ -121,15 +124,15 @@ public class SeedDataSQL implements CommandLineRunner {
 
         ClothingItem clothingItem15 = new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.MILD, ClothingItem.Type.JACKET_LIKE, false);
         ClothingItem clothingItem16 = new ClothingItem("Hoodie", ClothingItem.Material.SYNTHETIC, ClothingItem.RainProofness.NORMAL,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.COLD, ClothingItem.Type.SWEATSHIRT_LIKE, false);
-        ClothingItem clothingItem17 = new ClothingItem("Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD,ClothingItem.Occasion.UNIVERSAL,ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.TROUSERS_LIKE, false);
+        ClothingItem clothingItem17 = new ClothingItem("Blue Jeans", ClothingItem.Material.DENIM, ClothingItem.RainProofness.GOOD,ClothingItem.Occasion.UNIVERSAL,ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.TROUSERS_LIKE, false);
         ClothingItem clothingItem18 = new ClothingItem("T-Shirt", ClothingItem.Material.COTTON, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.CASUAL,ClothingItem.Weather.WARM, ClothingItem.Type.T_SHIRT_LIKE, false);
         ClothingItem clothingItem19 = new ClothingItem("Suit", ClothingItem.Material.SILK, ClothingItem.RainProofness.BAD,ClothingItem.Occasion.ELEGANT,ClothingItem.Weather.UNIVERSAL, ClothingItem.Type.SHIRT_LIKE, false);
 
-        clothingRepository.create(clothingItem15);
-        clothingRepository.create(clothingItem16);
-        clothingRepository.create(clothingItem17);
-        clothingRepository.create(clothingItem18);
-        clothingRepository.create(clothingItem19);
+        clothingRepository.save(clothingItem15);
+        clothingRepository.save(clothingItem16);
+        clothingRepository.save(clothingItem17);
+        clothingRepository.save(clothingItem18);
+        clothingRepository.save(clothingItem19);
 
         final List<ClothingItem> clothingItemsUser2 = List.of(clothingItem15, clothingItem16, clothingItem17, clothingItem18, clothingItem19);
         clothingItemsUser2.forEach(clothingItem -> {
@@ -141,7 +144,7 @@ public class SeedDataSQL implements CommandLineRunner {
         user2.setSensorData(List.of(arduinoSensor2));
         arduinoSensor2.setUser(user2);
 
-        userRepository.create(user2);
+        userRepository.save(user2);
 
         // Weather API
 //        WeatherForecast forecast = new WeatherForecast(
@@ -158,7 +161,7 @@ public class SeedDataSQL implements CommandLineRunner {
 //        );
 
         WeatherForecast forecast = WeatherForecast.currentForecastForCountryCity("Belgium", "Antwerp");
-        if (forecast != null) weatherForecastRepository.create(forecast);
+        if (forecast != null) weatherForecastRepository.save(forecast);
 
         // Slave and master accounts may be a bit easier to understand
     }
