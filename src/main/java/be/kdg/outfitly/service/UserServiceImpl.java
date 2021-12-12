@@ -4,7 +4,6 @@ package be.kdg.outfitly.service;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.repository.UserRepository;
-import be.kdg.outfitly.repository.UserRepositoryCollectionsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +29,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findById(int id) {
-        return userRepository.findById(id);
+        return userRepository.findById(id).orElseThrow();
     }
 
     @Override
     public User findByEmail(String email) {
-       return userRepository.read().stream().filter(user -> user.getEmail().equals(email)).findFirst().orElse(null);
+       return userRepository.findAll().stream().filter(user -> user.getEmail().equals(email)).findFirst().orElse(null);
     }
 
     @Override
@@ -48,16 +47,19 @@ public class UserServiceImpl implements UserService{
             logger.debug("User filled in an ap number");
             user = new User(email, password, firstName, lastName, washday, phoneNumber, country, countryCode, city, streetName, streetNumber, apartmentNumber, zipcode);
         }
-        return userRepository.create(user);
+        return userRepository.save(user);
     }
 
     @Override
     public List<User> read() {
-        return userRepository.read();
+        return userRepository.findAll();
     }
 
+    //TODO: Does this work?
     @Override
     public void update(User updatedUser){
-        userRepository.update(updatedUser);
+        User newUser = userRepository.getById(updatedUser.getId());
+        newUser.merge(updatedUser);
+        userRepository.save(newUser);
     }
 }

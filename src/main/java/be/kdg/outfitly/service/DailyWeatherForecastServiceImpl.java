@@ -32,7 +32,7 @@ public class DailyWeatherForecastServiceImpl implements DailyWeatherForecastServ
     public DailyWeatherForecast findByCountryAndCity(String country, String city){
         logger.debug("Find by country: "+country+" and city: "+city);
 
-        List<DailyWeatherForecast> forecasts = dailyWeatherForecastRepository.read().stream().filter(weatherData -> weatherData.getCountryCode().equals(country) && weatherData.getCity().equals(city)).collect(Collectors.toList());
+        List<DailyWeatherForecast> forecasts = dailyWeatherForecastRepository.findAll().stream().filter(weatherData -> weatherData.getCountryCode().equals(country) && weatherData.getCity().equals(city)).collect(Collectors.toList());
         forecasts = forecasts.stream()
                 .filter(forecast -> forecast.getDate().isAfter(LocalDateTime.now().minusMinutes(45L)))
                 .sorted(Comparator.comparing(DailyWeatherForecast::getDate))
@@ -49,7 +49,7 @@ public class DailyWeatherForecastServiceImpl implements DailyWeatherForecastServ
 
         WeatherForecast wf = weatherForecastService.findByCountryAndCity(country, city);
         //TODO: change this
-        return dailyWeatherForecastRepository.create(DailyWeatherForecast.dailyForecast(country, city, wf.getLatitude(), wf.getLongitude()));
+        return dailyWeatherForecastRepository.save(DailyWeatherForecast.dailyForecast(country, city, wf.getLatitude(), wf.getLongitude()));
     }
 }
 
