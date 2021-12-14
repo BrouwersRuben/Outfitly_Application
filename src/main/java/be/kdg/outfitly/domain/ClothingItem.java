@@ -1,13 +1,15 @@
 package be.kdg.outfitly.domain;
 
 import javax.persistence.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Objects;
 
 @javax.persistence.Entity
 @Table(name = "clothes")
 public class ClothingItem extends Entity {
 
-    public enum Material{
+    public enum Material {
         COTTON("Cotton"), WOOL("Wool"), SILK("Silk"), SYNTHETIC("Synthetic"), LEATHER("Leather"), DENIM("Denim"), OTHER("Other");
 
         private final String name;
@@ -21,7 +23,7 @@ public class ClothingItem extends Entity {
         }
     }
 
-    public enum Type{
+    public enum Type {
         JACKET_LIKE("Jackets"), SWEATSHIRT_LIKE("Sweatshirts"), SHIRT_LIKE("Shirts"), T_SHIRT_LIKE("T-Shirts"), TROUSERS_LIKE("Trousers"), SHOES("Shoes");
 
         private final String name;
@@ -35,7 +37,7 @@ public class ClothingItem extends Entity {
         }
     }
 
-    public enum RainProofness{
+    public enum RainProofness {
         BAD("Bad"), NORMAL("Normal"), GOOD("Good");
 
         private final String name;
@@ -49,7 +51,7 @@ public class ClothingItem extends Entity {
         }
     }
 
-    public enum Occasion{
+    public enum Occasion {
         CASUAL("Casual"), UNIVERSAL("Universal"), ELEGANT("Elegant");
 
         private final String name;
@@ -63,7 +65,7 @@ public class ClothingItem extends Entity {
         }
     }
 
-    public enum Weather{
+    public enum Weather {
         COLD("Cold"), MILD("Mild"), WARM("Warm"), UNIVERSAL("Universal");
 
         private final String name;
@@ -104,11 +106,17 @@ public class ClothingItem extends Entity {
     @Enumerated(EnumType.STRING)
     private Weather weather;
 
-    @Column(name = "image_url", length = 200)
-    private String photoUrl;
+//    @Column(name = "image_url", length = 200)
+//    private String photoUrl;
+
+    @Column(name = "photo", length = 10_000)
+    private byte[] photo;
+
+    @Column(name = "photo_type")
+    private String photoMIMEType;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, /*CascadeType.PERSIST,*/ CascadeType.REFRESH})
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     protected ClothingItem() {
@@ -183,13 +191,13 @@ public class ClothingItem extends Entity {
         this.weather = weather;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
+//    public String getPhotoUrl() {
+//        return photoUrl;
+//    }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
+//    public void setPhotoUrl(String photoUrl) {
+//        this.photoUrl = photoUrl;
+//    }
 
     public User getUser() {
         return user;
@@ -197,6 +205,26 @@ public class ClothingItem extends Entity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoEncoded() {
+        return photo == null ? "" : "data:" + this.photoMIMEType + ";base64," + Base64.getEncoder().encodeToString(photo);
+    }
+
+    public String getPhotoMIMEType() {
+        return photoMIMEType;
+    }
+
+    public void setPhotoMIMEType(String photoMIMEType) {
+        this.photoMIMEType = photoMIMEType;
     }
 
     @Override
@@ -208,7 +236,7 @@ public class ClothingItem extends Entity {
                 ", rainProofness=" + rainProofness +
                 ", occasion=" + occasion +
                 ", weather=" + weather +
-                ", photo=" + photoUrl +
+//                ", photo=" + photoUrl +
                 '}';
     }
 

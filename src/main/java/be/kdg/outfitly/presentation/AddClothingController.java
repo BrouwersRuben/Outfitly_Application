@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,12 +53,19 @@ public class AddClothingController {
 
     //Automatically gets converted to enum
     @PostMapping
-    public String processClothing(Principal principal, String clothingName, ClothingItem.Material material, ClothingItem.RainProofness rainproofness, ClothingItem.Occasion occasion, ClothingItem.Weather weather, ClothingItem.Type type){
+    public String processClothing(Principal principal, String clothingName, ClothingItem.Material material, ClothingItem.RainProofness rainproofness, ClothingItem.Occasion occasion, ClothingItem.Weather weather, ClothingItem.Type type, MultipartFile photo){
         logger.debug("User filled in clothing: " + clothingName);
         User user = userService.findByEmail(principal.getName());
 
 
         ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type);
+        try {
+            newClothingItem.setPhoto(photo.getBytes());
+            newClothingItem.setPhotoMIMEType(photo.getContentType());
+            logger.debug("test encoded photo: "+newClothingItem.getPhotoEncoded());
+        } catch(IOException ioe){
+            logger.error("Uploading the photo failed.");
+        }
         //quick fix, gives "java.lang.UnsupportedOperationException: null" error
         //with ex. userClothing.getClothes().add(..)
         //or addClothing method inside of User

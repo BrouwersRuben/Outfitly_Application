@@ -19,6 +19,7 @@
             <div class="card">
                 <div class="card-body">
                     <span th:text="${clothing.getName()}"></span>
+                    <img class="img-fluid" th:if="${clothing.getPhotoEncoded().length()>1}" th:src="${clothing.getPhotoEncoded()}" th:alt="${clothing.getName()}">
                     <form method="post" th:object="${clothingDTO}" th:action="@{/user/profile/viewclothing}">
                         <input type="text" id="ID" name="ID" th:value="${clothing.getId()}" hidden>
                         <input type="submit" class="btn" th:href="@{/user/profile/viewclothing}" value="Delete clothing">
