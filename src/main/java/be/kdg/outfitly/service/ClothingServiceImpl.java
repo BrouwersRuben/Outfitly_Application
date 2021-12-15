@@ -2,9 +2,9 @@ package be.kdg.outfitly.service;
 
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.repository.ClothingRepository;
+import be.kdg.outfitly.util.ClothingPictureTooLargeChecker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +25,7 @@ public class ClothingServiceImpl implements ClothingService {
 
     @Override
     public ClothingItem create(ClothingItem clothingItem) {
+        ClothingPictureTooLargeChecker.checkPictureSize(clothingItem.getPhoto(), clothingItem.getPhotoMIMEType(), 10_000);
         return clothingRepository.create(clothingItem);
     }
 
