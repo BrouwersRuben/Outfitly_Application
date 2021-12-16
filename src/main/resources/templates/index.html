@@ -106,7 +106,14 @@
         <a class="btn btn-primary btn-lg" th:href="@{/register}">Register now!</a>
     </div>
 
-<div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+    <h2>Have any problems? Contact us! (email doesn't work yet)</h2>
+    <form action="mailto:contact-project+kdg-ti-integration-2-1-outfitli-final-application-outfitlymvp@incoming.gitlab.com" method="POST" name="emailForm">
+        <label for="feedbackContent">Message:</label>
+        <textarea id="feedbackContent" name="feedbackContent" rows="5" cols="20"></textarea>
 
+        <input type="submit" value="Send Request">
+    </form>
+
+    <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
 </body>
 </html>
