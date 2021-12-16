@@ -99,7 +99,7 @@ public class AddClothingController {
     }
 
     @ExceptionHandler(ClothingPictureTooLargeException.class)
-    @ResponseStatus(value = HttpStatus.INSUFFICIENT_STORAGE, reason = "The picture is too large")
+//    @ResponseStatus(value = HttpStatus.INSUFFICIENT_STORAGE, reason = "The picture is too large")
     public ModelAndView handleError(Principal principal, HttpServletRequest req, ClothingPictureTooLargeException exception) {
         User user = userService.findByEmail(principal.getName());
         logger.error(exception.getMessage());
