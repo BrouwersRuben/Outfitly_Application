@@ -58,12 +58,13 @@ public class RegisterController {
 //            model.addAttribute("countries", countries.entrySet());
             return "register";
         } else {
-            List<User> users = userService.read();
-            boolean result = users.stream().anyMatch(user -> Objects.equals(user.getEmail(), userDTO.getEmail()));
-            if(result){
-                model.addAttribute("errorMessage", "That email already exists");
-                return "register";
-            } else {
+            //check if mail already exists
+//            List<User> users = userService.read();
+//            boolean result = users.stream().anyMatch(user -> Objects.equals(user.getEmail(), userDTO.getEmail()));
+//            if(result){
+//                model.addAttribute("errorMessage", "That email already exists");
+//                return "register";
+//            } else {
                 //No clothes yet
                 // TODO: Make it accept userDTO object
                 logger.debug("Country code of the registering user: "+userDTO.getCountryCode());
