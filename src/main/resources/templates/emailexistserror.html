@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>This page does not exist yet</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body class="m-4">
+    <nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
+
+    <div th:insert="~{fragments/header::header}">header</div>
+
+    <h1 class="m-4 display-1 text-center">Email Exists Error</h1>
+
+    <h5 class="text-center">Email: <strong><span th:text="${exception.getEmail()}"></span></strong> already exists in the database.</h5>
+
+    <div class="d-flex justify-content-center">
+        <input action="action" type="button" class="btn btn-outline-dark m-4" onclick="history.go(-1);" value="Go Back"/>
+    </div>
+
+    <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+
+</body>
+</html>
