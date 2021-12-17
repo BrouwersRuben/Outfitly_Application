@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQ</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+<nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
+
+<div class="container d-flex flex-column justify-content-sm-center">
+
+    <div class="pricing mx-auto text-center">
+        <h1>How Does It Work ?</h1>
+        <h5>Clothes Picking Reimagined.</h5>
+    </div>
+
+    <div class="card-deck d-flex flex-lg-row flex-sm-column m-4">
+
+        <div class="card border-0 mx-sm-auto" style="width:20rem;">
+            <div class="card-body">
+                <img class="card-image" th:src="@{images/how-it-works-illustration-1.svg}" alt="illustration">
+                <h4 class="card-title font-weight-bold">Step 1</h4>
+                <div class="card-description">
+                    <p>Create an account and choose your preferred subscription model.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card border-0 mx-5 mx-sm-auto" style="width:20rem;">
+            <div class="card-body">
+                <img class="card-image" th:src="@{images/how-it-works-illustration-2.svg}" alt="illustration">
+                <h4 class="card-title font-weight-bold">Step 2</h4>
+                <div class="card-description">
+                    <p>Add your clothing items in the application.</p>
+<!--                        The more clothes you add, the more outfit choices our AI will be able to give you!</p>-->
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card border-0 mx-sm-auto" style="width:20rem;">
+            <div class="card-body">
+                <img class="card-image" th:src="@{images/how-it-works-illustration-3.svg}" alt="illustration">
+                <h4 class="card-title font-weight-bold">Step 3</h4>
+                <div class="card-description">
+                    <p>Let our Artificial Intelligence take care of the rest.</p>
+<!--                    An outfit will be picked anytime you request!</p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-primary mt-4" th:href="@{register}">Try It Out!</a>
+    </div>
+
+</div>
+
+<div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+</body>
+</html>
