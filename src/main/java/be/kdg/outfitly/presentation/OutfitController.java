@@ -2,6 +2,7 @@ package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.*;
 import be.kdg.outfitly.service.ArduinoSensorService;
+import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import be.kdg.outfitly.service.WeatherForecastService;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ public class OutfitController {
     private final Logger logger = LoggerFactory.getLogger(OutfitController.class);
     private WeatherForecastService weatherForecastService;
     private ArduinoSensorService arduinoSensorService;
+    private ClothingService clothingService;
     private UserService userService;
 
     public OutfitController(WeatherForecastService weatherForecastService, ArduinoSensorService arduinoSensorService) {
@@ -30,38 +32,11 @@ public class OutfitController {
         this.arduinoSensorService = arduinoSensorService;
     }
 
-    @GetMapping
-    public String occasionSelector(Model model, Principal principal) {
-        logger.debug("principal" + principal.toString());
-        logger.debug("principal name" + principal.getName());
-        User user = userService.findByEmail(principal.getName());
-        model.addAttribute("loggedIn", user != null);
-        model.addAttribute("user", user);
-        model.addAttribute("occasions", ClothingItem.Occasion.values());
-        logger.debug(user.getId() + "");
-        logger.debug(user.getName() + "");
-        return "choose-occasion";
-    }
-
     @PostMapping
-    public String occasionForm(ClothingItem.Occasion occasion,
-                               Model model,
-                               Principal principal) {
-
-//        outfitSelector = new OutfitSelector(WeatherForecast.randomForecast(), user, occasion);
+    public String putInWash(Principal principal, Model model, @ModelAttribute("id") int id){
         User user = userService.findByEmail(principal.getName());
-        logger.debug("User for the outfit: "+user.toString());
-        //API
-        WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity());
-        logger.debug("Weather forecast from the API: " + weatherForecast);
-        //Arduino
-        ArduinoSensor arduinoSensor = arduinoSensorService.findByUser(userService.findByEmail(principal.getName()), LocalDateTime.now());
-        logger.debug("Weather forecast from the Arduino: " + arduinoSensor);
-        outfitSelector = new OutfitSelector(weatherForecast, arduinoSensor, user, occasion);
-        model.addAttribute("clothes", outfitSelector.getSuitableClothesMap());
-        model.addAttribute("types", List.of(ClothingItem.Type.values()));
-        model.addAttribute("aiDecision", outfitSelector.getAiDecision());
-//        logger.debug("Logger output: " + outfitSelector.getAiDecision().toString());
+        ClothingItem toPutInWash = clothingService.findById(id);
+        clothingService.putInWash(toPutInWash);
         return "outfit";
     }
 
