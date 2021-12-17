@@ -20,22 +20,22 @@ public class ClothingServiceImpl implements ClothingService {
 
     @Override
     public ClothingItem findById(int id) {
-        return clothingRepository.findById(id);
+        return clothingRepository.findById(id).orElseThrow();
     }
 
     @Override
     public ClothingItem create(ClothingItem clothingItem) {
-        return clothingRepository.create(clothingItem);
+        return clothingRepository.save(clothingItem);
     }
 
     @Override
     public List<ClothingItem> read() {
-        return clothingRepository.read();
+        return clothingRepository.findAll();
     }
 
     @Override
     public void delete(int id) {
-        ClothingItem clothingItemToRemove = clothingRepository.findById(id);
+        ClothingItem clothingItemToRemove = clothingRepository.findById(id).orElseThrow();
         clothingRepository.delete(clothingItemToRemove);
     }
 }

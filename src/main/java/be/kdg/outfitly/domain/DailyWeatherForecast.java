@@ -1,3 +1,4 @@
+/*
 package be.kdg.outfitly.domain;
 
 import org.apache.http.HttpEntity;
@@ -12,11 +13,20 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+@javax.persistence.Entity
 public class DailyWeatherForecast extends Entity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     private String city;
     private String countryCode;
@@ -30,9 +40,17 @@ public class DailyWeatherForecast extends Entity {
     private String description;
     private String weatherIcon;
     private LocalDateTime date;
+
+    @ElementCollection
     private ArrayList<Double> dailyTemperatures = new ArrayList<>();
+
+    @ElementCollection
     private ArrayList<Long> dailyTemperatureTimestamps = new ArrayList<>();
+
+    @ElementCollection
     private ArrayList<String> weatherAlerts = new ArrayList<>();
+
+    @ElementCollection
     private ArrayList<Long> weatherAlertTimeStamps = new ArrayList<>();
 
     private static final Logger logger = LoggerFactory.getLogger(DailyWeatherForecast.class);
@@ -262,3 +280,4 @@ public class DailyWeatherForecast extends Entity {
         this.date = date;
     }
 }
+*/
