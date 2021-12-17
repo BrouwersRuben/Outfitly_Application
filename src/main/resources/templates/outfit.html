@@ -32,6 +32,10 @@
                 <form method="post" th:action="@{/user/outfit}">
                     <input type="text" id="ID" name="ID" th:value="${item.getId()}" hidden>
                     <input type="submit" name="putInWash" class="btn btn-outline-dark my-4" value="Put in the wash">
+                    <!--
+                        TODO: dirty fix - clean up
+                    -->
+                    <input type="text" id="occasion" name="occasion" th:value="${occasion}" hidden>
                 </form>
             </div>
         </td>
