@@ -20,10 +20,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @RequestMapping("/user/profile")
@@ -55,6 +54,10 @@ public class ProfileController {
         model.addAttribute("user", user);
         model.addAttribute("codes", Locale.getISOCountries());
         model.addAttribute("locationDTO", new LocationDTO());
+//        logger.debug("Location code as the one from user: "+ Stream.of(Locale.getISOCountries())
+//                .filter(code -> code.equals(user.getCountryCode()))
+//                .collect(Collectors.toList()));
+//        logger.debug("Country codes: "+ Arrays.toString(Locale.getISOCountries()));
         return "changelocation";
     }
 

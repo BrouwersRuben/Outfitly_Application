@@ -32,7 +32,7 @@ public class User extends Entity {
     @Column(name = "country", nullable = false, length = 56)
     private String country;
 
-    @Column(name = "countryCode", nullable = false, length = 56)
+    @Column(name = "countryCode", nullable = false, length = 2)
     private String countryCode;
 
     @Column(name = "city", nullable = false, length = 85)
@@ -173,7 +173,7 @@ public class User extends Entity {
     }
 
     public String getCountryCode() {
-        return country;
+        return countryCode;
     }
 
     //function to get first name and surname together

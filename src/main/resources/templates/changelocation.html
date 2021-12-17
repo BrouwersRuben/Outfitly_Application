@@ -19,10 +19,10 @@
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">country error</div>
             </div>
 
-            <div class="form-group row">
-                <label class="float-start" for="countryCode">Country code</label>
-                <select class="float-end m-1 w-50" id="countryCode" name="countryCode">
-                    <option th:each="code : ${codes}" th:text="${code}" th:value="${code}" th:selected="${user.countryCode == code}"></option>
+            <div class="form-group row d-flex justify-content-center">
+                <label class="m-1 w-75" for="countryCode">Country code</label>
+                <select class="m-1 w-75" id="countryCode" name="countryCode">
+                    <option th:each="code : ${codes}" th:text="${code}" th:value="${code}" th:selected="${code} == ${user.countryCode}"></option>
                 </select>
                 <div class="m-2 alert alert-danger" th:errors="*{countryCode}" th:if="${#fields.hasErrors('countryCode')}">
                     country code error
