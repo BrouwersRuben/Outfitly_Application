@@ -1,3 +1,4 @@
+/*
 package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.*;
@@ -61,6 +62,7 @@ public class OccasionController {
         model.addAttribute("types", List.of(ClothingItem.Type.values()));
         model.addAttribute("aiDecision", outfitSelector.getAiDecision());
 //        logger.debug("Logger output: " + outfitSelector.getAiDecision().toString());
-        return "/user/outfit";
+        return "outfit";
     }
 }
+*/
