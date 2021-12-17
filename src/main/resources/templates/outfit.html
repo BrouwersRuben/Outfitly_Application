@@ -31,7 +31,7 @@
                 <p th:text="${item.getName()}">Clothing Item Name</p>
                 <form method="post" th:action="@{/user/profile/outfit}">
                     <input type="text" id="ID" name="ID" th:value="${item.getId()}" hidden>
-                    <input type="submit" class="btn" th:href="@{/user/profile/outfit}" value="Put in the wash">
+                    <input type="submit" name="putInWash" class="btn" th:href="@{/user/profile/outfit}" value="Put in the wash">
                 </form>
             </div>
         </td>

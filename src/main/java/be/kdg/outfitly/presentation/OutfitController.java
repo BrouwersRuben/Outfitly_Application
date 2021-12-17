@@ -66,7 +66,7 @@ public class OutfitController {
     }
 
 
-    @PostMapping
+    @PostMapping(params = {"putInWash"})
     public String putInWash(Principal principal, Model model, @ModelAttribute("clothingDTO") ClothingDTO clothingDTO){
         User user = userService.findByEmail(principal.getName());
         ClothingItem toPutInWash = clothingService.findById(clothingDTO.getID());
