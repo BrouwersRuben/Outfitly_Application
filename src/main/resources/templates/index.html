@@ -30,11 +30,6 @@
                     </div>
                 </div>
                 <div class="col-sm">
-                    <p class="m-4 fs-5 font-weight-bold">
-                        Our mission is to help people make correct decisions when it comes to picking their clothing and
-                        even automating this process for them. The main goal is to save our customers’ time, so they can
-                        focus on more important tasks.
-                    </p>
                     <p class="h2 m-4">What is this?</p>
                     <p class="m-4">
                         A subscription based application that, with the help of Artificial Intelligence, would assist
@@ -51,32 +46,7 @@
         </div>
     </div>
 
-    <div class="d-flex justify-content-center">
-        <h1>How does it work?</h1>
-    </div>
 
-    <div class="d-flex justify-content-center align-content-center">
-        <div class="w-50">
-            <p>
-                The process is really simple. When you first create your account, you must first add your clothing to our database.<br>
-                After that, you can use our AI to generate you outfits!<br>
-                The more clothing you add, the more choices the AI has to go through, giving you a lot more outfit choices.<br>
-                No longer have that piece of clothing? No problem! Just simply remove it on the website, and we will stop recommending it.
-            </p>
-        </div>
-    </div>
-
-    <div class="d-flex justify-content-center">
-        <div class="container m-4">
-            <div class="row g-2 text-center">
-                <p class="h1 m-4">Who are we</p>
-<!--                TODO: Make this more modern-->
-            </div>
-            <div class="row justify-content-center">
-                <img class="my-4 diagram" th:src="@{images/Diagram.png}" alt="Organization diagram">
-            </div>
-        </div>
-    </div>
 
     <div class="d-flex justify-content-center">
         <h1>Overall Aim</h1>
@@ -106,8 +76,8 @@
         <a class="btn btn-primary btn-lg" th:href="@{/register}">Register now!</a>
     </div>
 
-    <h2>Have any problems? Contact us! (email doesn't work yet)</h2>
-    <form action="mailto:contact-project+kdg-ti-integration-2-1-outfitli-final-application-outfitly@incoming.gitlab.com" method="POST" name="emailForm">
+    <h2>Have any problems or questions?? Contact us! (email doesn't work yet)</h2>
+    <form action="mailto:contact-project+kdg-ti-integration-2-1-outfitli-final-application-outfitly@incoming.gitlab.com?subject=ProblemInquiry" method="POST" name="emailForm">
         <label for="feedbackContent">Message:</label>
             <textarea id="feedbackContent" name="feedbackContent" rows="5" cols="20"></textarea>
         <input type="submit" value="Send Request">
