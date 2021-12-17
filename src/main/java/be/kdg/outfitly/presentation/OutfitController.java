@@ -1,6 +1,7 @@
 package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.*;
+import be.kdg.outfitly.presentation.dto.ClothingDTO;
 import be.kdg.outfitly.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,10 +64,5 @@ public class OutfitController {
         model.addAttribute("types", List.of(ClothingItem.Type.values()));
         model.addAttribute("aiDecision", outfitSelector.getAiDecision());
         return "outfit";
-    }
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
     }
 }
