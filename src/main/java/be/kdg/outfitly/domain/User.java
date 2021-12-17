@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @javax.persistence.Entity
-//@DynamicUpdate
-@Table(name = "costumers")
+@DynamicUpdate
+@Table(name = "users")
 public class User extends Entity {
 
     // Variables
@@ -30,7 +30,6 @@ public class User extends Entity {
     private String lastName;
 
     @Column(name = "phone_number", nullable = false, length = 50)
-    //String --> 047/..
     private String phoneNumber;
 
     @Column(name = "country", nullable = false, length = 56)
@@ -54,7 +53,7 @@ public class User extends Entity {
     @Column(name = "zip_code", nullable = false, length = 10)
     private String zipcode;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE}, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     private List<ClothingItem> clothes;
 
     @Column(name = "washing_reset_day", nullable = false)
@@ -104,11 +103,11 @@ public class User extends Entity {
         this.clothes = new ArrayList<>();
     }
 
-    public void addClothing(ClothingItem clothingItem){
+    public void addClothing(ClothingItem clothingItem) {
         clothes.add(clothingItem);
     }
 
-    public User merge(User other){
+    public User merge(User other) {
         setEmail(other.getEmail());
         setPassword(other.getPassword());
         setFirstName(other.getFirstName());
@@ -130,158 +129,144 @@ public class User extends Entity {
         return id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public DayOfWeek getWashingResetDay() {
-        return washingResetDay;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public String getStreetNumber() {
-        return streetNumber;
-    }
-
-    public String getApartmentNumber() {
-        return apartmentNumber;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public List<ClothingItem> getClothes() {
-        return clothes;
-    }
-
-    public List<ArduinoSensor> getSensorData() {
-        return sensorData;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    //function to get first name and surname together
-    public String getName(){
-        return firstName + " " + lastName;
-    }
-
-    //setters
-
     @Override
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public DayOfWeek getWashingResetDay() {
+        return washingResetDay;
     }
 
     public void setWashingResetDay(DayOfWeek washingResetDay) {
         this.washingResetDay = washingResetDay;
     }
 
-    public void setClothes(List<ClothingItem> clothes) {
-        this.clothes = clothes;
-    }
-
-    public void addClothingItem(ClothingItem clothingItem) {
-        this.clothes.add(clothingItem);
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
     public void setCountry(String country) {
         this.country = country;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    //setters
+
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getStreetName() {
+        return streetName;
     }
 
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }
 
+    public String getStreetNumber() {
+        return streetNumber;
+    }
+
     public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public String getApartmentNumber() {
+        return apartmentNumber;
     }
 
     public void setApartmentNumber(String apartmentNumber) {
         this.apartmentNumber = apartmentNumber;
     }
 
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public List<ClothingItem> getClothes() {
+        return clothes;
+    }
+
+    public void setClothes(List<ClothingItem> clothes) {
+        this.clothes = clothes;
+    }
+
+    public List<ArduinoSensor> getSensorData() {
+        return sensorData;
+    }
+
     public void setSensorData(List<ArduinoSensor> sensorData) {
         this.sensorData = sensorData;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
     }
 
     public void setCountryCode(String country) {
         this.country = country;
     }
 
+    //function to get first name and surname together
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
+    public void addClothingItem(ClothingItem clothingItem) {
+        this.clothes.add(clothingItem);
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", country='" + country + '\'' +
-                ", countryCODE='" + countryCode + '\'' +
-                ", city='" + city + '\'' +
-                ", streetName='" + streetName + '\'' +
-                ", streetNumber=" + streetNumber +
-                ", apartmentNumber='" + apartmentNumber + '\'' +
-                ", zipcode='" + zipcode + '\'' +
-                ", clothes=" + clothes +
-                '}';
+        return "User{" + "email='" + email + '\'' + ", password='" + password + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", phoneNumber='" + phoneNumber + '\'' + ", country='" + country + '\'' + ", countryCODE='" + countryCode + '\'' + ", city='" + city + '\'' + ", streetName='" + streetName + '\'' + ", streetNumber=" + streetNumber + ", apartmentNumber='" + apartmentNumber + '\'' + ", zipcode='" + zipcode + '\'' + ", clothes=" + clothes + '}';
     }
 }

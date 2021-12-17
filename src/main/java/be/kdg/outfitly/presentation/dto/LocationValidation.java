@@ -9,8 +9,10 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = LocationValidator.class)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface LocationValidation{
+public @interface LocationValidation {
     String message() default "Location not found.";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

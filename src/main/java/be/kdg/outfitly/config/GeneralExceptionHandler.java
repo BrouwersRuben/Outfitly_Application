@@ -18,8 +18,8 @@ public class GeneralExceptionHandler {
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "General exception occured...")
     @ExceptionHandler(value = Exception.class)
-    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception exception) throws Exception{
-        if (AnnotationUtils.findAnnotation (exception.getClass(), ResponseStatus.class) != null) {
+    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception exception) throws Exception {
+        if (AnnotationUtils.findAnnotation(exception.getClass(), ResponseStatus.class) != null) {
             throw exception;
         }
         log.error("Exception: " + exception.getMessage());

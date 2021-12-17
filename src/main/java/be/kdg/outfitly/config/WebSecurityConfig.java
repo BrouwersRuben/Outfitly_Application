@@ -1,6 +1,6 @@
 package be.kdg.outfitly.config;
 
-import be.kdg.outfitly.service.OutfitlyUserDetailsService;
+import be.kdg.outfitly.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    private OutfitlyUserDetailsService outfitlyUserDetailsService;
+    private UserDetailsServiceImpl outfitlyUserDetailsService;
 
     @Bean
     protected UserDetailsService userDetailsService() {
@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public void setOutfitlyUserDetailsService(OutfitlyUserDetailsService outfitlyUserDetailsService) {
+    public void setOutfitlyUserDetailsService(UserDetailsServiceImpl outfitlyUserDetailsService) {
         this.outfitlyUserDetailsService = outfitlyUserDetailsService;
     }
 }

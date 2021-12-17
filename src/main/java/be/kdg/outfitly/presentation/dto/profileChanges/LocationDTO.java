@@ -12,11 +12,9 @@ public class LocationDTO implements Locatable {
     @NotEmpty(message = "Please fill in your country.")
     @Size(max = 56)
     private String country;
-
     @NotEmpty(message = "Please select your country code.")
     @Size(max = 2, min = 2)
     private String countryCode;
-
     @NotEmpty(message ="Please fill in your city.")
     @Size(max = 85, message = "City name cannot be larger than 85 characters.")
     private String city;
@@ -26,7 +24,6 @@ public class LocationDTO implements Locatable {
     @NotEmpty(message = "Please fill in a street number.")
     @Size(max = 10, message = "Street number cannot be larger than 10 characters.")
     private String streetNumber;
-    //can be empty
     @Size(max = 10, message = "Apartment number cannot be larger than 10 characters.")
     private String apartmentNumber;
     @NotEmpty

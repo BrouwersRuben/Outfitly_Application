@@ -7,13 +7,13 @@ import java.util.Map;
 
 public class Countries {
 
-    public static Map<String, String> getCountryCodesAndNames(){
+    public static Map<String, String> getCountryCodesAndNames() {
 
         List<String> codes = List.of(Locale.getISOCountries());
 
-        Map<String,String> countries = new HashMap<>();
+        Map<String, String> countries = new HashMap<>();
 
-        codes.stream().forEach(code -> {
+        codes.forEach(code -> {
             String countryName = new Locale("", code).getDisplayName();
             countries.put(code, countryName);
         });

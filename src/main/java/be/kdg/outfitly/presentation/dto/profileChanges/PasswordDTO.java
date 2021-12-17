@@ -8,7 +8,6 @@ public class PasswordDTO {
 
     @NotEmpty
     private String currentPassword;
-
     @ValidPassword
     @NotEmpty()
     private String newPassword;

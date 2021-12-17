@@ -13,8 +13,6 @@ public class ClothingDTO {
 
     @Override
     public String toString() {
-        return "ClothingDTO{" +
-                "ID=" + ID +
-                '}';
+        return "ClothingDTO{" + "ID=" + ID + '}';
     }
 }

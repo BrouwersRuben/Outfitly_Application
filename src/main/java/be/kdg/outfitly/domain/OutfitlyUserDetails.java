@@ -1,6 +1,5 @@
 package be.kdg.outfitly.domain;
 
-import be.kdg.outfitly.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,7 +7,7 @@ import java.util.Collection;
 
 public class OutfitlyUserDetails implements UserDetails {
 
-    private User user;
+    private final User user;
 
     public OutfitlyUserDetails(User user) {
         this.user = user;

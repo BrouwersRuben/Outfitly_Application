@@ -15,11 +15,10 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.Locale;
 
 // TODO: This is only for the CURRENT weather forecast, we still need a separate class for future forecast I guess.
 @javax.persistence.Entity
-@Table(name = "current_weather_forecast")
+@Table(name = "weather_forecasts")
 public class WeatherForecast extends Entity {
 
     private static final Logger logger = LoggerFactory.getLogger(WeatherForecast.class);
@@ -142,12 +141,12 @@ public class WeatherForecast extends Entity {
 
 
     public static boolean isValidCountryCity(String countryCode, String city) {
-        return isValidLocation(city+","+countryCode);
+        return isValidLocation(city + "," + countryCode);
     }
 
-    public static boolean isValidLocation(String location){
+    public static boolean isValidLocation(String location) {
 
-        if(location.length() <= 3){
+        if (location.length() <= 3) {
             logger.debug("Invalid location. City not chosen. - " + location);
             return false;
         }
@@ -162,7 +161,7 @@ public class WeatherForecast extends Entity {
         boolean valid = !weatherAPIData.get("cod").equals("404");
 
 
-        logger.debug("Location: " + location + " is "+ (valid? "" :"not")+ " valid.");
+        logger.debug("Location: " + location + " is " + (valid ? "" : "not") + " valid.");
 
         return valid;
     }
@@ -181,36 +180,72 @@ public class WeatherForecast extends Entity {
         return city;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getCountryCode() {
         return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public double getTemperature() {
         return temperature;
     }
 
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
     public double getFeelsLikeTemperature() {
         return feelsLikeTemperature;
+    }
+
+    public void setFeelsLikeTemperature(double feelsLikeTemperature) {
+        this.feelsLikeTemperature = feelsLikeTemperature;
     }
 
     public double getLowestTemperature() {
         return lowestTemperature;
     }
 
+    public void setLowestTemperature(double lowestTemperature) {
+        this.lowestTemperature = lowestTemperature;
+    }
+
     public double getHighestTemperature() {
         return highestTemperature;
+    }
+
+    public void setHighestTemperature(double highestTemperature) {
+        this.highestTemperature = highestTemperature;
     }
 
     public double getWindSpeed() {
         return windSpeed;
     }
 
+    public void setWindSpeed(double windSpeed) {
+        this.windSpeed = windSpeed;
+    }
+
     public int getHumidity() {
         return humidity;
     }
 
+    public void setHumidity(int humidity) {
+        this.humidity = humidity;
+    }
+
     public String getWeatherDescription() {
         return weatherDescription;
+    }
+
+    public void setWeatherDescription(String weatherDescription) {
+        this.weatherDescription = weatherDescription;
     }
 
     public LocalDateTime getDate() {
@@ -219,42 +254,6 @@ public class WeatherForecast extends Entity {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
-    }
-
-    public void setFeelsLikeTemperature(double feelsLikeTemperature) {
-        this.feelsLikeTemperature = feelsLikeTemperature;
-    }
-
-    public void setLowestTemperature(double lowestTemperature) {
-        this.lowestTemperature = lowestTemperature;
-    }
-
-    public void setHighestTemperature(double highestTemperature) {
-        this.highestTemperature = highestTemperature;
-    }
-
-    public void setWindSpeed(double windSpeed) {
-        this.windSpeed = windSpeed;
-    }
-
-    public void setHumidity(int humidity) {
-        this.humidity = humidity;
-    }
-
-    public void setWeatherDescription(String weatherDescription) {
-        this.weatherDescription = weatherDescription;
     }
 
     public double getLatitude() {

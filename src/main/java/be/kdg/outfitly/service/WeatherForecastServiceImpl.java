@@ -23,11 +23,6 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
     }
 
     @Override
-    public WeatherForecast findByDate(LocalDateTime time) {
-        return weatherForecastRepository.findAll().stream().filter(weatherData -> weatherData.getTimeOfReading().equals(time)).findFirst().get();
-    }
-
-    @Override
     public WeatherForecast findByCountryAndCity(String country, String city) {
         logger.debug("Find by country: " + country + " and city: " + city);
         List<WeatherForecast> forecasts = weatherForecastRepository.findAll().stream().filter(weatherData -> weatherData.getCountryCode().equals(country) && weatherData.getCity().equals(city)).collect(Collectors.toList());

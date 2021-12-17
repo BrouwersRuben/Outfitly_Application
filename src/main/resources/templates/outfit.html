@@ -27,7 +27,10 @@
             <div th:text="${type.getName()}"></div>
         </td>
         <td>
-            <div th:each="item : ${clothes.get(type)}" th:text="${item.getName()}"></div>
+            <div th:each="item : ${clothes.get(type)}">
+                <p th:text="${item.getName()}">$name</p>
+                <img class="w-25" th:if="${item.getPhoto()?.getPhotoEncoded()}" th:src="${item.getPhoto()?.getPhotoEncoded()}" th:alt="${item.getName()}">
+            </div>
         </td>
     </tr>
 

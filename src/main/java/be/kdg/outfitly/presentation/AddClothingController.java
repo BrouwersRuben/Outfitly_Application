@@ -8,7 +8,6 @@ import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +26,8 @@ import java.util.Map;
 @RequestMapping("/user/addclothing")
 public class AddClothingController {
     private final Logger logger = LoggerFactory.getLogger(AddClothingController.class);
-    private UserService userService;
-    private ClothingService clothingService;
+    private final UserService userService;
+    private final ClothingService clothingService;
 
 
     public AddClothingController(UserService userService, ClothingService clothingService) {
@@ -52,14 +51,12 @@ public class AddClothingController {
         enumsValues.put("weather", List.of(ClothingItem.Weather.values()));
 
         model.addAttribute("enums", enumsValues.entrySet());
-        logger.debug("Passing enums: " + enumsValues.entrySet());
         return "addclothing";
     }
 
     //Automatically gets converted to enum
     @PostMapping
     public String processClothing(Principal principal, String clothingName, ClothingItem.Material material, ClothingItem.RainProofness rainproofness, ClothingItem.Occasion occasion, ClothingItem.Weather weather, ClothingItem.Type type, MultipartFile photo){
-        logger.debug("User filled in clothing: " + clothingName);
         User user = userService.findByEmail(principal.getName());
 
         ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type);
@@ -70,8 +67,6 @@ public class AddClothingController {
             logger.error("IO exception");
             return "redirect:/user/addclothing";
         }
-
-        logger.debug(user.getName() + " Added a new clothing item: " + newClothingItem);
 
         newClothingItem.setUser(user);
         clothingService.create(newClothingItem);

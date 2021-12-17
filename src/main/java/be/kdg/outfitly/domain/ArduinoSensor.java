@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @javax.persistence.Entity
 @Table(name = "arduino_forecast")
-public class ArduinoSensor extends Entity{
+public class ArduinoSensor extends Entity {
 
     // Variables
     @Id
@@ -22,11 +22,12 @@ public class ArduinoSensor extends Entity{
     private LocalDateTime timeOfReading;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     // Constructor
-    protected ArduinoSensor(){}
+    protected ArduinoSensor() {
+    }
 
     public ArduinoSensor(double sensorTemperature, double sensorHumidity, LocalDateTime timeOfReading) {
         this.sensorTemperature = sensorTemperature;
@@ -41,39 +42,39 @@ public class ArduinoSensor extends Entity{
         return id;
     }
 
-    public double getSensorTemperature() {
-        return sensorTemperature;
-    }
-
-    public double getSensorHumidity() {
-        return sensorHumidity;
-    }
-
-    public LocalDateTime getTimeOfReading() {
-        return timeOfReading;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    // Setters
-
     @Override
     public void setId(int id) {
         this.id = id;
+    }
+
+    public double getSensorTemperature() {
+        return sensorTemperature;
     }
 
     public void setSensorTemperature(double sensorTemperature) {
         this.sensorTemperature = sensorTemperature;
     }
 
+    public double getSensorHumidity() {
+        return sensorHumidity;
+    }
+
+    // Setters
+
     public void setSensorHumidity(double sensorHumidity) {
         this.sensorHumidity = sensorHumidity;
     }
 
+    public LocalDateTime getTimeOfReading() {
+        return timeOfReading;
+    }
+
     public void setTimeOfReading(LocalDateTime timeOfReading) {
         this.timeOfReading = timeOfReading;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public void setUser(User user) {
@@ -82,10 +83,6 @@ public class ArduinoSensor extends Entity{
 
     @Override
     public String toString() {
-        return "ArduinoSensor{" +
-                "sensorTemperature=" + sensorTemperature +
-                ", sensorHumidity=" + sensorHumidity +
-                ", timeOfReading=" + timeOfReading +
-                '}';
+        return "ArduinoSensor{" + "sensorTemperature=" + sensorTemperature + ", sensorHumidity=" + sensorHumidity + ", timeOfReading=" + timeOfReading + '}';
     }
 }
