@@ -66,7 +66,6 @@ public class AddClothingController {
         try {
             newClothingItem.setPhoto(photo.getBytes());
             newClothingItem.setPhotoMIMEType(photo.getContentType());
-            logger.debug("test encoded photo: "+newClothingItem.getPhotoEncoded());
         } catch(IOException ioe){
             logger.error("Uploading the photo failed.");
         }
