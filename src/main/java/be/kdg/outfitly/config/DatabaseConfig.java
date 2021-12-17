@@ -1,4 +1,4 @@
-package be.kdg.outfitly.db;
+package be.kdg.outfitly.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +11,8 @@ import javax.sql.DataSource;
 
 @Configuration
 @Profile("Hibernate")
-public class SQLDatabaseConfig {
-    private static final Logger logger = LoggerFactory.getLogger(SQLDatabaseConfig.class);
+public class DatabaseConfig {
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseConfig.class);
 
     @Bean
     public DataSource dataSource(){

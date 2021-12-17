@@ -4,6 +4,8 @@ package be.kdg.outfitly.service;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.repository.UserRepository;
+import be.kdg.outfitly.repository.UserRepositoryCollectionsImpl;
+import be.kdg.outfitly.util.EmailExistsChecker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,7 @@ public class UserServiceImpl implements UserService{
             logger.debug("User filled in an ap number");
             user = new User(email, password, firstName, lastName, washday, phoneNumber, country, countryCode, city, streetName, streetNumber, apartmentNumber, zipcode);
         }
+        EmailExistsChecker.checkEmail(user.getEmail(), userRepository.findAll());
         return userRepository.save(user);
     }
 
@@ -55,7 +58,6 @@ public class UserServiceImpl implements UserService{
         return userRepository.findAll();
     }
 
-    //TODO: Does this work?
     @Override
     public void update(User updatedUser){
         User newUser = userRepository.getById(updatedUser.getId());

@@ -3,9 +3,13 @@
 }
 
 .diagram{
-    max-width: 60%;
+    max-height: 550px;
 }
 
 .font-weight-bold{
     font-weight: bold;
+}
+
+.clothingPictureViewClothing{
+    max-height: 60%;
 }

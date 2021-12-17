@@ -2,15 +2,19 @@ package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
+import be.kdg.outfitly.exceptions.ClothingPictureTooLargeException;
 import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -92,5 +96,18 @@ public class AddClothingController {
 
         user.setClothes(userClothing);
         return "redirect:/user/mainpage";
+    }
+
+    @ExceptionHandler(ClothingPictureTooLargeException.class)
+//    @ResponseStatus(value = HttpStatus.INSUFFICIENT_STORAGE, reason = "The picture is too large")
+    public ModelAndView handleError(Principal principal, HttpServletRequest req, ClothingPictureTooLargeException exception) {
+        User user = userService.findByEmail(principal.getName());
+        logger.error(exception.getMessage());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("loggedIn", user.getId() != -1);
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("exception", exception);
+        modelAndView.setViewName("clothingpictureerror");
+        return modelAndView;
     }
 }
