@@ -54,9 +54,8 @@ public class UserDTO implements Locatable {
     @Size(max = 10, message = "Zipcode cannot be larger than 10 characters")
     private String zipcode;
 
-    //TODO: Maybe this should be optional?
     @NotNull(message = "The washingday should be given")
-    private DayOfWeek washday;
+    private DayOfWeek washDay;
 
     public String getEmail() {
         return email;
@@ -118,8 +117,8 @@ public class UserDTO implements Locatable {
         return apartmentNumber;
     }
 
-    public DayOfWeek getWashday() {
-        return washday;
+    public DayOfWeek getWashDay() {
+        return washDay;
     }
 
     public void setFirstName(String firstName) {
@@ -166,7 +165,7 @@ public class UserDTO implements Locatable {
         this.apartmentNumber = apartmentNumber;
     }
 
-    public void setWashday(DayOfWeek washday) {
-        this.washday = washday;
+    public void setWashDay(DayOfWeek washDay) {
+        this.washDay = washDay;
     }
 }

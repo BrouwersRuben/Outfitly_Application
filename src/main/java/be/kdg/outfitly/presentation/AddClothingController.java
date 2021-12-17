@@ -61,44 +61,30 @@ public class AddClothingController {
         logger.debug("User filled in clothing: " + clothingName);
         User user = userService.findByEmail(principal.getName());
 
-
         ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type);
         try {
             newClothingItem.setPhoto(photo.getBytes());
             newClothingItem.setPhotoMIMEType(photo.getContentType());
         } catch(IOException ioe){
-            logger.error("Uploading the photo failed.");
+            logger.error("IO exception");
+            return "redirect:/user/addclothing";
         }
-        //quick fix, gives "java.lang.UnsupportedOperationException: null" error
-        //with ex. userClothing.getClothes().add(..)
-        //or addClothing method inside of User
-//        List<ClothingItem> userClothing = new ArrayList<>(user.getClothes());
-//        userClothing.add(newClothingItem);
-        User userFromRepository = userService.findById(user.getId());
-//        userFromRepository.setClothes(userClothing);
 
         logger.debug(user.getName() + " Added a new clothing item: " + newClothingItem);
 
-//        user.setClothes(userClothing);
-
-        //newClothingItem.setUser(userFromRepository);
-        //clothingService.create(newClothingItem);
-
-        List<ClothingItem> userClothing = new ArrayList<>(userFromRepository.getClothes());
-        userClothing.add(newClothingItem);
-        userFromRepository.setClothes(userClothing);
-        userService.update(userFromRepository);
-        newClothingItem.setUser(userFromRepository);
+        newClothingItem.setUser(user);
         clothingService.create(newClothingItem);
 
-        logger.debug(user.getName() + " Added a new clothing item: " + newClothingItem);
+        List<ClothingItem> userClothing = new ArrayList<>(user.getClothes());
+        userClothing.add(newClothingItem);
+        user.setClothes(userClothing);
+        userService.update(user);
 
         user.setClothes(userClothing);
         return "redirect:/user/mainpage";
     }
 
     @ExceptionHandler(ClothingPictureTooLargeException.class)
-//    @ResponseStatus(value = HttpStatus.INSUFFICIENT_STORAGE, reason = "The picture is too large")
     public ModelAndView handleError(Principal principal, HttpServletRequest req, ClothingPictureTooLargeException exception) {
         User user = userService.findByEmail(principal.getName());
         logger.error(exception.getMessage());

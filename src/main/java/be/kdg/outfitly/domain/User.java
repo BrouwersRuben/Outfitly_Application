@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @javax.persistence.Entity
-@DynamicUpdate
+//@DynamicUpdate
 @Table(name = "costumers")
 public class User extends Entity {
 

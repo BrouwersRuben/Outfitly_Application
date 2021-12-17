@@ -4,7 +4,6 @@ package be.kdg.outfitly.service;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.repository.UserRepository;
-import be.kdg.outfitly.repository.UserRepositoryCollectionsImpl;
 import be.kdg.outfitly.util.EmailExistsChecker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
