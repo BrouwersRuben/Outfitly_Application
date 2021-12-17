@@ -33,6 +33,6 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
 
     @Override
     public ArduinoSensor findByUser(User user, LocalDateTime time) {
-        return arduinoSensorRepository.findAll().stream().filter(sensorData -> sensorData.equals(user.getSensorData().stream().filter(arduinoSensor -> arduinoSensor.getTimeOfReading().equals(time)))).findFirst().get();
+        return arduinoSensorRepository.findAll().stream().filter(sensorData -> sensorData.equals(user.getSensorData().stream().filter(arduinoSensor -> arduinoSensor.getTimeOfReading().equals(time)))).findFirst().orElse(null);
     }
 }
