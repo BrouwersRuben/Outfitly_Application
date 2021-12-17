@@ -71,7 +71,7 @@ public class OutfitController {
         User user = userService.findByEmail(principal.getName());
         ClothingItem toPutInWash = clothingService.findById(clothingDTO.getID());
         clothingService.putInWash(toPutInWash);
-        return "outfit";
+        return "redirect:/user/outfit";
     }
 
     @Autowired
