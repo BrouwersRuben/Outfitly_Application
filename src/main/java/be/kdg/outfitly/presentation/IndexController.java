@@ -42,6 +42,16 @@ public class IndexController {
         return "aboutus";
     }
 
+    @GetMapping("/how-it-works")
+    public String showHowItWorks(Model model, Principal principal) {
+        model.addAttribute("loggedIn", principal != null);
+        if(principal!=null) {
+            User user = userService.findByEmail(principal.getName());
+            model.addAttribute("user", user);
+        }
+        return "how-it-works";
+    }
+
     @GetMapping
     public String indexPage(Model model , Principal principal){
         model.addAttribute("loggedIn", principal != null);
