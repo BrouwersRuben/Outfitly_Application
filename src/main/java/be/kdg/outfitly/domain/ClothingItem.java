@@ -199,26 +199,14 @@ public class ClothingItem extends Entity {
         this.user = user;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public Photo getPhoto(){
+        return this.photo;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
+    public void setPhoto(Photo photo){
+        this.photo=photo;
     }
-
-    public String getPhotoEncoded() {
-        return photo == null ? "" : "data:" + this.photoMIMEType + ";base64," + Base64.getEncoder().encodeToString(photo);
-    }
-
-    public String getPhotoMIMEType() {
-        return photoMIMEType;
-    }
-
-    public void setPhotoMIMEType(String photoMIMEType) {
-        this.photoMIMEType = photoMIMEType;
-    }
-
+    
     @Override
     public String toString() {
         return "ClothingItem{" +

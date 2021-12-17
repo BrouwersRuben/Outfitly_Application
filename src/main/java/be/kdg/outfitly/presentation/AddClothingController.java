@@ -1,6 +1,7 @@
 package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.ClothingItem;
+import be.kdg.outfitly.domain.Photo;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.exceptions.ClothingPictureTooLargeException;
 import be.kdg.outfitly.service.ClothingService;
@@ -63,8 +64,8 @@ public class AddClothingController {
 
         ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type);
         try {
-            newClothingItem.setPhoto(photo.getBytes());
-            newClothingItem.setPhotoMIMEType(photo.getContentType());
+            Photo newPhoto = new Photo(photo.getBytes(), photo.getContentType());
+            newClothingItem.setPhoto(newPhoto);
         } catch(IOException ioe){
             logger.error("IO exception");
             return "redirect:/user/addclothing";

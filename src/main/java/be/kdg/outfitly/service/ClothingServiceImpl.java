@@ -25,9 +25,7 @@ public class ClothingServiceImpl implements ClothingService {
 
     @Override
     public ClothingItem create(ClothingItem clothingItem) {
-        logger.debug("Create clothing item - before exception.");
-        ClothingPictureTooLargeChecker.checkPictureSize(clothingItem.getPhoto(), clothingItem.getPhotoMIMEType(), 10_000);
-        logger.debug("Create clothing item - there was no exception.");
+        ClothingPictureTooLargeChecker.checkPictureSize(clothingItem.getPhoto());
 
         return clothingRepository.save(clothingItem);
     }
