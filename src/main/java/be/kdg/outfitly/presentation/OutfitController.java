@@ -62,21 +62,29 @@ public class OutfitController {
         return "outfit";
     }
 
-
     @PostMapping(params = {"putInWash"})
-    public String putInWash(Principal principal, Model model, @ModelAttribute("occasion") String occasionName, @ModelAttribute("clothingDTO") ClothingDTO clothingDTO){
+    public String putInWash(Principal principal, Model model, @ModelAttribute("clothingDTO") ClothingDTO clothingDTO){
         User user = userService.findByEmail(principal.getName());
-        logger.debug("Occasion putInWash: " + occasionName);
         ClothingItem toPutInWash = clothingService.findById(clothingDTO.getID());
         clothingService.putInWash(toPutInWash);
-        WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity());
-        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 20, LocalDateTime.now());
-        outfitSelector = new OutfitSelector(weatherForecast, arduinoSensor, user, ClothingItem.Occasion.valueOf(occasionName));
-        model.addAttribute("clothes", outfitSelector.getSuitableClothesMap());
-        model.addAttribute("types", List.of(ClothingItem.Type.values()));
-        model.addAttribute("aiDecision", outfitSelector.getAiDecision());
-        return "outfit";
+        return "redirect:/user/outfit";
     }
+
+//    @PostMapping(params = {"putInWash"})
+//    //TODO: Occasion is null
+//    public String putInWash(Principal principal, Model model, @ModelAttribute("occasion") String occasionName, @ModelAttribute("clothingDTO") ClothingDTO clothingDTO){
+//        User user = userService.findByEmail(principal.getName());
+//        logger.debug("Occasion putInWash: " + occasionName);
+//        ClothingItem toPutInWash = clothingService.findById(clothingDTO.getID());
+//        clothingService.putInWash(toPutInWash);
+//        WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity());
+//        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 20, LocalDateTime.now());
+//        outfitSelector = new OutfitSelector(weatherForecast, arduinoSensor, user, ClothingItem.Occasion.valueOf(occasionName));
+//        model.addAttribute("clothes", outfitSelector.getSuitableClothesMap());
+//        model.addAttribute("types", List.of(ClothingItem.Type.values()));
+//        model.addAttribute("aiDecision", outfitSelector.getAiDecision());
+//        return "outfit";
+//    }
 
     @Autowired
     public void setUserService(UserService userService) {
