@@ -34,26 +34,22 @@ public class OutfitSelector {
 
     public List<ClothingItem> getPossibleClothingItems() {
 
-        List<ClothingItem> possibleItems = new ArrayList<>();
-        for (ClothingItem clothingItem : user.getClothes()) {
-            if (!clothingItem.isWash_cycle()) {
-                possibleItems.add(clothingItem);
-            }
-        }
+        List<ClothingItem> possibleItems = user.getClothes();
 //        double lowestTemperature = rightTemperature(arduinoSensor.getSensorTemperature(), weatherForecast.getLowestTemperature());
-        double lowestAPITemperature = weatherForecast.getLowestTemperature();
+        double lowestTemperature = weatherForecast.getLowestTemperature();
         double lowestArduinoTemperatue = arduinoSensor.getSensorTemperature();
         boolean isGoingToRain = weatherForecast.isGoingToRain();
         logger.debug("Possible items before filtering: " + Arrays.toString(possibleItems.toArray()));
 
 
-        possibleItems = removeUnsuitableForTemperature(possibleItems, lowestAPITemperature, lowestArduinoTemperatue);
+        possibleItems = removeUnsuitableForTemperature(possibleItems, lowestTemperature,lowestArduinoTemperatue);
         possibleItems = removeUnsuitableForRain(possibleItems, isGoingToRain);
         possibleItems = removeUnsuitableForOccasion(possibleItems, occasion);
 
 //        logger.debug("Suitable items after filtering: " + Arrays.toString(possibleItems.toArray()));
         return possibleItems;
     }
+
 
 
     public List<ClothingItem> removeUnsuitableForRain(List<ClothingItem> clothes, boolean isGoingToRain) {
