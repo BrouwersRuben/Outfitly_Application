@@ -32,7 +32,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
         List<String> messages = validator.getMessages(result);
 
         // TODO: Change to progressbar or newline, or style?
-        String messageTemplate = String.join(", \n", messages);
+        String messageTemplate = String.join(" ", messages);
         context.buildConstraintViolationWithTemplate(messageTemplate)
                 .addConstraintViolation()
                 .disableDefaultConstraintViolation();
