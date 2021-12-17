@@ -13,7 +13,8 @@ public class OutfitSelector {
     private final ClothingItem.Occasion occasion;
     private StringBuilder aiDecision;
 
-    public OutfitSelector(WeatherForecast weatherForecast, User user, ClothingItem.Occasion occasion) {
+    public OutfitSelector(WeatherForecast weatherForecast, ArduinoSensor arduinoSensor, User user, ClothingItem.Occasion occasion) {
+        this.arduinoSensor = arduinoSensor;
         this.weatherForecast = weatherForecast;
         this.user = user;
         this.occasion = occasion;
@@ -22,7 +23,7 @@ public class OutfitSelector {
 
     private final Logger logger = LoggerFactory.getLogger(OutfitSelector.class);
 
-    private double rightTemperature(double arduinoTemp, double apiTemp) {
+    private double rightTemperature(double apiTemp, double arduinoTemp) {
         final double acceptableRange = 3; //the api can be 3° over or under the captured temperature of the arduino to still be counted as correct.
         if (apiTemp - acceptableRange < arduinoTemp && arduinoTemp < apiTemp + acceptableRange) {
             return apiTemp;
@@ -33,14 +34,20 @@ public class OutfitSelector {
 
     public List<ClothingItem> getPossibleClothingItems() {
 
-        List<ClothingItem> possibleItems = user.getClothes();
+        List<ClothingItem> possibleItems = new ArrayList<>();
+        for (ClothingItem clothingItem : user.getClothes()) {
+            if (!clothingItem.isWash_cycle()) {
+                possibleItems.add(clothingItem);
+            }
+        }
 //        double lowestTemperature = rightTemperature(arduinoSensor.getSensorTemperature(), weatherForecast.getLowestTemperature());
-        double lowestTemperature = weatherForecast.getLowestTemperature();
+        double lowestAPITemperature = weatherForecast.getLowestTemperature();
+        double lowestArduinoTemperatue = arduinoSensor.getSensorTemperature();
         boolean isGoingToRain = weatherForecast.isGoingToRain();
         logger.debug("Possible items before filtering: " + Arrays.toString(possibleItems.toArray()));
 
 
-        possibleItems = removeUnsuitableForTemperature(possibleItems, lowestTemperature);
+        possibleItems = removeUnsuitableForTemperature(possibleItems, lowestAPITemperature, lowestArduinoTemperatue);
         possibleItems = removeUnsuitableForRain(possibleItems, isGoingToRain);
         possibleItems = removeUnsuitableForOccasion(possibleItems, occasion);
 
@@ -61,15 +68,17 @@ public class OutfitSelector {
         return clothes;
     }
 
-    public List<ClothingItem> removeUnsuitableForTemperature(List<ClothingItem> clothes, double temperature) {
+    public List<ClothingItem> removeUnsuitableForTemperature(List<ClothingItem> clothes, double APItemperature, double ArduinoTemp) {
+
+        double checkedTemp = rightTemperature(APItemperature, ArduinoTemp);
 
         ClothingItem.Weather givenWeather;
 
-        if (temperature < 5) {
+        if (checkedTemp < 5) {
             aiDecision.append("The temperature is classified as cold.\n");
 //            logger.debug("The temperature is classified as cold");
             givenWeather = ClothingItem.Weather.COLD;
-        } else if (temperature < 15) {
+        } else if (checkedTemp < 15) {
             aiDecision.append("The temperature is classified as mild.\n");
 //            logger.debug("The temperature is classified as mild");
             givenWeather = ClothingItem.Weather.MILD;
@@ -101,8 +110,7 @@ public class OutfitSelector {
 
         Map<ClothingItem.Type, List<ClothingItem>> clothesByType = new HashMap<>();
 
-        types.stream()
-                .forEach(type -> {
+        types.forEach(type -> {
                     List<ClothingItem> clothesOfType = clothes
                             .stream()
                             .filter(item -> item.getType() == type)

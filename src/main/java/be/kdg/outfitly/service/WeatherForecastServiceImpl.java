@@ -2,7 +2,6 @@ package be.kdg.outfitly.service;
 
 import be.kdg.outfitly.domain.WeatherForecast;
 import be.kdg.outfitly.repository.WeatherForecastRepository;
-import be.kdg.outfitly.repository.WeatherForecastRepositoryCollectionsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +24,13 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
 
     @Override
     public WeatherForecast findByDate(LocalDateTime time) {
-        return weatherForecastRepository.read().stream().filter(weatherData -> weatherData.getTimeOfReading().equals(time)).findFirst().get();
+        return weatherForecastRepository.findAll().stream().filter(weatherData -> weatherData.getTimeOfReading().equals(time)).findFirst().get();
     }
 
     @Override
     public WeatherForecast findByCountryAndCity(String country, String city) {
         logger.debug("Find by country: " + country + " and city: " + city);
-        List<WeatherForecast> forecasts = weatherForecastRepository.read().stream().filter(weatherData -> weatherData.getCountryCode().equals(country) && weatherData.getCity().equals(city)).collect(Collectors.toList());
+        List<WeatherForecast> forecasts = weatherForecastRepository.findAll().stream().filter(weatherData -> weatherData.getCountryCode().equals(country) && weatherData.getCity().equals(city)).collect(Collectors.toList());
         forecasts = forecasts.stream()
                 .filter(forecast -> forecast.getDate().isAfter(LocalDateTime.now().minusMinutes(45L)))
                 .sorted(Comparator.comparing(WeatherForecast::getDate))
@@ -45,7 +44,7 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
 
     @Override
     public WeatherForecast create(String country, String city) {
-        return weatherForecastRepository.create(WeatherForecast.currentForecastForCountryCity(country, city));
+        return weatherForecastRepository.save(WeatherForecast.currentForecastForCountryCity(country, city));
     }
 
 

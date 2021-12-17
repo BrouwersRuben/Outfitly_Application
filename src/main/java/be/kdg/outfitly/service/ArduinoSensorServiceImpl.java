@@ -1,8 +1,8 @@
 package be.kdg.outfitly.service;
 
 import be.kdg.outfitly.domain.ArduinoSensor;
+import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.repository.ArduinoSensorRepository;
-import be.kdg.outfitly.repository.ArduinoSensorRepositoryCollectionsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,11 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
 
     @Override
     public ArduinoSensor findByDate(LocalDateTime time) {
-        return arduinoSensorRepository.read().stream().filter(sensorData -> sensorData.getTimeOfReading().equals(time)).findFirst().get();
+        return arduinoSensorRepository.findAll().stream().filter(sensorData -> sensorData.getTimeOfReading().equals(time)).findFirst().get();
+    }
+
+    @Override
+    public ArduinoSensor findByUser(User user, LocalDateTime time) {
+        return arduinoSensorRepository.findAll().stream().filter(sensorData -> sensorData.equals(user.getSensorData().stream().filter(arduinoSensor -> arduinoSensor.getTimeOfReading().equals(time)))).findFirst().get();
     }
 }

@@ -3,10 +3,8 @@ package be.kdg.outfitly.presentation.dto;
 import be.kdg.outfitly.util.ValidPassword;
 
 import javax.validation.Constraint;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.time.DayOfWeek;
 
 @LocationValidation
 public class UserDTO implements Locatable {
@@ -55,6 +53,10 @@ public class UserDTO implements Locatable {
     @NotEmpty
     @Size(max = 10, message = "Zipcode cannot be larger than 10 characters")
     private String zipcode;
+
+    //TODO: Maybe this should be optional?
+    @NotNull(message = "The washingday should be given")
+    private DayOfWeek washday;
 
     public String getEmail() {
         return email;
@@ -116,6 +118,10 @@ public class UserDTO implements Locatable {
         return apartmentNumber;
     }
 
+    public DayOfWeek getWashday() {
+        return washday;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -158,5 +164,9 @@ public class UserDTO implements Locatable {
 
     public void setApartmentNumber(String apartmentNumber) {
         this.apartmentNumber = apartmentNumber;
+    }
+
+    public void setWashday(DayOfWeek washday) {
+        this.washday = washday;
     }
 }

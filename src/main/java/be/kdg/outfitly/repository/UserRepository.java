@@ -1,12 +1,7 @@
 package be.kdg.outfitly.repository;
 
 import be.kdg.outfitly.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface UserRepository {
-    User create (User user);
-    List<User> read();
-    User findById(int id);
-    void update (User user);
+public interface UserRepository extends JpaRepository<User, Integer> {
 }

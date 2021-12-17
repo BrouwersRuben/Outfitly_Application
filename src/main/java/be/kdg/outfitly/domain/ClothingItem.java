@@ -191,13 +191,13 @@ public class ClothingItem extends Entity {
         this.weather = weather;
     }
 
-//    public String getPhotoUrl() {
-//        return photoUrl;
-//    }
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
 
-//    public void setPhotoUrl(String photoUrl) {
-//        this.photoUrl = photoUrl;
-//    }
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
 
     public User getUser() {
         return user;
