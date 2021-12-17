@@ -1,9 +1,12 @@
 package be.kdg.outfitly.domain;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @javax.persistence.Entity
+@DynamicUpdate
 @Table(name = "clothes")
 public class ClothingItem extends Entity {
 

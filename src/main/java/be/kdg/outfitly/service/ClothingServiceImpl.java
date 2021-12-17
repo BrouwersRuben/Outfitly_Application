@@ -1,10 +1,12 @@
 package be.kdg.outfitly.service;
 
 import be.kdg.outfitly.domain.ClothingItem;
+import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.repository.ClothingRepository;
 import be.kdg.outfitly.util.ClothingPictureTooLargeChecker;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -36,5 +38,13 @@ public class ClothingServiceImpl implements ClothingService {
     public void delete(int id) {
         ClothingItem clothingItemToRemove = clothingRepository.findById(id).orElseThrow();
         clothingRepository.delete(clothingItemToRemove);
+    }
+
+    @Override
+    @Transactional
+    public void putInWash(ClothingItem clothingItem) {
+        ClothingItem toBeUpdated = clothingRepository.getById(clothingItem.getId());
+        toBeUpdated.setWash_cycle(true);
+        clothingRepository.save(toBeUpdated);
     }
 }

@@ -10,4 +10,5 @@ public interface ClothingService {
     ClothingItem create(ClothingItem clothingItem);
     List<ClothingItem> read();
     void delete(int id);
+    void putInWash(ClothingItem toPutInWash);
 }
