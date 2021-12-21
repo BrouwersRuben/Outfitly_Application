@@ -22,15 +22,19 @@
     </div>
 
     <div class="d-flex justify-content-center">
+        <a th:href="@{/register}"><img class="width400px" th:src="@{images/register.png}" alt="Register now!"></a>
+    </div>
+
+    <div class="d-flex justify-content-center">
         <div class="container m-4">
             <div class="row">
                 <div class="col-sm flex-row-reverse">
                     <div class="d-flex flex-row-reverse">
-                        <img class="my-4" th:src="@{images/drawingWardrobe.png}" width="60%" alt="cartoon wardrobe image">
+                        <img class="my-4 width400px" th:src="@{images/drawingWardrobe.png}" alt="cartoon wardrobe image">
                     </div>
                 </div>
                 <div class="col-sm">
-                    <p class="h2 m-4">What is this?</p>
+                    <p class="h1 m-4">What is this?</p>
                     <p class="m-4">
                         A subscription based application that, with the help of Artificial Intelligence, would assist
                         the user with the daily task of picking out clothes for the day by taking into account the
@@ -46,12 +50,14 @@
         </div>
     </div>
 
+<!--    <div class="d-flex justify-content-center align-content-center m-4">-->
+<!--        <img th:src="@{images/babyInJacket.jpeg}" class="mx-4" width="500px" alt="baby in a jacket" >-->
+<!--    </div>-->
 
+    <p class="h1 m-4 text-center">The aim of this website</p>
 
-    <div class="d-flex justify-content-center">
-        <h1>Overall Aim</h1>
-    </div>
-    <div class="d-flex justify-content-center align-content-center">
+    <div class="d-flex justify-content-center align-content-center m-4">
+        <img th:src="@{images/guy_running_cold.jpg}" class="mx-4 width400px" alt="guy running in the snow with no clothes on" >
         <div class="w-50">
             <p>
                 Our aim is to save you time and avoid those awkward situations where you have overdressed or underdressed for the occasion.<br>
@@ -64,24 +70,45 @@
         </div>
     </div>
 
-    <!--
-    TODO: This for final product
-    <div class="d-flex justify-content-center">
-        <h1>Reviews
-        </h1>
-    </div>
-    -->
+    <p class="h1 mb-4 text-center">Our reviews</p>
 
-    <div class="d-flex justify-content-center">
-        <a class="btn btn-primary btn-lg" th:href="@{/register}">Register now!</a>
+    <div class="d-flex justify-content-center align-content-center m-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4" style="max-width: 70%">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <h2>Have any problems or questions?? Contact us! (email doesn't work yet)</h2>
-    <form action="mailto:contact-project+kdg-ti-integration-2-1-outfitli-final-application-outfitly@incoming.gitlab.com?subject=ProblemInquiry" method="POST" name="emailForm">
-        <label for="feedbackContent">Message:</label>
-            <textarea id="feedbackContent" name="feedbackContent" rows="5" cols="20"></textarea>
-        <input type="submit" value="Send Request">
-    </form>
 
     <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
 </body>

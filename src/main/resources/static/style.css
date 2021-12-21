@@ -6,6 +6,10 @@
     font-weight: bold;
 }
 
-.clothingPictureViewClothing{
-    max-height: 550px;
+.width400px{
+    width: 400px;
+}
+
+.teamPicture{
+    max-height: 200px;
 }

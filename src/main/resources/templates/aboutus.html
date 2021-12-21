@@ -7,7 +7,7 @@
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </head>
 <body>
-    <div th:insert="~{fragments/navbar::navbar}">navbarLoggedIn</div>
+    <nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
 
     <div th:insert="~{fragments/header::header}">header</div>
 
@@ -25,7 +25,7 @@
     <div class="card-deck mx-5 text-center d-flex flex-row justify-content-center">
         <div class="row">
             <div class="card m-4 box-shadow" style="width: 20rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img th:src="@{images/teamPictures/ruben.png}" class="card-img-top teamPicture" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Brouwers Ruben</h5>
                     <p class="small">CEO</p>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="card m-4 box-shadow" style="width: 20rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img th:src="@{images/teamPictures/roby.png}" class="card-img-top teamPicture" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Van Boxelaere Roby</h5>
                     <p class="small">CFO</p>
@@ -51,7 +51,7 @@
 
         <div class="row">
             <div class="card m-4 box-shadow" style="width: 20rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img th:src="@{images/teamPictures/rodzers.png}" class="card-img-top teamPicture" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Ušackis Rodžers</h5>
                     <p class="small">CMO</p>
@@ -63,7 +63,7 @@
             </div>
 
             <div class="card m-4 box-shadow" style="width: 20rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img th:src="@{images/teamPictures/dominik.png}" class="card-img-top teamPicture" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Mika Dominik</h5>
                     <p class="small">CTO</p>
@@ -76,12 +76,12 @@
         </div>
     </div>
 
-    <div class="d-flex justify-content-center">
-        <div class="container m-4">
-            <div class="row justify-content-center">
-                <img class="my-4 diagram" th:src="@{images/Diagram.png}" alt="Organization diagram">
-            </div>
-        </div>
+    <div class="d-flex justify-content-center align-content-center">
+        <form action="mailto:contact-project+kdg-ti-integration-2-1-outfitli-final-application-outfitly@incoming.gitlab.com?subject=ProblemInquiry" method="POST" name="emailForm">
+            <label for="feedbackContent" class="form-label m-2">Have any problems or questions?? Contact us!</label>
+            <textarea class="form-control m-2" id="feedbackContent" name="feedbackContent" placeholder="Enter your problem or question here!"></textarea>
+            <input class="btn btn-primary m-2" type="submit" value="Send Request">
+        </form>
     </div>
 
     <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
