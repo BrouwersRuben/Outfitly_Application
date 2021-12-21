@@ -95,29 +95,31 @@
 
 <div class="d-flex flex-column m-5" style="max-height: 100vh">
 
-    <h2 class="">Hello, <span th:text="${username}"></span></h2>
+    <h2 class="" th:utext="#{weather-forecast.heading-1}">Hello, <span th:text="${username}"></span></h2>
 
     <div class="d-flex flex-row">
 
         <div class='d-flex justify-content-center flex-column w-50'>
             <div>
-                <p>The current forecast for today in <span th:text="${city}"></span> is <span
+                <p th:utext="#{weather-forecast.paragraph-1}">The current forecast for today in <span th:text="${city}"></span> is <span
                         th:text="${dailyWeatherForecastData.getDescription}"></span>.</p>
-                <p>The forecast for today shows a high of <span
-                        th:text="${dailyWeatherForecastData.getMaxTemperature}"></span>°C and a low of <span
-                        th:text="${dailyWeatherForecastData.getMinTemperature}"></span>°C.</p>
-                <p>There is a <span th:text="${dailyWeatherForecastData.getRainProbability}"></span>% chance of rain
-                    today.</p>
+                <p th:utext="#{weather-forecast.paragraph-2}">The forecast for today shows a high of
+                    <span th:text="${dailyWeatherForecastData.getMaxTemperature}"></span>
+                    <span th:utext="#{weather-forecast.paragraph-2-span-1}">°C and a low of </span>
+                    <span th:text="${dailyWeatherForecastData.getMinTemperature}"></span>°C.
+                </p>
+                <p th:utext="#{weather-forecast.paragraph-3}">There is a <span th:text="${dailyWeatherForecastData.getRainProbability}"></span>
+                    <span th:utext="#{weather-forecast.paragraph-3-span-1}">% chance of rain today.</span>
+                </p>
             </div>
         </div>
 
         <div class="d-flex flex-row justify-content-center w-50">
             <div><img th:src="${dailyWeatherForecastData.getWeatherIcon()}" alt="weather-icon" class="img-fluid"></div>
             <div class="justify-content-center d-flex flex-column w-50">
-                <div>Current temperature: <span th:text="${dailyWeatherForecastData.getCurrentTemperature}"></span>°C
-                </div>
-                <div>Humidity: <span th:text="${dailyWeatherForecastData.getCurrentHumidity}"></span>%</div>
-                <div>Wind: <span th:text="${dailyWeatherForecastData.getCurrentWindSpeed}"></span>m/s</div>
+                <div th:utext="#{weather-forecast.div-1-text}">Current temperature: <span th:text="${dailyWeatherForecastData.getCurrentTemperature}"></span>°C</div>
+                <div th:utext="#{weather-forecast.div-2-text}">Humidity: <span th:text="${dailyWeatherForecastData.getCurrentHumidity}"></span>%</div>
+                <div th:utext="#{weather-forecast.div-3-text}">Wind: <span th:text="${dailyWeatherForecastData.getCurrentWindSpeed}"></span>m/s</div>
             </div>
         </div>
     </div>
@@ -134,7 +136,7 @@
 
 <div class="d-flex justify-content-center">
     <div class="m-4">
-        <a class="btn btn-outline-dark" th:href="@{/user/outfit}">View suggested clothing</a>
+        <a class="btn btn-outline-dark" th:utext="#{weather-forecast.button}" th:href="@{/user/outfit}">View suggested clothing</a>
     </div>
     <!--    <div class="m-4">-->
     <!--        <a class="btn btn-outline-dark" th:href="@{/...}">View weekly broadcast</a>-->
