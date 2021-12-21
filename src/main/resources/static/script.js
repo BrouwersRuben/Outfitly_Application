@@ -71,7 +71,7 @@ if (descriptions?.length !== 0) {
     document.getElementById('warning').innerText = 'Weather warnings for today.';
     document.getElementById('alerts').className = 'd-flex flex-column justify-content-center alert alert-warning';
 
-    for (let i = 0; i < weatherAlertMap.length; i++) {
+    for (let i = 0; i < descriptions.length; i++) {
         let type1 = document.createElement('span');
         let type2 = document.createElement('span');
         let text1 = document.createTextNode('\n[' + unixTimeConverter(timestampsAlerts[i]) + ']');
