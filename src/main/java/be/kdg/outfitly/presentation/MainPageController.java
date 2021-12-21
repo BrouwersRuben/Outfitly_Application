@@ -2,6 +2,7 @@ package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.service.UserService;
+import be.kdg.outfitly.service.WeatherForecastService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,11 +17,11 @@ import java.security.Principal;
 public class MainPageController {
     private final Logger logger = LoggerFactory.getLogger(MainPageController.class);
     private final UserService userService;
-    private final DailyWeatherForecastService dailyWeatherForecastService;
+    private final WeatherForecastService weatherForecastService;
 
-    public MainPageController(UserService userService, DailyWeatherForecastService dailyWeatherForecastService) {
+    public MainPageController(UserService userService, WeatherForecastService weatherForecastService) {
         this.userService = userService;
-        this.dailyWeatherForecastService = dailyWeatherForecastService;
+        this.weatherForecastService = weatherForecastService;
     }
 
     @GetMapping
