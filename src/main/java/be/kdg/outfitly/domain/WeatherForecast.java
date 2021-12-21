@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 // TODO: This is only for the CURRENT weather forecast, we still need a separate class for future forecast I guess.
 @javax.persistence.Entity
@@ -31,19 +33,24 @@ public class WeatherForecast extends Entity {
     private LocalDateTime date;
 
     //TODO: city + country --> location
-    @Column(name = "forecast_location", nullable = false)
+    @Column(name = "city", nullable = false)
     private String city;
 
+
+    @Column(name = "country_code", nullable = false)
     private String countryCode;
 
-    @Column(name = "temperature", nullable = false)
-    private double temperature;
+    @Column(name = "current_temperature", nullable = false)
+    private double currentTemperature;
 
-    @Column(name = "humidity", nullable = false)
-    private int humidity;
+    @Column(name = "current_feels_like_temperature", nullable = false)
+    private double currentFeelsLikeTemperature;
 
-    @Column(name = "feels_like_temperature", nullable = false)
-    private double feelsLikeTemperature;
+    @Column(name = "current_humidity", nullable = false)
+    private int currentHumidity;
+
+    @Column(name = "wind_speed", nullable = false)
+    private double currentWindSpeed;
 
     @Column(name = "lowest_temperature", nullable = false)
     private double lowestTemperature;
@@ -51,11 +58,14 @@ public class WeatherForecast extends Entity {
     @Column(name = "highest_temperature", nullable = false)
     private double highestTemperature;
 
-    @Column(name = "wind_speed", nullable = false)
-    private double windSpeed;
+    @Column(name = "rain_probability", nullable = false)
+    private double rainProbability;
 
     @Column(name = "weather_description", nullable = false)
     private String weatherDescription;
+
+    @Column(name = "weather_icon", nullable = false)
+    private String weatherIcon;
 
     @Column(name = "latitude", nullable = false)
     private double latitude;
@@ -63,56 +73,104 @@ public class WeatherForecast extends Entity {
     @Column(name = "longtitude", nullable = false)
     private double longitude;
 
-    protected WeatherForecast() {
-    }
+    @ElementCollection
+    private List<Double> dailyTemperatures;
 
-    public WeatherForecast(LocalDateTime date, String city, String countryCode, double temperature, double feelsLikeTemperature, double lowestTemperature, double highestTemperature, double windSpeed, int humidity, String weatherDescription, double latitude, double longitude) {
+    @ElementCollection
+    private List<Long> dailyTemperatureTimestamps;
+
+    @ElementCollection
+    private List<String> weatherAlerts;
+
+    @ElementCollection
+    private List<Long> weatherAlertTimeStamps;
+
+
+    public WeatherForecast(int id, LocalDateTime date, String city, String countryCode, double currentTemperature, double currentFeelsLikeTemperature, int currentHumidity, double currentWindSpeed, double lowestTemperature, double highestTemperature, double rainProbability, String weatherDescription, String weatherIcon, double latitude, double longitude, List<Double> dailyTemperatures, List<Long> dailyTemperatureTimestamps, List<String> weatherAlerts, List<Long> weatherAlertTimeStamps) {
+        this.id = id;
         this.date = date;
         this.city = city;
         this.countryCode = countryCode;
-        this.temperature = temperature;
-        this.feelsLikeTemperature = feelsLikeTemperature;
+        this.currentTemperature = currentTemperature;
+        this.currentFeelsLikeTemperature = currentFeelsLikeTemperature;
+        this.currentHumidity = currentHumidity;
+        this.currentWindSpeed = currentWindSpeed;
         this.lowestTemperature = lowestTemperature;
         this.highestTemperature = highestTemperature;
-        this.windSpeed = windSpeed;
-        this.humidity = humidity;
+        this.rainProbability = rainProbability;
         this.weatherDescription = weatherDescription;
+        this.weatherIcon = weatherIcon;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.dailyTemperatures = new ArrayList<>();
+        this.dailyTemperatureTimestamps = new ArrayList<>();
+        this.weatherAlerts = new ArrayList<>();
+        this.weatherAlertTimeStamps = new ArrayList<>();
+    }
+
+    protected WeatherForecast() {
+
     }
 
 
     public static WeatherForecast currentForecastForCountryCity(String countryCode, String city) {
-        WeatherForecast wf = new WeatherForecast();
-        JSONObject weatherAPIData;
+        WeatherForecast weatherForecast = new WeatherForecast();
+        JSONObject currentWeatherAPIData;
+        JSONObject hourlyWeatherDataAPI;
+
         try {
-            weatherAPIData = retrieveAPIData(city + "," + countryCode);
+            currentWeatherAPIData = retrieveAPIData("https://api.openweathermap.org/data/2.5/weather?q=" + city + "," + countryCode + "&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c");
+
         } catch (Exception e) {
-            logger.error("An error occurred while data was being retrieved from the API.");
+            logger.error("An error occurred while data was being retrieved from the first API.");
             return null;
         }
 
-        wf.setDate(LocalDateTime.now());
-        wf.setCountryCode(countryCode);
-        wf.setCity(city);
-        wf.setTemperature(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp"))));
-        wf.setFeelsLikeTemperature(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("feels_like"))));
-        wf.setLowestTemperature(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_min"))));
-        wf.setHighestTemperature(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("main").get("temp_max"))));
-        wf.setWindSpeed(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("wind").get("speed"))));
-        wf.setHumidity(Integer.parseInt(String.valueOf(weatherAPIData.getJSONObject("main").get("humidity"))));
-        wf.setWeatherDescription(String.valueOf(weatherAPIData.getJSONArray("weather").getJSONObject(0).get("description")));
-        wf.setLatitude(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("coord").get("lat"))));
-        wf.setLongitude(Double.parseDouble(String.valueOf(weatherAPIData.getJSONObject("coord").get("lon"))));
+        weatherForecast.setDate(LocalDateTime.now());
+        weatherForecast.setCountryCode(countryCode);
+        weatherForecast.setCity(city);
+        weatherForecast.setCurrentTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("temp"))));
+        weatherForecast.setCurrentFeelsLikeTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("feels_like"))));
+        weatherForecast.setCurrentHumidity(Integer.parseInt(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("humidity"))));
+        weatherForecast.setCurrentWindSpeed(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("wind").get("speed"))));
+        weatherForecast.setHighestTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("temp_max"))));
+        weatherForecast.setLowestTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("temp_min"))));
+        weatherForecast.setWeatherDescription(String.valueOf(currentWeatherAPIData.getJSONArray("weather").getJSONObject(0).get("description")));
+        weatherForecast.setLatitude(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("coord").get("lat"))));
+        weatherForecast.setLongitude(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("coord").get("lon"))));
+
+
+        try {
+            hourlyWeatherDataAPI = retrieveAPIData("https://api.openweathermap.org/data/2.5/onecall?lat="+weatherForecast.getLatitude()+"&lon="+weatherForecast.getLongitude()+"&exclude=minutely&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c");
+
+        } catch (Exception e) {
+            logger.error("An error occurred while data was being retrieved from the second API.");
+            return null;
+        }
+
+        weatherForecast.setRainProbability(Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("daily").getJSONObject(0).get("pop"))) * 100);
+        weatherForecast.setWeatherIcon(String.valueOf("http://openweathermap.org/img/wn/"+hourlyWeatherDataAPI.getJSONObject("current").getJSONArray("weather").getJSONObject(0).get("icon"))+"@4x.png");
+
+        for (int i = 0; i < hourlyWeatherDataAPI.getJSONArray("hourly").length(); i++) {
+            weatherForecast.dailyTemperatures.add(Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("temp"))));
+            weatherForecast.dailyTemperatureTimestamps.add(Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("dt"))));
+        }
+
+        if (hourlyWeatherDataAPI.has("alerts")) {
+            for (int i = 0; i <hourlyWeatherDataAPI.getJSONArray("alerts").length(); i++) {
+                weatherForecast.weatherAlerts.add(String.valueOf(hourlyWeatherDataAPI.getJSONArray("alerts").getJSONObject(i).get("description")));
+                weatherForecast.weatherAlertTimeStamps.add(Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("alerts").getJSONObject(i).get("start"))));
+            }
+        }
+
         logger.debug("Weather forecast object created: ");
 
-        return wf;
+        return weatherForecast;
     }
 
-    private static JSONObject retrieveAPIData(String location) throws Exception {
-        String APILink = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c";
+    private static JSONObject retrieveAPIData(String apiLink) throws Exception {
         // TODO: Reload api on refresh
-        URIBuilder builder = new URIBuilder(APILink);
+        URIBuilder builder = new URIBuilder(apiLink);
         HttpGet get = new HttpGet(builder.build());
         CloseableHttpClient httpclient = HttpClients.createDefault();
         JSONObject json;
@@ -167,12 +225,13 @@ public class WeatherForecast extends Entity {
     }
 
 
-    // Note: I can retrieve any info from the API, though retrieving some data might be tricky due to the fact that we're using a trial version.
-    // https://openweathermap.org/api
-    // Some data can be only retrieved with coordinates, feasible.
+    // Getters
+    @Override
+    public int getId() {
+        return id;
+    }
 
-
-    public LocalDateTime getTimeOfReading() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -180,118 +239,151 @@ public class WeatherForecast extends Entity {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getCountryCode() {
         return countryCode;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public double getCurrentTemperature() {
+        return currentTemperature;
     }
 
-    public double getTemperature() {
-        return temperature;
+    public double getCurrentFeelsLikeTemperature() {
+        return currentFeelsLikeTemperature;
     }
 
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
+    public int getCurrentHumidity() {
+        return currentHumidity;
     }
 
-    public double getFeelsLikeTemperature() {
-        return feelsLikeTemperature;
-    }
-
-    public void setFeelsLikeTemperature(double feelsLikeTemperature) {
-        this.feelsLikeTemperature = feelsLikeTemperature;
+    public double getCurrentWindSpeed() {
+        return currentWindSpeed;
     }
 
     public double getLowestTemperature() {
         return lowestTemperature;
     }
 
-    public void setLowestTemperature(double lowestTemperature) {
-        this.lowestTemperature = lowestTemperature;
-    }
-
     public double getHighestTemperature() {
         return highestTemperature;
     }
 
-    public void setHighestTemperature(double highestTemperature) {
-        this.highestTemperature = highestTemperature;
-    }
-
-    public double getWindSpeed() {
-        return windSpeed;
-    }
-
-    public void setWindSpeed(double windSpeed) {
-        this.windSpeed = windSpeed;
-    }
-
-    public int getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(int humidity) {
-        this.humidity = humidity;
+    public double getRainProbability() {
+        return rainProbability;
     }
 
     public String getWeatherDescription() {
         return weatherDescription;
     }
 
-    public void setWeatherDescription(String weatherDescription) {
-        this.weatherDescription = weatherDescription;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public String getWeatherIcon() {
+        return weatherIcon;
     }
 
     public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
     public double getLongitude() {
         return longitude;
+    }
+
+    public List<Double> getDailyTemperatures() {
+        return dailyTemperatures;
+    }
+
+    public List<Long> getDailyTemperatureTimestamps() {
+        return dailyTemperatureTimestamps;
+    }
+
+    public List<String> getWeatherAlerts() {
+        return weatherAlerts;
+    }
+
+    public List<Long> getWeatherAlertTimeStamps() {
+        return weatherAlertTimeStamps;
+    }
+
+
+    // Setters
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public void setCurrentTemperature(double currentTemperature) {
+        this.currentTemperature = currentTemperature;
+    }
+
+    public void setCurrentFeelsLikeTemperature(double currentFeelsLikeTemperature) {
+        this.currentFeelsLikeTemperature = currentFeelsLikeTemperature;
+    }
+
+    public void setCurrentHumidity(int currentHumidity) {
+        this.currentHumidity = currentHumidity;
+    }
+
+    public void setCurrentWindSpeed(double currentWindSpeed) {
+        this.currentWindSpeed = currentWindSpeed;
+    }
+
+    public void setLowestTemperature(double lowestTemperature) {
+        this.lowestTemperature = lowestTemperature;
+    }
+
+    public void setHighestTemperature(double highestTemperature) {
+        this.highestTemperature = highestTemperature;
+    }
+
+    public void setRainProbability(double rainProbability) {
+        this.rainProbability = rainProbability;
+    }
+
+    public void setWeatherDescription(String weatherDescription) {
+        this.weatherDescription = weatherDescription;
+    }
+
+    public void setWeatherIcon(String weatherIcon) {
+        this.weatherIcon = weatherIcon;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
+    public void setDailyTemperatures(List<Double> dailyTemperatures) {
+        this.dailyTemperatures = dailyTemperatures;
+    }
+
+    public void setDailyTemperatureTimestamps(List<Long> dailyTemperatureTimestamps) {
+        this.dailyTemperatureTimestamps = dailyTemperatureTimestamps;
+    }
+
+    public void setWeatherAlerts(List<String> weatherAlerts) {
+        this.weatherAlerts = weatherAlerts;
+    }
+
+    public void setWeatherAlertTimeStamps(List<Long> weatherAlertTimeStamps) {
+        this.weatherAlertTimeStamps = weatherAlertTimeStamps;
+    }
+
     // https://openweathermap.org/weather-conditions
     public boolean isGoingToRain() {
         return getWeatherDescription().toLowerCase().contains("rain") || getWeatherDescription().toLowerCase().contains("drizzle");
-    }
-
-    @Override
-    public String toString() {
-        return "WeatherForecast{" +
-                "date=" + date +
-                ", city='" + city + '\'' +
-                ", countryCode='" + countryCode + '\'' +
-                ", temperature=" + temperature +
-                ", feelsLikeTemperature=" + feelsLikeTemperature +
-                ", lowestTemperature=" + lowestTemperature +
-                ", highestTemperature=" + highestTemperature +
-                ", windSpeed=" + windSpeed +
-                ", humidity=" + humidity +
-                ", weatherDescription='" + weatherDescription + '\'' +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                '}';
     }
 }
