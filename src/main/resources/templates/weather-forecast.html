@@ -6,86 +6,16 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@3.6.1/dist/chart.min.js"></script>
-    <script th:inline="javascript" th:type="module">
-        let valueCount = 10;
-        let temperatureArray = [[${dailyWeatherForecastData.getDailyTemperatures}]].slice(0, valueCount);
-        let timestampArray = [[${dailyWeatherForecastData.getDailyTemperatureTimestamps}]];
-        let weatherAlertArray = [[${dailyWeatherForecastData.getWeatherAlerts}]];
-        let weatherAlertTimestampArray = [[${dailyWeatherForecastData.getWeatherAlertTimestamps}]];
-        let timeArray = [];
-        console.log(temperatureArray);
 
-        for (let i = 0; i < valueCount * 2; i += 2) {
-            let date = new Date(timestampArray[i] * 1000);
-            let hours = date.getHours();
-            let minutes = '0' + date.getMinutes();
-
-            timeArray.push(hours + ':' + minutes.substr(-2));
-        }
-
-        const ctx = document.getElementById('myChart').getContext('2d');
-
-        let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, 'rgba(58, 123, 213, 1');
-        gradient.addColorStop(1, 'rgba(0, 210, 255, 0.3');
-
-        // TODO: Values on top of line.
-        const myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: timeArray,
-                datasets: [{
-                    data: temperatureArray,
-                    borderColor: '#3e95cd',
-                    fill: true,
-                    backgroundColor: gradient,
-                    borderColor: '#fff',
-                    borderWidth: 1.5
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-                elements: {
-                    point: {
-                        radius: 0
-                    }
-                }
-            }
-        });
-
-        function unixTimeConverter(timestamp) {
-            let time = new Date(timestamp * 1000);
-            let year = time.getFullYear();
-            let month = time.getMonth();
-            let date = time.getDate();
-            let hour = time.getHours();
-            let min = time.getMinutes();
-            let sec = time.getSeconds();
-            return year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec;
-        }
-
-        if (weatherAlertArray.length != 0) {
-            document.getElementById('warning').innerText = 'Weather warnings for today.';
-            document.getElementById('alerts').className = 'd-flex flex-column justify-content-center alert alert-warning';
-
-            for (let i = 0; i < weatherAlertArray.length; i++) {
-                let type1 = document.createElement('span');
-                let type2 = document.createElement('span');
-                let text1 = document.createTextNode('\n[' + unixTimeConverter(weatherAlertTimestampArray[i]) + ']');
-                let text2 = document.createTextNode(weatherAlertArray[i]);
-                type1.appendChild(text1);
-                type2.appendChild(text2);
-                document.getElementById('weatherAlerts').appendChild(type1);
-                document.getElementById('weatherAlerts').appendChild(type2);
-            }
-        }
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        let temperatureArray = /*[[${dailyWeatherForecastData.getDailyTemperatures}]]*/ 1;
+        let timestampArray = /*[[${dailyWeatherForecastData.getDailyTemperatureTimestamps}]]*/ 1;
+        let weatherAlertArray = /*[[${dailyWeatherForecastData.getWeatherAlerts}]]*/ 1;
+        let weatherAlertTimestampArray = /*[[${dailyWeatherForecastData.getWeatherAlertTimestamps}]]*/ 1;
+        /*]]>*/
     </script>
+
 </head>
 <body class="m-4">
 
@@ -144,5 +74,7 @@
 </div>
 
 <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+
+<script th:src="@{/script.js}"></script>
 </body>
 </html>
