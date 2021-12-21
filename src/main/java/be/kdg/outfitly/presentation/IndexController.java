@@ -13,7 +13,6 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/")
 public class IndexController {
-//TODO: God Class?
 
     private UserService userService;
 

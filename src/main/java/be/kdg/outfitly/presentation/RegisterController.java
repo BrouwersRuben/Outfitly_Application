@@ -1,5 +1,6 @@
 package be.kdg.outfitly.presentation;
 
+import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.exceptions.EmailExistsException;
 import be.kdg.outfitly.presentation.dto.UserDTO;
 import be.kdg.outfitly.service.UserService;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -30,7 +32,12 @@ public class RegisterController {
     }
 
     @RequestMapping
-    public String register(Model model) {
+    public String register(Model model, Principal principal) {
+//        User user = userService.findByEmail(principal.getName());
+        if(principal!=null){
+//            return "redirect:/user/mainpage";
+            model.addAttribute("errorMessage", "You are already logged in.");
+        }
         model.addAttribute("userDTO", new UserDTO());
         model.addAttribute("countryCodes", Locale.getISOCountries());
         return "register";
