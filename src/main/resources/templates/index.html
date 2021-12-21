@@ -14,7 +14,7 @@
     <div th:insert="~{fragments/header::header}">header</div>
 
     <div class="container-fluid bg-blue text-white text-center py-4">
-        <h3 class="m-4">
+        <h3 class="m-4" th:text="index.bannerText">
             <strong><em>Don't waste time picking the right clothes. Outfitly will do it for <br>
             you. Save time by wearing the correct clothes for the correct occasion.</em></strong> <br>
         </h3>
@@ -33,13 +33,13 @@
                     </div>
                 </div>
                 <div class="col-sm">
-                    <p class="h1 m-4 font-weight-bold" >What is this?</p>
-                    <p class="m-4 indexPageText">
+                    <p class="h1 m-4 font-weight-bold" th:utext="index.whatIsThis">What is this?</p>
+                    <p class="m-4 indexPageText" th:utext="index.whatIsThisDescription1">
                         A subscription based application that, with the help of Artificial Intelligence, would assist
                         the user with the daily task of picking out clothes for the day by taking into account the
                         weather forecast as well as the clothing inventory of the user.
                     </p>
-                    <p class="m-4 indexPageText">
+                    <p class="m-4 indexPageText" th:utext="index.whatIsThisDescription12">
                         Besides that the application would also serve a secondary purpose as a clothing manager,
                         where the user would be able to see which clothes need to be washed, which clothes are currently
                         washing and which clothes are available for selection.
@@ -53,13 +53,13 @@
 <!--        <img th:src="@{images/babyInJacket.jpeg}" class="mx-4" width="500px" alt="baby in a jacket" >-->
 <!--    </div>-->
 
-    <p class="h1 m-4 text-center font-weight-bold">Then Outfitly will be for you!</p>
+    <p class="h1 m-4 text-center font-weight-bold" th:utext="index.willBeForYou">Then Outfitly will be for you!</p>
 
     <div class="d-flex justify-content-center">
         <div class="container m-4">
             <div class="row">
                 <div class="col-sm text-end">
-                    <p class="indexPageText">
+                    <p class="indexPageText" th:utext="index.willBeForYouDescription">
                         Our aim is to save you time and avoid those awkward situations where you have overdressed or underdressed for the occasion.<br>
                         Are you somebody that struggles with picking your outfit in the morning?<br>
                         Or somebody that regularly picks the wrong outfit because you didn't look at the weather forecast for that day?
@@ -74,7 +74,7 @@
         </div>
     </div>
 
-    <p class="h1 mb-4 text-center font-weight-bold">Our reviews</p>
+    <p class="h1 mb-4 text-center font-weight-bold" th:utext="index.ourReviews">Our reviews</p>
 
     <div class="d-flex justify-content-center align-content-center m-4">
         <div class="row row-cols-1 row-cols-md-3 g-4 align-content-center">
@@ -82,8 +82,8 @@
                 <div class="card w-75">
                     <div class="card-body">
                         <h5 class="card-title">Jonas</h5>
-                        <p>I love supporting new technologies and Outfitly has been a great help to my busy life!</p>
-                        <a th:href="@{/review-jonas}" class="btn-sm btn-primary">Read full review</a>
+                        <p th:utext="index.jonasText">I love supporting new technologies and Outfitly has been a great help to my busy life!</p>
+                        <a th:href="@{/review-jonas}" class="btn-sm btn-primary" th:utext="index.readFullReview">Read full review</a>
                     </div>
                 </div>
             </div>
@@ -91,8 +91,8 @@
                 <div class="card w-75">
                     <div class="card-body">
                         <h5 class="card-title">Marie</h5>
-                        <p>It saves me so much stress. As a person that doesn't follow fashion, this is great!</p>
-                        <a th:href="@{/review-marie}" class="btn-sm btn-primary">Read full review</a>
+                        <p th:utext="index.marieText">It saves me so much stress. As a person that doesn't follow fashion, this is great!</p>
+                        <a th:href="@{/review-marie}" class="btn-sm btn-primary" th:utext="index.readFullReview">Read full review</a>
                     </div>
                 </div>
             </div>
