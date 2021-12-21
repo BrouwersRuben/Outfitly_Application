@@ -3,7 +3,7 @@ package be.kdg.outfitly.service;
 
 import be.kdg.outfitly.domain.DailyWeatherForecast;
 import be.kdg.outfitly.domain.WeatherForecast;
-import be.kdg.outfitly.repository.DailyWeatherForecastRepository;
+import be.kdg.outfitly.repository.WeatherForecastRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,24 +16,21 @@ import java.util.stream.Collectors;
 
 @Component
 public class DailyWeatherForecastServiceImpl implements DailyWeatherForecastService {
-    private final DailyWeatherForecastRepository dailyWeatherForecastRepository;
+    private final WeatherForecastRepository weatherForecastRepository;
     private final WeatherForecastService weatherForecastService;
     private final Logger logger = LoggerFactory.getLogger(DailyWeatherForecastServiceImpl.class);
 
-
     @Autowired
-    public DailyWeatherForecastServiceImpl(DailyWeatherForecastRepository dailyWeatherForecastRepository, WeatherForecastService weatherForecastService) {
-        this.dailyWeatherForecastRepository = dailyWeatherForecastRepository;
+    public DailyWeatherForecastServiceImpl(WeatherForecastRepository weatherForecastRepository, WeatherForecastService weatherForecastService) {
+        this.weatherForecastRepository = weatherForecastRepository;
         this.weatherForecastService = weatherForecastService;
     }
-
-
 
     @Override
     public DailyWeatherForecast findByCountryAndCity(String country, String city){
         logger.debug("Find by country: "+country+" and city: "+city);
 
-        List<DailyWeatherForecast> forecasts = dailyWeatherForecastRepository.findAll().stream().filter(weatherData -> weatherData.getCountryCode().equals(country) && weatherData.getCity().equals(city)).collect(Collectors.toList());
+        List<DailyWeatherForecast> forecasts = weatherForecastRepository.findAll().stream().filter(weatherData -> weatherData.getCountryCode().equals(country) && weatherData.getCity().equals(city)).collect(Collectors.toList());
         forecasts = forecasts.stream()
                 .filter(forecast -> forecast.getDate().isAfter(LocalDateTime.now().minusMinutes(45L)))
                 .sorted(Comparator.comparing(DailyWeatherForecast::getDate))
@@ -50,7 +47,7 @@ public class DailyWeatherForecastServiceImpl implements DailyWeatherForecastServ
 
         WeatherForecast wf = weatherForecastService.findByCountryAndCity(country, city);
         //TODO: change this
-        return dailyWeatherForecastRepository.save(DailyWeatherForecast.dailyForecast(country, city, wf.getLatitude(), wf.getLongitude()));
+        return weatherForecastRepository.save(DailyWeatherForecast.dailyForecast(country, city, wf.getLatitude(), wf.getLongitude()));
     }
 }
 
