@@ -45,7 +45,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .and().formLogin()
                 .loginPage("/login").usernameParameter("email").defaultSuccessUrl("/user/mainpage")
-                .and().logout().logoutSuccessUrl("/logout");
+                .and().logout().logoutSuccessUrl("/logout")
+                .and()
+                .authorizeRequests().antMatchers("/h2-console/**").permitAll()
+                .and()
+                .headers().frameOptions().disable()
+                .and()
+                .csrf().ignoringAntMatchers("/h2-console/**")
+                .and()
+                .cors().disable();
 
     }
 
