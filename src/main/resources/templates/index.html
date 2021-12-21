@@ -76,24 +76,28 @@
 
     <p class="h1 mb-4 text-center font-weight-bold">Our reviews</p>
 
-    <div class="d-flex justify-content-center align-content-center m-4">
-        <div class="row row-cols-1 row-cols-md-3 g-4 align-content-center">
-            <div class="col-2">
-                <div class="card w-75">
-                    <div class="card-body">
-                        <h5 class="card-title">Jonas</h5>
-                        <p>I love supporting new technologies and Outfitly has been a great help to my busy life!</p>
-                        <a th:href="@{/review-jonas}" class="btn-sm btn-primary">Read full review</a>
-                    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center">
+        <div class="col-2 d-flex justify-content-center">
+            <div class="card w-75">
+                <div class="card-body">
+                    <h5 class="card-title">Jonas</h5>
+                    <p>I love supporting new technologies and Outfitly has been a great help to my busy life!</p>
+                    <a th:href="@{/review-jonas}" class="btn btn-primary">Read full review</a>
+                </div>
+                <div class="card-footer text-muted text-end">
+                    10 days ago
                 </div>
             </div>
-            <div class="col-6">
-                <div class="card w-75">
-                    <div class="card-body">
-                        <h5 class="card-title">Marie</h5>
-                        <p>It saves me so much stress. As a person that doesn't follow fashion, this is great!</p>
-                        <a th:href="@{/review-marie}" class="btn-sm btn-primary">Read full review</a>
-                    </div>
+        </div>
+        <div class="col-6 d-flex justify-content-center">
+            <div class="card w-75">
+                <div class="card-body">
+                    <h5 class="card-title">Marie</h5>
+                    <p>It saves me so much stress. As a person that doesn't follow fashion, this is great!</p>
+                    <a th:href="@{/review-marie}" class="btn btn-primary">Read full review</a>
+                </div>
+                <div class="card-footer text-muted text-end">
+                    5 days ago
                 </div>
             </div>
         </div>
