@@ -11,39 +11,39 @@
         <div class="order-0 me-auto">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/mainpage}">Main page</a>
+                    <a class="nav-link" th:utext="#{navbar-logged-in-a-1}" th:href="@{/user/mainpage}">Main page</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/outfit}">Pick an outfit!</a>
+                    <a class="nav-link" th:utext="#{navbar-logged-in-a-2}" th:href="@{/user/outfit}">Pick an outfit!</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/weather-forecast}">Weather forecast</a>
+                    <a class="nav-link" th:utext="#{navbar-logged-in-a-3}" th:href="@{/user/weather-forecast}">Weather forecast</a>
                 </li>
             </ul>
         </div>
         <div class="order-1 ml-auto">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/profile}">Your profile</a>
+                    <a class="nav-link" th:utext="#{navbar-logged-in-a-4}" th:href="@{/user/profile}">Your profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/addclothing}">Add clothing</a>
+                    <a class="nav-link" th:utext="#{navbar-logged-in-a-5}" th:href="@{/user/addclothing}">Add clothing</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" th:utext="#{navbar-logged-in-a-6}"  href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Other pages
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" th:href="@{/}">Home</a></li>
-                        <li><a class="dropdown-item" th:href="@{/aboutus}">About Us</a></li>
-                        <li><a class="dropdown-item" th:href="@{/how-it-works}">How It Works</a></li>
-                        <li><a class="dropdown-item" th:href="@{/faq}">FAQ</a></li>
-                        <li><a class="dropdown-item" th:href="@{/pricing}">Price</a></li>
+                        <li><a class="dropdown-item" th:utext="#{navbar.a-1}" th:href="@{/}">Home</a></li>
+                        <li><a class="dropdown-item" th:utext="#{navbar.a-2}" th:href="@{/aboutus}">About Us</a></li>
+                        <li><a class="dropdown-item" th:utext="#{navbar.a-3}" th:href="@{/how-it-works}">How It Works</a></li>
+                        <li><a class="dropdown-item" th:utext="#{navbar.a-4}" th:href="@{/faq}">FAQ</a></li>
+                        <li><a class="dropdown-item" th:utext="#{navbar.a-5}" th:href="@{/pricing}">Price</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
                     <form th:action="@{/logout}" method="post">
-                        <button class="btn btn-primary mx-2" type="submit">Logout</button>
+                        <button class="btn btn-primary mx-2" type="submit" th:utext="#{navbar-logged-in-button}">Logout</button>
                     </form>
 <!--                    <a class="nav-link" th:href="@{/logout}">Logout</a>-->
                 </li>

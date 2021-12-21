@@ -12,8 +12,8 @@
 <div class="container d-flex flex-column justify-content-sm-center">
 
     <div class="pricing mx-auto text-center">
-        <h1>How Does It Work ?</h1>
-        <h5>Clothes Picking Reimagined</h5>
+        <h1 th:utext="#{how-it-works.heading-1}">How Does It Work ?</h1>
+        <h5 th:utext="#{how-it-works.heading-2}">Clothes Picking Reimagined</h5>
     </div>
 
     <div class="card-deck d-flex flex-lg-row flex-sm-column m-4">
@@ -21,9 +21,9 @@
         <div class="card border-0 mx-sm-auto" style="width:20rem;">
             <div class="card-body">
                 <img class="card-image" th:src="@{images/how-it-works-illustration-1.svg}" alt="illustration">
-                <h4 class="card-title font-weight-bold">Step 1</h4>
+                <h4 class="card-title font-weight-bold" th:utext="#{how-it-works.card-1-title}">Step 1</h4>
                 <div class="card-description">
-                    <p>Create an account and choose your preferred subscription model.</p>
+                    <p th:utext="#{how-it-works.card-1-description}">Create an account and choose your preferred subscription model.</p>
                 </div>
             </div>
         </div>
@@ -32,9 +32,9 @@
         <div class="card border-0 mx-5 mx-sm-auto" style="width:20rem;">
             <div class="card-body">
                 <img class="card-image" th:src="@{images/how-it-works-illustration-2.svg}" alt="illustration">
-                <h4 class="card-title font-weight-bold">Step 2</h4>
+                <h4 class="card-title font-weight-bold" th:utext="#{how-it-works.card-2-title}">Step 2</h4>
                 <div class="card-description">
-                    <p>Add your clothing items in the application.</p>
+                    <p th:utext="#{how-it-works.card-2-description}">Add your clothing items in the application.</p>
 <!--                        The more clothes you add, the more outfit choices our AI will be able to give you!</p>-->
                 </div>
             </div>
@@ -43,9 +43,9 @@
         <div class="card border-0 mx-sm-auto" style="width:20rem;">
             <div class="card-body">
                 <img class="card-image" th:src="@{images/how-it-works-illustration-3.svg}" alt="illustration">
-                <h4 class="card-title font-weight-bold">Step 3</h4>
+                <h4 class="card-title font-weight-bold" th:utext="#{how-it-works.card-3-title}">Step 3</h4>
                 <div class="card-description">
-                    <p>Select the occasion of your event.</p>
+                    <p th:utext="#{how-it-works.card-3-description}">Select the occasion of your event.</p>
 <!--                    <br><br>Whether it's sunny, rainy or snowy, we got you covered!-->
                 </div>
             </div>
@@ -54,9 +54,9 @@
         <div class="card border-0 mx-sm-auto" style="width:20rem;">
             <div class="card-body">
                 <img class="card-image" th:src="@{images/how-it-works-illustration-4.svg}" alt="illustration">
-                <h4 class="card-title font-weight-bold">Step 4</h4>
+                <h4 class="card-title font-weight-bold" th:utext="#{how-it-works.card-4-title}">Step 4</h4>
                 <div class="card-description">
-                    <p>Let our Artificial Intelligence take care of the rest.</p>
+                    <p th:utext="#{how-it-works.card-4-description}">Let our Artificial Intelligence take care of the rest.</p>
 <!--                    <br><br>A list of outfit choices will be presented to you whenever you want it.</p>-->
                 </div>
             </div>
@@ -64,7 +64,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-        <a class="btn btn-primary mt-4" th:href="@{register}">Try It Out!</a>
+        <a class="btn btn-primary mt-4" th:utext="#{how-it-works.button}" th:href="@{register}">Try It Out!</a>
     </div>
 
 </div>
