@@ -67,6 +67,26 @@ public class IndexController {
         return "pricing";
     }
 
+    @GetMapping("review-jonas")
+    public String showReviewJonas(Model model, Principal principal){
+        model.addAttribute("loggedIn", principal != null);
+        if (principal != null) {
+            User user = userService.findByEmail(principal.getName());
+            model.addAttribute("user", user);
+        }
+        return "review-jonas";
+    }
+
+    @GetMapping("review-marie")
+    public String showReviewMarie(Model model, Principal principal){
+        model.addAttribute("loggedIn", principal != null);
+        if (principal != null) {
+            User user = userService.findByEmail(principal.getName());
+            model.addAttribute("user", user);
+        }
+        return "review-marie";
+    }
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
