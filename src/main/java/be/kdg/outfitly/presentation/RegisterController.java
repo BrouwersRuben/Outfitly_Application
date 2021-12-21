@@ -1,5 +1,6 @@
 package be.kdg.outfitly.presentation;
 
+import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.exceptions.EmailExistsException;
 import be.kdg.outfitly.presentation.dto.UserDTO;
 import be.kdg.outfitly.service.UserService;
