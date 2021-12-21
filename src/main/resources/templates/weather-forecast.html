@@ -9,10 +9,8 @@
 
     <script th:inline="javascript">
         /*<![CDATA[*/
-        let temperatureArray = /*[[${dailyWeatherForecastData.getDailyTemperatures}]]*/ 1;
-        let timestampArray = /*[[${dailyWeatherForecastData.getDailyTemperatureTimestamps}]]*/ 1;
-        let weatherAlertArray = /*[[${dailyWeatherForecastData.getWeatherAlerts}]]*/ 1;
-        let weatherAlertTimestampArray = /*[[${dailyWeatherForecastData.getWeatherAlertTimestamps}]]*/ 1;
+        let temperatureMap = /*[[${dailyWeatherForecastData.getDailyTemperatures*/ 1;
+        let weatherAlertMap = /*[[${dailyWeatherForecastData.getWeatherAlerts*/ 1;
         /*]]>*/
     </script>
 
@@ -32,11 +30,11 @@
         <div class='d-flex justify-content-center flex-column w-50'>
             <div style="white-space: pre;">
                 <p th:utext="#{weather-forecast.paragraph-1}">The current forecast for today in <span th:text="${city}"></span> is <span
-                        th:text="${dailyWeatherForecastData.getDescription}"></span>.</p>
+                        th:text="${dailyWeatherForecastData.getWeatherDescription()}"></span>.</p>
                 <p th:utext="#{weather-forecast.paragraph-2}">The forecast for today shows a high of
-                    <span th:text="${dailyWeatherForecastData.getMaxTemperature}"></span>
+                    <span th:text="${dailyWeatherForecastData.getHighestTemperature()}"></span>
                     <span th:utext="#{weather-forecast.paragraph-2-span-1}">°C and a low of </span>
-                    <span th:text="${dailyWeatherForecastData.getMinTemperature}"></span>°C.
+                    <span th:text="${dailyWeatherForecastData.getLowestTemperature()}"></span>°C.
                 </p>
                 <p th:utext="#{weather-forecast.paragraph-3}">There is a <span th:text="${dailyWeatherForecastData.getRainProbability}"></span>
                     <span th:utext="#{weather-forecast.paragraph-3-span-1}">% chance of rain today.</span>

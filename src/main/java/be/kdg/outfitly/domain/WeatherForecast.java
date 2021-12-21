@@ -16,7 +16,9 @@ import javax.persistence.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // TODO: This is only for the CURRENT weather forecast, we still need a separate class for future forecast I guess.
 @javax.persistence.Entity
@@ -73,20 +75,25 @@ public class WeatherForecast extends Entity {
     @Column(name = "longtitude", nullable = false)
     private double longitude;
 
-    @ElementCollection
-    private List<Double> dailyTemperatures;
+//    @ElementCollection
+//    private List<Double> dailyTemperatures;
+//
+//    @ElementCollection
+//    private List<Long> dailyTemperatureTimestamps;
 
     @ElementCollection
-    private List<Long> dailyTemperatureTimestamps;
+    private Map<Long, Double> dailyTemperatures = new HashMap<>();
 
+//    @ElementCollection
+//    private List<String> weatherAlerts;
+//
+//    @ElementCollection
+//    private List<Long> weatherAlertTimeStamps;
     @ElementCollection
-    private List<String> weatherAlerts;
-
-    @ElementCollection
-    private List<Long> weatherAlertTimeStamps;
+    private Map<Long, String> weatherAlerts = new HashMap<>();
 
 
-    public WeatherForecast(int id, LocalDateTime date, String city, String countryCode, double currentTemperature, double currentFeelsLikeTemperature, int currentHumidity, double currentWindSpeed, double lowestTemperature, double highestTemperature, double rainProbability, String weatherDescription, String weatherIcon, double latitude, double longitude, List<Double> dailyTemperatures, List<Long> dailyTemperatureTimestamps, List<String> weatherAlerts, List<Long> weatherAlertTimeStamps) {
+    public WeatherForecast(int id, LocalDateTime date, String city, String countryCode, double currentTemperature, double currentFeelsLikeTemperature, int currentHumidity, double currentWindSpeed, double lowestTemperature, double highestTemperature, double rainProbability, String weatherDescription, String weatherIcon, double latitude, double longitude) {
         this.id = id;
         this.date = date;
         this.city = city;
@@ -102,10 +109,8 @@ public class WeatherForecast extends Entity {
         this.weatherIcon = weatherIcon;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.dailyTemperatures = new ArrayList<>();
-        this.dailyTemperatureTimestamps = new ArrayList<>();
-        this.weatherAlerts = new ArrayList<>();
-        this.weatherAlertTimeStamps = new ArrayList<>();
+        this.dailyTemperatures =  dailyTemperatures;
+        this.weatherAlerts =  weatherAlerts;
     }
 
     protected WeatherForecast() {
@@ -149,17 +154,23 @@ public class WeatherForecast extends Entity {
         }
 
         weatherForecast.setRainProbability(Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("daily").getJSONObject(0).get("pop"))) * 100);
-        weatherForecast.setWeatherIcon(String.valueOf("http://openweathermap.org/img/wn/"+hourlyWeatherDataAPI.getJSONObject("current").getJSONArray("weather").getJSONObject(0).get("icon"))+"@4x.png");
+        weatherForecast.setWeatherIcon(String.valueOf("http://openweathermap.org/img/wn/" + hourlyWeatherDataAPI.getJSONObject("current").getJSONArray("weather").getJSONObject(0).get("icon")) + "@4x.png");
 
         for (int i = 0; i < hourlyWeatherDataAPI.getJSONArray("hourly").length(); i++) {
-            weatherForecast.dailyTemperatures.add(Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("temp"))));
-            weatherForecast.dailyTemperatureTimestamps.add(Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("dt"))));
+//            weatherForecast.dailyTemperatures.add(Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("temp"))));
+//            weatherForecast.dailyTemperatureTimestamps.add(Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("dt"))));
+            double temperature = Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("temp")));
+            long timestamp = Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("dt")));
+            weatherForecast.getDailyTemperatures().put(timestamp, temperature);
         }
 
         if (hourlyWeatherDataAPI.has("alerts")) {
             for (int i = 0; i <hourlyWeatherDataAPI.getJSONArray("alerts").length(); i++) {
-                weatherForecast.weatherAlerts.add(String.valueOf(hourlyWeatherDataAPI.getJSONArray("alerts").getJSONObject(i).get("description")));
-                weatherForecast.weatherAlertTimeStamps.add(Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("alerts").getJSONObject(i).get("start"))));
+
+                long timestamp = Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("alerts").getJSONObject(i).get("start")));
+                String description = String.valueOf(hourlyWeatherDataAPI.getJSONArray("alerts").getJSONObject(i).get("description"));
+
+                weatherForecast.getWeatherAlerts().put(timestamp, description);
             }
         }
 
@@ -287,20 +298,12 @@ public class WeatherForecast extends Entity {
         return longitude;
     }
 
-    public List<Double> getDailyTemperatures() {
+    public Map<Long, Double> getDailyTemperatures() {
         return dailyTemperatures;
     }
 
-    public List<Long> getDailyTemperatureTimestamps() {
-        return dailyTemperatureTimestamps;
-    }
-
-    public List<String> getWeatherAlerts() {
+    public Map<Long, String> getWeatherAlerts() {
         return weatherAlerts;
-    }
-
-    public List<Long> getWeatherAlertTimeStamps() {
-        return weatherAlertTimeStamps;
     }
 
 
@@ -366,24 +369,17 @@ public class WeatherForecast extends Entity {
         this.longitude = longitude;
     }
 
-    public void setDailyTemperatures(List<Double> dailyTemperatures) {
-        this.dailyTemperatures = dailyTemperatures;
-    }
-
-    public void setDailyTemperatureTimestamps(List<Long> dailyTemperatureTimestamps) {
-        this.dailyTemperatureTimestamps = dailyTemperatureTimestamps;
-    }
-
-    public void setWeatherAlerts(List<String> weatherAlerts) {
-        this.weatherAlerts = weatherAlerts;
-    }
-
-    public void setWeatherAlertTimeStamps(List<Long> weatherAlertTimeStamps) {
-        this.weatherAlertTimeStamps = weatherAlertTimeStamps;
-    }
 
     // https://openweathermap.org/weather-conditions
     public boolean isGoingToRain() {
         return getWeatherDescription().toLowerCase().contains("rain") || getWeatherDescription().toLowerCase().contains("drizzle");
+    }
+
+    public void setDailyTemperatures(HashMap<Long, Double> dailyTemperatures) {
+        this.dailyTemperatures = dailyTemperatures;
+    }
+
+    public void setWeatherAlerts(HashMap<Long, String> weatherAlerts) {
+        this.weatherAlerts = weatherAlerts;
     }
 }

@@ -32,7 +32,7 @@ public class MainPageController {
 
         model.addAttribute("username", user.getName());
         model.addAttribute("city", user.getCity());
-//        model.addAttribute("dailyWeatherForecastData", dailyWeatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity()));
+        model.addAttribute("dailyWeatherForecastData", weatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity()));
         return "weather-forecast";
     }
 }
