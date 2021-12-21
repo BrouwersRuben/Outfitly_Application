@@ -23,6 +23,7 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
     }
 
     @Override
+    //No scheduling needed, method checks the repository for weatherforecasts, if the one they get for that city is older than 45 minutes, it will get a new one from the api.
     public WeatherForecast findByCountryAndCity(String country, String city) {
         logger.debug("Find by country: " + country + " and city: " + city);
         List<WeatherForecast> forecasts = weatherForecastRepository.findAll().stream().filter(weatherData -> weatherData.getCountryCode().equals(country) && weatherData.getCity().equals(city)).collect(Collectors.toList());

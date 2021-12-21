@@ -34,10 +34,8 @@ public class WeatherForecast extends Entity {
     @Column(name = "forecast_timestamp", nullable = false)
     private LocalDateTime date;
 
-    //TODO: city + country --> location
     @Column(name = "city", nullable = false)
     private String city;
-
 
     @Column(name = "country_code", nullable = false)
     private String countryCode;
@@ -75,20 +73,12 @@ public class WeatherForecast extends Entity {
     @Column(name = "longtitude", nullable = false)
     private double longitude;
 
-//    @ElementCollection
-//    private List<Double> dailyTemperatures;
-//
-//    @ElementCollection
-//    private List<Long> dailyTemperatureTimestamps;
+    @Column(name = "user_email")
+    private String email;
 
     @ElementCollection
     private Map<Long, Double> dailyTemperatures = new HashMap<>();
 
-//    @ElementCollection
-//    private List<String> weatherAlerts;
-//
-//    @ElementCollection
-//    private List<Long> weatherAlertTimeStamps;
     @ElementCollection
     private Map<Long, String> weatherAlerts = new HashMap<>();
 
@@ -113,10 +103,16 @@ public class WeatherForecast extends Entity {
         this.weatherAlerts =  weatherAlerts;
     }
 
+    public WeatherForecast(LocalDateTime date, double currentTemperature, int currentHumidity, String email) {
+        this.date = date;
+        this.currentTemperature = currentTemperature;
+        this.currentHumidity = currentHumidity;
+        this.email = email;
+    }
+
     protected WeatherForecast() {
 
     }
-
 
     public static WeatherForecast currentForecastForCountryCity(String countryCode, String city) {
         WeatherForecast weatherForecast = new WeatherForecast();

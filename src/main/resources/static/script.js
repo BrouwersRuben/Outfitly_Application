@@ -30,7 +30,7 @@ let minRange = Math.min(...temperatures) - 2;
 const myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: timestamps,
+        labels: timestampLabelArray,
         datasets: [{
             data: temperatures,
             borderColor: '#3e95cd',
@@ -55,7 +55,19 @@ const myChart = new Chart(ctx, {
     }
 });
 
-if (weatherAlertMap.length !== 0) {
+function unixTimeConverter(timestamp) {
+    let time = new Date(timestamp * 1000);
+    let year = time.getFullYear();
+    let month = time.getMonth();
+    let date = time.getDate();
+    let hour = time.getHours();
+    let min = time.getMinutes();
+    let sec = time.getSeconds();
+    console.log(year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec);
+    return year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec;
+}
+
+if (descriptions?.length !== 0) {
     document.getElementById('warning').innerText = 'Weather warnings for today.';
     document.getElementById('alerts').className = 'd-flex flex-column justify-content-center alert alert-warning';
 
@@ -69,15 +81,4 @@ if (weatherAlertMap.length !== 0) {
         document.getElementById('weatherAlerts').appendChild(type1);
         document.getElementById('weatherAlerts').appendChild(type2);
     }
-}
-
-function unixTimeConverter(timestamp) {
-    let time = new Date(timestamp * 1000);
-    let year = time.getFullYear();
-    let month = time.getMonth();
-    let date = time.getDate();
-    let hour = time.getHours();
-    let min = time.getMinutes();
-    let sec = time.getSeconds();
-    return year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec;
 }
