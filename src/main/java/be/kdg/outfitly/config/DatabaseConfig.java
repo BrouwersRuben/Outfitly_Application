@@ -20,7 +20,7 @@ public class DatabaseConfig {
         DataSource dataSource = DataSourceBuilder.create()
                 .driverClassName("org.h2.Driver")
                 .url("jdbc:h2:mem:outfitlydevdb")
-                .username("")
+                .username("sa")
                 .password("")
                 .build();
         return dataSource;
