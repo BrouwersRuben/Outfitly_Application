@@ -26,12 +26,12 @@
             <tbody>
                 <tr>
                     <td>Temperature</td>
-                    <td><span th:text="${weatherForecastData.temperature}">$placeholder$</span> °C</td>
+                    <td><span th:text="${weatherForecastData.currentTemperature}">$placeholder$</span> °C</td>
                     <td><span th:text="${arduinoSensorData.sensorTemperature}">$placeholder$</span> °C</td>
                 </tr>
                 <tr>
                     <td>Humidity</td>
-                    <td><span th:text="${weatherForecastData.humidity}">$placeholder$</span> %</td>
+                    <td><span th:text="${weatherForecastData.currentHumidity}">$placeholder$</span> %</td>
                     <td><span th:text="${arduinoSensorData.sensorHumidity}">$placeholder$</span> %</td>
                 </tr>
             </tbody>
