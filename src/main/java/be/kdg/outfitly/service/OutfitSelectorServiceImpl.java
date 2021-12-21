@@ -3,7 +3,6 @@ package be.kdg.outfitly.service;
 import be.kdg.outfitly.domain.*;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,7 +30,7 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
     }
 
     public List<ClothingItem> getPossibleClothingItems(User user, ClothingItem.Occasion occasion) {
-        WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountry(), user.getCity());
+        WeatherForecast weatherForecast = weatherForecastService.getNewByCountryCodeAndCity(user.getCountry(), user.getCity());
         //TODO: is this the correct way to do the time
         ArduinoSensor arduinoSensor = arduinoSensorService.findByUser(user);
         List<ClothingItem> possibleItems = user.getClothes();

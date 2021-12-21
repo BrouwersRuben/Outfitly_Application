@@ -73,8 +73,6 @@ public class WeatherForecast extends Entity {
     @Column(name = "longtitude", nullable = false)
     private double longitude;
 
-    @Column(name = "user_email")
-    private String email;
 
     @ElementCollection
     private Map<Long, Double> dailyTemperatures = new HashMap<>();
@@ -103,133 +101,109 @@ public class WeatherForecast extends Entity {
         this.weatherAlerts =  weatherAlerts;
     }
 
-    public WeatherForecast(LocalDateTime date, double currentTemperature, int currentHumidity, String email) {
-        this.date = date;
-        this.currentTemperature = currentTemperature;
-        this.currentHumidity = currentHumidity;
-        this.email = email;
+//    public WeatherForecast(LocalDateTime date, double currentTemperature, int currentHumidity, String email) {
+//        this.date = date;
+//        this.currentTemperature = currentTemperature;
+//        this.currentHumidity = currentHumidity;
+//        this.email = email;
+//    }
+
+    public WeatherForecast() {
+
     }
 
-    protected WeatherForecast() {
+//    public static WeatherForecast currentForecastForCountryCity(String countryCode, String city) {
+//        WeatherForecast weatherForecast = new WeatherForecast();
+//        JSONObject currentWeatherAPIData;
+//        JSONObject hourlyWeatherDataAPI;
+//
+//        try {
+//            currentWeatherAPIData = retrieveAPIData("https://api.openweathermap.org/data/2.5/weather?q=" + city + "," + countryCode + "&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c");
+//
+//        } catch (Exception e) {
+//            logger.error("An error occurred while data was being retrieved from the first API.");
+//            return null;
+//        }
+//
+//        weatherForecast.setDate(LocalDateTime.now());
+//        weatherForecast.setCountryCode(countryCode);
+//        weatherForecast.setCity(city);
+//        weatherForecast.setCurrentTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("temp"))));
+//        weatherForecast.setCurrentFeelsLikeTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("feels_like"))));
+//        weatherForecast.setCurrentHumidity(Integer.parseInt(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("humidity"))));
+//        weatherForecast.setCurrentWindSpeed(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("wind").get("speed"))));
+//        weatherForecast.setHighestTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("temp_max"))));
+//        weatherForecast.setLowestTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("temp_min"))));
+//        weatherForecast.setWeatherDescription(String.valueOf(currentWeatherAPIData.getJSONArray("weather").getJSONObject(0).get("description")));
+//        weatherForecast.setLatitude(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("coord").get("lat"))));
+//        weatherForecast.setLongitude(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("coord").get("lon"))));
+//
+//
+//        try {
+//            hourlyWeatherDataAPI = retrieveAPIData("https://api.openweathermap.org/data/2.5/onecall?lat="+weatherForecast.getLatitude()+"&lon="+weatherForecast.getLongitude()+"&exclude=minutely&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c");
+//
+//        } catch (Exception e) {
+//            logger.error("An error occurred while data was being retrieved from the second API.");
+//            return null;
+//        }
+//
+//        weatherForecast.setRainProbability(Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("daily").getJSONObject(0).get("pop"))) * 100);
+//        weatherForecast.setWeatherIcon(String.valueOf("http://openweathermap.org/img/wn/" + hourlyWeatherDataAPI.getJSONObject("current").getJSONArray("weather").getJSONObject(0).get("icon")) + "@4x.png");
+//
+//        for (int i = 0; i < hourlyWeatherDataAPI.getJSONArray("hourly").length(); i++) {
+////            weatherForecast.dailyTemperatures.add(Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("temp"))));
+////            weatherForecast.dailyTemperatureTimestamps.add(Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("dt"))));
+//            double temperature = Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("temp")));
+//            long timestamp = Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("dt")));
+//            weatherForecast.getDailyTemperatures().put(timestamp, temperature);
+//        }
+//
+//        if (hourlyWeatherDataAPI.has("alerts")) {
+//            for (int i = 0; i <hourlyWeatherDataAPI.getJSONArray("alerts").length(); i++) {
+//
+//                long timestamp = Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("alerts").getJSONObject(i).get("start")));
+//                String description = String.valueOf(hourlyWeatherDataAPI.getJSONArray("alerts").getJSONObject(i).get("description"));
+//
+//                weatherForecast.getWeatherAlerts().put(timestamp, description);
+//            }
+//        }
+//
+//        logger.debug("Weather forecast object created: ");
+//
+//        return weatherForecast;
+//    }
 
-    }
-
-    public static WeatherForecast currentForecastForCountryCity(String countryCode, String city) {
-        WeatherForecast weatherForecast = new WeatherForecast();
-        JSONObject currentWeatherAPIData;
-        JSONObject hourlyWeatherDataAPI;
-
-        try {
-            currentWeatherAPIData = retrieveAPIData("https://api.openweathermap.org/data/2.5/weather?q=" + city + "," + countryCode + "&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c");
-
-        } catch (Exception e) {
-            logger.error("An error occurred while data was being retrieved from the first API.");
-            return null;
-        }
-
-        weatherForecast.setDate(LocalDateTime.now());
-        weatherForecast.setCountryCode(countryCode);
-        weatherForecast.setCity(city);
-        weatherForecast.setCurrentTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("temp"))));
-        weatherForecast.setCurrentFeelsLikeTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("feels_like"))));
-        weatherForecast.setCurrentHumidity(Integer.parseInt(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("humidity"))));
-        weatherForecast.setCurrentWindSpeed(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("wind").get("speed"))));
-        weatherForecast.setHighestTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("temp_max"))));
-        weatherForecast.setLowestTemperature(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("main").get("temp_min"))));
-        weatherForecast.setWeatherDescription(String.valueOf(currentWeatherAPIData.getJSONArray("weather").getJSONObject(0).get("description")));
-        weatherForecast.setLatitude(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("coord").get("lat"))));
-        weatherForecast.setLongitude(Double.parseDouble(String.valueOf(currentWeatherAPIData.getJSONObject("coord").get("lon"))));
-
-
-        try {
-            hourlyWeatherDataAPI = retrieveAPIData("https://api.openweathermap.org/data/2.5/onecall?lat="+weatherForecast.getLatitude()+"&lon="+weatherForecast.getLongitude()+"&exclude=minutely&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c");
-
-        } catch (Exception e) {
-            logger.error("An error occurred while data was being retrieved from the second API.");
-            return null;
-        }
-
-        weatherForecast.setRainProbability(Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("daily").getJSONObject(0).get("pop"))) * 100);
-        weatherForecast.setWeatherIcon(String.valueOf("http://openweathermap.org/img/wn/" + hourlyWeatherDataAPI.getJSONObject("current").getJSONArray("weather").getJSONObject(0).get("icon")) + "@4x.png");
-
-        for (int i = 0; i < hourlyWeatherDataAPI.getJSONArray("hourly").length(); i++) {
-//            weatherForecast.dailyTemperatures.add(Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("temp"))));
-//            weatherForecast.dailyTemperatureTimestamps.add(Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("dt"))));
-            double temperature = Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("temp")));
-            long timestamp = Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("dt")));
-            weatherForecast.getDailyTemperatures().put(timestamp, temperature);
-        }
-
-        if (hourlyWeatherDataAPI.has("alerts")) {
-            for (int i = 0; i <hourlyWeatherDataAPI.getJSONArray("alerts").length(); i++) {
-
-                long timestamp = Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("alerts").getJSONObject(i).get("start")));
-                String description = String.valueOf(hourlyWeatherDataAPI.getJSONArray("alerts").getJSONObject(i).get("description"));
-
-                weatherForecast.getWeatherAlerts().put(timestamp, description);
-            }
-        }
-
-        logger.debug("Weather forecast object created: ");
-
-        return weatherForecast;
-    }
-
-    private static JSONObject retrieveAPIData(String apiLink) throws Exception {
-        // TODO: Reload api on refresh
-        URIBuilder builder = new URIBuilder(apiLink);
-        HttpGet get = new HttpGet(builder.build());
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        JSONObject json;
-
-        try (CloseableHttpResponse response = httpclient.execute(get)) {
-            json = null;
-            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
-                logger.error("Bad response status code: {}.", response.getStatusLine().getStatusCode());
-//                return;
-            }
-
-            HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                String rawResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-                json = new JSONObject(rawResult);
-            }
-
-            if (json == null) {
-                logger.error("No weather forecast data retrieved!");
-            } else {
-                logger.debug("Forecast data successfully retrieved!");
-            }
-        }
-        return json;
-    }
+//    private static JSONObject retrieveAPIData(String apiLink) throws Exception {
+//        // TODO: Reload api on refresh
+//        URIBuilder builder = new URIBuilder(apiLink);
+//        HttpGet get = new HttpGet(builder.build());
+//        CloseableHttpClient httpclient = HttpClients.createDefault();
+//        JSONObject json;
+//
+//        try (CloseableHttpResponse response = httpclient.execute(get)) {
+//            json = null;
+//            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+//                logger.error("Bad response status code: {}.", response.getStatusLine().getStatusCode());
+////                return;
+//            }
+//
+//            HttpEntity entity = response.getEntity();
+//            if (entity != null) {
+//                String rawResult = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+//                json = new JSONObject(rawResult);
+//            }
+//
+//            if (json == null) {
+//                logger.error("No weather forecast data retrieved!");
+//            } else {
+//                logger.debug("Forecast data successfully retrieved!");
+//            }
+//        }
+//        return json;
+//    }
 
 
-    public static boolean isValidCountryCity(String countryCode, String city) {
-        return isValidLocation(city + "," + countryCode);
-    }
 
-    public static boolean isValidLocation(String location) {
-
-        if (location.length() <= 3) {
-            logger.debug("Invalid location. City not chosen. - " + location);
-            return false;
-        }
-
-        JSONObject weatherAPIData;
-        try {
-            weatherAPIData = retrieveAPIData(location);
-        } catch (Exception e) {
-            logger.error("An error occurred while data was being retrieved from the API.");
-            return false;
-        }
-        boolean valid = !weatherAPIData.get("cod").equals("404");
-
-
-        logger.debug("Location: " + location + " is " + (valid ? "" : "not") + " valid.");
-
-        return valid;
-    }
 
 
     // Getters

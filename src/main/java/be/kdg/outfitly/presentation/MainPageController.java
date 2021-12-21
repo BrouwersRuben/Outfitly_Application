@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
 
 
 @Controller
@@ -36,7 +35,7 @@ public class MainPageController {
 
         model.addAttribute("username", user.getName());
         model.addAttribute("city", user.getCity());
-        model.addAttribute("dailyWeatherForecastData", weatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity()));
+        model.addAttribute("dailyWeatherForecastData", weatherForecastService.getNewByCountryCodeAndCity(user.getCountryCode(), user.getCity()));
         model.addAttribute("sensorWeatherForecastData", arduinoSensorService.findByUser(user));
         return "main-page";
     }
