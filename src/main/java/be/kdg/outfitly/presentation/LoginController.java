@@ -28,6 +28,8 @@ public class LoginController {
         return "login";
     }
 
+
+    //TODO: validation for logging in, currently it does not do anything, just refreshes the page
 //    @PostMapping
 //    public String processLogin(UserDTO userDTO, Model model, @ModelAttribute("user") User user) {
 //        List<User> users = userService.read();
