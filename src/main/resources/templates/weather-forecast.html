@@ -100,7 +100,7 @@
     <div class="d-flex flex-row">
 
         <div class='d-flex justify-content-center flex-column w-50'>
-            <div>
+            <div style="white-space: pre;">
                 <p th:utext="#{weather-forecast.paragraph-1}">The current forecast for today in <span th:text="${city}"></span> is <span
                         th:text="${dailyWeatherForecastData.getDescription}"></span>.</p>
                 <p th:utext="#{weather-forecast.paragraph-2}">The forecast for today shows a high of
@@ -116,7 +116,7 @@
 
         <div class="d-flex flex-row justify-content-center w-50">
             <div><img th:src="${dailyWeatherForecastData.getWeatherIcon()}" alt="weather-icon" class="img-fluid"></div>
-            <div class="justify-content-center d-flex flex-column w-50">
+            <div style="white-space: pre;" class="justify-content-center d-flex flex-column w-50">
                 <div th:utext="#{weather-forecast.div-1-text}">Current temperature: <span th:text="${dailyWeatherForecastData.getCurrentTemperature}"></span>°C</div>
                 <div th:utext="#{weather-forecast.div-2-text}">Humidity: <span th:text="${dailyWeatherForecastData.getCurrentHumidity}"></span>%</div>
                 <div th:utext="#{weather-forecast.div-3-text}">Wind: <span th:text="${dailyWeatherForecastData.getCurrentWindSpeed}"></span>m/s</div>
