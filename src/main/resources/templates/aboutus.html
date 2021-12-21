@@ -11,15 +11,17 @@
 
     <div th:insert="~{fragments/header::header}">header</div>
 
-    <div class="m-md-4 m-2">
-        <h1 class="font-weight-bold">Our mission</h1>
-        <p>
-            We want to save people's precious time by automating the process of picking their clothing so they have more time for their important tasks.
-        </p>
-        <h1 class="font-weight-bold">About us</h1>
-        <p>
-            We're a small team of multinational and success driven students who are currently studying in the Applied Computer Science course at the Karel de Grote University College.
-        </p>
+    <div class="d-flex justify-content-center">
+        <div class="m-md-4 m-2 w-50 justify-content-center">
+            <h1 class="font-weight-bold ">Our mission</h1>
+            <p class="indexPageText">
+                We want to save people's precious time by automating the process of picking their clothing so they have more time for their important tasks.
+            </p>
+            <h1 class="font-weight-bold">About us</h1>
+            <p class="indexPageText">
+                We're a small team of multinational and success driven students who are currently studying in the Applied Computer Science course at the Karel de Grote University College.
+            </p>
+        </div>
     </div>
 
     <div class="card-deck mx-5 text-center d-flex flex-row justify-content-center">
@@ -80,7 +82,9 @@
         <form action="mailto:contact-project+kdg-ti-integration-2-1-outfitli-final-application-outfitly@incoming.gitlab.com?subject=ProblemInquiry" method="POST" name="emailForm">
             <label for="feedbackContent" class="form-label m-2">Have any problems or questions?? Contact us!</label>
             <textarea class="form-control m-2" id="feedbackContent" name="feedbackContent" placeholder="Enter your problem or question here!"></textarea>
-            <input class="btn btn-primary m-2" type="submit" value="Send Request">
+            <div class="d-flex justify-content-end">
+                <input class="btn btn-primary my-2" type="submit" value="Send Request">
+            </div>
         </form>
     </div>
 
