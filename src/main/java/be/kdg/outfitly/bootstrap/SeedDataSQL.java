@@ -3,6 +3,7 @@ package be.kdg.outfitly.bootstrap;
 import be.kdg.outfitly.domain.ArduinoSensor;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
+import be.kdg.outfitly.repository.ArduinoSensorRepository;
 import be.kdg.outfitly.repository.ClothingRepository;
 import be.kdg.outfitly.repository.UserRepository;
 import org.slf4j.Logger;
@@ -21,12 +22,13 @@ public class SeedDataSQL implements CommandLineRunner {
     private final Logger logger = LoggerFactory.getLogger(SeedDataSQL.class);
     private final UserRepository userRepository;
     private final ClothingRepository clothingRepository;
+    private final ArduinoSensorRepository arduinoSensorRepository;
 
 
-
-    public SeedDataSQL(UserRepository userRepository, ClothingRepository clothingRepository) {
+    public SeedDataSQL(UserRepository userRepository, ClothingRepository clothingRepository, ArduinoSensorRepository arduinoSensorRepository) {
         this.userRepository = userRepository;
         this.clothingRepository = clothingRepository;
+        this.arduinoSensorRepository = arduinoSensorRepository;
     }
 
     @Override
@@ -57,16 +59,7 @@ public class SeedDataSQL implements CommandLineRunner {
             clothingItem.setUser(user1);
         });
 
-        // Arduino API
-        ArduinoSensor arduinoSensor = new ArduinoSensor(10, 50, LocalDateTime.now());
-
-        /*arduinoSensorRepository.create(arduinoSensor);*/
-
-        arduinoSensor.setUser(user1);
-        user1.setSensorData(List.of(arduinoSensor));
-
         User testUser = userRepository.save(user1);
-
 
         clothingRepository.save(clothingItem1);
         clothingRepository.save(clothingItem2);
@@ -106,9 +99,15 @@ public class SeedDataSQL implements CommandLineRunner {
             clothingItem.setUser(user2);
         });
 
-        ArduinoSensor arduinoSensor2 = new ArduinoSensor(99, 300, LocalDateTime.now());
-        user2.setSensorData(List.of(arduinoSensor2));
-        arduinoSensor2.setUser(user2);
+        ArduinoSensor arduinoSensortest1 = new ArduinoSensor(-4, 70, "testUser1@gmail.com", LocalDateTime.now().minusMinutes(45));
+        ArduinoSensor arduinoSensortest2 = new ArduinoSensor(3, 40, "testUser1@gmail.com", LocalDateTime.now().minusMinutes(15));
+        arduinoSensorRepository.save(arduinoSensortest1);
+        arduinoSensorRepository.save(arduinoSensortest2);
+
+        ArduinoSensor arduinoSensortest3 = new ArduinoSensor(12, 45, "testUser2@gmail.com", LocalDateTime.now().minusMinutes(45));
+        ArduinoSensor arduinoSensortest4 = new ArduinoSensor(13, 25, "testUser2@gmail.com", LocalDateTime.now().minusMinutes(15));
+        arduinoSensorRepository.save(arduinoSensortest3);
+        arduinoSensorRepository.save(arduinoSensortest4);
 
         userRepository.save(user2);
     }

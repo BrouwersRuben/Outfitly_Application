@@ -24,7 +24,7 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
     }
 
     @Override
-    public ArduinoSensor findByUser(User user, LocalDateTime time) {
+    public ArduinoSensor findByUser(User user) {
         logger.debug("Find by email: " + user.getEmail());
         List<ArduinoSensor> sensorDatas = arduinoSensorRepository.findAll().stream().filter(sensorData -> sensorData.getEmail().equals(user.getEmail())).collect(Collectors.toList());
         sensorDatas = sensorDatas.stream()
