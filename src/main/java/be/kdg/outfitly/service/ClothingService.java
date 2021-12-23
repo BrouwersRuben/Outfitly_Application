@@ -9,5 +9,6 @@ public interface ClothingService {
     ClothingItem findById(int id);
     ClothingItem create(ClothingItem clothingItem);
     List<ClothingItem> read();
-    void delete(int id, User user);
+    void delete(int id);
+    void putInWash(ClothingItem toPutInWash);
 }

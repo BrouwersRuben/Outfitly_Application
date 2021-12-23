@@ -30,6 +30,7 @@ public class User extends Entity {
     private String lastName;
 
     @Column(name = "phone_number", nullable = false, length = 50)
+    //String --> 047/..
     private String phoneNumber;
 
 

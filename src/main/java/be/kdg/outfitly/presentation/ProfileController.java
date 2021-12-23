@@ -2,10 +2,7 @@ package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.ClothingDTO;
-import be.kdg.outfitly.presentation.dto.profileChanges.LocationDTO;
-import be.kdg.outfitly.presentation.dto.profileChanges.NameDTO;
-import be.kdg.outfitly.presentation.dto.profileChanges.PasswordDTO;
-import be.kdg.outfitly.presentation.dto.profileChanges.PhoneNumberDTO;
+import be.kdg.outfitly.presentation.dto.profileChanges.*;
 import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
 import be.kdg.outfitly.util.CountriesCodesAndNames;
@@ -101,6 +98,7 @@ public class ProfileController {
                 userService.update(user);
                 return "redirect:/user/profile";
             } else {
+                //TODO: Bean validation
                 model.addAttribute("errorMessage", "This password is incorrect");
                 return "changepassword";
             }
@@ -164,5 +162,27 @@ public class ProfileController {
         clothingService.delete(clothingDTO.getID(), userService.findByEmail(principal.getName()));
         model.addAttribute("user", userService.findByEmail(principal.getName()));
         return "redirect:/user/profile/viewclothing";
+    }
+
+    @GetMapping("/changewashingresetday")
+    public String changeWashingDay(Model model, Principal principal) {
+        User user = userService.findByEmail(principal.getName());
+        model.addAttribute("user", user);
+        model.addAttribute("washingDayDTO", new WashingDayDTO());
+        return "changewashingresetday";
+    }
+
+    @PostMapping("/changewashingresetday")
+    public String processChangeWashingDay(Model model, Principal principal, @Valid @ModelAttribute("washingDayDTO") WashingDayDTO washingDayDTO, BindingResult errors) {
+        User user = userService.findByEmail(principal.getName());
+        if (errors.hasErrors()) {
+            errors.getAllErrors().forEach(error -> logger.error(error.toString()));
+            model.addAttribute("user", user);
+            return "changewashingresetday";
+        } else {
+            user.setWashingResetDay(washingDayDTO.getNewWashingResetDay());
+            userService.update(user);
+            return "redirect:/user/profile";
+        }
     }
 }

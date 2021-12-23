@@ -1,14 +1,13 @@
 package be.kdg.outfitly.presentation;
 
 import be.kdg.outfitly.domain.*;
-import be.kdg.outfitly.service.OutfitSelectorService;
-import be.kdg.outfitly.service.UserService;
+import be.kdg.outfitly.presentation.dto.ClothingDTO;
+import be.kdg.outfitly.service.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -18,10 +17,13 @@ import java.util.List;
 public class OutfitController {
 
     private final OutfitSelectorService outfitSelector;
-    private UserService userService;
+    private final ClothingService clothingService;
+    private final UserService userService;
 
-    public OutfitController(OutfitSelectorService outfitSelector) {
+    public OutfitController(OutfitSelectorService outfitSelector, UserService userService, ClothingService clothingService) {
         this.outfitSelector = outfitSelector;
+        this.userService = userService;
+        this.clothingService = clothingService;
     }
 
     @GetMapping
@@ -39,11 +41,28 @@ public class OutfitController {
         model.addAttribute("clothes", outfitSelector.getSuitableClothes(user, occasion));
         model.addAttribute("types", List.of(ClothingItem.Type.values()));
         model.addAttribute("aiDecision", outfitSelector.getAiDecision());
+        model.addAttribute("occasion", occasion.getName());
         return "outfit";
     }
 
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    /*
+    @PostMapping(params = {"putInWash"})
+    public String putInWash(Principal principal, Model model, @ModelAttribute("clothingDTO") ClothingDTO clothingDTO){
+        User user = userService.findByEmail(principal.getName());
+        ClothingItem toPutInWash = clothingService.findById(clothingDTO.getID());
+        clothingService.putInWash(toPutInWash);
+        return "redirect:/user/outfit";
+    }*/
+
+    @PostMapping(params = {"putInWash"})
+    //TODO: Occasion is null
+    public String putInWash(Principal principal, Model model, @ModelAttribute("occasion") String occasionName, @ModelAttribute("clothingDTO") ClothingDTO clothingDTO){
+        User user = userService.findByEmail(principal.getName());
+        ClothingItem toPutInWash = clothingService.findById(clothingDTO.getID());
+        clothingService.putInWash(toPutInWash);
+        model.addAttribute("clothes", outfitSelector.getSuitableClothes(user, ClothingItem.Occasion.valueOf(occasionName.toUpperCase())));
+        model.addAttribute("types", List.of(ClothingItem.Type.values()));
+        model.addAttribute("aiDecision", outfitSelector.getAiDecision());
+        return "outfit";
     }
 }
