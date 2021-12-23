@@ -34,6 +34,7 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
         WeatherForecast weatherForecast = weatherForecastService.getNewByCountryCodeAndCity(user.getCountryCode(), user.getCity());
 
         List<ClothingItem> possibleItems = user.getClothes();
+        possibleItems.removeIf(ClothingItem::isWashCycle);
 
         boolean isGoingToRain = weatherForecast.isGoingToRain();
         double lowestTemperature = weatherForecast.getLowestTemperature();
