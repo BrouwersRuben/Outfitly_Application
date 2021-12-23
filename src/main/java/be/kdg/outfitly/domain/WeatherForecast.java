@@ -1,23 +1,11 @@
 package be.kdg.outfitly.domain;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 // TODO: This is only for the CURRENT weather forecast, we still need a separate class for future forecast I guess.
@@ -97,158 +85,157 @@ public class WeatherForecast extends Entity {
         this.weatherIcon = weatherIcon;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.dailyTemperatures =  dailyTemperatures;
-        this.weatherAlerts =  weatherAlerts;
+        //TODO:  is this correct?
+        this.dailyTemperatures = dailyTemperatures;
+        this.weatherAlerts = weatherAlerts;
     }
 
     public WeatherForecast() {
 
     }
 
-    // Getters
+    // Getters & Setters
+
     @Override
     public int getId() {
         return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 
     public LocalDateTime getDate() {
         return date;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public double getCurrentTemperature() {
-        return currentTemperature;
-    }
-
-    public double getCurrentFeelsLikeTemperature() {
-        return currentFeelsLikeTemperature;
-    }
-
-    public int getCurrentHumidity() {
-        return currentHumidity;
-    }
-
-    public double getCurrentWindSpeed() {
-        return currentWindSpeed;
-    }
-
-    public double getLowestTemperature() {
-        return lowestTemperature;
-    }
-
-    public double getHighestTemperature() {
-        return highestTemperature;
-    }
-
-    public double getRainProbability() {
-        return rainProbability;
-    }
-
-    public String getWeatherDescription() {
-        return weatherDescription;
-    }
-
-    public String getWeatherIcon() {
-        return weatherIcon;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public Map<Long, Double> getDailyTemperatures() {
-        return dailyTemperatures;
-    }
-
-    public Map<Long, String> getWeatherAlerts() {
-        return weatherAlerts;
-    }
-
-
-    // Setters
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public String getCity() {
+        return city;
     }
 
     public void setCity(String city) {
         this.city = city;
     }
 
+    public String getCountryCode() {
+        return countryCode;
+    }
+
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
+    }
+
+    public double getCurrentTemperature() {
+        return currentTemperature;
     }
 
     public void setCurrentTemperature(double currentTemperature) {
         this.currentTemperature = currentTemperature;
     }
 
+    public double getCurrentFeelsLikeTemperature() {
+        return currentFeelsLikeTemperature;
+    }
+
     public void setCurrentFeelsLikeTemperature(double currentFeelsLikeTemperature) {
         this.currentFeelsLikeTemperature = currentFeelsLikeTemperature;
+    }
+
+    public int getCurrentHumidity() {
+        return currentHumidity;
     }
 
     public void setCurrentHumidity(int currentHumidity) {
         this.currentHumidity = currentHumidity;
     }
 
+    public double getCurrentWindSpeed() {
+        return currentWindSpeed;
+    }
+
     public void setCurrentWindSpeed(double currentWindSpeed) {
         this.currentWindSpeed = currentWindSpeed;
+    }
+
+    public double getLowestTemperature() {
+        return lowestTemperature;
     }
 
     public void setLowestTemperature(double lowestTemperature) {
         this.lowestTemperature = lowestTemperature;
     }
 
+    public double getHighestTemperature() {
+        return highestTemperature;
+    }
+
     public void setHighestTemperature(double highestTemperature) {
         this.highestTemperature = highestTemperature;
+    }
+
+    public double getRainProbability() {
+        return rainProbability;
     }
 
     public void setRainProbability(double rainProbability) {
         this.rainProbability = rainProbability;
     }
 
+    public String getWeatherDescription() {
+        return weatherDescription;
+    }
+
     public void setWeatherDescription(String weatherDescription) {
         this.weatherDescription = weatherDescription;
+    }
+
+    public String getWeatherIcon() {
+        return weatherIcon;
     }
 
     public void setWeatherIcon(String weatherIcon) {
         this.weatherIcon = weatherIcon;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-
-    // https://openweathermap.org/weather-conditions
-    public boolean isGoingToRain() {
-        return getWeatherDescription().toLowerCase().contains("rain") || getWeatherDescription().toLowerCase().contains("drizzle");
+    public Map<Long, Double> getDailyTemperatures() {
+        return dailyTemperatures;
     }
 
     public void setDailyTemperatures(HashMap<Long, Double> dailyTemperatures) {
         this.dailyTemperatures = dailyTemperatures;
     }
 
+    public Map<Long, String> getWeatherAlerts() {
+        return weatherAlerts;
+    }
+
     public void setWeatherAlerts(HashMap<Long, String> weatherAlerts) {
         this.weatherAlerts = weatherAlerts;
+    }
+
+    // https://openweathermap.org/weather-conditions
+    public boolean isGoingToRain() {
+        return getWeatherDescription().toLowerCase().contains("rain") || getWeatherDescription().toLowerCase().contains("drizzle");
     }
 }
