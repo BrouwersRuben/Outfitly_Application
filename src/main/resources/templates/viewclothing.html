@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Outfitly</title>
+    <link rel="icon" type="image/x-icon" th:href="@{images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
@@ -12,20 +13,26 @@
 
     <div th:insert="~{fragments/header::header}">header</div>
 
-    <div class="d-flex align-content-center">
-        <a th:href="@{/user/profile}" class="btn btn-outline-dark m-4">Go back</a>
+    <div class="d-flex justify-content-center">
+        <div class="d-flex align-content-center">
+            <a th:href="@{/user/profile}" class="btn btn-outline-dark m-4">Go back</a>
+        </div>
     </div>
 
-    <div class="card-deck w-50 d-flex flex-row justify-content-center">
-        <div th:each="clothing : ${user.getClothes()}">
-            <div class="card m-4">
-                <div class="card-body">
-                    <span th:text="${clothing.getName()}"></span>
-                    <img class="img-fluid" th:if="${clothing.getPhoto()?.getPhotoEncoded()}" th:src="${clothing.getPhoto()?.getPhotoEncoded()}" th:alt="${clothing.getName()}">
-                    <form method="post" th:object="${clothingDTO}" th:action="@{/user/profile/viewclothing}">
-                        <input type="text" id="ID" name="ID" th:value="${clothing.getId()}" hidden>
-                        <input type="submit" class="btn" th:href="@{/user/profile/viewclothing}" value="Delete clothing">
-                    </form>
+    <div class="card-deck mx-5 text-center d-flex justify-content-center">
+        <div class="row">
+            <div th:each="clothing : ${user.getClothes()}">
+                <div class="col letter-space d-flex justify-content-center">
+                    <div class="card m-4 w-25">
+                        <div class="card-body">
+                            <span th:text="${clothing.getName()}"></span>
+                            <img class="img-fluid" th:if="${clothing.getPhoto()?.getPhotoEncoded()}" th:src="${clothing.getPhoto()?.getPhotoEncoded()}" th:alt="${clothing.getName()}">
+                            <form method="post" th:object="${clothingDTO}" th:action="@{/user/profile/viewclothing}">
+                                <input type="text" id="ID" name="ID" th:value="${clothing.getId()}" hidden>
+                                <input type="submit" class="btn btn-outline-dark m-4" th:href="@{/user/profile/viewclothing}" value="Delete clothing">
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

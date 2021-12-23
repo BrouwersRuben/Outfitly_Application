@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>About us</title>
+    <link rel="icon" type="image/x-icon" th:href="@{images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link href="../static/style.css" media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
@@ -26,59 +27,62 @@
         </div>
     </div>
 
-    <div class="card-deck mx-5 text-center d-flex flex-row justify-content-center">
+    <div class="card-deck mx-5 text-center d-flex justify-content-center">
         <div class="row">
-            <div class="card m-4 box-shadow teamCard" >
-                <div class="container mt-4">
-                    <img th:src="@{images/teamPictures/ruben.png}" class="teamPicture">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Brouwers Ruben</h5>
-                    <p class="small">CEO</p>
-                </div>
-                <div class="card-body">
-                    <a href="https://gitlab.com/BrouwersRuben" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
-                </div>
-            </div>
-
-            <div class="card m-4 box-shadow teamCard">
-                <div class="container mt-4">
-                    <img th:src="@{images/teamPictures/roby.png}" class="teamPicture">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Van Boxelaere Roby</h5>
-                    <p class="small">CFO</p>
-                </div>
-                <div class="card-body">
-                    <a href="https://gitlab.com/Robyvb" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
+            <div class="col-lg-6 col-xs-12 letter-space d-flex justify-content-center">
+                <div class="card my-4 box-shadow teamCard" >
+                    <div class="container mt-4">
+                        <img th:src="@{images/teamPictures/ruben.png}" class="teamPicture">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Brouwers Ruben</h5>
+                        <p class="small">CEO</p>
+                    </div>
+                    <div class="card-body">
+                        <a href="https://gitlab.com/BrouwersRuben" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="card m-4 box-shadow teamCard">
-                <div class="container mt-4">
-                    <img th:src="@{images/teamPictures/rodzers.png}" class="teamPicture">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Ušackis Rodžers</h5>
-                    <p class="small">CMO</p>
-                </div>
-                <div class="card-body">
-                    <a href="https://gitlab.com/Robyvb" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
+            <div class="col-lg-6 col-xs-12 letter-space d-flex justify-content-center">
+                <div class="card my-4 box-shadow teamCard">
+                    <div class="container mt-4">
+                        <img th:src="@{images/teamPictures/roby.png}" class="teamPicture">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Van Boxelaere Roby</h5>
+                        <p class="small">CFO</p>
+                    </div>
+                    <div class="card-body">
+                        <a href="https://gitlab.com/Robyvb" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
+                    </div>
                 </div>
             </div>
-
-            <div class="card m-4 box-shadow teamCard">
-                <div class="container mt-4">
-                    <img th:src="@{images/teamPictures/dominik.png}" class="teamPicture">
+            <div class="col-lg-6 col-xs-12 letter-space d-flex justify-content-center">
+                <div class="card my-4 box-shadow teamCard">
+                    <div class="container mt-4">
+                        <img th:src="@{images/teamPictures/rodzers.png}" class="teamPicture">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Ušackis Rodžers</h5>
+                        <p class="small">CMO</p>
+                    </div>
+                    <div class="card-body">
+                        <a href="https://gitlab.com/rodzhersu" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Mika Dominik</h5>
-                    <p class="small">CTO</p>
-                </div>
-                <div class="card-body">
-                    <a href="https://gitlab.com/Robyvb" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
+            </div>
+            <div class="col-lg-6 col-xs-12 letter-space d-flex justify-content-center">
+                <div class="card my-4 box-shadow teamCard">
+                    <div class="container mt-4">
+                        <img th:src="@{images/teamPictures/dominik.png}" class="teamPicture">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Mika Dominik</h5>
+                        <p class="small">CTO</p>
+                    </div>
+                    <div class="card-body">
+                        <a href="https://gitlab.com/Dominik.Mika" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
+                    </div>
                 </div>
             </div>
         </div>
