@@ -6,6 +6,7 @@ import be.kdg.outfitly.repository.ArduinoSensorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class ArduinoSensorServiceImpl implements ArduinoSensorService{
     private final ArduinoSensorRepository arduinoSensorRepository;
-    private Logger logger = LoggerFactory.getLogger(ArduinoSensor.class);
+    private final Logger logger = LoggerFactory.getLogger(ArduinoSensor.class);
 
     @Autowired
     public ArduinoSensorServiceImpl(ArduinoSensorRepository arduinoSensorRepository) {
@@ -29,9 +30,9 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
         List<ArduinoSensor> sensorDatas = arduinoSensorRepository.findAll().stream().filter(sensorData -> sensorData.getEmail().equals(user.getEmail())).collect(Collectors.toList());
         sensorDatas = sensorDatas.stream()
                 .filter(sensorData -> sensorData.getTimeOfReading().isAfter(LocalDateTime.now().minusHours(1)))
-                .sorted(Comparator.comparing(ArduinoSensor::getTimeOfReading))
+                .sorted(Comparator.comparing(ArduinoSensor::getTimeOfReading)) //What does this line do?
                 .collect(Collectors.toList());
-        if (sensorDatas.size() == 0){
+        if (sensorDatas.size() == 0){ //Get latest one
             return null; //TODO: have the AI check if there is a null, if so, just use the API
         } else {
             return sensorDatas.get(0);
@@ -47,5 +48,16 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
             return arduinoSensorRepository.save(new ArduinoSensor(temperature, humidity, email, LocalDateTime.now()));
         }
         return null;
+    }
+
+
+    @Scheduled(cron = "0 3 * * *")
+    public void delete(){
+        for (ArduinoSensor sensorData : arduinoSensorRepository.findAll()){
+            if (sensorData.getTimeOfReading().isBefore(LocalDateTime.now().minusDays(1))){
+                logger.debug("Deleted sensor data with time: " + sensorData.getTimeOfReading());
+                arduinoSensorRepository.delete(sensorData);
+            }
+        }
     }
 }
