@@ -73,25 +73,20 @@ public class ClothingServiceImpl implements ClothingService {
         List<ClothingItem> clothes = clothingRepository.findAll();
         List<User> users = userService.read();
 
-//        for(User user : users){
-//            if(!user.getWashingResetDay().equals(LocalDateTime.now())){
-//                continue;
-//            } else {
-//
-//            }
-//        }
-
-        users.stream()
-                .forEach(
+        users.forEach(
                         user ->{
                             if(!user.getWashingResetDay().equals(LocalDateTime.now().getDayOfWeek())){
                                 logger.debug(LocalDateTime.now().getDayOfWeek().toString());
                                 return;
                             } else {
-                                user.getClothes().forEach(clothingItem -> {
+                                List<ClothingItem> clothingToChange = user.getClothes();
+                                clothingToChange.forEach(clothingItem -> {
                                     clothingItem.setWashCycle(false);
-                                    userService.update(user);
-                                };
+                                    create(clothingItem);
+//                                    userService.update(user);
+                                });
+                                user.setClothes(clothingToChange);
+                                userService.create(user);
                             }
                         }
                 );
