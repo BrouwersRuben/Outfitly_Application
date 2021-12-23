@@ -31,7 +31,7 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
     }
 
     public List<ClothingItem> getPossibleClothingItems(User user, ClothingItem.Occasion occasion) {
-        WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountry(), user.getCity());
+        WeatherForecast weatherForecast = weatherForecastService.getNewByCountryCodeAndCity(user.getCountryCode(), user.getCity());
 
         List<ClothingItem> possibleItems = user.getClothes();
 
