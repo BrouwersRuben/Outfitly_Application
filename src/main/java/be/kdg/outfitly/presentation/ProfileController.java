@@ -1,6 +1,5 @@
 package be.kdg.outfitly.presentation;
 
-import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.ClothingDTO;
 import be.kdg.outfitly.presentation.dto.profileChanges.LocationDTO;
@@ -22,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 @Controller
