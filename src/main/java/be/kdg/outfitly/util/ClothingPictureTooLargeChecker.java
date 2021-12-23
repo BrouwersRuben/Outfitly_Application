@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class ClothingPictureTooLargeChecker {
     public static void checkPictureSize(Photo photo){
+        if(photo == null) return;
         if (photo.getBytes().length > Photo.MAX_NUMBER_BYTES) throw new ClothingPictureTooLargeException("The picture is too large", photo);
     }
 }
