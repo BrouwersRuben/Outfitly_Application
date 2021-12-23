@@ -88,7 +88,10 @@ public class ClothingServiceImpl implements ClothingService {
                                 logger.debug(LocalDateTime.now().getDayOfWeek().toString());
                                 return;
                             } else {
-                                user.getClothes().stream().forEach(clothingItem -> clothingItem.setWashCycle(false));
+                                user.getClothes().forEach(clothingItem -> {
+                                    clothingItem.setWashCycle(false);
+                                    userService.update(user);
+                                };
                             }
                         }
                 );
