@@ -15,33 +15,33 @@
 
 <div class="container mt-4">
     <div class="pricing m-3 mx-auto text-center">
-        <p class="h1 m-3 font-weight-bold" th:utext="pricing.title">Pricing</p>
-        <p th:utext="pricing.text1">Choose the plan that's right for you.</p>
-        <p th:utext="pricing.text2">Paid plans start with a 14-day free trial.</p>
-        <p th:utext="pricing.text3">Upgrade, downgrade or cancel at anytime.</p>
+        <p class="h1 m-3 font-weight-bold" th:utext="#{pricing.title}">Pricing</p>
+        <p th:utext="#{pricing.text1}">Choose the plan that's right for you.</p>
+        <p th:utext="#{pricing.text2}">Paid plans start with a 14-day free trial.</p>
+        <p th:utext="#{pricing.text3}">Upgrade, downgrade or cancel at anytime.</p>
     </div>
     <div class="card-deck mx-5 text-center d-flex flex-row justify-content-center">
         <div class="card m-4 box-shadow" style="width:20rem">
             <div class="card-header">
-                <h2 class="font-weight-normal m-0" th:utext="pricing.individual">Individual</h2>
+                <h2 class="font-weight-normal m-0" th:utext="#{pricing.individual}">Individual</h2>
             </div>
             <div class="card-body">
-                <h1 class="card-title"><span style="font-size: 22px">€</span>4.99<span style="font-size: 22px" th:utext="pricing.pricePerMonth"> / month</span></h1>
+                <h1 class="card-title"><span class="font22">€</span>4.99<span class="font22" th:utext="#{pricing.pricePerMonth}"> / month</span></h1>
                 <ul class="list-unstyled my-4">
-                    <li th:utext="pricing.individualText1">One User Account</li>
-                    <li th:utext="pricing.individualText2">24/7 Customer Support</li>
-                    <li th:utext="pricing.individualText3">Access To All Features</li>
-                    <li th:utext="pricing.individualText4">Cancel Anytime</li>
+                    <li th:utext="#{pricing.individualText1}">One User Account</li>
+                    <li th:utext="#{pricing.individualText2}">24/7 Customer Support</li>
+                    <li th:utext="#{pricing.individualText3}">Access To All Features</li>
+                    <li th:utext="#{pricing.individualText4}">Cancel Anytime</li>
                 </ul>
                 <div class="m-4">
-                    <a th:href="@{/register}" class="btn btn-outline-dark" >Get Started</a>
+                    <a th:href="@{/register}" class="btn btn-primary" th:utext="#{pricing.getStarted}">Get Started</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="product-description p-3 mx-auto text-center">
-        <p>Save time and dress confidently with Outfitly.</p>
+        <p th:utext="#{pricing.saveTime}">Save time and dress confidently with Outfitly.</p>
     </div>
 </div>
 

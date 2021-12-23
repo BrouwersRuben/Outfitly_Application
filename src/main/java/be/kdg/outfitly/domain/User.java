@@ -58,9 +58,6 @@ public class User extends Entity {
     @Enumerated(EnumType.STRING)
     private DayOfWeek washingResetDay;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<ArduinoSensor> sensorData;
-
     // Constructor
     // TODO: make this protected MULTI USER
     public User() {
@@ -227,14 +224,6 @@ public class User extends Entity {
 
     public void setClothes(List<ClothingItem> clothes) {
         this.clothes = clothes;
-    }
-
-    public List<ArduinoSensor> getSensorData() {
-        return sensorData;
-    }
-
-    public void setSensorData(List<ArduinoSensor> sensorData) {
-        this.sensorData = sensorData;
     }
 
     public String getCountryCode() {

@@ -1,18 +1,23 @@
 package be.kdg.outfitly.service;
 
 import be.kdg.outfitly.domain.ClothingItem;
+import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.repository.ClothingRepository;
 import be.kdg.outfitly.util.ClothingPictureTooLargeChecker;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ClothingServiceImpl implements ClothingService {
     private final ClothingRepository clothingRepository;
+    private final UserService userService;
 
-    public ClothingServiceImpl(ClothingRepository clothingRepository) {
+    public ClothingServiceImpl(ClothingRepository clothingRepository, UserService userService) {
         this.clothingRepository = clothingRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -33,8 +38,15 @@ public class ClothingServiceImpl implements ClothingService {
     }
 
     @Override
-    public void delete(int id) {
-        ClothingItem clothingItemToRemove = clothingRepository.findById(id).orElseThrow();
-        clothingRepository.delete(clothingItemToRemove);
+    @Transactional
+    public void delete(int id, User user) {
+        User userFromRepo = userService.findById(user.getId());
+        List<ClothingItem> clothes = new ArrayList<>(userFromRepo.getClothes());
+
+        clothes.remove(clothingRepository.findById(id).orElseThrow());
+        userFromRepo.setClothes(clothes);
+
+        userService.update(userFromRepo);
+        clothingRepository.delete(clothingRepository.findById(id).orElseThrow());
     }
 }

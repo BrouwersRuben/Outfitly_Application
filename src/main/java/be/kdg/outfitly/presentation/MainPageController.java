@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/user/main-page")
@@ -32,6 +32,7 @@ public class MainPageController {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("loggedIn", user != null);
         model.addAttribute("user", user);
+        model.addAttribute("arduinoSensorData", arduinoSensorService.findByUser(user));
 
         model.addAttribute("username", user.getName());
         model.addAttribute("city", user.getCity());

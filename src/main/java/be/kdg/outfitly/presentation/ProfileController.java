@@ -1,6 +1,5 @@
 package be.kdg.outfitly.presentation;
 
-import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.presentation.dto.ClothingDTO;
 import be.kdg.outfitly.presentation.dto.profileChanges.LocationDTO;
@@ -23,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 @Controller
@@ -164,23 +161,8 @@ public class ProfileController {
 
     @PostMapping("/viewclothing")
     public String processRemoveClothing(@ModelAttribute("clothingDTO") ClothingDTO clothingDTO, Principal principal, Model model) {
-        User user = userService.findByEmail(principal.getName());
-
-        ClothingItem clothingItemToRemove = clothingService.findById(clothingDTO.getID());
-
-        clothingService.delete(clothingDTO.getID());
-        List<ClothingItem> newClothingList = clothingService.read();
-        user.setClothes(newClothingList);
-        userService.update(user);
-        model.addAttribute("user", user);
-
-        User userFromRepo = userService.findById(user.getId());
-        List<ClothingItem> clothes = new ArrayList<>(userFromRepo.getClothes());
-
-        clothes.remove(clothingItemToRemove);
-
-        userFromRepo.setClothes(clothes);
-        userService.update(userFromRepo);
+        clothingService.delete(clothingDTO.getID(), userService.findByEmail(principal.getName()));
+        model.addAttribute("user", userService.findByEmail(principal.getName()));
         return "redirect:/user/profile/viewclothing";
     }
 }
