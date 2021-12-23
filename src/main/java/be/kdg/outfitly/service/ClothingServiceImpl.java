@@ -4,14 +4,22 @@ import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.repository.ClothingRepository;
 import be.kdg.outfitly.util.ClothingPictureTooLargeChecker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
 public class ClothingServiceImpl implements ClothingService {
+    private final Logger logger = LoggerFactory.getLogger(ClothingServiceImpl.class);
+
     private final ClothingRepository clothingRepository;
     private final UserService userService;
 
@@ -56,5 +64,35 @@ public class ClothingServiceImpl implements ClothingService {
         ClothingItem toBeUpdated = clothingRepository.getById(clothingItem.getId());
         toBeUpdated.setWashCycle(true);
         clothingRepository.save(toBeUpdated);
+    }
+
+    //only for here in this timezone
+    @Scheduled(cron = "0 0 3 * * *", zone = "Europe/Paris")
+    public void resetClothesWashCycle(){
+        Calendar calendar = Calendar.getInstance();
+        List<ClothingItem> clothes = clothingRepository.findAll();
+        List<User> users = userService.read();
+
+//        for(User user : users){
+//            if(!user.getWashingResetDay().equals(LocalDateTime.now())){
+//                continue;
+//            } else {
+//
+//            }
+//        }
+
+        users.stream()
+                .forEach(
+                        user ->{
+                            if(!user.getWashingResetDay().equals(LocalDateTime.now().getDayOfWeek())){
+                                logger.debug(LocalDateTime.now().getDayOfWeek().toString());
+                                return;
+                            } else {
+                                user.getClothes().stream().forEach(clothingItem -> clothingItem.setWashCycle(false));
+                            }
+                        }
+                );
+
+
     }
 }
