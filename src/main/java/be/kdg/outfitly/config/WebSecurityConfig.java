@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").authenticated()
                 .antMatchers("/").permitAll()
                 .and().formLogin()
-                .loginPage("/login").usernameParameter("email").defaultSuccessUrl("/user/mainpage")
+                .loginPage("/login").usernameParameter("email").defaultSuccessUrl("/user/main-page")
                 .and().logout().logoutSuccessUrl("/logout")
                 .and()
                 .authorizeRequests().antMatchers("/h2-console/**").permitAll()
@@ -54,6 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().ignoringAntMatchers("/h2-console/**")
                 .and()
                 .cors().disable();
+
 
     }
 
