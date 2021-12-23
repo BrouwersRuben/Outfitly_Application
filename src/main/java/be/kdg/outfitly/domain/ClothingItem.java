@@ -36,7 +36,7 @@ public class ClothingItem extends Entity {
     private Photo photo;
 
     @Column(name = "wash_cycle", nullable = false)
-    private boolean wash_cycle;
+    private boolean washCycle;
     //TODO: Should be set to false upon registering clothes
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, /*CascadeType.PERSIST,*/ CascadeType.REFRESH})
@@ -46,14 +46,14 @@ public class ClothingItem extends Entity {
     protected ClothingItem() {
     }
 
-    public ClothingItem(String name, Material material, RainProofness rainProofness, Occasion occasion, Weather weather, Type type) {
+    public ClothingItem(String name, Material material, RainProofness rainProofness, Occasion occasion, Weather weather, Type type, boolean washCycle) {
         this.name = name;
         this.type = type;
         this.material = material;
         this.rainProofness = rainProofness;
         this.occasion = occasion;
         this.weather = weather;
-        this.wash_cycle = wash_cycle;
+        this.washCycle = washCycle;
     }
 
     @Override
@@ -114,12 +114,12 @@ public class ClothingItem extends Entity {
         this.weather = weather;
     }
 
-    public boolean isWash_cycle() {
-        return wash_cycle;
+    public boolean isWashCycle() {
+        return washCycle;
     }
 
-    public void setWash_cycle(boolean wash_cycle) {
-        this.wash_cycle = wash_cycle;
+    public void setWashCycle(boolean washCycle) {
+        this.washCycle = washCycle;
     }
 
     public User getUser() {

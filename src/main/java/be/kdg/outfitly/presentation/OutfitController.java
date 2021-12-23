@@ -45,17 +45,7 @@ public class OutfitController {
         return "outfit";
     }
 
-    /*
     @PostMapping(params = {"putInWash"})
-    public String putInWash(Principal principal, Model model, @ModelAttribute("clothingDTO") ClothingDTO clothingDTO){
-        User user = userService.findByEmail(principal.getName());
-        ClothingItem toPutInWash = clothingService.findById(clothingDTO.getID());
-        clothingService.putInWash(toPutInWash);
-        return "redirect:/user/outfit";
-    }*/
-
-    @PostMapping(params = {"putInWash"})
-    //TODO: Occasion is null
     public String putInWash(Principal principal, Model model, @ModelAttribute("occasion") String occasionName, @ModelAttribute("clothingDTO") ClothingDTO clothingDTO){
         User user = userService.findByEmail(principal.getName());
         ClothingItem toPutInWash = clothingService.findById(clothingDTO.getID());
@@ -65,4 +55,5 @@ public class OutfitController {
         model.addAttribute("aiDecision", outfitSelector.getAiDecision());
         return "outfit";
     }
+
 }

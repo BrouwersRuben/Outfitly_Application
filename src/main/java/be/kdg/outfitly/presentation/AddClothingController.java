@@ -59,7 +59,7 @@ public class AddClothingController {
     public String processClothing(Principal principal, String clothingName, ClothingItem.Material material, ClothingItem.RainProofness rainproofness, ClothingItem.Occasion occasion, ClothingItem.Weather weather, ClothingItem.Type type, MultipartFile photo){
         User user = userService.findByEmail(principal.getName());
 
-        ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type);
+        ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type, false); //upon creation, washingcycle has been set to false
         try {
             Photo newPhoto = new Photo(photo.getBytes(), photo.getContentType());
             newClothingItem.setPhoto(newPhoto);

@@ -15,7 +15,7 @@
         <form method="post" th:object="${washingDayDTO}" th:action="@{/user/profile/changewashingresetday}">
             <div class="form-group row">
                 <label for="newWashingResetDay">Wash day</label>
-                <input type="text" class="form-control" name="newWashingResetDay" id="newWashingResetDay" th:value="${user.getWashingResetDay()}" >
+                <input type="text" class="form-control" name="newWashingResetDay" id="newWashingResetDay" th:value="${user.getWashingResetDay().toString().toLowerCase()}" >
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('newWashingResetDay')}" th:errors="*{newWashingResetDay}">washing reset day error</div>
             </div>
             <div class="d-flex justify-content-center">

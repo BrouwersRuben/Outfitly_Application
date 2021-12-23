@@ -1,11 +1,11 @@
 package be.kdg.outfitly.service;
 
 import be.kdg.outfitly.domain.ClothingItem;
+import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.repository.ClothingRepository;
 import be.kdg.outfitly.util.ClothingPictureTooLargeChecker;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
