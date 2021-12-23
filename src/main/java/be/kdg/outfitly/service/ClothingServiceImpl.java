@@ -54,7 +54,7 @@ public class ClothingServiceImpl implements ClothingService {
     @Transactional
     public void putInWash(ClothingItem clothingItem) {
         ClothingItem toBeUpdated = clothingRepository.getById(clothingItem.getId());
-        toBeUpdated.setWash_cycle(true);
+        toBeUpdated.setWashCycle(true);
         clothingRepository.save(toBeUpdated);
     }
 }
