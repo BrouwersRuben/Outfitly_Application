@@ -69,12 +69,10 @@ public class ClothingServiceImpl implements ClothingService {
     //only for here in this timezone
     @Scheduled(cron = "0 0 3 * * *", zone = "Europe/Paris")
     public void resetClothesWashCycle(){
-        Calendar calendar = Calendar.getInstance();
-        List<ClothingItem> clothes = clothingRepository.findAll();
         List<User> users = userService.read();
 
         users.forEach(
-                        user ->{
+                user ->{
                             if(!user.getWashingResetDay().equals(LocalDateTime.now().getDayOfWeek())){
                                 logger.debug(LocalDateTime.now().getDayOfWeek().toString());
                                 return;
@@ -83,7 +81,6 @@ public class ClothingServiceImpl implements ClothingService {
                                 clothingToChange.forEach(clothingItem -> {
                                     clothingItem.setWashCycle(false);
                                     create(clothingItem);
-//                                    userService.update(user);
                                 });
                                 user.setClothes(clothingToChange);
                                 userService.create(user);

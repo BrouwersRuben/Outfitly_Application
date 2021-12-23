@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Outfitly</title>
+    <link rel="icon" type="image/x-icon" th:href="@{images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link href="../static/style.css" media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
@@ -59,8 +60,8 @@
     <div class="d-flex justify-content-center">
         <div class="container m-4">
             <div class="row">
-                <div class="col-sm text-end">
-                    <p class="indexPageText" th:utext="#{index.willBeForYouDescription}">
+                <div class="col-sm">
+                    <p class="m-4 indexPageText" th:utext="#{index.willBeForYouDescription}">
                         Our aim is to save you time and avoid those awkward situations where you have overdressed or underdressed for the occasion.<br>
                         Are you somebody that struggles with picking your outfit in the morning?<br>
                         Or somebody that regularly picks the wrong outfit because you didn't look at the weather forecast for that day?
@@ -78,8 +79,8 @@
     <p class="h1 mb-4 text-center font-weight-bold" th:utext="#{index.ourReviews}">Our reviews</p>
 
     <div class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center">
-        <div class="col-2 d-flex justify-content-center">
-            <div class="card w-75">
+        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 d-flex justify-content-center">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Jonas</h5>
                     <p th:utext="#{index.jonasText}">I love supporting new technologies and Outfitly has been a great help to my busy life!</p>
@@ -90,8 +91,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 d-flex justify-content-center">
-            <div class="card w-75">
+        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 d-flex justify-content-center">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Marie</h5>
                     <p th:utext="#{index.marieText}">It saves me so much stress. As a person that doesn't follow fashion, this is great!</p>
