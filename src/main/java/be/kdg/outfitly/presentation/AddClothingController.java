@@ -77,7 +77,7 @@ public class AddClothingController {
         userService.update(user);
 
         user.setClothes(userClothing);
-        return "redirect:/user/mainpage";
+        return "redirect:/user/profile";
     }
 
     @ExceptionHandler(ClothingPictureTooLargeException.class)
