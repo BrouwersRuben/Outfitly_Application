@@ -17,7 +17,7 @@
     <div class="m-4">
         <form method="post" th:action="@{/user/addclothing}" enctype="multipart/form-data">
             <div class="d-flex justify-content-center">
-                <label for="clothingName">Clothing name</label>
+                <label for="clothingName" th:utext="#{addclothing.clothingName}">Clothing name</label>
             </div>
             <div class="d-flex justify-content-center">
                 <input type="text" name="clothingName" id="clothingName" maxlength = "50" required="required">
@@ -27,14 +27,14 @@
                     <h2 th:text="${enum.getKey()}"></h2>
                     <div th:each="value : ${enum.getValue()}">
                         <input type="radio" th:id="${enum.getKey() + value}" th:name="${enum.getKey()}" th:value="${value}" required="required">
-                        <label th:for="${enum.getKey() + value}" th:text="${value}">value</label>
+                        <label th:for="${enum.getKey() + value}" th:utext="${value}">value</label>
                     </div>
                 </div>
             </div>
 
 
             <div class="d-flex justify-content-center">
-                <label for="photo" class="form-label w-25">Upload a picture:</label>
+                <label for="photo" class="form-label w-25" th:utext="#{addclothing.uploadAPicture}">Upload a picture:</label>
             </div>
 
             <div class="d-flex justify-content-center mb-4">
@@ -42,8 +42,8 @@
             </div>
 
             <div class="d-flex justify-content-center">
-                <a th:href="@{/user/profile}" class ="btn btn-outline-dark m-4">Go back</a>
-                <button class="btn btn-outline-dark m-4" type="submit">Add clothing</button>
+                <a th:href="@{/user/profile}" class ="btn btn-outline-dark m-4" th:utext="#{addclothing.goBack}">Go back</a>
+                <button class="btn btn-outline-dark m-4" type="submit" th:utext="#{addclothing.addClothing}">Add clothing</button>
             </div>
 
         </form>

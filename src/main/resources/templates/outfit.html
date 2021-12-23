@@ -19,8 +19,8 @@
 <table class="table table-responsive table-striped table-bordered my-4">
     <thead class="table-dark">
     <tr>
-        <th scope="col" style="width: 50%">Clothing Type</th>
-        <th scope="col" style="width: 50%">Clothing Items</th>
+        <th scope="col" style="width: 50%" th:utext="#{outfit.clothingType}">Clothing Type</th>
+        <th scope="col" style="width: 50%" th:utext="#{outfit.clothingItems}">Clothing Items</th>
     </tr>
     </thead>
     <tbody>
@@ -34,7 +34,7 @@
                 <img class="w-25" th:if="${item.getPhoto()?.getPhotoEncoded()}" th:src="${item.getPhoto()?.getPhotoEncoded()}" th:alt="${item.getName()}">
                 <form method="post" th:action="@{/user/outfit}">
                     <input type="text" id="ID" name="ID" th:value="${item.getId()}" hidden>
-                    <input type="submit" name="putInWash" class="btn btn-outline-dark my-4" value="Put in the wash">
+                    <input type="submit" name="putInWash" class="btn btn-outline-dark my-4" value="Put in the wash" th:value="#{outfit.putInWash}">
                     <!--
                         TODO: dirty fix - clean up
                     -->
@@ -47,8 +47,8 @@
 </table>
 
 <div class="d-flex justify-content-center m-5">
-    <a class="btn btn-outline-dark m-4" th:href="@{/user/outfit}">Choose a different occasion</a>
-    <a class="btn btn-outline-dark m-4" href="#" data-bs-toggle="popover" data-bs-placement="bottom" title="Why the AI picked these clothes" th:data-bs-content="${aiDecision}">ℹ️ Information</a>
+    <a class="btn btn-outline-dark m-4" th:href="@{/user/outfit}" th:utext="#{outfit.chooseDifferentOccasion}">Choose a different occasion</a>
+    <a class="btn btn-outline-dark m-4" href="#" data-bs-toggle="popover" data-bs-placement="bottom" title="Why the AI picked these clothes" th:data-bs-content="${aiDecision}" th:utext="#{outfit.information}" th:title="#{outfit.whyAIPicked}">ℹ️ Information</a>
 </div>
 
 <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
