@@ -59,19 +59,20 @@
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phone number error</div>
             </div>
             <h2>Address:</h2>
-            <div class="form-group m-4">
-                <label for="country">Country</label>
-                <input type="text" class="form-control" id="country" placeholder="Belgium" name="country">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">country number error</div>
-            </div>
+<!--            <div class="form-group m-4">-->
+<!--                <label for="country">Country</label>-->
+<!--                <input type="text" class="form-control" id="country" placeholder="Belgium" name="country">-->
+<!--                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">country number error</div>-->
+<!--            </div>-->
 
             <div class="form-group m-4">
-                <label for="countryCode">Country code</label>
-                <select class="form-control" id="countryCode" name="countryCode" >
-<!--                    <option th:each="country : ${countries}" th:text="${country.getValue()}" th:value="${country.getKey()}"></option>-->
-                    <option th:each="code : ${countryCodes}" th:text="${code}" th:value="${code}"></option>
+                <label for="countryCode">Country</label>
+                <select class="form-select" id="countryCode" name="countryCode">
+                    <option th:each="nameAndCode : ${namesAndCodes}" th:text="${nameAndCode.getKey()}" th:value="${nameAndCode.getValue()}" th:selected="${nameAndCode.getValue() == 'BE'}"></option>
                 </select>
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('countryCode')}" th:errors="*{countryCode}">country code error</div>
+                <div class="m-2 alert alert-danger" th:errors="*{countryCode}" th:if="${#fields.hasErrors('countryCode')}">
+                    country code error
+                </div>
             </div>
 
             <div class="form-group m-4">

@@ -9,6 +9,7 @@ import be.kdg.outfitly.presentation.dto.profileChanges.PasswordDTO;
 import be.kdg.outfitly.presentation.dto.profileChanges.PhoneNumberDTO;
 import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
+import be.kdg.outfitly.util.CountriesCodesAndNames;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +53,10 @@ public class ProfileController {
     @GetMapping("/changelocation")
     public String changeLocation(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
-        model.addAttribute("loggedIn", user.getId() != -1);
+//        model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
-        model.addAttribute("codes", Locale.getISOCountries());
+//        model.addAttribute("codes", Locale.getISOCountries());
+        model.addAttribute("namesAndCodes",CountriesCodesAndNames.getCountryCodesAndNames().entrySet());
         model.addAttribute("locationDTO", new LocationDTO());
         return "changelocation";
     }
@@ -66,10 +68,11 @@ public class ProfileController {
         model.addAttribute("user", user);
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
+            model.addAttribute("namesAndCodes",CountriesCodesAndNames.getCountryCodesAndNames().entrySet());
             return "changelocation";
         } else {
             user.setCity(locationDTO.getCity());
-            user.setCountry(locationDTO.getCountry());
+//            user.setCountry(locationDTO.getCountry());
             user.setCountryCode(locationDTO.getCountryCode());
             user.setStreetName(locationDTO.getStreetName());
             user.setStreetNumber(locationDTO.getStreetNumber());

@@ -31,7 +31,7 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
     }
 
     public List<ClothingItem> getPossibleClothingItems(User user, ClothingItem.Occasion occasion) {
-        WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountry(), user.getCity());
+        WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountryCode(), user.getCity());
         //TODO: is this the correct way to do the time
         ArduinoSensor arduinoSensor = arduinoSensorService.findByUser(user, LocalDateTime.now());
         List<ClothingItem> possibleItems = user.getClothes();

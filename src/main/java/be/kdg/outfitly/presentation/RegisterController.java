@@ -4,6 +4,7 @@ import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.exceptions.EmailExistsException;
 import be.kdg.outfitly.presentation.dto.UserDTO;
 import be.kdg.outfitly.service.UserService;
+import be.kdg.outfitly.util.CountriesCodesAndNames;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -38,8 +39,8 @@ public class RegisterController {
 //            return "redirect:/user/mainpage";
             model.addAttribute("errorMessage", "You are already logged in.");
         }
+        model.addAttribute("namesAndCodes", CountriesCodesAndNames.getCountryCodesAndNames().entrySet());
         model.addAttribute("userDTO", new UserDTO());
-        model.addAttribute("countryCodes", Locale.getISOCountries());
         return "register";
     }
 
@@ -56,10 +57,10 @@ public class RegisterController {
     public String processRegister(Model model, @Valid @ModelAttribute("userDTO") UserDTO userDTO, BindingResult errors) {
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
-            model.addAttribute("countryCodes", Locale.getISOCountries());
+            model.addAttribute("namesAndCodes",CountriesCodesAndNames.getCountryCodesAndNames().entrySet());
             return "register";
         } else {
-            userService.create(userDTO.getEmail(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getWashDay(), userDTO.getPhoneNumber(), userDTO.getCountry(), userDTO.getCountryCode(), userDTO.getCity(), userDTO.getStreetName(), userDTO.getStreetNumber(), userDTO.getApartmentNumber(), userDTO.getZipcode(), new ArrayList<>());
+            userService.create(userDTO.getEmail(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getWashDay(), userDTO.getPhoneNumber(), userDTO.getCountryCode(), userDTO.getCity(), userDTO.getStreetName(), userDTO.getStreetNumber(), userDTO.getApartmentNumber(), userDTO.getZipcode(), new ArrayList<>());
             return "redirect:/login";
         }
     }

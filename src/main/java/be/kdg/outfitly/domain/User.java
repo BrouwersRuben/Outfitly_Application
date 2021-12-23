@@ -32,8 +32,6 @@ public class User extends Entity {
     @Column(name = "phone_number", nullable = false, length = 50)
     private String phoneNumber;
 
-    @Column(name = "country", nullable = false, length = 56)
-    private String country;
 
     @Column(name = "countryCode", nullable = false, length = 2)
     private String countryCode;
@@ -69,14 +67,13 @@ public class User extends Entity {
     }
 
     //constructor for everything
-    public User(String email, String password, String firstName, String lastName, DayOfWeek washingResetDay, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, DayOfWeek washingResetDay, String phoneNumber, String countryCode, String city, String streetName, String streetNumber, String apartmentNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.washingResetDay = washingResetDay;
         this.phoneNumber = phoneNumber;
-        this.country = country;
         this.countryCode = countryCode;
         this.city = city;
         this.streetName = streetName;
@@ -87,14 +84,13 @@ public class User extends Entity {
     }
 
     //Constructor for without apartmentNumber
-    public User(String email, String password, String firstName, String lastName, DayOfWeek washingResetDay, String phoneNumber, String country, String countryCode, String city, String streetName, String streetNumber, String zipcode) {
+    public User(String email, String password, String firstName, String lastName, DayOfWeek washingResetDay, String phoneNumber, String countryCode, String city, String streetName, String streetNumber, String zipcode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.washingResetDay = washingResetDay;
         this.phoneNumber = phoneNumber;
-        this.country = country;
         this.countryCode = countryCode;
         this.city = city;
         this.streetName = streetName;
@@ -113,7 +109,7 @@ public class User extends Entity {
         setFirstName(other.getFirstName());
         setLastName(other.getLastName());
         setPhoneNumber(other.getPhoneNumber());
-        setCountry(other.getCountry());
+//        setCountry(other.getCountry());
         setCountryCode(other.getCountryCode());
         setCity(other.getCity());
         setStreetName(other.getStreetName());
@@ -182,13 +178,6 @@ public class User extends Entity {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
 
     public String getCity() {
         return city;
@@ -253,7 +242,7 @@ public class User extends Entity {
     }
 
     public void setCountryCode(String country) {
-        this.country = country;
+        this.countryCode = country;
     }
 
     //function to get first name and surname together
@@ -267,6 +256,6 @@ public class User extends Entity {
 
     @Override
     public String toString() {
-        return "User{" + "email='" + email + '\'' + ", password='" + password + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", phoneNumber='" + phoneNumber + '\'' + ", country='" + country + '\'' + ", countryCODE='" + countryCode + '\'' + ", city='" + city + '\'' + ", streetName='" + streetName + '\'' + ", streetNumber=" + streetNumber + ", apartmentNumber='" + apartmentNumber + '\'' + ", zipcode='" + zipcode + '\'' + ", clothes=" + clothes + '}';
+        return "User{" + "email='" + email + '\'' + ", password='" + password + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", phoneNumber='" + phoneNumber + '\''  + ", countryCODE='" + countryCode + '\'' + ", city='" + city + '\'' + ", streetName='" + streetName + '\'' + ", streetNumber=" + streetNumber + ", apartmentNumber='" + apartmentNumber + '\'' + ", zipcode='" + zipcode + '\'' + ", clothes=" + clothes + '}';
     }
 }

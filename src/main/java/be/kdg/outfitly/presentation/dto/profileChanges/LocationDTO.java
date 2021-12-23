@@ -9,9 +9,7 @@ import javax.validation.constraints.Size;
 @LocationValidation
 public class LocationDTO implements Locatable {
 
-    @NotEmpty(message = "Please fill in your country.")
-    @Size(max = 56)
-    private String country;
+
     @NotEmpty(message = "Please select your country code.")
     @Size(max = 2, min = 2)
     private String countryCode;
@@ -30,13 +28,7 @@ public class LocationDTO implements Locatable {
     @Size(max = 10, message = "Zipcode cannot be larger than 10 characters")
     private String zipcode;
 
-    public String getCountry() {
-        return country;
-    }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
 
     public String getCity() {
         return city;

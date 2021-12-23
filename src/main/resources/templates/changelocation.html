@@ -13,16 +13,16 @@
 
     <div class="d-flex justify-content-center align-content-center">
         <form method="post" th:object="${locationDTO}" th:action="@{/user/profile/changelocation}">
-            <div class="form-group row d-flex justify-content-center">
-                <label for="country" class="m-1 w-75">Country:</label>
-                <input type="text" name="country" id="country" th:value="${user.country}" class="m-1 w-75">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">country error</div>
-            </div>
+<!--            <div class="form-group row d-flex justify-content-center">-->
+<!--                <label for="country" class="m-1 w-75">Country:</label>-->
+<!--                <input type="text" name="country" id="country" th:value="${user.country}" class="m-1 w-75">-->
+<!--                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">country error</div>-->
+<!--            </div>-->
 
             <div class="form-group row d-flex justify-content-center">
-                <label class="m-1 w-75" for="countryCode">Country code</label>
+                <label class="m-1 w-75" for="countryCode">Country</label>
                 <select class="m-1 w-75" id="countryCode" name="countryCode">
-                    <option th:each="code : ${codes}" th:text="${code}" th:value="${code}" th:selected="${code} == ${user.countryCode}"></option>
+                    <option th:each="nameAndCode : ${namesAndCodes}" th:text="${nameAndCode.getKey()}" th:value="${nameAndCode.getValue()}" th:selected="${nameAndCode.getValue()} == ${user.countryCode}"></option>
                 </select>
                 <div class="m-2 alert alert-danger" th:errors="*{countryCode}" th:if="${#fields.hasErrors('countryCode')}">
                     country code error

@@ -27,9 +27,9 @@ public class UserDTO implements Locatable {
     @NotEmpty(message = "Please fill in your phone number.")
     @Size(min = 10, max = 50, message = "Phone number must be between 10 to 50 characters long.")
     private String phoneNumber;
-    @NotEmpty(message = "Please fill in your country.")
-    @Size(max = 56)
-    private String country;
+//    @NotEmpty(message = "Please fill in your country.")
+//    @Size(max = 56)
+//    private String country;
     @NotEmpty(message = "Please fill in your country.")
     @Size(min = 2, max = 2)
     private String countryCode;
@@ -98,13 +98,13 @@ public class UserDTO implements Locatable {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getCountry() {
-        return country;
-    }
+//    public String getCountry() {
+//        return country;
+//    }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+//    public void setCountry(String country) {
+//        this.country = country;
+//    }
 
     public String getCountryCode() {
         return countryCode;
