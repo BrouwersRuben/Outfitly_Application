@@ -14,6 +14,7 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Lob
     @Column(name = "photo", length = MAX_NUMBER_BYTES)
     private byte[] bytes;
 
