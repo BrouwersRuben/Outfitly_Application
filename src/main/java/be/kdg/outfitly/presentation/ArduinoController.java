@@ -20,12 +20,11 @@ public class ArduinoController {
     }
 
     //This REST server is very basic and based of an example Mr. Vochten gave us. We will learn the correct ways and standards of REST servers in programming 2.3
-    //http://ipoflaptop/api/sensordata?humidity={double humidity}&temperature={double temperature}&email={String email}
+    //http://ipoflaptop/api/sensordata?hum={double humidity}&temp={double temperature}&em={String email}
     @GetMapping("/api/sensordata")
-    public ArduinoSensor measurement(@RequestParam double humidity, @RequestParam double temperature, @RequestParam String email){
-        logger.debug("sensorData: " + humidity + "%, " + temperature + "°C, " + email);
-        ArduinoSensor newData = arduinoSensorService.saveSensorData(humidity, temperature, email);
-        logger.debug("Sensordata save: " + newData);
+    public ArduinoSensor measurement(@RequestParam double hum, @RequestParam double temp, @RequestParam String em){
+        logger.debug("sensorData: " + hum + "%, " + temp + "°C, " + em);
+        ArduinoSensor newData = arduinoSensorService.saveSensorData(hum, temp, em);
         return newData;
     }
 }

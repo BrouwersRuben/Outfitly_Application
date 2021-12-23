@@ -41,6 +41,11 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
 
     @Override
     public ArduinoSensor saveSensorData(double humidity, double temperature, String email){
-        return arduinoSensorRepository.save(new ArduinoSensor(temperature, humidity, email, LocalDateTime.now()));
+        if (humidity == 123 && temperature == 123 && email.equals("testtest")){
+            logger.debug("Did not save testdata");
+        } else {
+            return arduinoSensorRepository.save(new ArduinoSensor(temperature, humidity, email, LocalDateTime.now()));
+        }
+        return null;
     }
 }

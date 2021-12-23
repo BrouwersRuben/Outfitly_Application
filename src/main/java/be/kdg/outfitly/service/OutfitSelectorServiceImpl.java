@@ -32,17 +32,21 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
 
     public List<ClothingItem> getPossibleClothingItems(User user, ClothingItem.Occasion occasion) {
         WeatherForecast weatherForecast = weatherForecastService.findByCountryAndCity(user.getCountry(), user.getCity());
-        //TODO: is this the correct way to do the time
-        ArduinoSensor arduinoSensor = arduinoSensorService.findByUser(user);
+
         List<ClothingItem> possibleItems = user.getClothes();
-        double lowestTemperature = weatherForecast.getLowestTemperature();
-        double lowestArduinoTemperatue = arduinoSensor.getSensorTemperature();
+
         boolean isGoingToRain = weatherForecast.isGoingToRain();
+        double lowestTemperature = weatherForecast.getLowestTemperature();
+        double lowestArduinoTemperatue = weatherForecast.getLowestTemperature(); //Set arduinosensortemp equal to apitemp
+
+        //TODO: check if sensordata is null, if so, use apidata alone
+        if (arduinoSensorService.findByUser(user) != null){ //check if sensordata is null
+            lowestArduinoTemperatue = arduinoSensorService.findByUser(user).getSensorTemperature(); //if not, pick this sensordata
+        }
 
         possibleItems = removeUnsuitableForTemperature(possibleItems, lowestTemperature,lowestArduinoTemperatue);
         possibleItems = removeUnsuitableForRain(possibleItems, isGoingToRain);
         possibleItems = removeUnsuitableForOccasion(possibleItems, occasion);
-
         return possibleItems;
     }
 
