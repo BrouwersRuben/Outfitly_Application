@@ -50,9 +50,12 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
         return null;
     }
 
-
-    @Scheduled(cron = "0 3 * * *")
+    //only for here in this timezone
+    @Scheduled(cron = "0 3 * * *", zone = "Europe/Paris")
     public void delete(){
+//        arduinoSensorRepository.deleteAll(arduinoSensorRepository.findAll().stream()
+//                .filter(arduinoData -> arduinoData.getTimeOfReading().isBefore(LocalDateTime.now().minusDays(1)))
+//                .collect(Collectors.toList()));
         for (ArduinoSensor sensorData : arduinoSensorRepository.findAll()){
             if (sensorData.getTimeOfReading().isBefore(LocalDateTime.now().minusDays(1))){
                 logger.debug("Deleted sensor data with time: " + sensorData.getTimeOfReading());
