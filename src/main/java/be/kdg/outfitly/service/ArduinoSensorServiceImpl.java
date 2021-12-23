@@ -32,8 +32,8 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
                 .filter(sensorData -> sensorData.getTimeOfReading().isAfter(LocalDateTime.now().minusHours(1)))
                 .sorted(Comparator.comparing(ArduinoSensor::getTimeOfReading)) //What does this line do?
                 .collect(Collectors.toList());
-        if (sensorDatas.size() == 0){ //Get latest one
-            return null; //TODO: have the AI check if there is a null, if so, just use the API
+        if (sensorDatas.size() == 0){ //Get the latest one
+            return null;
         } else {
             return sensorDatas.get(0);
         }
@@ -50,17 +50,13 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
         return null;
     }
 
+
     //only for here in this timezone
+    //    @Scheduled(cron = "30 * * * * *", zone = "Europe/Paris")
     @Scheduled(cron = "0 0 3 * * *", zone = "Europe/Paris")
     public void delete(){
-//        arduinoSensorRepository.deleteAll(arduinoSensorRepository.findAll().stream()
-//                .filter(arduinoData -> arduinoData.getTimeOfReading().isBefore(LocalDateTime.now().minusDays(1)))
-//                .collect(Collectors.toList()));
-        for (ArduinoSensor sensorData : arduinoSensorRepository.findAll()){
-            if (sensorData.getTimeOfReading().isBefore(LocalDateTime.now().minusDays(1))){
-                logger.debug("Deleted sensor data with time: " + sensorData.getTimeOfReading());
-                arduinoSensorRepository.delete(sensorData);
-            }
-        }
+        arduinoSensorRepository.deleteAll(arduinoSensorRepository.findAll().stream()
+                .filter(arduinoData -> arduinoData.getTimeOfReading().isBefore(LocalDateTime.now().minusDays(1)))
+                .collect(Collectors.toList()));
     }
 }
