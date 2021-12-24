@@ -22,7 +22,7 @@
 <!--            </div>-->
 
             <div class="form-group row d-flex justify-content-center">
-                <label class="m-1 w-75" for="countryCode">Country</label>
+                <label class="m-1 w-75" for="countryCode" th:utext="#{aboutus.ourMission}">Country</label>
                 <select class="m-1 w-75" id="countryCode" name="countryCode">
                     <option th:each="nameAndCode : ${namesAndCodes}" th:text="${nameAndCode.getKey()}" th:value="${nameAndCode.getValue()}" th:selected="${nameAndCode.getValue()} == ${user.countryCode}"></option>
                 </select>
@@ -32,13 +32,13 @@
             </div>
 
             <div class="form-group row d-flex justify-content-center">
-                <label for="city" class="m-1 w-75">City:</label>
+                <label for="city" class="m-1 w-75" >City:</label>
                 <input type="text" name="city" id="city" th:value="${user.city}" class="m-1 w-75">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">city error</div>
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors().get(0)}">Invalid location error</div>
             </div>
             <div class="form-group row d-flex justify-content-center">
-                <label for="streetName" class="m-1 w-75">Street:</label>
+                <label for="streetName" class="m-1 w-75" >Street:</label>
                 <input type="text" name="streetName" id="streetName" th:value="${user.streetName}" class="m-1 w-75">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}">street name error</div>
             </div>
