@@ -36,7 +36,7 @@ public class AddClothingController {
     }
 
     @GetMapping
-    public String addClothing(Model model, Principal principal){
+    public String addClothing(Model model, Principal principal) {
 
         User user = userService.findByEmail(principal.getName());
 
@@ -55,14 +55,16 @@ public class AddClothingController {
 
     //Automatically gets converted to enum
     @PostMapping
-    public String processClothing(Principal principal, String clothingName, ClothingItem.Material material, ClothingItem.RainProofness rainproofness, ClothingItem.Occasion occasion, ClothingItem.Weather weather, ClothingItem.Type type, MultipartFile photo){
+    public String processClothing(Principal principal, String clothingName, ClothingItem.Material material, ClothingItem.RainProofness rainproofness, ClothingItem.Occasion occasion, ClothingItem.Weather weather, ClothingItem.Type type, MultipartFile photo) {
         User user = userService.findByEmail(principal.getName());
 
         ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type, false); //upon creation, washingcycle has been set to false
         try {
             Photo newPhoto = new Photo(photo.getBytes(), photo.getContentType());
-            newClothingItem.setPhoto(newPhoto);
-        } catch(IOException ioe){
+            if (photo.getContentType().startsWith("image")) {
+                newClothingItem.setPhoto(newPhoto);
+            }
+        } catch (IOException ioe) {
             logger.error("IO exception");
             return "redirect:/user/addclothing";
         }
