@@ -13,12 +13,12 @@
 
     <div th:insert="~{fragments/header::header}">header</div>
 
-    <h1 class="m-4 display-1 text-center">Email Exists Error</h1>
+    <h1 class="m-4 display-1 text-center" th:utext="#{emailexistserror.emailExistsError}">Email Exists Error</h1>
 
-    <h5 class="text-center">Email: <strong><span th:text="${exception.getEmail()}"></span></strong> already exists in the database.</h5>
+    <h5 class="text-center" th:utext="#{emailexistserror.text1}">Email: <strong><span th:text="${exception.getEmail()}"></span></strong> <span th:utext="#{emailexistserror.text2}">already exists in the database.</span></h5>
 
     <div class="d-flex justify-content-center">
-        <input action="action" type="button" class="btn btn-outline-dark m-4" onclick="history.go(-1);" value="Go Back"/>
+        <input type="button" class="btn btn-outline-dark m-4" onclick="history.go(-1);" th:value="#{emailexistserror.goBack}"/>
     </div>
 
     <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>

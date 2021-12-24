@@ -12,24 +12,24 @@
 
     <div th:insert="~{fragments/header::header}">header</div>
 
-    <h1 class="display-1 text-center m-4">An Error Occurred</h1>
+    <h1 class="display-1 text-center m-4" th:utext="#{error.errorOccured}">An Error Occurred</h1>
 
     <div class="d-flex justify-content-center">
         <div class="container m-4">
             <div class="d-flex flex-row-reverse">
                 <div class="col-sm">
                     <p th:if="${url}">
-                        <b>Page:</b> <span th:text="${url}">Page URL</span>
+                        <b th:utext="#{error.page}">Page:</b> <span th:text="${url}">Page URL</span>
                     </p>
                     <p th:if="${url == null}">
-                        <b>URL:</b> <span th:text="${#httpServletRequest.requestURL}">Request URL</span>
+                        <b th:utext="#{error.url}">URL:</b> <span th:text="${#httpServletRequest.requestURL}">Request URL</span>
                     </p>
                     <p th:if="${status}">
-                        <b>Response Status:</b> <span th:text="${status}">status-code</span> <span
+                        <b th:utext="#{error.responseStatus}">Response Status:</b> <span th:text="${status}">status-code</span> <span
                             th:if="${error}" th:text="'('+${error}+')'">error ...</span>
                     </p>
                     <p id='created' th:if="${timestamp}">
-                        <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
+                        <b th:utext="#{error.occurred}">Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
                     </p>
                 </div>
                 <div class="d-flex flex-row-reverse">
@@ -40,7 +40,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-        <input action="action" type="button" class="btn btn-outline-dark m-4" onclick="history.go(-1);" value="Go Back"/>
+        <input action="action" type="button" class="btn btn-outline-dark m-4" onclick="history.go(-1);"  th:value="#{error.goBack}"/>
     </div>
 
     <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
