@@ -16,6 +16,7 @@ import java.util.Date;
 public class GeneralExceptionHandler {
     private final Logger log = LoggerFactory.getLogger(GeneralExceptionHandler.class);
 
+    //This method is used for general exception handling
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "General exception occured...")
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception exception) throws Exception {

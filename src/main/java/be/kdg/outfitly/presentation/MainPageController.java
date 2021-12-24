@@ -30,7 +30,6 @@ public class MainPageController {
     @GetMapping
     public String showDailyForecast(Model model, Principal principal){
         User user = userService.findByEmail(principal.getName());
-        model.addAttribute("loggedIn", user != null);
         model.addAttribute("user", user);
         model.addAttribute("arduinoSensorData", arduinoSensorService.findByUser(user));
 

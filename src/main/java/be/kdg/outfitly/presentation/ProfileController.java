@@ -5,7 +5,7 @@ import be.kdg.outfitly.presentation.dto.ClothingDTO;
 import be.kdg.outfitly.presentation.dto.profileChanges.*;
 import be.kdg.outfitly.service.ClothingService;
 import be.kdg.outfitly.service.UserService;
-import be.kdg.outfitly.util.CountriesCodesAndNames;
+import be.kdg.outfitly.util.CountriesNamesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,6 @@ public class ProfileController {
     @GetMapping
     public String showProfile(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
-        model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
         return "profile";
     }
@@ -47,10 +46,8 @@ public class ProfileController {
     @GetMapping("/changelocation")
     public String changeLocation(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
-//        model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
-//        model.addAttribute("codes", Locale.getISOCountries());
-        model.addAttribute("namesAndCodes",CountriesCodesAndNames.getCountryCodesAndNames().entrySet());
+        model.addAttribute("namesAndCodes", CountriesNamesUtil.getCountriesNamesAndCodes().entrySet());
         model.addAttribute("locationDTO", new LocationDTO());
         return "changelocation";
     }
@@ -62,7 +59,7 @@ public class ProfileController {
         model.addAttribute("user", user);
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
-            model.addAttribute("namesAndCodes",CountriesCodesAndNames.getCountryCodesAndNames().entrySet());
+            model.addAttribute("namesAndCodes", CountriesNamesUtil.getCountriesNamesAndCodes().entrySet());
             return "changelocation";
         } else {
             user.setCity(locationDTO.getCity());
@@ -81,7 +78,6 @@ public class ProfileController {
     public String changePassword(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("passwordDTO", new PasswordDTO());
-        model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
         return "changepassword";
     }

@@ -119,9 +119,8 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
 
     //TODO: Redundant
     @Override
-    public Map<ClothingItem.Type, List<ClothingItem>> getSuitableClothes(User user, ClothingItem.Occasion occasion) {
-        Map<ClothingItem.Type, List<ClothingItem>> suitableClothes = divideClothesIntoTypes(getPossibleClothingItems(user, occasion));
-        return suitableClothes;
+    public Map<ClothingItem.Type, List<ClothingItem>> getSuitableClothesGroupedByType(User user, ClothingItem.Occasion occasion) {
+        return divideClothesIntoTypes(getPossibleClothingItems(user, occasion));
     }
 
     @Override

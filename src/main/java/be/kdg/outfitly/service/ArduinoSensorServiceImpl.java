@@ -24,6 +24,7 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
         this.arduinoSensorRepository = arduinoSensorRepository;
     }
 
+
     @Override
     public ArduinoSensor findByUser(User user) {
         logger.debug("Find by email: " + user.getEmail());

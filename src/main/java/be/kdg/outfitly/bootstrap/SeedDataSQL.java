@@ -81,7 +81,7 @@ public class SeedDataSQL implements CommandLineRunner {
 
         logger.warn("Test user creation to see clothes: " + testUser);
 
-        User user2 = new User("testUser2@gmail.com", "test123", "Bob", "Shannon", DayOfWeek.WEDNESDAY, "0458564572", "ES", "Barcelona", "La Rambla", "15", "08001");
+        User user2 = new User("testUser2@gmail.com", "test123", "Bob", "Shannon", DayOfWeek.WEDNESDAY, "0458564572", "ES", "Barcelona", "La Rambla", "15", "", "08001");
 
         ClothingItem clothingItem15 = new ClothingItem("Jacket", ClothingItem.Material.LEATHER, ClothingItem.RainProofness.NORMAL, ClothingItem.Occasion.CASUAL, ClothingItem.Weather.MILD, ClothingItem.Type.JACKET_LIKE, false);
         ClothingItem clothingItem16 = new ClothingItem("Hoodie", ClothingItem.Material.SYNTHETIC, ClothingItem.RainProofness.NORMAL, ClothingItem.Occasion.CASUAL, ClothingItem.Weather.COLD, ClothingItem.Type.SWEATSHIRT_LIKE, false);

@@ -40,7 +40,6 @@ public class AddClothingController {
 
         User user = userService.findByEmail(principal.getName());
 
-        model.addAttribute("loggedIn", user.getId() != -1);
         model.addAttribute("user", user);
 
         Map<String, List<Object>> enumsValues = new HashMap<>();
@@ -85,7 +84,6 @@ public class AddClothingController {
         User user = userService.findByEmail(principal.getName());
         logger.error(exception.getMessage());
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("loggedIn", user.getId() != -1);
         modelAndView.addObject("user", user);
         modelAndView.addObject("exception", exception);
         modelAndView.setViewName("clothingpictureerror");

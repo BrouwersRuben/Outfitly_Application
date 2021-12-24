@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,6 +69,7 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
 
         } catch (Exception e) {
             logger.error("An error occurred while data was being retrieved from the first API.");
+            logger.error(Arrays.toString(e.getStackTrace()));
             return null;
         }
 
@@ -153,8 +155,10 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
 
     public boolean isValidLocation(String location) {
 
+        logger.debug("Validating location: "+location);
+
         if (location.length() <= 3) {
-            logger.debug("Invalid location. City not chosen. - " + location);
+            logger.error("Invalid location. City not chosen. - " + location);
             return false;
         }
 
@@ -163,6 +167,7 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
             weatherAPIData = retrieveAPIData(location);
         } catch (Exception e) {
             logger.error("An error occurred while data was being retrieved from the API.");
+            logger.error(Arrays.toString(e.getStackTrace()));
             return false;
         }
         boolean valid = !weatherAPIData.get("cod").equals("404");

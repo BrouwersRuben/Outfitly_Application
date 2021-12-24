@@ -4,7 +4,6 @@ import be.kdg.outfitly.domain.*;
 import be.kdg.outfitly.presentation.dto.ClothingDTO;
 import be.kdg.outfitly.service.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,6 @@ public class OutfitController {
     @GetMapping
     public String occasionSelector(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
-        model.addAttribute("loggedIn", user != null);
         model.addAttribute("user", user);
         model.addAttribute("occasions", ClothingItem.Occasion.values());
         return "choose-occasion";
@@ -38,7 +36,7 @@ public class OutfitController {
     @PostMapping
     public String occasionForm(ClothingItem.Occasion occasion, Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
-        model.addAttribute("clothes", outfitSelector.getSuitableClothes(user, occasion));
+        model.addAttribute("clothes", outfitSelector.getSuitableClothesGroupedByType(user, occasion));
         model.addAttribute("types", List.of(ClothingItem.Type.values()));
         model.addAttribute("aiDecision", outfitSelector.getAiDecision());
         model.addAttribute("occasion", occasion.getName());
@@ -50,7 +48,7 @@ public class OutfitController {
         User user = userService.findByEmail(principal.getName());
         ClothingItem toPutInWash = clothingService.findById(clothingDTO.getID());
         clothingService.putInWash(toPutInWash);
-        model.addAttribute("clothes", outfitSelector.getSuitableClothes(user, ClothingItem.Occasion.valueOf(occasionName.toUpperCase())));
+        model.addAttribute("clothes", outfitSelector.getSuitableClothesGroupedByType(user, ClothingItem.Occasion.valueOf(occasionName.toUpperCase())));
         model.addAttribute("types", List.of(ClothingItem.Type.values()));
         model.addAttribute("aiDecision", outfitSelector.getAiDecision());
         return "outfit";

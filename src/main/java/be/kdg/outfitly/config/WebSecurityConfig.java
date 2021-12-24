@@ -40,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
+                .antMatchers( "**/favicon.ico").permitAll()
                 .antMatchers("/user").authenticated()
                 .antMatchers("/user/**").authenticated()
                 .antMatchers("/").permitAll()
@@ -58,14 +59,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
-
     @SuppressWarnings("deprecation")
     @Bean
     public NoOpPasswordEncoder passwordEncoder() {
+        //In the future we will need to do password encoding for safety
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 

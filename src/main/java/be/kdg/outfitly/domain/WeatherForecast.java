@@ -85,9 +85,6 @@ public class WeatherForecast extends Entity {
         this.weatherIcon = weatherIcon;
         this.latitude = latitude;
         this.longitude = longitude;
-        //TODO:  is this correct?
-        this.dailyTemperatures = dailyTemperatures;
-        this.weatherAlerts = weatherAlerts;
     }
 
     public WeatherForecast() {
