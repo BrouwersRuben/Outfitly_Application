@@ -63,7 +63,6 @@ public class ProfileController {
             return "changelocation";
         } else {
             user.setCity(locationDTO.getCity());
-//            user.setCountry(locationDTO.getCountry());
             user.setCountryCode(locationDTO.getCountryCode());
             user.setStreetName(locationDTO.getStreetName());
             user.setStreetNumber(locationDTO.getStreetNumber());
