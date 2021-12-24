@@ -31,3 +31,11 @@
 .addClothingCard{
     width: 18rem;
 }
+
+.howItWorksCard{
+    width:20rem;
+}
+
+.weatherPic{
+    min-width: 100px;
+}

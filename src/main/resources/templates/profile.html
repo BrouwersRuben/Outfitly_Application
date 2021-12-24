@@ -2,8 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Outfitly</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <title>Profile</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,20 +15,27 @@
     <div class="d-flex align-items-center justify-content-center">
         <h2><span th:utext="#{profile.greeting}">Good afternoon</span> <span th:text="${user.getFirstName()}">User Name</span><span th:utext="#{profile.greetingFollowup}">, what would you like to do?</span></h2>
     </div>
-    <div class="d-flex align-items-center justify-content-center">
-        <a th:href="@{/user/profile/changelocation}" class="btn btn-secondary m-2" th:utext="#{profile.changeLocation}">Change Location</a>
-
-        <a th:href="@{/user/profile/changepassword}" class="btn btn-secondary m-2" th:utext="#{profile.changePassword}">Change Password</a>
-
-        <a th:href="@{/user/profile/changename}" class="btn btn-secondary m-2" th:utext="#{profile.changeName}">Change Name</a>
-
-        <a th:href="@{/user/profile/changephonenumber}" class="btn btn-secondary m-2">Change Phone Number</a>
-
-        <a th:href="@{/user/profile/changewashingresetday}" class="btn btn-secondary m-2">Change Washing Reset Day</a>
-    </div>
-
-    <div class="d-flex align-items-center justify-content-center">
-        <a th:href="@{/user/profile/viewclothing}" class="btn btn-secondary m-2" th:utext="#{profile.viewAllClothing}">View all clothing</a>
+    <div class="d-flex align-items-center justify-content-center container">
+        <div class="col">
+            <div class="row d-flex align-items-center justify-content-center">
+                <a th:href="@{/user/profile/changelocation}" class="btn btn-secondary m-2 w-25" th:utext="#{profile.changeLocation}">Change Location</a>
+            </div>
+            <div class="row d-flex align-items-center justify-content-center">
+                <a th:href="@{/user/profile/changepassword}" class="btn btn-secondary m-2 w-25" th:utext="#{profile.changePassword}">Change Password</a>
+            </div>
+            <div class="row d-flex align-items-center justify-content-center">
+                <a th:href="@{/user/profile/changename}" class="btn btn-secondary m-2 w-25" th:utext="#{profile.changeName}">Change Name</a>
+            </div>
+            <div class="row d-flex align-items-center justify-content-center">
+                <a th:href="@{/user/profile/changephonenumber}" class="btn btn-secondary m-2 w-25" th:utext="#{profile.changePhoneNumber}">Change Phone Number</a>
+            </div>
+            <div class="row d-flex align-items-center justify-content-center">
+                <a th:href="@{/user/profile/changewashingresetday}" class="btn btn-secondary m-2 w-25" th:utext="#{profile.changeWashingResetDay}">Change Washing Reset Day</a>
+            </div>
+            <div class="row d-flex align-items-center justify-content-center">
+                <a th:href="@{/user/profile/viewclothing}" class="btn btn-secondary m-2 w-25" th:utext="#{profile.viewAllClothing}">View all clothing</a>
+            </div>
+        </div>
     </div>
 
     <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>

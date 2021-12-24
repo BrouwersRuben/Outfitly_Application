@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>FAQ</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
@@ -14,7 +13,7 @@
 
 <div th:insert="~{fragments/header::header}">header</div>
 
-<div class="m-4">
+<div class="m-lg-4">
     <h2 class="font-weight-bold" th:utext="#{faq.heading-1}">How does it work?</h2>
     <p style="white-space: pre;" th:utext="#{faq.paragraph-1}">
         The process is really simple. When you create your account, you must first add your clothing to our database.<br>

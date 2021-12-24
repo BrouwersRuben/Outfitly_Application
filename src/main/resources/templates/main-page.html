@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Weather Forecast</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <title>Main page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link href="../static/style.css" media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@3.6.1/dist/chart.min.js"></script>
 
@@ -25,12 +25,12 @@
 
 <div class="d-flex flex-column m-5" style="max-height: 100vh">
 
-    <h2 class="" ><span th:utext="#{weather-forecast.heading-1}">Hello, </span><span th:text="${user.getName()}"> user </span></h2>
+    <h2 class="text-center" ><span th:utext="#{weather-forecast.heading-1}">Hello, </span><span th:text="${user.getName()}"> user </span></h2>
 
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row justify-content-start">
 
-        <div class='d-flex justify-content-center flex-column w-50'>
-            <div>
+        <div class="d-flex flex-wrap justify-content-center flex-column w-50">
+
                 <p>
                     <span th:utext="#{weather-forecast.paragraph-1}">The current forecast for today in </span>
                     <span th:text="${city}"></span> is <span th:text="${dailyWeatherForecastData.weatherDescription}"></span>.</p>
@@ -42,17 +42,18 @@
                     <span th:utext="#{weather-forecast.paragraph-3}">There is a </span>
                     <span th:text="${dailyWeatherForecastData.rainProbability}"></span><span th:utext="#{weather-forecast.paragraph-3-span-1}">% chance of rain today.</span>
                 </p>
+
+            <div class="d-flex flex-row justify-content-center w-50 ">
+                <div><img th:src="${dailyWeatherForecastData.weatherIcon}" alt="weather-icon" class="img-fluid weatherPic"></div>
+                <div style="white-space: pre;" class="justify-content-center d-flex flex-column w-50">
+                    <div ><span th:utext="#{weather-forecast.div-1-text}">Current temperature:</span> <span th:text="${sensorWeatherForecastData.sensorTemperature}"></span>°C</div>
+                    <div ><span th:utext="#{weather-forecast.div-2-text}">Humidity:</span> <span th:text="${sensorWeatherForecastData.sensorHumidity}"></span>%</div>
+                    <div ><span th:utext="#{weather-forecast.div-3-text}">Wind:</span> <span th:text="${dailyWeatherForecastData.currentWindSpeed}"></span>m/s</div>
+                </div>
             </div>
+
         </div>
 
-        <div class="d-flex flex-row justify-content-center w-50">
-            <div><img th:src="${dailyWeatherForecastData.weatherIcon}" alt="weather-icon" class="img-fluid"></div>
-            <div style="white-space: pre;" class="justify-content-center d-flex flex-column w-50">
-                <div ><span th:utext="#{weather-forecast.div-1-text}">Current temperature:</span> <span th:text="${sensorWeatherForecastData.sensorTemperature}"></span>°C</div>
-                <div ><span th:utext="#{weather-forecast.div-2-text}">Humidity:</span> <span th:text="${sensorWeatherForecastData.sensorHumidity}"></span>%</div>
-                <div ><span th:utext="#{weather-forecast.div-3-text}">Wind:</span> <span th:text="${dailyWeatherForecastData.currentWindSpeed}"></span>m/s</div>
-            </div>
-        </div>
     </div>
 
     <div id="alerts">
@@ -60,7 +61,7 @@
         <div id="weatherAlerts" class="d-flex flex-column"></div>
     </div>
 
-    <div class="mt-4">
+    <div class="mt-4 d-flex justify-content-center ">
         <canvas id="myChart"></canvas>
     </div>
 </div>
