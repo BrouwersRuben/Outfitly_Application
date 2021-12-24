@@ -16,7 +16,7 @@
 
     <div class="d-flex justify-content-center">
         <div class="m-md-4 m-2 w-50 justify-content-center">
-            <p class="h1 font-weight-bold ">Our mission</p>
+            <p class="h1 font-weight-bold" th:utext="#{aboutus.ourMission}">Our mission</p>
             <p class="indexPageText" th:utext="#{aboutus.ourMissionText}">
                 We want to save people's precious time by automating the process of picking their clothing so they have more time for their important tasks.
             </p>
@@ -93,7 +93,7 @@
             <label for="feedbackContent" class="form-label m-2" th:utext="#{aboutus.contactUs}">Have any problems or questions?? Contact us!</label>
             <textarea class="form-control m-2" id="feedbackContent" name="feedbackContent" placeholder="Enter your problem or question here!"></textarea>
             <div class="d-flex justify-content-end">
-                <input class="btn btn-outline-dark my-2" type="submit" value="Send Request">
+                <input class="btn btn-outline-dark my-2" type="submit" th:value="#{aboutus.contactUsButton}">
             </div>
         </form>
     </div>

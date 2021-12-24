@@ -20,18 +20,18 @@
                 Please fill in your correct login details.
             </div>
             <div class="form-group m-4">
-                <label for="exampleInputEmail1">Email address</label>
+                <label for="exampleInputEmail1" th:utext="#{login.email}">Email address</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <small id="emailHelp" class="form-text text-muted" th:utext="#{login.emailNotification}">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group m-4">
-                <label for="exampleInputPassword1">Password</label>
+                <label for="exampleInputPassword1" th:utext="#{login.password}">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
             </div>
-            <button type="submit" class="btn btn-primary m-4">Log in</button>
+            <button type="submit" class="btn btn-primary m-4" th:utext="#{login.logIn}">Log in</button>
         </form>
         <div class="text-center">
-            <a th:href="@{/register}" class="btn btn-primary text-decoration-none text-light">Haven't made an account yet? Register!</a>
+            <a th:href="@{/register}" class="btn btn-primary text-decoration-none text-light" th:utext="#{login.registerNotification}">Haven't made an account yet? Register!</a>
         </div>
     </div>
 

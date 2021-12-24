@@ -16,13 +16,13 @@
     <div class="d-flex justify-content-center align-content-center">
       <form method="post" th:object="${phoneNumberDTO}" th:action="@{/user/profile/changephonenumber}">
         <div class="form-group row">
-          <label for="newPhoneNumber" class="m-1 w-75">Phone number:</label>
+          <label for="newPhoneNumber" class="m-1 w-75" th:utext="#{changephonenumber.phoneNumber}">Phone number:</label>
           <input type="text" name="newPhoneNumber" id="newPhoneNumber" th:value="${user.getPhoneNumber()}" class="m-1 w-75">
           <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('newPhoneNumber')}" th:errors="*{newPhoneNumber}">Phone number error</div>
         </div>
         <div class="d-flex justify-content-center">
-          <button class="btn btn-outline-dark m-4" type="submit">Change phone number</button>
-          <a th:href="@{/user/profile}" class="btn btn-outline-dark m-4">Go back</a>
+          <button class="btn btn-outline-dark m-4" type="submit" th:value="#{changephonenumber.changePhoneNumber}">Change phone number</button>
+          <a th:href="@{/user/profile}" class="btn btn-outline-dark m-4" th:value="#{changephonenumber.goBack}">Go back</a>
         </div>
       </form>
     </div>
