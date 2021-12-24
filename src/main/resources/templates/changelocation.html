@@ -22,7 +22,7 @@
 <!--            </div>-->
 
             <div class="form-group row d-flex justify-content-center">
-                <label class="m-1 w-75" for="countryCode">Country</label>
+                <label class="m-1 w-75" for="countryCode" th:utext="#{changelocation.country}">Country</label>
                 <select class="m-1 w-75" id="countryCode" name="countryCode">
                     <option th:each="nameAndCode : ${namesAndCodes}" th:text="${nameAndCode.getKey()}" th:value="${nameAndCode.getValue()}" th:selected="${nameAndCode.getValue()} == ${user.countryCode}"></option>
                 </select>
@@ -32,34 +32,34 @@
             </div>
 
             <div class="form-group row d-flex justify-content-center">
-                <label for="city" class="m-1 w-75">City:</label>
+                <label for="city" class="m-1 w-75" th:utext="#{changelocation.city}">City:</label>
                 <input type="text" name="city" id="city" th:value="${user.city}" class="m-1 w-75">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">city error</div>
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors().get(0)}">Invalid location error</div>
             </div>
             <div class="form-group row d-flex justify-content-center">
-                <label for="streetName" class="m-1 w-75">Street:</label>
+                <label for="streetName" class="m-1 w-75" th:utext="#{changelocation.street}">Street:</label>
                 <input type="text" name="streetName" id="streetName" th:value="${user.streetName}" class="m-1 w-75">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}">street name error</div>
             </div>
             <div class="form-group row d-flex justify-content-center">
-                <label for="streetNumber" class="m-1 w-75">Street number:</label>
+                <label for="streetNumber" class="m-1 w-75" th:utext="#{changelocation.streetNumber}">Street number:</label>
                 <input type="text" name="streetNumber" id="streetNumber" th:value="${user.streetNumber}" class="m-1 w-75">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetNumber')}" th:errors="*{streetNumber}">street number error</div>
             </div>
             <div class="form-group row d-flex justify-content-center">
-                <label for="apartmentNumber" class="m-1 w-75">Apartment number:</label>
+                <label for="apartmentNumber" class="m-1 w-75" th:utext="#{changelocation.apartmentNumber}">Apartment number:</label>
                 <input type="text" name="apartmentNumber" id="apartmentNumber" th:value="${user.apartmentNumber}" class="m-1 w-75">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('apartmentNumber')}" th:errors="*{apartmentNumber}">apartment number error</div>
             </div>
             <div class="form-group row d-flex justify-content-center">
-                <label for="zipcode" class="m-1 w-75">Zipcode:</label>
+                <label for="zipcode" class="m-1 w-75" th:utext="#{changelocation.zipcode}">Zipcode:</label>
                 <input type="text" name="zipcode" id="zipcode" th:value="${user.zipcode}" class="m-1 w-75">
                 <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">zipcode error</div>
             </div>
             <div class="d-flex justify-content-center">
-                <button class="btn btn-outline-dark m-4" type="submit">Change location</button>
-                <a th:href="@{/user/profile}" class="btn btn-outline-dark m-4">Go back</a>
+                <button class="btn btn-outline-dark m-4" type="submit" th:utext="#{changelocation.changeLocation}">Change location</button>
+                <a th:href="@{/user/profile}" class="btn btn-outline-dark m-4" th:utext="#{changelocation.goBack}">Go back</a>
             </div>
         </form>
     </div>
