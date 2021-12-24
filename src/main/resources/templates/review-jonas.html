@@ -14,7 +14,7 @@
 
     <div th:insert="~{fragments/header::header}">header</div>
 
-    <p class="h1 m-4 font-weight-bold text-center">Blogpost Jonas</p>
+    <p class="h1 m-4 font-weight-bold text-center" th:utext="#{review-jonas.title}">Blogpost Jonas</p>
 
     <div class="d-flex justify-content-center">
         <div class="container m-4">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-sm">
-                    <p class="m-4 indexPageText">
+                    <p class="m-4 indexPageText" th:utext="#{review-jonas.paragraph}">
                         I always loved supporting and keeping up to date with new technologies.
                         Outfitly was something that immediately caught my attention.
                         I’m a very busy person and don’t always have the time to do all my morning chores before having to leave.
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <input action="action" type="button" class="btn btn-outline-dark m-4" onclick="history.go(-1);" value="Go Back"/>
+        <input action="action" type="button" class="btn btn-outline-dark m-4" onclick="history.go(-1);" value="Go back" th:value="#{review-jonas.button}"/>
     </div>
 
 

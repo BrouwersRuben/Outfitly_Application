@@ -14,7 +14,7 @@
 
     <div th:insert="~{fragments/header::header}">header</div>
 
-    <p class="h1 m-4 font-weight-bold text-center">Blogpost Marie</p>
+    <p class="h1 m-4 font-weight-bold text-center" th:utext="#{review-marie.title}">Blogpost Marie</p>
 
     <div class="d-flex justify-content-center">
         <div class="container m-4">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-sm">
-                    <p class="m-4 indexPageText">
+                    <p class="m-4 indexPageText" th:utext="#{review-marie.paragraph}">
                         Outfitly was exactly what I was looking for.
                         Having just graduated from university and getting into the working world is as stressful as it gets
                         and picking out clothing for the day has always been a challenge for me.
@@ -40,7 +40,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-        <input action="action" type="button" class="btn btn-outline-dark m-4" onclick="history.go(-1);" value="Go Back"/>
+        <input action="action" type="button" class="btn btn-outline-dark m-4" onclick="history.go(-1);" value="Go Back" th:value="#{review-marie.button}"/>
     </div>
 
     <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
