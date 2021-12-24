@@ -96,8 +96,7 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
         weatherForecast.setRainProbability(Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("daily").getJSONObject(0).get("pop"))) * 100);
         weatherForecast.setWeatherIcon(String.valueOf("http://openweathermap.org/img/wn/" + hourlyWeatherDataAPI.getJSONObject("current").getJSONArray("weather").getJSONObject(0).get("icon")) + "@4x.png");
 
-        //Is this easily possible because there is an iterator counter.
-        //TODO: Change to stream
+        //These 2 loops cannot be easily changed to lambda foreach loops because they use the iterator index
         for (int i = 0; i < hourlyWeatherDataAPI.getJSONArray("hourly").length(); i++) {
             double temperature = Double.parseDouble(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("temp")));
             long timestamp = Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("hourly").getJSONObject(i).get("dt")));
@@ -105,7 +104,6 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
         }
 
         if (hourlyWeatherDataAPI.has("alerts")) {
-            //TODO: Change to stream
             for (int i = 0; i < hourlyWeatherDataAPI.getJSONArray("alerts").length(); i++) {
 
                 long timestamp = Long.parseLong(String.valueOf(hourlyWeatherDataAPI.getJSONArray("alerts").getJSONObject(i).get("start")));
@@ -114,8 +112,6 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
                 weatherForecast.getWeatherAlerts().put(timestamp, description);
             }
         }
-
-
         return weatherForecastRepository.save(weatherForecast);
     }
 
