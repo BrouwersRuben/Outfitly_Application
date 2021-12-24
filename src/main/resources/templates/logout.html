@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Outfitly</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
@@ -12,7 +11,7 @@
 
     <div th:insert="~{fragments/header::header}">header</div>
 
-    <h3 class="h3 text-center mt-5">You have logged out.</h3>
+    <h3 class="h3 text-center mt-5" th:utext="#{logout.disclaimer}">You have logged out.</h3>
 
     <div class="d-flex justify-content-center m-5">
         <img src="../static/images/logout.gif" alt="throwing pc out of the window" title="throwing pc out of the window" width="40%"
@@ -20,7 +19,7 @@
     </div>
 
     <div class="d-flex justify-content-center m-5">
-        <a th:href="@{/}" class="btn btn-outline-dark">Go back to home page</a>
+        <a th:href="@{/}" class="btn btn-outline-dark" th:utext="#{logout.return-button}">Go back to home page</a>
     </div>
 
     <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>

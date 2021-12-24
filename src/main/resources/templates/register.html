@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
@@ -14,13 +13,13 @@
 
     <div class="container">
         <div class="d-flex justify-content-end">
-            <a th:href="@{/}" class="btn btn-primary m-4">Go back</a>
+            <a th:href="@{/}" class="btn btn-primary m-4" th:utext="#{register.go-back-button}">Go back</a>
         </div>
     </div>
 
     <div class="d-flex justify-content-center">
         <div class="w-50">
-            <div th:if="${errorMessage}" class="alert alert-warning text-center" role="alert" th:text="${errorMessage}">
+            <div th:if="${errorMessage}" class="alert alert-warning text-center" role="alert" th:text="${errorMessage}" th:utext="#{register.login-details}">
                 Please fill in your correct login details.
             </div>
         </div>
@@ -29,38 +28,38 @@
     <div class="container">
         <form method="post" class="m-4" th:object="${userDTO}" th:action="@{/register}">
             <div class="form-group m-4">
-                <label for="firstName">First Name</label>
+                <label for="firstName" th:utext="#{register.first-name}">First Name</label>
                 <input type="text" class="form-control" id="firstName" placeholder="John" name="firstName">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">first name error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:utext="#{register.first-name-error}">First Name Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputLastName">Last name</label>
+                <label for="inputLastName" th:utext="#{register.last-name}">Last Name</label>
                 <input type="text" class="form-control" id="inputLastName" placeholder="Doe" name="lastName">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">last name error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:utext="#{register.last-name-error}">Last Name Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="password">Password</label>
+                <label for="password" th:utext="#{register.password}">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:utext="#{register.password-error}">Password Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="email">Email address</label>
+                <label for="email" th:utext="#{register.email-address}">Email address</label>
                 <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email error</div>
+                <small id="emailHelp" class="form-text text-muted" th:utext="#{register.email-address-disclaimer}">We'll never share your email with anyone else.</small>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:utext="#{register.email-address-error}">Email Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputWashingDay">Wash day</label>
+                <label for="inputWashingDay" th:utext="#{register.wash-day}">Wash Day</label>
                 <input type="text" class="form-control" id="inputWashingDay" placeholder="Wednesday" name="washDay">
-                <small id="washDayHelp" class="form-text text-muted">The day you do your laundry on.</small>
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('washDay')}" th:errors="*{washDay}">wash day error</div>
+                <small id="washDayHelp" class="form-text text-muted" th:utext="#{register.wash-day-dislaimer}">The day you do your laundry on.</small>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('washDay')}" th:errors="*{washDay}" th:utext="#{register.wash-day-error}">Wash Day Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="inputPhoneNumber">Phone Number</label>
+                <label for="inputPhoneNumber" th:utext="#{register.phone-number}">Phone Number</label>
                 <input type="text" class="form-control" id="inputPhoneNumber" placeholder="+32 3 613 13 13" name="phoneNumber">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phone number error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" th:utext="#{register.phone-number-error}">Phone Number Error</div>
             </div>
-            <h2>Address:</h2>
+            <h2 th:utext="#{register.h-address}">Address:</h2>
 <!--            <div class="form-group m-4">-->
 <!--                <label for="country">Country</label>-->
 <!--                <input type="text" class="form-control" id="country" placeholder="Belgium" name="country">-->
@@ -68,43 +67,40 @@
 <!--            </div>-->
 
             <div class="form-group m-4">
-                <label for="countryCode">Country</label>
+                <label for="countryCode" th:utext="#{register.country}">Country</label>
                 <select class="form-select" id="countryCode" name="countryCode">
                     <option th:each="nameAndCode : ${namesAndCodes}" th:text="${nameAndCode.getKey()}" th:value="${nameAndCode.getValue()}" th:selected="${nameAndCode.getValue() == 'BE'}"></option>
                 </select>
-                <div class="m-2 alert alert-danger" th:errors="*{countryCode}" th:if="${#fields.hasErrors('countryCode')}">
-                    country code error
-                </div>
+                <div class="m-2 alert alert-danger" th:errors="*{countryCode}" th:if="${#fields.hasErrors('countryCode')}" th:utext="#{register.country-error}">Country Code Error</div>
             </div>
-
             <div class="form-group m-4">
-                <label for="city">City</label>
+                <label for="city" th:utext="#{register.city}">City</label>
                 <input type="text" class="form-control" id="city" placeholder="Antwerp" name="city">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">city number error</div>
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors().get(0)}">Invalid location error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}" th:utext="#{register.city-error-1}">City Number Error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors().get(0)}" th:utext="#{register.city-error-2}">Invalid Location Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="streetName">Street</label>
+                <label for="streetName" th:utext="#{register.street}">Street</label>
                 <input type="text" class="form-control" id="streetName" placeholder="Nationale Straat" name="streetName">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}">Street Name Error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}" th:utext="#{register.street-error}">Street Name Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="streetNumber">Street Number</label>
+                <label for="streetNumber" th:utext="#{register.street-number}">Street Number</label>
                 <input type="text" class="form-control" id="streetNumber" placeholder="5" name="streetNumber">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetNumber')}" th:errors="*{streetNumber}">Street Number Error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('streetNumber')}" th:errors="*{streetNumber}" th:utext="#{register.street-number-error}">Street Number Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="apartmentNumber">Apartment Number (optional)</label>
+                <label for="apartmentNumber" th:utext="#{register.apartment-number}">Apartment Number (optional)</label>
                 <input type="text" class="form-control" id="apartmentNumber" placeholder="5" name="apartmentNumber">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('apartmentNumber')}" th:errors="*{apartmentNumber}">Apartment Number Error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('apartmentNumber')}" th:errors="*{apartmentNumber}" th:utext="#{register.apartment-number-error}">Apartment Number Error</div>
             </div>
             <div class="form-group m-4">
-                <label for="zipcode">Zipcode</label>
+                <label for="zipcode" th:utext="#{register.zipcode}">Zipcode</label>
                 <input type="text" class="form-control" id="zipcode" placeholder="2000" name="zipcode">
-                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">Zipcode Error</div>
+                <div class="m-2 alert alert-danger" th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}" th:utext="#{register.zipcode-error}">Zipcode Error</div>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary m-4">Create account</button>
+                <button type="submit" class="btn btn-primary m-4" th:utext="#{register.create-account-button}">Create account</button>
             </div>
         </form>
     </div>
