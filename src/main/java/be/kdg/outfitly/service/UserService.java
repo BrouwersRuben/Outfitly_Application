@@ -13,4 +13,5 @@ public interface UserService {
     User findByEmail(String email);
     List<User> read();
     void update(User updatedUser);
+    void addClothingItem(int usersID, ClothingItem item);
 }

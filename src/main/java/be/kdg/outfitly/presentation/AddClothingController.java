@@ -67,15 +67,9 @@ public class AddClothingController {
             return "redirect:/user/addclothing";
         }
 
-        newClothingItem.setUser(user);
         clothingService.create(newClothingItem);
+        userService.addClothingItem(user.getId(), newClothingItem);
 
-        List<ClothingItem> userClothing = new ArrayList<>(user.getClothes());
-        userClothing.add(newClothingItem);
-        user.setClothes(userClothing);
-        userService.update(user);
-
-        user.setClothes(userClothing);
         return "redirect:/user/profile";
     }
 

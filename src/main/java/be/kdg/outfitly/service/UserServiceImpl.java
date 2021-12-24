@@ -53,4 +53,12 @@ public class UserServiceImpl implements UserService {
         newUser.merge(updatedUser);
         userRepository.save(newUser);
     }
+
+    @Override
+    public void addClothingItem(int usersID, ClothingItem item) {
+       User user = userRepository.getById(usersID);
+       item.setUser(user);
+       user.addClothingItem(item);
+       userRepository.save(user);
+    }
 }
