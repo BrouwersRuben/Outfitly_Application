@@ -160,10 +160,11 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
 
         JSONObject weatherAPIData;
         try {
-            weatherAPIData = retrieveAPIData(location);
+            String APILink = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c";
+            weatherAPIData = retrieveAPIData(APILink);
         } catch (Exception e) {
             logger.error("An error occurred while data was being retrieved from the API.");
-            logger.error(Arrays.toString(e.getStackTrace()));
+            Arrays.stream(e.getStackTrace()).forEach(stackTrace -> {logger.error(stackTrace.toString());});
             return false;
         }
         boolean valid = !weatherAPIData.get("cod").equals("404");
