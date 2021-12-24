@@ -1,10 +1,9 @@
 package be.kdg.outfitly.presentation;
 
-import be.kdg.outfitly.domain.User;
 import be.kdg.outfitly.exceptions.EmailExistsException;
 import be.kdg.outfitly.presentation.dto.UserDTO;
 import be.kdg.outfitly.service.UserService;
-import be.kdg.outfitly.util.CountriesCodesAndNames;
+import be.kdg.outfitly.util.CountriesNamesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Locale;
 
 @Controller
 @RequestMapping("/register")
@@ -34,12 +32,10 @@ public class RegisterController {
 
     @RequestMapping
     public String register(Model model, Principal principal) {
-//        User user = userService.findByEmail(principal.getName());
         if(principal!=null){
-//            return "redirect:/user/mainpage";
             model.addAttribute("errorMessage", "You are already logged in.");
         }
-        model.addAttribute("namesAndCodes", CountriesCodesAndNames.getCountryCodesAndNames().entrySet());
+        model.addAttribute("namesAndCodes", CountriesNamesUtil.getCountriesNamesAndCodes().entrySet());
         model.addAttribute("userDTO", new UserDTO());
         return "register";
     }
@@ -57,7 +53,7 @@ public class RegisterController {
     public String processRegister(Model model, @Valid @ModelAttribute("userDTO") UserDTO userDTO, BindingResult errors) {
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
-            model.addAttribute("namesAndCodes",CountriesCodesAndNames.getCountryCodesAndNames().entrySet());
+            model.addAttribute("namesAndCodes", CountriesNamesUtil.getCountriesNamesAndCodes().entrySet());
             return "register";
         } else {
             userService.create(userDTO.getEmail(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getWashDay(), userDTO.getPhoneNumber(), userDTO.getCountryCode(), userDTO.getCity(), userDTO.getStreetName(), userDTO.getStreetNumber(), userDTO.getApartmentNumber(), userDTO.getZipcode(), new ArrayList<>());

@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface OutfitSelectorService {
-    Map<ClothingItem.Type, List<ClothingItem>> getSuitableClothes(User user, ClothingItem.Occasion occasion);
+    Map<ClothingItem.Type, List<ClothingItem>> getSuitableClothesGroupedByType(User user, ClothingItem.Occasion occasion);
     String getAiDecision();
 }

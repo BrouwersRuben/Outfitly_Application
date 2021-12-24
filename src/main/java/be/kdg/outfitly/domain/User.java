@@ -81,22 +81,6 @@ public class User extends Entity {
         this.clothes = new ArrayList<>();
     }
 
-    //Constructor for without apartmentNumber
-    public User(String email, String password, String firstName, String lastName, DayOfWeek washingResetDay, String phoneNumber, String countryCode, String city, String streetName, String streetNumber, String zipcode) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.washingResetDay = washingResetDay;
-        this.phoneNumber = phoneNumber;
-        this.countryCode = countryCode;
-        this.city = city;
-        this.streetName = streetName;
-        this.streetNumber = streetNumber;
-        this.zipcode = zipcode;
-        this.clothes = new ArrayList<>();
-    }
-
     public void addClothing(ClothingItem clothingItem) {
         clothes.add(clothingItem);
     }
@@ -107,7 +91,6 @@ public class User extends Entity {
         setFirstName(other.getFirstName());
         setLastName(other.getLastName());
         setPhoneNumber(other.getPhoneNumber());
-//        setCountry(other.getCountry());
         setCountryCode(other.getCountryCode());
         setCity(other.getCity());
         setStreetName(other.getStreetName());

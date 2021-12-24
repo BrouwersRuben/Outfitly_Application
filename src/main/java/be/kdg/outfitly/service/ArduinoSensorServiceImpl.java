@@ -24,13 +24,14 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
         this.arduinoSensorRepository = arduinoSensorRepository;
     }
 
+
     @Override
     public ArduinoSensor findByUser(User user) {
         logger.debug("Find by email: " + user.getEmail());
         List<ArduinoSensor> sensorDatas = arduinoSensorRepository.findAll().stream().filter(sensorData -> sensorData.getEmail().equals(user.getEmail())).collect(Collectors.toList());
         sensorDatas = sensorDatas.stream()
                 .filter(sensorData -> sensorData.getTimeOfReading().isAfter(LocalDateTime.now().minusHours(1)))
-                .sorted(Comparator.comparing(ArduinoSensor::getTimeOfReading)) //What does this line do?
+                .sorted(Comparator.comparing(ArduinoSensor::getTimeOfReading))
                 .collect(Collectors.toList());
         if (sensorDatas.size() == 0){ //Get the latest one
             return null;
@@ -52,7 +53,6 @@ public class ArduinoSensorServiceImpl implements ArduinoSensorService{
 
 
     //only for here in this timezone
-    //    @Scheduled(cron = "30 * * * * *", zone = "Europe/Paris")
     @Scheduled(cron = "0 0 3 * * *", zone = "Europe/Paris")
     public void delete(){
         arduinoSensorRepository.deleteAll(arduinoSensorRepository.findAll().stream()

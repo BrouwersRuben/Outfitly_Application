@@ -21,6 +21,7 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
         this.weatherForecastService = weatherForecastService;
     }
 
+
     private double rightTemperature(double apiTemp, double arduinoTemp) {
         final double acceptableRange = 3; //the api can be 3° over or under the captured temperature of the arduino to still be counted as correct.
         if (apiTemp - acceptableRange < arduinoTemp && arduinoTemp < apiTemp + acceptableRange) {
@@ -30,6 +31,7 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
         }
     }
 
+    //Return all possible clothing items based on the weather and occasion picked by the user
     public List<ClothingItem> getPossibleClothingItems(User user, ClothingItem.Occasion occasion) {
         WeatherForecast weatherForecast = weatherForecastService.getNewByCountryCodeAndCity(user.getCountryCode(), user.getCity());
 
@@ -40,7 +42,6 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
         double lowestTemperature = weatherForecast.getLowestTemperature();
         double lowestArduinoTemperatue = weatherForecast.getLowestTemperature(); //Set arduinosensortemp equal to apitemp
 
-        //TODO: check if sensordata is null, if so, use apidata alone
         if (arduinoSensorService.findByUser(user) != null){ //check if sensordata is null
             lowestArduinoTemperatue = arduinoSensorService.findByUser(user).getSensorTemperature(); //if not, pick this sensordata
         }
@@ -53,7 +54,6 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
     }
 
     public List<ClothingItem> removeUnsuitableForOccasion(List<ClothingItem> clothes, ClothingItem.Occasion occasion) {
-
         return clothes
                 .stream()
                 .filter(item -> item.getOccasion() == occasion || item.getOccasion() == ClothingItem.Occasion.UNIVERSAL)
@@ -69,19 +69,15 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
 
         if (checkedTemp < 5) {
             aiDecision.append("The temperature is classified as cold.\n");
-//            logger.debug("The temperature is classified as cold");
             givenWeather = ClothingItem.Weather.COLD;
         } else if (checkedTemp < 15) {
             aiDecision.append("The temperature is classified as mild.\n");
-//            logger.debug("The temperature is classified as mild");
             givenWeather = ClothingItem.Weather.MILD;
         } else {
             aiDecision.append("The temperature is classified as warm.\n");
-//            logger.debug("The temperature is classified as warm");
             givenWeather = ClothingItem.Weather.WARM;
         }
 
-//        logger.debug("Filtering out clothes that don't fit this temperature.");
         return clothes
                 .stream()
                 .filter(item -> item.getWeather() == givenWeather || item.getWeather() == ClothingItem.Weather.UNIVERSAL)
@@ -117,11 +113,9 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
         return clothesByType;
     }
 
-    //TODO: Redundant
     @Override
-    public Map<ClothingItem.Type, List<ClothingItem>> getSuitableClothes(User user, ClothingItem.Occasion occasion) {
-        Map<ClothingItem.Type, List<ClothingItem>> suitableClothes = divideClothesIntoTypes(getPossibleClothingItems(user, occasion));
-        return suitableClothes;
+    public Map<ClothingItem.Type, List<ClothingItem>> getSuitableClothesGroupedByType(User user, ClothingItem.Occasion occasion) {
+        return divideClothesIntoTypes(getPossibleClothingItems(user, occasion));
     }
 
     @Override

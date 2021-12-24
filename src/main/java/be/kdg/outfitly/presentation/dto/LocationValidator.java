@@ -22,7 +22,6 @@ public class LocationValidator implements ConstraintValidator<LocationValidation
     public boolean isValid(Locatable value, ConstraintValidatorContext context) {
 
         return weatherForecastService.isValidCountryCodeAndCity(value.getCountryCode(), value.getCity());
-//        return WeatherForecast.isValidCountryCity(value.getCountryCode(), value.getCity());
     }
 
 

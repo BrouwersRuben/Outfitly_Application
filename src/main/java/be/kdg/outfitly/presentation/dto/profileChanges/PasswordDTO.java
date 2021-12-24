@@ -6,10 +6,11 @@ import javax.validation.constraints.NotEmpty;
 
 public class PasswordDTO {
 
-    @NotEmpty
+    @NotEmpty(message = "Please fill in your old password")
     private String currentPassword;
+
     @ValidPassword
-    @NotEmpty()
+    @NotEmpty(message = "Please fill in your new password")
     private String newPassword;
 
     public String getNewPassword() {

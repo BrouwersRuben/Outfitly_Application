@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,6 +69,7 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
 
         } catch (Exception e) {
             logger.error("An error occurred while data was being retrieved from the first API.");
+            logger.error(Arrays.toString(e.getStackTrace()));
             return null;
         }
 
@@ -143,22 +145,28 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
         return json;
     }
 
+    //Checks if the country passed by the user is a valid country and city, otherwise it will throw an exception
     public boolean isValidCountryCodeAndCity(String countryCode, String city) {
         return isValidLocation(city + "," + countryCode);
     }
 
+    //Checks if the location passed by the user is a valid location
     public boolean isValidLocation(String location) {
 
+        logger.debug("Validating location: "+location);
+
         if (location.length() <= 3) {
-            logger.debug("Invalid location. City not chosen. - " + location);
+            logger.error("Invalid location. City not chosen. - " + location);
             return false;
         }
 
         JSONObject weatherAPIData;
         try {
-            weatherAPIData = retrieveAPIData(location);
+            String APILink = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=ff81fe37ad2b546130b7cbcb331aa72c";
+            weatherAPIData = retrieveAPIData(APILink);
         } catch (Exception e) {
             logger.error("An error occurred while data was being retrieved from the API.");
+            Arrays.stream(e.getStackTrace()).forEach(stackTrace -> {logger.error(stackTrace.toString());});
             return false;
         }
         boolean valid = !weatherAPIData.get("cod").equals("404");
