@@ -32,7 +32,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
     //Misc
-    implementation 'com.google.code.gson:gson'
     implementation 'org.json:json:20210307'
 }
 

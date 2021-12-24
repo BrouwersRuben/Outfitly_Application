@@ -73,12 +73,9 @@ Then you can see that our Java application will display different values for bot
 * Spring boot starter security
   * This dependency makes the multi-user support possible.
 
-### Miscellaneous 
-
-[//]: # (TODO: This still has to be explained)
-* Gson
-  * 
+### Miscellaneous
 * Json
+  * Is being used for parsing the json data we get from the api http request.
 
 ## Documentation of how we talk with our Arduino
 So for this project we chose to use our Arduino as a weather station. 

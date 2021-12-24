@@ -17,11 +17,11 @@
     <div class="d-flex justify-content-center">
         <div class="m-md-4 m-2 w-50 justify-content-center">
             <p class="h1 font-weight-bold ">Our mission</p>
-            <p class="indexPageText">
+            <p class="indexPageText" th:utext="#{aboutus.ourMissionText}">
                 We want to save people's precious time by automating the process of picking their clothing so they have more time for their important tasks.
             </p>
-            <p class="h1 font-weight-bold">About us</p>
-            <p class="indexPageText">
+            <p class="h1 font-weight-bold" th:utext="#{aboutus.aboutUs}">About us</p>
+            <p class="indexPageText" th:utext="#{aboutus.aboutUsText}">
                 We're a small team of multinational and success driven students who are currently studying in the Applied Computer Science course at the Karel de Grote University College.
             </p>
         </div>
@@ -39,7 +39,7 @@
                         <p class="small">CEO</p>
                     </div>
                     <div class="card-body">
-                        <a href="https://gitlab.com/BrouwersRuben" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
+                        <a href="https://gitlab.com/BrouwersRuben" target="_blank" class="btn btn-outline-dark m-4" th:utext="#{aboutus.gitlabProfile}">Gitlab profile</a>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                         <p class="small">CFO</p>
                     </div>
                     <div class="card-body">
-                        <a href="https://gitlab.com/Robyvb" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
+                        <a href="https://gitlab.com/Robyvb" target="_blank" class="btn btn-outline-dark m-4" th:utext="#{aboutus.gitlabProfile}">Gitlab profile</a>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                         <p class="small">CMO</p>
                     </div>
                     <div class="card-body">
-                        <a href="https://gitlab.com/rodzhersu" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
+                        <a href="https://gitlab.com/rodzhersu" target="_blank" class="btn btn-outline-dark m-4" th:utext="#{aboutus.gitlabProfile}">Gitlab profile</a>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                         <p class="small">CTO</p>
                     </div>
                     <div class="card-body">
-                        <a href="https://gitlab.com/Dominik.Mika" target="_blank" class="btn btn-outline-dark m-4">Gitlab profile</a>
+                        <a href="https://gitlab.com/Dominik.Mika" target="_blank" class="btn btn-outline-dark m-4" th:utext="#{aboutus.gitlabProfile}">Gitlab profile</a>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
 
     <div class="d-flex justify-content-center align-content-center">
         <form action="mailto:contact-project+kdg-ti-integration-2-1-outfitli-final-application-outfitly@incoming.gitlab.com?subject=ProblemInquiry" method="POST" name="emailForm">
-            <label for="feedbackContent" class="form-label m-2">Have any problems or questions?? Contact us!</label>
+            <label for="feedbackContent" class="form-label m-2" th:utext="#{aboutus.contactUs}">Have any problems or questions?? Contact us!</label>
             <textarea class="form-control m-2" id="feedbackContent" name="feedbackContent" placeholder="Enter your problem or question here!"></textarea>
             <div class="d-flex justify-content-end">
                 <input class="btn btn-outline-dark my-2" type="submit" value="Send Request">
