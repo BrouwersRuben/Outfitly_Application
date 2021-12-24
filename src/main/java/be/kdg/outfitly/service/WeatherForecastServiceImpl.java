@@ -145,10 +145,12 @@ public class WeatherForecastServiceImpl implements WeatherForecastService {
         return json;
     }
 
+    //Checks if the country passed by the user is a valid country and city, otherwise it will throw an exception
     public boolean isValidCountryCodeAndCity(String countryCode, String city) {
         return isValidLocation(city + "," + countryCode);
     }
 
+    //Checks if the location passed by the user is a valid location
     public boolean isValidLocation(String location) {
 
         logger.debug("Validating location: "+location);
