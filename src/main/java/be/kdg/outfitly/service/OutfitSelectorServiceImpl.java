@@ -67,6 +67,19 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
 
         ClothingItem.Weather givenWeather;
 
+//        Cannot be switch case because the "checkedTemp" is double
+//        switch (checkedTemp) {
+//            case (checkedTemp < 5):
+//                aiDecision.append("The temperature is classified as cold.\n");
+//                givenWeather = ClothingItem.Weather.COLD;
+//            case (checkedTemp < 15):
+//                aiDecision.append("The temperature is classified as mild.\n");
+//                givenWeather = ClothingItem.Weather.MILD;
+//            default:
+//                aiDecision.append("The temperature is classified as warm.\n");
+//                givenWeather = ClothingItem.Weather.WARM;
+//        }
+
         if (checkedTemp < 5) {
             aiDecision.append("The temperature is classified as cold.\n");
             givenWeather = ClothingItem.Weather.COLD;
