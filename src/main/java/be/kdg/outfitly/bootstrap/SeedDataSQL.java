@@ -101,13 +101,13 @@ public class SeedDataSQL implements CommandLineRunner {
             clothingItem.setUser(user2);
         });
 
-        ArduinoSensor arduinoSensortest1 = new ArduinoSensor(-4, 70, "testUser1@gmail.com", LocalDateTime.now().minusMinutes(45));
-        ArduinoSensor arduinoSensortest2 = new ArduinoSensor(3, 40, "testUser1@gmail.com", LocalDateTime.now().minusMinutes(15));
+        ArduinoSensor arduinoSensortest1 = new ArduinoSensor(4, 15, "testUser1@gmail.com", LocalDateTime.now().minusMinutes(45));
+        ArduinoSensor arduinoSensortest2 = new ArduinoSensor(6, 30, "testUser1@gmail.com", LocalDateTime.now().minusMinutes(15));
         arduinoSensorRepository.save(arduinoSensortest1);
         arduinoSensorRepository.save(arduinoSensortest2);
 
-        ArduinoSensor arduinoSensortest3 = new ArduinoSensor(12, 45, "testUser2@gmail.com", LocalDateTime.now().minusMinutes(45));
-        ArduinoSensor arduinoSensortest4 = new ArduinoSensor(13, 25, "testUser2@gmail.com", LocalDateTime.now().minusMinutes(15));
+        ArduinoSensor arduinoSensortest3 = new ArduinoSensor(9, 5, "testUser2@gmail.com", LocalDateTime.now().minusMinutes(45));
+        ArduinoSensor arduinoSensortest4 = new ArduinoSensor(11, 0, "testUser2@gmail.com", LocalDateTime.now().minusMinutes(15));
         arduinoSensorRepository.save(arduinoSensortest3);
         arduinoSensorRepository.save(arduinoSensortest4);
 
