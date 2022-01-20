@@ -24,6 +24,8 @@ const ctx = document.getElementById('myChart').getContext('2d');
 let gradient = ctx.createLinearGradient(0, 0, 0, 400);
 gradient.addColorStop(0, 'rgba(58, 123, 213, 1');
 gradient.addColorStop(1, 'rgba(0, 210, 255, 0.3');
+// gradient.addColorStop(0, '#FF564E');
+// gradient.addColorStop(1, '#FAD126');
 
 let minRange = Math.min(...temperatures) - 2;
 
