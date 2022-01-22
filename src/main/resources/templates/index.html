@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Outfitly</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link href="../static/style.css" media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
@@ -12,68 +12,139 @@
 
 <nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
 
-    <div th:insert="~{fragments/header::header}">header</div>
+<!--    <div th:insert="~{fragments/header::header}">header</div>-->
 
-    <div class="container-fluid bg-blue text-white text-center py-4">
-        <h3 class="m-4 font-weight-bold" th:text="#{index.bannerText}">
-            Don't waste time picking the right clothes. Outfitly will do it for <br>
-            you. Save time by wearing the correct clothes for the correct occasion.<br>
-        </h3>
-    </div>
-
-    <div class="d-flex justify-content-center">
-        <a th:href="@{/register}"><img class="width400px" th:src="@{images/register.png}" alt="Register now!"></a>
-    </div>
-
-    <div class="d-flex justify-content-center">
-        <div class="container m-4">
-            <div class="row">
-                <div class="col-sm flex-row-reverse">
-                    <div class="d-flex flex-row-reverse">
-                        <img class="my-4 width400px" th:src="@{images/drawingWardrobe.png}" alt="cartoon wardrobe image">
+    <header class="indexBanner">
+        <div class="container position-relative">
+            <div class="row justify-content-center">
+                <div class="col-xl-8">
+                    <div class="text-center text-white">
+                        <p class="h3 m-4 font-weight-bold" th:text="#{index.bannerText}">
+                            Don't waste time picking the right clothes. Outfitly will do it for <br>
+                            you. Save time by wearing the correct clothes for the correct occasion.<br>
+                        </p>
+                        <a class="btn btn-dark btn-lg" th:utext="#{navbar.a-7}" th:href="@{/register}">Register</a>
                     </div>
                 </div>
-                <div class="col-sm">
-                    <p class="h1 m-4 font-weight-bold" th:utext="#{index.whatIsThis}">What is this?</p>
-                    <p class="m-4 indexPageText" th:utext="#{index.whatIsThisDescription1}">
+            </div>
+        </div>
+    </header>
+
+<!--    <div class="d-flex justify-content-center">-->
+<!--        <a th:href="@{/register}"><img class="width400px" th:src="@{images/register.png}" alt="Register now!"></a>-->
+<!--    </div>-->
+    <section class="features-icons bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex justify-content-center"><img th:src="@{images/how-it-works-illustration-1.svg}" alt="illustration"></div>
+                        <h3>Step 1</h3>
+                        <p class="lead mb-0">Create an account and choose your preferred subscription model.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex justify-content-center"><img th:src="@{images/how-it-works-illustration-2.svg}" alt="illustration"></div>
+                        <h3>Step 2</h3>
+                        <p class="lead mb-0">Add your clothing items in the application.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex justify-content-center"><img th:src="@{images/how-it-works-illustration-3.svg}" alt="illustration"></div>
+                        <h3>Step 3</h3>
+                        <p class="lead mb-0">Select the occasion of your event.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex justify-content-center"><img th:src="@{images/how-it-works-illustration-4.svg}" alt="illustration"></div>
+                        <h3>Step 4</h3>
+                        <p class="lead mb-0">Let our Artificial Intelligence take care of the rest.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img wardrobe"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2 th:utext="#{index.whatIsThis}">What is this?</h2>
+                    <p class="lead mb-0" th:utext="#{index.whatIsThisDescription1}">
                         A subscription based application that, with the help of Artificial Intelligence, would assist
                         the user with the daily task of picking out clothes for the day by taking into account the
-                        weather forecast as well as the clothing inventory of the user.
-                    </p>
-                    <p class="m-4 indexPageText" th:utext="#{index.whatIsThisDescription2}">
+                        weather forecast as well as the clothing inventory of the user.</p>
+                    <br>
+                    <p class="lead mb-0" th:utext="#{index.whatIsThisDescription2}">
                         Besides that the application would also serve a secondary purpose as a clothing manager,
                         where the user would be able to see which clothes need to be washed, which clothes are currently
-                        washing and which clothes are available for selection.
-                    </p>
+                        washing and which clothes are available for selection.</p>
+                </div>
+                </div>
+            </div>
+            <div class="row g-0">
+                <div class="col-lg-6 order-lg-1 text-white showcase-img snowRunning"></div>
+                <div class="col-lg-6 order-lg-2 my-auto showcase-text">
+                    <h2 th:utext="#{index.willBeForYou}">Then Outfitly will be for you!</h2>
+                    <p class="lead mb-0" th:utext="#{index.willBeForYouDescription}">Newly improved, and full of great utility classes, Bootstrap 5 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 5!</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-<!--    <div class="d-flex justify-content-center align-content-center m-4">-->
-<!--        <img th:src="@{images/babyInJacket.jpeg}" class="mx-4" width="500px" alt="baby in a jacket" >-->
+<!--    <div class="d-flex justify-content-center">-->
+<!--        <div class="container m-4">-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm flex-row-reverse">-->
+<!--                    <div class="d-flex flex-row-reverse">-->
+<!--                        <img class="my-4 width400px" th:src="@{images/drawingWardrobe.png}" alt="cartoon wardrobe image">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-sm">-->
+<!--                    <p class="h1 m-4 font-weight-bold" th:utext="#{index.whatIsThis}">What is this?</p>-->
+<!--                    <p class="m-4 indexPageText" th:utext="#{index.whatIsThisDescription1}">-->
+<!--                        A subscription based application that, with the help of Artificial Intelligence, would assist-->
+<!--                        the user with the daily task of picking out clothes for the day by taking into account the-->
+<!--                        weather forecast as well as the clothing inventory of the user.-->
+<!--                    </p>-->
+<!--                    <p class="m-4 indexPageText" th:utext="#{index.whatIsThisDescription2}">-->
+<!--                        Besides that the application would also serve a secondary purpose as a clothing manager,-->
+<!--                        where the user would be able to see which clothes need to be washed, which clothes are currently-->
+<!--                        washing and which clothes are available for selection.-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 <!--    </div>-->
 
-    <p class="h1 m-4 text-center font-weight-bold" th:utext="#{index.willBeForYou}">Then Outfitly will be for you!</p>
+<!--&lt;!&ndash;    <div class="d-flex justify-content-center align-content-center m-4">&ndash;&gt;-->
+<!--&lt;!&ndash;        <img th:src="@{images/babyInJacket.jpeg}" class="mx-4" width="500px" alt="baby in a jacket" >&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
 
-    <div class="d-flex justify-content-center">
-        <div class="container m-4">
-            <div class="row">
-                <div class="col-sm">
-                    <p class="m-4 indexPageText" th:utext="#{index.willBeForYouDescription}">
-                        Our aim is to save you time and avoid those awkward situations where you have overdressed or underdressed for the occasion.<br>
-                        Are you somebody that struggles with picking your outfit in the morning?<br>
-                        Or somebody that regularly picks the wrong outfit because you didn't look at the weather forecast for that day?
-                    </p>
-                </div>
-                <div class="col-sm flex-row-reverse">
-                    <div class="d-flex">
-                        <img th:src="@{images/guy_running_cold.jpg}" class="mx-4 width400px" alt="guy running in the snow with no clothes on" >
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <p class="h1 m-4 text-center font-weight-bold" th:utext="#{index.willBeForYou}">Then Outfitly will be for you!</p>-->
+
+<!--    <div class="d-flex justify-content-center">-->
+<!--        <div class="container m-4">-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm">-->
+<!--                    <p class="m-4 indexPageText" th:utext="#{index.willBeForYouDescription}">-->
+<!--                        Our aim is to save you time and avoid those awkward situations where you have overdressed or underdressed for the occasion.<br>-->
+<!--                        Are you somebody that struggles with picking your outfit in the morning?<br>-->
+<!--                        Or somebody that regularly picks the wrong outfit because you didn't look at the weather forecast for that day?-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--                <div class="col-sm flex-row-reverse">-->
+<!--                    <div class="d-flex">-->
+<!--                        <img th:src="@{images/guy_running_cold.jpg}" class="mx-4 width400px" alt="guy running in the snow with no clothes on" >-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <p class="h1 mb-4 text-center font-weight-bold" th:utext="#{index.ourReviews}">Our reviews</p>
 

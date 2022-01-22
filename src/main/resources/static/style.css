@@ -1,6 +1,4 @@
-.bg-blue{
-    background: #4A86E8;
-}
+/*General Rules*/
 
 .font-weight-bold{
     font-weight: bold;
@@ -8,6 +6,62 @@
 
 .width400px{
     width: 400px;
+}
+
+/*Index Page*/
+
+header.indexBanner {
+    position: relative;
+    background-color: #343a40;
+    background: url("images/bannerClock.jpg") no-repeat center top;
+    background-size: cover;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+header.indexBanner:before {
+    content: "";
+    position: absolute;
+    background-color: #1c375e;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+}
+
+.features-icons {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+.features-icons .features-icons-item {
+    max-width: 20rem;
+}
+.features-icons .features-icons-item .features-icons-icon {
+    height: 12rem;
+}
+.features-icons .features-icons-item .features-icons-icon i {
+    font-size: 4.5rem;
+}
+
+.showcase .showcase-text {
+    padding: 3rem;
+}
+.showcase .showcase-img {
+    min-height: 30rem;
+}
+@media (min-width: 768px) {
+    .showcase .showcase-text {
+        padding: 7rem;
+    }
+}
+
+.wardrobe{
+    background: url("images/wardrobe.jpg") center;
+    background-size: cover;
+}
+.snowRunning{
+    background: url("images/winter-running-cold-weather-exersize-crop.jpg") center;
+    background-size: cover;
 }
 
 .teamPicture{
