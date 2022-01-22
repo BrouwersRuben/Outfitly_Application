@@ -8,6 +8,10 @@
     width: 400px;
 }
 
+body{
+    background: rgb(248, 249, 250);
+}
+
 /*Index Page*/
 
 header.indexBanner {
@@ -34,7 +38,7 @@ header.indexBanner:before {
     padding-bottom: 7rem;
 }
 .features-icons .features-icons-item {
-    max-width: 20rem;
+    max-width: 30rem;
 }
 .features-icons .features-icons-item .features-icons-icon {
     height: 12rem;
@@ -64,6 +68,35 @@ header.indexBanner:before {
     background-size: cover;
 }
 
+img.headshot{
+    max-width: 15rem;
+}
+
+/*Footer*/
+
+.fa {
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+    color: #0d6efd;
+}
+
+.fa-instagram {
+    color: #0d6efd;
+}
+
+.fa-gitlab {
+    color: #0d6efd;
+}
+
 .teamPicture{
     max-height: 200px;
     border: black 1px solid;
@@ -74,20 +107,12 @@ header.indexBanner:before {
     width: 20rem;
 }
 
-.indexPageText{
-    font-size: 1.2em;
-}
-
 .font22{
     font-size: 22px
 }
 
 .addClothingCard{
     width: 18rem;
-}
-
-.howItWorksCard{
-    width:20rem;
 }
 
 .weatherPic{

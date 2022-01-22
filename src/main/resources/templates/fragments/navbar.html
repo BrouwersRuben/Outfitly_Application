@@ -6,11 +6,10 @@
 
 <div th:fragment="navbar">
 
-    <nav class="navbar bg-light static-top navbar-expand-lg navbar-light">
+    <nav class="navbar static-top navbar-expand-lg navbar-light">
         <div class="container-fluid justify-content-start">
             <a class="navbar-brand" th:href="@{/}">
-<!--                TODO: Th:src-->
-                <img src="../static/images/logo.png" th:src="@{/images/logo.png}" width="40" height="30" alt="Outfitly Logo">
+                <img th:src="@{/images/logo.png}" width="40" height="30" alt="Outfitly Logo">
                 Outfitly
             </a>
         </div>
@@ -21,9 +20,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:utext="#{navbar.a-2}" th:href="@{/aboutus}">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:utext="#{navbar.a-3}" th:href="@{/how-it-works}">How It Works</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:utext="#{navbar.a-4}" th:href="@{/faq}">FAQ</a>

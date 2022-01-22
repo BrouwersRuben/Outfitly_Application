@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-sm flex-row-reverse">
                     <div class="d-flex flex-row-reverse">
-                        <img class="my-4 width400px" th:src="@{images/marie.png}" alt="Marie">
+                        <img style="max-width: 20rem" class="img-fluid rounded-circle mb-3" th:src="@{images/mariejpeg}" alt="headshot Marie" />
                     </div>
                 </div>
                 <div class="col-sm">
@@ -39,7 +39,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-        <input action="action" type="button" class="btn btn-outline-dark m-4" onclick="history.go(-1);" value="Go Back" th:value="#{review-marie.button}"/>
+        <input type="button" class="btn btn-outline-dark m-4" onclick="history.go(-1);" value="Go Back" th:value="#{review-marie.button}"/>
     </div>
 
     <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>

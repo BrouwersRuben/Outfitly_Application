@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link href="../static/style.css" media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </head>
-<body>
+<body class="bg-light">
 
-<nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
+    <nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
 
-<!--    <div th:insert="~{fragments/header::header}">header</div>-->
+    <div th:insert="~{fragments/header::header}">header</div>
 
     <header class="indexBanner">
         <div class="container position-relative">
@@ -23,18 +24,43 @@
                             Don't waste time picking the right clothes. Outfitly will do it for <br>
                             you. Save time by wearing the correct clothes for the correct occasion.<br>
                         </p>
-                        <a class="btn btn-dark btn-lg" th:utext="#{navbar.a-7}" th:href="@{/register}">Register</a>
+                        <a class="btn btn-primary btn-lg" th:utext="#{navbar.a-7}" th:href="@{/register}">Register</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-<!--    <div class="d-flex justify-content-center">-->
-<!--        <a th:href="@{/register}"><img class="width400px" th:src="@{images/register.png}" alt="Register now!"></a>-->
-<!--    </div>-->
-    <section class="features-icons bg-light text-center">
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img wardrobe"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2 th:utext="#{index.whatIsThis}">What is this?</h2>
+                    <p class="lead mb-0" th:utext="#{index.whatIsThisDescription1}">
+                        A subscription based application that, with the help of Artificial Intelligence, would assist
+                        the user with the daily task of picking out clothes for the day by taking into account the
+                        weather forecast as well as the clothing inventory of the user.</p>
+                    <br>
+                    <p class="lead mb-0" th:utext="#{index.whatIsThisDescription2}">
+                        Besides that the application would also serve a secondary purpose as a clothing manager,
+                        where the user would be able to see which clothes need to be washed, which clothes are currently
+                        washing and which clothes are available for selection.</p>
+                </div>
+                </div>
+            </div>
+            <div class="row g-0">
+                <div class="col-lg-6 order-lg-1 text-white showcase-img snowRunning"></div>
+                <div class="col-lg-6 order-lg-2 my-auto showcase-text">
+                    <h2 th:utext="#{index.willBeForYou}">Then Outfitly will be for you!</h2>
+                    <p class="lead mb-0" th:utext="#{index.willBeForYouDescription}">Newly improved, and full of great utility classes, Bootstrap 5 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 5!</p>
+                </div>
+            </div>
+    </section>
+
+    <section class="features-icons text-center">
         <div class="container">
+            <h2 class="mb-5">How does this all work?</h2>
             <div class="row">
                 <div class="col-lg-3">
                     <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
@@ -68,112 +94,31 @@
         </div>
     </section>
 
-    <section class="showcase">
-        <div class="container-fluid p-0">
-            <div class="row g-0">
-                <div class="col-lg-6 order-lg-2 text-white showcase-img wardrobe"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2 th:utext="#{index.whatIsThis}">What is this?</h2>
-                    <p class="lead mb-0" th:utext="#{index.whatIsThisDescription1}">
-                        A subscription based application that, with the help of Artificial Intelligence, would assist
-                        the user with the daily task of picking out clothes for the day by taking into account the
-                        weather forecast as well as the clothing inventory of the user.</p>
-                    <br>
-                    <p class="lead mb-0" th:utext="#{index.whatIsThisDescription2}">
-                        Besides that the application would also serve a secondary purpose as a clothing manager,
-                        where the user would be able to see which clothes need to be washed, which clothes are currently
-                        washing and which clothes are available for selection.</p>
+    <section class="testimonials text-center">
+        <div class="container">
+            <h2 class="mb-5">What people are saying...</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="headshot img-fluid rounded-circle mb-3" th:src="@{images/jonas.jpeg}" alt="headshot Jonas" />
+                        <h5>Jonas</h5>
+                        <p class="font-weight-light mb-0" th:utext="#{index.jonasText}">I love supporting new technologies and Outfitly has been a great help to my busy life! </p>
+                        <a th:href="@{/review-jonas}" class="m-2 btn btn-primary" th:utext="#{index.readFullReview}">Read full review</a>
+                    </div>
                 </div>
-                </div>
-            </div>
-            <div class="row g-0">
-                <div class="col-lg-6 order-lg-1 text-white showcase-img snowRunning"></div>
-                <div class="col-lg-6 order-lg-2 my-auto showcase-text">
-                    <h2 th:utext="#{index.willBeForYou}">Then Outfitly will be for you!</h2>
-                    <p class="lead mb-0" th:utext="#{index.willBeForYouDescription}">Newly improved, and full of great utility classes, Bootstrap 5 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 5!</p>
+                <div class="col-lg-6">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="headshot img-fluid rounded-circle mb-3" th:src="@{images/marie.jpeg}" alt="headshot marie" />
+                        <h5>Marie</h5>
+                        <p class="font-weight-light mb-0" th:utext="#{index.marieText}">It saves me so much stress. As a person that doesn't follow fashion, this is great!</p>
+                        <a th:href="@{/review-marie}" class="m-2 btn btn-primary" th:utext="#{index.readFullReview}">Read full review</a>
+                    </div>
                 </div>
             </div>
+        </div>
     </section>
 
-<!--    <div class="d-flex justify-content-center">-->
-<!--        <div class="container m-4">-->
-<!--            <div class="row">-->
-<!--                <div class="col-sm flex-row-reverse">-->
-<!--                    <div class="d-flex flex-row-reverse">-->
-<!--                        <img class="my-4 width400px" th:src="@{images/drawingWardrobe.png}" alt="cartoon wardrobe image">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-sm">-->
-<!--                    <p class="h1 m-4 font-weight-bold" th:utext="#{index.whatIsThis}">What is this?</p>-->
-<!--                    <p class="m-4 indexPageText" th:utext="#{index.whatIsThisDescription1}">-->
-<!--                        A subscription based application that, with the help of Artificial Intelligence, would assist-->
-<!--                        the user with the daily task of picking out clothes for the day by taking into account the-->
-<!--                        weather forecast as well as the clothing inventory of the user.-->
-<!--                    </p>-->
-<!--                    <p class="m-4 indexPageText" th:utext="#{index.whatIsThisDescription2}">-->
-<!--                        Besides that the application would also serve a secondary purpose as a clothing manager,-->
-<!--                        where the user would be able to see which clothes need to be washed, which clothes are currently-->
-<!--                        washing and which clothes are available for selection.-->
-<!--                    </p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--&lt;!&ndash;    <div class="d-flex justify-content-center align-content-center m-4">&ndash;&gt;-->
-<!--&lt;!&ndash;        <img th:src="@{images/babyInJacket.jpeg}" class="mx-4" width="500px" alt="baby in a jacket" >&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-
-<!--    <p class="h1 m-4 text-center font-weight-bold" th:utext="#{index.willBeForYou}">Then Outfitly will be for you!</p>-->
-
-<!--    <div class="d-flex justify-content-center">-->
-<!--        <div class="container m-4">-->
-<!--            <div class="row">-->
-<!--                <div class="col-sm">-->
-<!--                    <p class="m-4 indexPageText" th:utext="#{index.willBeForYouDescription}">-->
-<!--                        Our aim is to save you time and avoid those awkward situations where you have overdressed or underdressed for the occasion.<br>-->
-<!--                        Are you somebody that struggles with picking your outfit in the morning?<br>-->
-<!--                        Or somebody that regularly picks the wrong outfit because you didn't look at the weather forecast for that day?-->
-<!--                    </p>-->
-<!--                </div>-->
-<!--                <div class="col-sm flex-row-reverse">-->
-<!--                    <div class="d-flex">-->
-<!--                        <img th:src="@{images/guy_running_cold.jpg}" class="mx-4 width400px" alt="guy running in the snow with no clothes on" >-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-    <p class="h1 mb-4 text-center font-weight-bold" th:utext="#{index.ourReviews}">Our reviews</p>
-
-    <div class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center">
-        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 d-flex justify-content-center">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Jonas</h5>
-                    <p th:utext="#{index.jonasText}">I love supporting new technologies and Outfitly has been a great help to my busy life!</p>
-                    <a th:href="@{/review-jonas}" class="btn btn-primary" th:utext="#{index.readFullReview}">Read full review</a>
-                </div>
-                <div class="card-footer text-muted text-end">
-                    10 <span th:utext="#{index.daysAgo}">days ago</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 d-flex justify-content-center">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Marie</h5>
-                    <p th:utext="#{index.marieText}">It saves me so much stress. As a person that doesn't follow fashion, this is great!</p>
-                    <a th:href="@{/review-marie}" class="btn btn-primary" th:utext="#{index.readFullReview}">Read full review</a>
-                </div>
-                <div class="card-footer text-muted text-end">
-                    5 <span th:utext="#{index.daysAgo}">days ago</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+
 </body>
 </html>
