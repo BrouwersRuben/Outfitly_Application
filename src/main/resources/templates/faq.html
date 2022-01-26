@@ -6,44 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="../static/style.css" media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
 </head>
-<body class="m-4">
+<body>
 
 <nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
 
 <div th:insert="~{fragments/header::header}">header</div>
 
-<div class="m-lg-4">
-    <h2 class="font-weight-bold" th:utext="#{faq.heading-1}">How does it work?</h2>
-    <p style="white-space: pre;" th:utext="#{faq.paragraph-1}">
-        The process is really simple. When you create your account, you must first add your clothing to our database.<br>
-        After that, you can use our AI to generate you outfits!<br>
-        The more clothing you add, the more choices the AI has to go through, giving you a lot more outfit choices.<br>
-        No longer have that piece of clothing? No problem! Just simply remove it on the website, and we will stop recommending it.
-    </p>
-    <h2 class="font-weight-bold" th:utext="#{faq.heading-2}">Can I add my children's clothes to my account?</h2>
-    <p th:utext="#{faq.paragraph-2}">This isn't a feature yet but we are working on this!</p>
-    <!--
-    <h5 class="font-weight-bold">I forgot my password, where do I retrieve it?</h5>
-    <p>
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, commodo ut elit ullamco exercitation et deserunt
-        culpa ex elit occaecat officia est dolore et elit ut incididunt in dolore officia ut voluptate occaecat
-        cillum sed aute exercitation reprehenderit aute est aute elit dolore reprehenderit anim. Duis. Ad ad
-        mollit irure nostrud occaecat aute cillum irure exercitation laborum ut deserunt consectetur ad ea
-        non elit non amet nisi sint reprehenderit pariatur aliqua.
-    </p>
-    -->
-    <h2 class="font-weight-bold" th:utext="#{faq.heading-3}">What happens with my data?</h2>
-    <p style="white-space: pre;" th:utext="#{faq.paragraph-3}">
-        We treat your data with the upmost respect. We will never sell your data.<br>
-        Your data gets used to improve your experience and some of our services depend on it (ex. the weather forecast).<br>
-        We are very transparent when it comes to user data.<br>
-        We don't gather data that the user doesn't know of. Everything that's collected is shown to you.<br>
-        Want to see all the data we saved or want to make sure your data is removed? Contact us!
-    </p>
-</div>
+<section>
+    <div class="container">
+        <h1 class="text-center mb-5">Frequently Asked Questions</h1>
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <img th:src="@{images/faq.png}" alt="FAQ" class="img-fluid">
+            </div>
+            <div class="col-sm-6">
+                <div id="accordion">
+                    <div class="accordion-card">
+                        <div class="accordion-card__header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <h5 class="mb-0">
+                                <span th:utext="#{faq.heading-1}">How does it work?</span>
+                            </h5>
+                            <i class="fa fa-caret-down drop-icon"></i>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="accordion-card__body" th:utext="#{faq.paragraph-1}">
+                                The process is really simple. When you create your account, you must first add your clothing to our database.
+                                After that, you can use our AI to generate you outfits!
+                                The more clothing you add, the more choices the AI has to go through, giving you a lot more outfit choices.
+                                No longer have that piece of clothing? No problem! Just simply remove it on the website, and we will stop recommending it.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-card">
+                        <div class="accordion-card__header collapsed" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h5 class="mb-0">
+                                <span th:utext="#{faq.heading-2}">Can I add my children's clothes to my account?</span>
+                            </h5>
+                            <i class="fa fa-caret-down drop-icon"></i>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="accordion-card__body" th:utext="#{faq.paragraph-2}">
+                                This isn't a feature yet but we are working on this!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-card">
+                        <div class="accordion-card__header collapsed" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <h5 class="mb-0">
+                                <span th:utext="#{faq.heading-3}">What happens with my data?</span>
+                            </h5>
+                            <i class="fa fa-caret-down drop-icon"></i>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="accordion-card__body" th:utext="#{faq.paragraph-3}">
+                                We treat your data with the upmost respect. We will never sell your data.
+                                Your data gets used to improve your experience and some of our services depend on it (ex. the weather forecast).
+                                We are very transparent when it comes to user data.
+                                We don't gather data that the user doesn't know of. Everything that's collected is shown to you.
+                                Want to see all the data we saved or want to make sure your data is removed? <a href=""> Contact us!</a> <!--TODO: Contact us page-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div th:insert="~{fragments/footer::footer}">&copy; 2021 The Static Templates</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>
