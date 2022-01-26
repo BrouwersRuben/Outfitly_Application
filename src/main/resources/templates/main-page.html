@@ -46,8 +46,8 @@
             <div class="d-flex flex-row justify-content-center w-50 ">
                 <div><img th:src="${dailyWeatherForecastData.weatherIcon}" alt="weather-icon" class="img-fluid weatherPic"></div>
                 <div style="white-space: pre;" class="justify-content-center d-flex flex-column w-50">
-                    <div ><span th:utext="#{weather-forecast.div-1-text}">Current temperature:</span> <span th:text="${sensorWeatherForecastData.sensorTemperature}"></span>°C</div>
-                    <div ><span th:utext="#{weather-forecast.div-2-text}">Humidity:</span> <span th:text="${sensorWeatherForecastData.sensorHumidity}"></span>%</div>
+                    <div ><span th:utext="#{weather-forecast.div-1-text}">Current temperature:</span> <span th:text="${dailyWeatherForecastData.getCurrentTemperature()}"></span>°C</div>
+                    <div ><span th:utext="#{weather-forecast.div-2-text}">Humidity:</span> <span th:text="${dailyWeatherForecastData.getCurrentHumidity()}"></span>%</div>
                     <div ><span th:utext="#{weather-forecast.div-3-text}">Wind:</span> <span th:text="${dailyWeatherForecastData.currentWindSpeed}"></span>m/s</div>
                 </div>
             </div>

@@ -1,9 +1,7 @@
 package be.kdg.outfitly.bootstrap;
 
-import be.kdg.outfitly.domain.ArduinoSensor;
 import be.kdg.outfitly.domain.ClothingItem;
 import be.kdg.outfitly.domain.User;
-import be.kdg.outfitly.repository.ArduinoSensorRepository;
 import be.kdg.outfitly.repository.ClothingRepository;
 import be.kdg.outfitly.repository.UserRepository;
 import org.slf4j.Logger;
@@ -22,13 +20,11 @@ public class SeedDataSQL implements CommandLineRunner {
     private final Logger logger = LoggerFactory.getLogger(SeedDataSQL.class);
     private final UserRepository userRepository;
     private final ClothingRepository clothingRepository;
-    private final ArduinoSensorRepository arduinoSensorRepository;
 
 
-    public SeedDataSQL(UserRepository userRepository, ClothingRepository clothingRepository, ArduinoSensorRepository arduinoSensorRepository) {
+    public SeedDataSQL(UserRepository userRepository, ClothingRepository clothingRepository) {
         this.userRepository = userRepository;
         this.clothingRepository = clothingRepository;
-        this.arduinoSensorRepository = arduinoSensorRepository;
     }
 
     @Override
@@ -100,16 +96,6 @@ public class SeedDataSQL implements CommandLineRunner {
             user2.addClothingItem(clothingItem);
             clothingItem.setUser(user2);
         });
-
-        ArduinoSensor arduinoSensortest1 = new ArduinoSensor(4, 15, "testUser1@gmail.com", LocalDateTime.now().minusMinutes(45));
-        ArduinoSensor arduinoSensortest2 = new ArduinoSensor(6, 30, "testUser1@gmail.com", LocalDateTime.now().minusMinutes(15));
-        arduinoSensorRepository.save(arduinoSensortest1);
-        arduinoSensorRepository.save(arduinoSensortest2);
-
-        ArduinoSensor arduinoSensortest3 = new ArduinoSensor(9, 5, "testUser2@gmail.com", LocalDateTime.now().minusMinutes(45));
-        ArduinoSensor arduinoSensortest4 = new ArduinoSensor(11, 0, "testUser2@gmail.com", LocalDateTime.now().minusMinutes(15));
-        arduinoSensorRepository.save(arduinoSensortest3);
-        arduinoSensorRepository.save(arduinoSensortest4);
 
         userRepository.save(user2);
     }

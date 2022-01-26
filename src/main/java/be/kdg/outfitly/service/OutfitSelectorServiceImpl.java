@@ -10,25 +10,12 @@ import java.util.stream.Collectors;
 @Service
 public class OutfitSelectorServiceImpl implements OutfitSelectorService {
 
-    //TODO: Logger
-    private final ArduinoSensorService arduinoSensorService;
     private final WeatherForecastService weatherForecastService;
 
     private StringBuilder aiDecision = new StringBuilder();
 
-    public OutfitSelectorServiceImpl(ArduinoSensorService arduinoSensorService, WeatherForecastService weatherForecastService) {
-        this.arduinoSensorService = arduinoSensorService;
+    public OutfitSelectorServiceImpl(WeatherForecastService weatherForecastService) {
         this.weatherForecastService = weatherForecastService;
-    }
-
-
-    private double rightTemperature(double apiTemp, double arduinoTemp) {
-        final double acceptableRange = 3; //the api can be 3° over or under the captured temperature of the arduino to still be counted as correct.
-        if (apiTemp - acceptableRange < arduinoTemp && arduinoTemp < apiTemp + acceptableRange) {
-            return apiTemp;
-        } else {
-            return arduinoTemp;
-        }
     }
 
     //Return all possible clothing items based on the weather and occasion picked by the user
@@ -40,13 +27,8 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
 
         boolean isGoingToRain = weatherForecast.isGoingToRain();
         double lowestTemperature = weatherForecast.getLowestTemperature();
-        double lowestArduinoTemperatue = weatherForecast.getLowestTemperature(); //Set arduinosensortemp equal to apitemp
 
-        if (arduinoSensorService.findByUser(user) != null){ //check if sensordata is null
-            lowestArduinoTemperatue = arduinoSensorService.findByUser(user).getSensorTemperature(); //if not, pick this sensordata
-        }
-
-        possibleItems = removeUnsuitableForTemperature(possibleItems, lowestTemperature,lowestArduinoTemperatue);
+        possibleItems = removeUnsuitableForTemperature(possibleItems, lowestTemperature);
         possibleItems = removeUnsuitableForRain(possibleItems, isGoingToRain);
         possibleItems = removeUnsuitableForOccasion(possibleItems, occasion);
 
@@ -61,29 +43,14 @@ public class OutfitSelectorServiceImpl implements OutfitSelectorService {
 
     }
 
-    public List<ClothingItem> removeUnsuitableForTemperature(List<ClothingItem> clothes, double APItemperature, double ArduinoTemp) {
-
-        double checkedTemp = rightTemperature(APItemperature, ArduinoTemp);
+    public List<ClothingItem> removeUnsuitableForTemperature(List<ClothingItem> clothes, double temperature) {
 
         ClothingItem.Weather givenWeather;
 
-//        Cannot be switch case because the "checkedTemp" is double
-//        switch (checkedTemp) {
-//            case (checkedTemp < 5):
-//                aiDecision.append("The temperature is classified as cold.\n");
-//                givenWeather = ClothingItem.Weather.COLD;
-//            case (checkedTemp < 15):
-//                aiDecision.append("The temperature is classified as mild.\n");
-//                givenWeather = ClothingItem.Weather.MILD;
-//            default:
-//                aiDecision.append("The temperature is classified as warm.\n");
-//                givenWeather = ClothingItem.Weather.WARM;
-//        }
-
-        if (checkedTemp < 5) {
+        if (temperature < 5) {
             aiDecision.append("The temperature is classified as cold.\n");
             givenWeather = ClothingItem.Weather.COLD;
-        } else if (checkedTemp < 15) {
+        } else if (temperature < 15) {
             aiDecision.append("The temperature is classified as mild.\n");
             givenWeather = ClothingItem.Weather.MILD;
         } else {
