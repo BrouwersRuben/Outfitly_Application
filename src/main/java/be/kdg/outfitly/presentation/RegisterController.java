@@ -37,7 +37,7 @@ public class RegisterController {
         }
         model.addAttribute("namesAndCodes", CountriesNamesUtil.getCountriesNamesAndCodes().entrySet());
         model.addAttribute("userDTO", new UserDTO());
-        return "register";
+        return "staticPages/register";
     }
 
     @ExceptionHandler(EmailExistsException.class)
@@ -54,7 +54,7 @@ public class RegisterController {
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
             model.addAttribute("namesAndCodes", CountriesNamesUtil.getCountriesNamesAndCodes().entrySet());
-            return "register";
+            return "staticPages/register";
         } else {
             userService.create(userDTO.getEmail(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getWashDay(), userDTO.getPhoneNumber(), userDTO.getCountryCode(), userDTO.getCity(), userDTO.getStreetName(), userDTO.getStreetNumber(), userDTO.getApartmentNumber(), userDTO.getZipcode(), new ArrayList<>());
             return "redirect:/login";

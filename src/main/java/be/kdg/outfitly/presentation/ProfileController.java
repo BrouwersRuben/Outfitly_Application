@@ -40,7 +40,7 @@ public class ProfileController {
     public String showProfile(Model model, Principal principal) {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
-        return "profile";
+        return "dynamicPages/profile";
     }
 
     @GetMapping("/changelocation")
@@ -49,7 +49,7 @@ public class ProfileController {
         model.addAttribute("user", user);
         model.addAttribute("namesAndCodes", CountriesNamesUtil.getCountriesNamesAndCodes().entrySet());
         model.addAttribute("locationDTO", new LocationDTO());
-        return "changelocation";
+        return "dynamicPages/changeProfileData/changelocation";
     }
 
     @PostMapping("/changelocation")
@@ -60,7 +60,7 @@ public class ProfileController {
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> logger.error(error.toString()));
             model.addAttribute("namesAndCodes", CountriesNamesUtil.getCountriesNamesAndCodes().entrySet());
-            return "changelocation";
+            return "dynamicPages/changeProfileData/changelocation";
         } else {
             user.setCity(locationDTO.getCity());
             user.setCountryCode(locationDTO.getCountryCode());
@@ -78,7 +78,7 @@ public class ProfileController {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("passwordDTO", new PasswordDTO());
         model.addAttribute("user", user);
-        return "changepassword";
+        return "dynamicPages/changeProfileData/changepassword";
     }
 
     @PostMapping("/changepassword")
@@ -95,7 +95,7 @@ public class ProfileController {
             } else {
                 //TODO: Bean validation
                 model.addAttribute("errorMessage", "This password is incorrect");
-                return "changepassword";
+                return "dynamicPages/changeProfileData/changepassword";
             }
         }
     }
@@ -105,7 +105,7 @@ public class ProfileController {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("nameDTO", new NameDTO());
-        return "changename";
+        return "dynamicPages/changeProfileData/changename";
     }
 
     @PostMapping("/changename")
@@ -127,7 +127,7 @@ public class ProfileController {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("phoneNumberDTO", new PhoneNumberDTO());
-        return "changephonenumber";
+        return "dynamicPages/changeProfileData/changephonenumber";
     }
 
     @PostMapping("/changephonenumber")
@@ -148,8 +148,7 @@ public class ProfileController {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("clothingDTO", new ClothingDTO());
-
-        return "viewclothing";
+        return "dynamicPages/viewclothing";
     }
 
     @PostMapping("/viewclothing")
@@ -164,7 +163,7 @@ public class ProfileController {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("washingDayDTO", new WashingDayDTO());
-        return "changewashingresetday";
+        return "dynamicPages/changeProfileData/changewashingresetday";
     }
 
     @PostMapping("/changewashingresetday")

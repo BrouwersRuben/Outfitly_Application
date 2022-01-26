@@ -9,11 +9,11 @@
         <div class="row">
             <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                 <ul class="list-inline mb-2">
-                    <li class="list-inline-item"><a class="nav-link" th:href="@{/aboutus}">About</a></li>
+                    <li class="list-inline-item"><a class="nav-link" th:href="@{/aboutus}" th:utext="#{footer.about}">About</a></li>
                     <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a style="text-decoration: none" href="https://www.kdg.be/gebruiksvoorwaarden-en-privacy">Terms of Use & Privacy Policy</a></li>
+                    <li class="list-inline-item"><a style="text-decoration: none" href="https://www.kdg.be/gebruiksvoorwaarden-en-privacy" th:utext="#{footer.terms}">Terms of Use & Privacy Policy</a></li>
                 </ul>
-                <p class="text-muted small mb-4 mb-lg-0">&copy; Outfitly 2022. All Rights Reserved.</p>
+                <p class="text-muted small mb-4 mb-lg-0" th:utext="#{footer.rights}">&copy; Outfitly 2022. All Rights Reserved.</p>
             </div>
             <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                 <ul class="list-inline mb-0">

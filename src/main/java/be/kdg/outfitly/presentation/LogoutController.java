@@ -10,7 +10,7 @@ public class LogoutController {
 
     @GetMapping
     public String logout() {
-        return "logout";
+        return "staticPages/logout";
     }
 
 }

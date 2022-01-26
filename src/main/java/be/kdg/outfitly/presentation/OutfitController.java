@@ -30,7 +30,7 @@ public class OutfitController {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("occasions", ClothingItem.Occasion.values());
-        return "choose-occasion";
+        return "dynamicPages/choose-occasion";
     }
 
     @PostMapping
@@ -40,7 +40,7 @@ public class OutfitController {
         model.addAttribute("types", List.of(ClothingItem.Type.values()));
         model.addAttribute("aiDecision", outfitSelector.getAiDecision());
         model.addAttribute("occasion", occasion.getName());
-        return "outfit";
+        return "dynamicPages/outfit";
     }
 
     @PostMapping(params = {"putInWash"})
@@ -51,7 +51,7 @@ public class OutfitController {
         model.addAttribute("clothes", outfitSelector.getSuitableClothesGroupedByType(user, ClothingItem.Occasion.valueOf(occasionName.toUpperCase())));
         model.addAttribute("types", List.of(ClothingItem.Type.values()));
         model.addAttribute("aiDecision", outfitSelector.getAiDecision());
-        return "outfit";
+        return "dynamicPages/outfit";
     }
 
 }

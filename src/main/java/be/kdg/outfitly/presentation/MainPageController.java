@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/user/main-page")
@@ -37,6 +36,6 @@ public class MainPageController {
         model.addAttribute("city", user.getCity());
         model.addAttribute("dailyWeatherForecastData", weatherForecastService.getNewByCountryCodeAndCity(user.getCountryCode(), user.getCity()));
         model.addAttribute("sensorWeatherForecastData", arduinoSensorService.findByUser(user));
-        return "main-page";
+        return "dynamicPages/main-page";
     }
 }

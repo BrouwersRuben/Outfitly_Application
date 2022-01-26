@@ -5,7 +5,7 @@
     <title>Outfitly</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link href="../static/style.css" media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </head>
@@ -20,7 +20,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-8">
                     <div class="text-center text-white">
-                        <p class="h3 m-4 font-weight-bold" th:text="#{index.bannerText}">
+                        <p class="h3 m-4 font-weight-bold" th:utext="#{index.bannerText}">
                             Don't waste time picking the right clothes. Outfitly will do it for <br>
                             you. Save time by wearing the correct clothes for the correct occasion.<br>
                         </p>
@@ -60,34 +60,34 @@
 
     <section class="features-icons text-center">
         <div class="container">
-            <h2 class="mb-5">How does this all work?</h2>
+            <h2 class="mb-5" th:utext="#{index.heading-1}">How does this all work?</h2>
             <div class="row">
                 <div class="col-lg-3">
                     <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                         <div class="features-icons-icon d-flex justify-content-center"><img th:src="@{images/how-it-works-illustration-1.svg}" alt="illustration"></div>
-                        <h3>Step 1</h3>
-                        <p class="lead mb-0">Create an account and choose your preferred subscription model.</p>
+                        <h3 th:utext="#{index.card-1-title}">Step 1</h3>
+                        <p class="lead mb-0" th:utext="#{index.card-1-description}">Create an account and choose your preferred subscription model.</p>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                         <div class="features-icons-icon d-flex justify-content-center"><img th:src="@{images/how-it-works-illustration-2.svg}" alt="illustration"></div>
-                        <h3>Step 2</h3>
-                        <p class="lead mb-0">Add your clothing items in the application.</p>
+                        <h3 th:utext="#{index.card-2-title}">Step 2</h3>
+                        <p class="lead mb-0" th:utext="#{index.card-2-description}">Add your clothing items in the application.</p>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="features-icons-item mx-auto mb-0 mb-lg-3">
                         <div class="features-icons-icon d-flex justify-content-center"><img th:src="@{images/how-it-works-illustration-3.svg}" alt="illustration"></div>
-                        <h3>Step 3</h3>
-                        <p class="lead mb-0">Select the occasion of your event.</p>
+                        <h3 th:utext="#{index.card-3-title}">Step 3</h3>
+                        <p class="lead mb-0" th:utext="#{index.card-3-description}">Select the occasion of your event.</p>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="features-icons-item mx-auto mb-0 mb-lg-3">
                         <div class="features-icons-icon d-flex justify-content-center"><img th:src="@{images/how-it-works-illustration-4.svg}" alt="illustration"></div>
-                        <h3>Step 4</h3>
-                        <p class="lead mb-0">Let our Artificial Intelligence take care of the rest.</p>
+                        <h3 th:utext="#{index.card-4-title}">Step 4</h3>
+                        <p class="lead mb-0" th:utext="#{index.card-4-description}">Let our Artificial Intelligence take care of the rest.</p>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
 
     <section class="testimonials text-center">
         <div class="container">
-            <h2 class="mb-5">What people are saying...</h2>
+            <h2 class="mb-5" th:utext="#{index.ourReviews}">What people are saying...</h2>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="testimonial-item mx-auto mb-5 mb-lg-0">
