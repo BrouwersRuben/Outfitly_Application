@@ -115,6 +115,21 @@ img.headshot{
     box-shadow: 0 2px 25px -3px rgba(0, 0, 0, 0.1);
 }
 
+.about-us{
+    background-color: #0d6efd;
+    margin-bottom: 5rem!important;
+    min-width: 250px;
+}
+
+/*Pricing*/
+
+.pricing-card {
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+    background-color: #0d6efd;
+    color: white;
+    border-bottom: 2px solid rgba(0, 0, 0, .125);
+}
 
 /*Footer*/
 
