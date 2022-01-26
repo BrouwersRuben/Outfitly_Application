@@ -25,7 +25,7 @@
                     <div class="card m-4 w-25">
                         <div class="card-body">
                             <span th:text="${clothing.getName()}"></span>
-                            <img class="img-fluid" th:if="${clothing.getPhoto()?.getPhotoEncoded()}" th:src="${clothing.getPhoto()?.getPhotoEncoded()}" th:alt="${clothing.getName()}">
+                            <img alt="picture of clothing" class="img-fluid" th:if="${clothing.getPhoto()?.getPhotoEncoded()}" th:src="${clothing.getPhoto()?.getPhotoEncoded()}" th:alt="${clothing.getName()}">
                             <form method="post" th:object="${clothingDTO}" th:action="@{/user/profile/viewclothing}">
                                 <input type="text" id="ID" name="ID" th:value="${clothing.getId()}" hidden>
                                 <input type="submit" class="btn btn-outline-dark m-4" th:href="@{/user/profile/viewclothing}" value="Delete clothing">

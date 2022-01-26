@@ -31,6 +31,6 @@ public class MainPageController {
         model.addAttribute("username", user.getName());
         model.addAttribute("city", user.getCity());
         model.addAttribute("dailyWeatherForecastData", weatherForecastService.getNewByCountryCodeAndCity(user.getCountryCode(), user.getCity()));
-        return "main-page";
+        return "dynamicPages/main-page";
     }
 }

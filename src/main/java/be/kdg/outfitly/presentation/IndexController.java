@@ -23,7 +23,7 @@ public class IndexController {
             User user = userService.findByEmail(principal.getName());
             model.addAttribute("user", user);
         }
-        return "index";
+        return "staticPages/index";
     }
 
     @GetMapping("/faq")
@@ -33,7 +33,7 @@ public class IndexController {
             User user = userService.findByEmail(principal.getName());
             model.addAttribute("user", user);
         }
-        return "faq";
+        return "staticPages/faq";
     }
 
     @GetMapping("/aboutus")
@@ -43,17 +43,7 @@ public class IndexController {
             User user = userService.findByEmail(principal.getName());
             model.addAttribute("user", user);
         }
-        return "aboutus";
-    }
-
-    @GetMapping("/how-it-works")
-    public String showHowItWorks(Model model, Principal principal) {
-        model.addAttribute("loggedIn", principal != null);
-        if (principal != null) {
-            User user = userService.findByEmail(principal.getName());
-            model.addAttribute("user", user);
-        }
-        return "how-it-works";
+        return "staticPages/aboutus";
     }
 
     @GetMapping("/pricing")
@@ -63,7 +53,7 @@ public class IndexController {
             User user = userService.findByEmail(principal.getName());
             model.addAttribute("user", user);
         }
-        return "pricing";
+        return "staticPages/pricing";
     }
 
     @GetMapping("review-jonas")
@@ -73,7 +63,7 @@ public class IndexController {
             User user = userService.findByEmail(principal.getName());
             model.addAttribute("user", user);
         }
-        return "review-jonas";
+        return "staticPages/review-jonas";
     }
 
     @GetMapping("review-marie")
@@ -83,7 +73,7 @@ public class IndexController {
             User user = userService.findByEmail(principal.getName());
             model.addAttribute("user", user);
         }
-        return "review-marie";
+        return "staticPages/review-marie";
     }
 
     @Autowired

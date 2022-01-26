@@ -17,10 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/user/addclothing")
@@ -50,7 +47,7 @@ public class AddClothingController {
         enumsValues.put("weather", List.of(ClothingItem.Weather.values()));
 
         model.addAttribute("enums", enumsValues.entrySet());
-        return "addclothing";
+        return "dynamicPages/changeProfileData/addclothing";
     }
 
     //Automatically gets converted to enum
@@ -61,7 +58,7 @@ public class AddClothingController {
         ClothingItem newClothingItem = new ClothingItem(clothingName, material, rainproofness, occasion, weather, type, false); //upon creation, washingcycle has been set to false
         try {
             Photo newPhoto = new Photo(photo.getBytes(), photo.getContentType());
-            if (photo.getContentType().startsWith("image")) {
+            if (Objects.requireNonNull(photo.getContentType()).startsWith("image")) {
                 newClothingItem.setPhoto(newPhoto);
             }
         } catch (IOException ioe) {

@@ -1,6 +1,4 @@
-.bg-blue{
-    background: #4A86E8;
-}
+/*General Rules*/
 
 .font-weight-bold{
     font-weight: bold;
@@ -10,18 +8,152 @@
     width: 400px;
 }
 
-.teamPicture{
-    max-height: 200px;
-    border: black 1px solid;
+body{
+    background: rgb(248, 249, 250);
 }
 
-.teamCard{
-    box-shadow: 2px 2px 4px lightgray;
-    width: 20rem;
+/*Index Page*/
+
+header.indexBanner {
+    position: relative;
+    background-color: #343a40;
+    background: url("images/bannerClock.jpg") no-repeat center top;
+    background-size: cover;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+header.indexBanner:before {
+    content: "";
+    position: absolute;
+    background-color: #1c375e;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
 }
 
-.indexPageText{
-    font-size: 1.2em;
+.features-icons {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+.features-icons .features-icons-item {
+    max-width: 30rem;
+}
+.features-icons .features-icons-item .features-icons-icon {
+    height: 12rem;
+}
+.features-icons .features-icons-item .features-icons-icon i {
+    font-size: 4.5rem;
+}
+
+.showcase .showcase-text {
+    padding: 3rem;
+}
+.showcase .showcase-img {
+    min-height: 30rem;
+}
+@media (min-width: 768px) {
+    .showcase .showcase-text {
+        padding: 7rem;
+    }
+}
+
+.wardrobe{
+    background: url("images/wardrobe.jpg") center;
+    background-size: cover;
+}
+.snowRunning{
+    background: url("images/winter-running-cold-weather-exersize-crop.jpg") center;
+    background-size: cover;
+}
+
+img.headshot{
+    max-width: 15rem;
+}
+
+/*FAQ*/
+
+.flex-center {
+    align-items: center;
+}
+
+#accordion .accordion-card {
+    background: transparent;
+    border: 0;
+    margin-bottom: 30px;
+}
+#accordion .accordion-card__header {
+    background: #0d6efd;
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#accordion .accordion-card__header.collapsed .drop-icon {
+    transform: rotate(0deg);
+}
+#accordion .accordion-card__header h5 {
+    display: flex;
+    align-items: center;
+}
+#accordion .accordion-card__header h5 span {
+    margin-left: 10px;
+}
+#accordion .accordion-card__header .drop-icon {
+    margin-right: 15px;
+    transform: rotate(180deg);
+    transition: all 0.2s;
+}
+#accordion .accordion-card__body {
+    padding: 25px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 25px -3px rgba(0, 0, 0, 0.1);
+}
+
+.about-us{
+    background-color: #0d6efd;
+    margin-bottom: 5rem!important;
+    min-width: 250px;
+}
+
+/*Pricing*/
+
+.pricing-card {
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+    background-color: #0d6efd;
+    color: white;
+    border-bottom: 2px solid rgba(0, 0, 0, .125);
+}
+
+/*Footer*/
+
+.fa {
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+    color: #0d6efd;
+}
+
+.fa-instagram {
+    color: #0d6efd;
+}
+
+.fa-gitlab {
+    color: #0d6efd;
 }
 
 .font22{
@@ -30,10 +162,6 @@
 
 .addClothingCard{
     width: 18rem;
-}
-
-.howItWorksCard{
-    width:20rem;
 }
 
 .weatherPic{

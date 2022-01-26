@@ -25,13 +25,13 @@ public class LoginController {
 
     @GetMapping
     public String showLogin(Model model, @ModelAttribute("user") User user) {
-        return "login";
+        return "staticPages/login";
     }
 
     @GetMapping(params = "error")
     public String errorLogin(Model model){
         model.addAttribute("errorMessage", "Wrong email or password.");
-        return "login";
+        return "staticPages/login";
     }
 
 }

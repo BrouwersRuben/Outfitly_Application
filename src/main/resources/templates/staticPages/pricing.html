@@ -5,10 +5,11 @@
     <title>Pricing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link href="../static/style.css" media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="m-4">
+<body>
 
 <nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
 
@@ -16,14 +17,14 @@
 
 <div class="container mt-4">
     <div class="pricing m-3 mx-auto text-center">
-        <p class="h1 m-3 font-weight-bold" th:utext="#{pricing.title}">Pricing</p>
+        <h1 class="text-center mb-5" th:utext="#{pricing.title}">Pricing</h1>
         <p th:utext="#{pricing.text1}">Choose the plan that's right for you.</p>
         <p th:utext="#{pricing.text2}">Paid plans start with a 14-day free trial.</p>
         <p th:utext="#{pricing.text3}">Upgrade, downgrade or cancel at anytime.</p>
     </div>
-    <div class="card-deck mx-5 text-center d-flex flex-row justify-content-center">
-        <div class="card m-4 box-shadow" style="width:20rem">
-            <div class="card-header">
+    <div class="rounded card-deck mx-5 text-center d-flex flex-row justify-content-center">
+        <div class="card m-4 box-shadow rounded-bottom" style="width:20rem">
+            <div class="pricing-card rounded-top">
                 <h2 class="font-weight-normal m-0" th:utext="#{pricing.individual}">Individual</h2>
             </div>
             <div class="card-body">
@@ -39,10 +40,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="product-description p-3 mx-auto text-center">
-        <p th:utext="#{pricing.saveTime}">Save time and dress confidently with Outfitly.</p>
     </div>
 </div>
 
