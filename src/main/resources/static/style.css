@@ -97,16 +97,6 @@ img.headshot{
     color: #0d6efd;
 }
 
-.teamPicture{
-    max-height: 200px;
-    border: black 1px solid;
-}
-
-.teamCard{
-    box-shadow: 2px 2px 4px lightgray;
-    width: 20rem;
-}
-
 .font22{
     font-size: 22px
 }

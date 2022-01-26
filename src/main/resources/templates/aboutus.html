@@ -7,85 +7,72 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link href="../static/style.css" media="all" rel="stylesheet" th:href="@{/style.css}" type="text/css"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <nav th:replace="${loggedIn} ? ~{fragments/navbarLoggedIn::navbarLoggedIn} : ~{fragments/navbar::navbar}"></nav>
 
     <div th:insert="~{fragments/header::header}">header</div>
 
-    <div class="d-flex justify-content-center">
-        <div class="m-md-4 m-2 w-50 justify-content-center">
-            <p class="h1 font-weight-bold" th:utext="#{aboutus.ourMission}">Our mission</p>
-            <p class="indexPageText" th:utext="#{aboutus.ourMissionText}">
-                We want to save people's precious time by automating the process of picking their clothing so they have more time for their important tasks.
-            </p>
-            <p class="h1 font-weight-bold" th:utext="#{aboutus.aboutUs}">About us</p>
-            <p class="indexPageText" th:utext="#{aboutus.aboutUsText}">
-                We're a small team of multinational and success driven students who are currently studying in the Applied Computer Science course at the Karel de Grote University College.
-            </p>
+    <div class="bg-light py-3">
+        <div class="container py-5">
+            <div class="row mb-4">
+                <div class="col-lg-6">
+                    <h2 class="display-4 font-weight-light" th:utext="#{aboutus.ourMission}">Our Mission</h2>
+                    <p class="font-italic" th:utext="#{aboutus.ourMissionText}">We want to save people's precious time by automating the process of picking their clothing so they have more time for their important tasks.</p>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="display-4 font-weight-light" th:utext="#{aboutus.aboutUs}">Our team</h2>
+                    <p class="font-italic" th:utext="#{aboutus.aboutUsText}">We're a small team of multinational and success driven students who are currently studying in the Applied Computer Science course at the Karel de Grote University College.</p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-xl-3 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img th:src="@{images/teamPictures/ruben.png}" alt="Ruben profile pic" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">Brouwers Ruben</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
+                        <ul class="social mb-0 list-inline mt-3">
+                            <li class="list-inline-item"><a href="https://twitter.com/RubenBrouwers01" target="_blank" class="social-link"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/ruben-b-746600141/" target="_blank" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item"><a href="https://gitlab.com/BrouwersRuben" target="_blank" class="social-link"><i class="fa fa-gitlab"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img th:src="@{images/teamPictures/roby.png}" alt="Roby profile pic" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">Van Boxelaere Roby</h5><span class="small text-uppercase text-muted">CFO - Founder</span>
+                        <ul class="social mb-0 list-inline mt-3">
+                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/roby-van-boxelaere-a62a321b8/" target="_blank" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item"><a href="https://gitlab.com/Robyvb" target="_blank" class="social-link"><i class="fa fa-gitlab"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img th:src="@{images/teamPictures/rodzers.png}" alt="Rodžers profile pic" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">Ušackis Rodžers</h5><span class="small text-uppercase text-muted">CMO - Founder</span>
+                        <ul class="social mb-0 list-inline mt-3">
+                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/rodžers-ušackis-b89a211b8/" target="_blank" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item"><a href="https://gitlab.com/rodzhersu" target="_blank" class="social-link"><i class="fa fa-gitlab"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End-->
+
+                <!-- Team item-->
+                <div class="col-xl-3 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img th:src="@{images/teamPictures/dominik.png}" alt="Dominik profile pic" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">Mika Dominik</h5><span class="small text-uppercase text-muted">CTO - Founder</span>
+                        <ul class="social mb-0 list-inline mt-3">
+                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/dominik-m-759a201b8/" target="_blank" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item"><a href="https://gitlab.com/Dominik.Mika" target="_blank" class="social-link"><i class="fa fa-gitlab"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End-->
+
+            </div>
         </div>
     </div>
 
-    <div class="card-deck mx-5 text-center d-flex justify-content-center">
-        <div class="row">
-            <div class="col-lg-6 col-xs-12 letter-space d-flex justify-content-center">
-                <div class="card my-4 box-shadow teamCard" >
-                    <div class="container mt-4">
-                        <img th:src="@{images/teamPictures/ruben.png}" class="teamPicture">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Brouwers Ruben</h5>
-                        <p class="small">CEO</p>
-                    </div>
-                    <div class="card-body">
-                        <a href="https://gitlab.com/BrouwersRuben" target="_blank" class="btn btn-outline-dark m-4" th:utext="#{aboutus.gitlabProfile}">Gitlab profile</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 letter-space d-flex justify-content-center">
-                <div class="card my-4 box-shadow teamCard">
-                    <div class="container mt-4">
-                        <img th:src="@{images/teamPictures/roby.png}" class="teamPicture">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Van Boxelaere Roby</h5>
-                        <p class="small">CFO</p>
-                    </div>
-                    <div class="card-body">
-                        <a href="https://gitlab.com/Robyvb" target="_blank" class="btn btn-outline-dark m-4" th:utext="#{aboutus.gitlabProfile}">Gitlab profile</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 letter-space d-flex justify-content-center">
-                <div class="card my-4 box-shadow teamCard">
-                    <div class="container mt-4">
-                        <img th:src="@{images/teamPictures/rodzers.png}" class="teamPicture">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Ušackis Rodžers</h5>
-                        <p class="small">CMO</p>
-                    </div>
-                    <div class="card-body">
-                        <a href="https://gitlab.com/rodzhersu" target="_blank" class="btn btn-outline-dark m-4" th:utext="#{aboutus.gitlabProfile}">Gitlab profile</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-xs-12 letter-space d-flex justify-content-center">
-                <div class="card my-4 box-shadow teamCard">
-                    <div class="container mt-4">
-                        <img th:src="@{images/teamPictures/dominik.png}" class="teamPicture">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Mika Dominik</h5>
-                        <p class="small">CTO</p>
-                    </div>
-                    <div class="card-body">
-                        <a href="https://gitlab.com/Dominik.Mika" target="_blank" class="btn btn-outline-dark m-4" th:utext="#{aboutus.gitlabProfile}">Gitlab profile</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="d-flex justify-content-center align-content-center">
         <form action="mailto:contact-project+kdg-ti-integration-2-1-outfitli-final-application-outfitly@incoming.gitlab.com?subject=ProblemInquiry" method="POST" name="emailForm">
