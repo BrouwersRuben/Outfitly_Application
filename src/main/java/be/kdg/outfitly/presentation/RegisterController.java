@@ -56,8 +56,10 @@ public class RegisterController {
             model.addAttribute("namesAndCodes", CountriesNamesUtil.getCountriesNamesAndCodes().entrySet());
             return "staticPages/register";
         } else {
-            userService.create(userDTO.getEmail(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getWashDay(), userDTO.getPhoneNumber(), userDTO.getCountryCode(), userDTO.getCity(), userDTO.getStreetName(), userDTO.getStreetNumber(), userDTO.getApartmentNumber(), userDTO.getZipcode(), new ArrayList<>());
-            return "redirect:/login";
+//            userService.create(userDTO.getEmail(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getWashDay(), userDTO.getPhoneNumber(), userDTO.getCountryCode(), userDTO.getCity(), userDTO.getStreetName(), userDTO.getStreetNumber(), userDTO.getApartmentNumber(), userDTO.getZipcode(), new ArrayList<>());
+            model.addAttribute("errorMessage", "This site is still under development... Sorry for that :/");
+//            return "redirect:/login";
+            return "staticPages/register";
         }
     }
 }
